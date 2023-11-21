@@ -4,8 +4,10 @@ import mainFont from '../fonts/Futura_book.ttf';
 import secondaryFont from '../fonts/Inter.ttf';
 
 const defaultTheme = createTheme({
-  backgroundColors: {
-    main: 'black',
+  componentColors: {
+    backgroundMain: 'black',
+    logoMain: '#008FD5',
+    logoSecondary: 'white',
   },
   textColors: {
     main: 'white',

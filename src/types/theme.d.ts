@@ -14,8 +14,10 @@ declare module '@mui/material/styles' {
 
 declare module '@mui/material/styles' {
   interface Theme {
-    backgroundColors: {
-      main: string;
+    componentColors: {
+      backgroundMain: string;
+      logoMain: string;
+      logoSecondary: string;
     },
     textColors: {
       main: string;
@@ -28,8 +30,10 @@ declare module '@mui/material/styles' {
     },
   }
   interface ThemeOptions {
-    backgroundColors: {
-      main: string;
+    componentColors: {
+      backgroundMain: string;
+      logoMain: string;
+      logoSecondary: string;
     },
     textColors: {
       main: string;

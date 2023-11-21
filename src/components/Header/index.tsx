@@ -1,17 +1,21 @@
 import React from 'react';
+import { useTheme } from '@mui/material';
 import S from './styles';
-import Logo from '../../assets/images/Logo.png';
+import Logo from '../Logo';
 
 const Header = (): JSX.Element => {
+  // const [navMenuOpen, setNavMenuOpen] = useState(false);
+  const { componentColors } = useTheme();
+
   return (
     <S.Header>
       <S.NewProjectLink to="/">Start a project</S.NewProjectLink>
       <S.LogoContainer>
-        <img 
-          alt='Website logo'
-          src={Logo}
-        />
+        <Logo fillMain={componentColors.logoMain} fillSecondary={componentColors.logoSecondary} />
       </S.LogoContainer>
+      <S.Burger />
+
+      {/* NavMenu */}
     </S.Header>
   );
 };

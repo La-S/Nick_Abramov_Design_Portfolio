@@ -1,4 +1,5 @@
 import { styled, AppBar, Box } from '@mui/material';
+import { List as BurgerIcon } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
 const Header = styled(AppBar)(({ theme }) => ({
@@ -7,7 +8,7 @@ const Header = styled(AppBar)(({ theme }) => ({
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center',
-  backgroundColor: theme.backgroundColors.main,
+  backgroundColor: theme.componentColors.backgroundMain,
   boxShadow: 'none',
 
   [theme.breakpoints.down('tablet')]: {
@@ -27,14 +28,29 @@ const NewProjectLink = styled(Link)(({ theme }) => ({
   },
 }));
 
-// TODO: Update once the svg is provided
 const LogoContainer = styled(Box)(({ theme }) => ({
-  img: {
-    height: '45.5px',
+  width: '335px',
+  height: '46px',
+  cursor: 'pointer',
 
-    [theme.breakpoints.down('tablet')]: {
-      height: '28px',
-    },
+  [theme.breakpoints.down('tablet')]: {
+    width: '209px',
+    height: '28px',
+  },
+}));
+
+const Burger = styled(BurgerIcon)(({ theme }) => ({
+  width: '48px',
+  height: '42px',
+  cursor: 'pointer',
+
+  '*': {
+    color: theme.textColors.main,
+  },
+
+  [theme.breakpoints.down('tablet')]: {
+    width: '41px',
+    height: '35px',
   },
 }));
 
@@ -42,4 +58,5 @@ export default {
   NewProjectLink,
   Header,
   LogoContainer,
+  Burger,
 };
