@@ -19,12 +19,21 @@ const NavMainContainer = styled(
   opacity: 0,
 
   ul: {
+    width: '100%',
     textAlign: 'center',
     margin: 0,
     padding: 0,
     listStyle: 'none',
 
     li: {
+      width: '100%',
+      height: '123px',
+      margin: 0,
+      padding: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent:'center',
+
       a: {
         fontFamily: theme.fonts.main,
         fontSize: '64px',
@@ -35,9 +44,9 @@ const NavMainContainer = styled(
     },
   },
   
-  transition: 'all 0.3s ease-in-out',
+  transition: 'height 0.3s ease-in-out, opacity 0.3s ease-in-out',
   ...(open && {
-    transition: 'all 0.3s ease-in-out',
+    transition: 'height 0.3s ease-in-out, opacity 0.3s ease-in-out',
     height: '100vh',
     opacity: 1,
   }),
@@ -45,7 +54,11 @@ const NavMainContainer = styled(
   [theme.breakpoints.down('tablet')]: {
     ul: {
       li: {
+        height: '97px',
+        borderTop: '1px solid #2D2D2D',
+        borderBottom: '1px solid #2D2D2D',
         a: {
+          width: '100%',
           fontSize: '50px',
         },
       },
