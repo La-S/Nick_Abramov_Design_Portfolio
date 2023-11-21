@@ -21,6 +21,7 @@ declare module '@mui/material/styles' {
     },
     textColors: {
       main: string;
+      secondary: string;
       underline: string;
     },
     fonts: {
@@ -37,6 +38,7 @@ declare module '@mui/material/styles' {
     },
     textColors: {
       main: string;
+      secondary: string;
       underline: string;
     },
     fonts: {

@@ -11,6 +11,7 @@ const defaultTheme = createTheme({
   },
   textColors: {
     main: 'white',
+    secondary: '#008FD5',
     underline: '#00AF95',
   },
   fonts: {
