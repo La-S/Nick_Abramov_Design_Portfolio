@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTheme } from '@mui/material';
 import S from './styles';
 import Logo from '../Logo';
+import NavMenu from './NavMenu';
 
 const Header = (): JSX.Element => {
-  // const [navMenuOpen, setNavMenuOpen] = useState(false);
+  const [navMenuOpen, setNavMenuOpen] = useState<boolean>(false);
   const { componentColors } = useTheme();
 
   return (
@@ -13,9 +14,9 @@ const Header = (): JSX.Element => {
       <S.LogoContainer>
         <Logo fillMain={componentColors.logoMain} fillSecondary={componentColors.logoSecondary} />
       </S.LogoContainer>
-      <S.Burger />
+      <S.Burger onClick={() => setNavMenuOpen(true)} />
 
-      {/* NavMenu */}
+      <NavMenu openState={[navMenuOpen, setNavMenuOpen]} />
     </S.Header>
   );
 };
