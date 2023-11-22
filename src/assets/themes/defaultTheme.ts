@@ -6,6 +6,8 @@ import secondaryFont from '../fonts/Inter.ttf';
 const defaultTheme = createTheme({
   componentColors: {
     backgroundMain: '#000000',
+    backgroundSecondary: '#008FD5',
+    backgroundTertiary: '#00AF95',
     logoMain: '#008FD5',
     logoSecondary: '#FFFFFF',
     questionUnderline: '#494949',

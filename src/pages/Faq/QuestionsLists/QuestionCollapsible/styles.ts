@@ -21,6 +21,7 @@ const QuestionContainer = styled(Box)(({ theme }) => ({
 
   '.MuiTypography-root': {
     alignSelf: 'flex-end',
+    textAlign: 'left',
     marginLeft: '15px',
     fontFamily: theme.fonts.main,
     fontSize: '24px',

@@ -17,6 +17,8 @@ declare module '@mui/material/styles' {
   interface Theme {
     componentColors: {
       backgroundMain: string;
+      backgroundSecondary: string;
+      backgroundTertiary: string;
       logoMain: string;
       logoSecondary: string;
       questionUnderline: string;
@@ -36,6 +38,8 @@ declare module '@mui/material/styles' {
   interface ThemeOptions {
     componentColors: {
       backgroundMain: string;
+      backgroundSecondary: string;
+      backgroundTertiary: string;
       logoMain: string;
       logoSecondary: string;
       questionUnderline: string;
