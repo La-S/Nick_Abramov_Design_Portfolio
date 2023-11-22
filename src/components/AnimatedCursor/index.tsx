@@ -26,7 +26,6 @@ const AnimatedCursor = (): JSX.Element => {
       clickables={[
         'a',
         'button',
-        '.Logo',
         '.Burger',
       ]}
     />

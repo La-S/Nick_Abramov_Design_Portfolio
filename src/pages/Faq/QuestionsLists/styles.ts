@@ -1,9 +1,13 @@
 import { styled, Box } from '@mui/material';
 
-const QuestionsListsContainer = styled(Box)(() => ({
+const QuestionsListsContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
   margin: '0 75px 85px 75px',
+
+  [theme.breakpoints.down('tablet')]: {
+    margin: '0 20px 25px 20px',
+  },
 }));
 
 

@@ -4,7 +4,6 @@ const FaqContainer = styled(Box)(() => ({
 }));
 
 const PageTitle = styled(Typography)(({ theme }) => ({
-  width: '500px',
   margin: 'auto',
   textAlign: 'center',
   display: 'flex',
@@ -16,6 +15,11 @@ const PageTitle = styled(Typography)(({ theme }) => ({
 
   span: {
     color: theme.textColors.tertiary,
+  },
+  
+  [theme.breakpoints.down('tablet')]: {
+    fontSize: '50px',
+    marginBottom: '65px',
   },
 }));
 
@@ -33,6 +37,10 @@ const Banner = styled(Box)(({ theme }) => ({
     fontSize: '48px',
     textAlign: 'center',
     color: theme.textColors.main,
+  },
+
+  [theme.breakpoints.down('tablet')]: {
+    display: 'none',
   },
 }));
 

@@ -14,6 +14,7 @@ const QuestionCollapsible = ({ question, answer }: Props): JSX.Element => {
   return (
     <S.Container>
       <S.QuestionButton
+        expanded={expanded}
         onClick={() => setExpanded(!expanded)}
         disableRipple
       >

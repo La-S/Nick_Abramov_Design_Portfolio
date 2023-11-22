@@ -12,7 +12,7 @@ const Header = (): JSX.Element => {
     <S.Header>
       <S.NewProjectLink to="/">Start a project</S.NewProjectLink>
       <S.LogoContainer>
-        <Logo fillMain={componentColors.logoMain} fillSecondary={componentColors.logoSecondary} />
+        <Logo fillMain={componentColors.logoMain} fillSecondary={componentColors.logoSecondary} isLink />
       </S.LogoContainer>
       <S.Burger onClick={() => setNavMenuOpen(true)} className="Burger" />
 
