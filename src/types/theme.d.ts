@@ -23,6 +23,7 @@ declare module '@mui/material/styles' {
       main: string;
       secondary: string;
       underline: string;
+      copyright: string;
     },
     fonts: {
       main: string;
@@ -40,6 +41,7 @@ declare module '@mui/material/styles' {
       main: string;
       secondary: string;
       underline: string;
+      copyright: string;
     },
     fonts: {
       main: string;

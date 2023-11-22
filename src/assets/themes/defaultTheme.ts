@@ -13,6 +13,7 @@ const defaultTheme = createTheme({
     main: 'white',
     secondary: '#008FD5',
     underline: '#00AF95',
+    copyright: '#767676',
   },
   fonts: {
     main: 'Futura',

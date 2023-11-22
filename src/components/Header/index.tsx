@@ -5,7 +5,7 @@ import Logo from '../Logo';
 import NavMenu from './NavMenu';
 
 const Header = (): JSX.Element => {
-  const [navMenuOpen, setNavMenuOpen] = useState<boolean>(true);
+  const [navMenuOpen, setNavMenuOpen] = useState<boolean>(false);
   const { componentColors } = useTheme();
 
   return (

@@ -2,7 +2,7 @@ export const screenSizeBreakpoints = {
   values: {
     mobile: 480,
     tablet: 768,
-    laptop: 1024, 
+    laptop: 1050, 
     desktop: 1200,
   },
 };
