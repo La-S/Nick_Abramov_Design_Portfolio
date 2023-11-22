@@ -19,13 +19,13 @@ const Header = styled(AppBar)(({ theme }) => ({
 
 const NewProjectLink = styled(Link)(({ theme }) => ({
   fontFamily: theme.fonts.secondary,
-  textDecorationColor: theme.textColors.underline,
+  textDecorationColor: theme.textColors.tertiary,
   textDecorationThickness: '2px',
   textUnderlineOffset: '2.75px',
 
   transition: 'color 0.2s ease-in-out',
   '&:hover': {
-    color: theme.textColors.underline,
+    color: theme.textColors.tertiary,
   },
 
   [theme.breakpoints.down('tablet')]: {

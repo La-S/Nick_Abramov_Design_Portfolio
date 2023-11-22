@@ -12,7 +12,7 @@ const defaultTheme = createTheme({
   textColors: {
     main: '#FFFFFF',
     secondary: '#008FD5',
-    underline: '#00AF95',
+    tertiary: '#00AF95',
     copyright: '#767676',
   },
   fonts: {

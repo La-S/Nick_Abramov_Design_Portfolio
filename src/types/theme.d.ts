@@ -22,7 +22,7 @@ declare module '@mui/material/styles' {
     textColors: {
       main: string;
       secondary: string;
-      underline: string;
+      tertiary: string;
       copyright: string;
     },
     fonts: {
@@ -40,7 +40,7 @@ declare module '@mui/material/styles' {
     textColors: {
       main: string;
       secondary: string;
-      underline: string;
+      tertiary: string;
       copyright: string;
     },
     fonts: {
