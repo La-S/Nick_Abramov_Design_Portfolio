@@ -9,6 +9,7 @@ declare module '@mui/material/styles' {
     tablet: true;
     laptop: true;
     desktop: true;
+    extraLarge: true;
   }
 }
 
@@ -18,6 +19,7 @@ declare module '@mui/material/styles' {
       backgroundMain: string;
       logoMain: string;
       logoSecondary: string;
+      questionUnderline: string;
     },
     textColors: {
       main: string;
@@ -36,6 +38,7 @@ declare module '@mui/material/styles' {
       backgroundMain: string;
       logoMain: string;
       logoSecondary: string;
+      questionUnderline: string;
     },
     textColors: {
       main: string;

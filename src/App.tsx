@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import { defaultTheme } from './assets/themes';
 import S from './styles';
 import AnimatedCursor from './components/AnimatedCursor';
+import Faq from './pages/Faq';
 
 const App = (): JSX.Element => {
   const [theme] = useState(defaultTheme);
@@ -19,18 +20,12 @@ const App = (): JSX.Element => {
           <Header />
 
           <Routes>
-            <Route path="/about">
-              About
-            </Route>
-            <Route path="/users">
-              Users
-            </Route>
             <Route path="/">
-            Home
+              Home
             </Route>
+            <Route path="/questions" Component={Faq}/>
           </Routes>
 
-          <div style={{ height: '90vh', backgroundColor: 'black' }} />
           <Footer />
         </S.BodyContainer>
 

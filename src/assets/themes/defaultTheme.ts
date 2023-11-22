@@ -8,6 +8,7 @@ const defaultTheme = createTheme({
     backgroundMain: '#000000',
     logoMain: '#008FD5',
     logoSecondary: '#FFFFFF',
+    questionUnderline: '#494949',
   },
   textColors: {
     main: '#FFFFFF',

@@ -4,5 +4,6 @@ export const screenSizeBreakpoints = {
     tablet: 768,
     laptop: 1050, 
     desktop: 1200,
+    extraLarge: 1400,
   },
 };
