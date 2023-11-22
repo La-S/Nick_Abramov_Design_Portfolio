@@ -1,6 +1,9 @@
 import { styled, Box } from '@mui/material';
 
 const BodyContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-end',
   minHeight: '100vh',
   backgroundColor: theme.componentColors.backgroundMain,
   paddingTop: '85px',
