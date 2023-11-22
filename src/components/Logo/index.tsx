@@ -6,7 +6,7 @@ interface Props {
 }
 
 const Logo = ({ fillMain, fillSecondary }: Props): JSX.Element => (
-  <svg viewBox="0 0 335 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 335 46" fill="none" xmlns="http://www.w3.org/2000/svg" className="Logo">
     <path d="M23.1841 2.6134L23.025 25.3082L8.004 3.36819L2.10974 6.82995V45.9996H9.31384L8.96767 17.2805L25.7429 45.9996H33.6207L28.5123 2.6134H23.1841Z" fill={fillMain}/>
     <path d="M44.4502 11.0189L34.4814 2.61377L36.0299 13.423L44.4502 11.0189Z" fill={fillMain}/>
     <path d="M36.3339 16.172L40.0809 46H50.7374L45.0349 13.6653L36.3339 16.172Z" fill={fillMain}/>

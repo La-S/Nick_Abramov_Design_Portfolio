@@ -14,7 +14,7 @@ const Header = (): JSX.Element => {
       <S.LogoContainer>
         <Logo fillMain={componentColors.logoMain} fillSecondary={componentColors.logoSecondary} />
       </S.LogoContainer>
-      <S.Burger onClick={() => setNavMenuOpen(true)} />
+      <S.Burger onClick={() => setNavMenuOpen(true)} className="Burger" />
 
       <NavMenu openState={[navMenuOpen, setNavMenuOpen]} />
     </S.Header>

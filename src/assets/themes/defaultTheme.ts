@@ -5,12 +5,12 @@ import secondaryFont from '../fonts/Inter.ttf';
 
 const defaultTheme = createTheme({
   componentColors: {
-    backgroundMain: 'black',
+    backgroundMain: '#000000',
     logoMain: '#008FD5',
-    logoSecondary: 'white',
+    logoSecondary: '#FFFFFF',
   },
   textColors: {
-    main: 'white',
+    main: '#FFFFFF',
     secondary: '#008FD5',
     underline: '#00AF95',
     copyright: '#767676',

@@ -23,6 +23,11 @@ const NewProjectLink = styled(Link)(({ theme }) => ({
   textDecorationThickness: '2px',
   textUnderlineOffset: '2.75px',
 
+  transition: 'color 0.2s ease-in-out',
+  '&:hover': {
+    color: theme.textColors.underline,
+  },
+
   [theme.breakpoints.down('tablet')]: {
     display: 'none',
   },
@@ -31,7 +36,6 @@ const NewProjectLink = styled(Link)(({ theme }) => ({
 const LogoContainer = styled(Box)(({ theme }) => ({
   width: '335px',
   height: '46px',
-  cursor: 'pointer',
 
   [theme.breakpoints.down('tablet')]: {
     width: '209px',
@@ -42,7 +46,6 @@ const LogoContainer = styled(Box)(({ theme }) => ({
 const Burger = styled(BurgerIcon)(({ theme }) => ({
   width: '48px',
   height: '42px',
-  cursor: 'pointer',
 
   '*': {
     color: theme.textColors.main,

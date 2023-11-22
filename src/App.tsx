@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { defaultTheme } from './assets/themes';
 import S from './styles';
+import AnimatedCursor from './components/AnimatedCursor';
 
 const App = (): JSX.Element => {
   const [theme] = useState(defaultTheme);
@@ -29,9 +30,11 @@ const App = (): JSX.Element => {
             </Route>
           </Routes>
 
-          <div style={{ height: '90vh' }} />
+          <div style={{ height: '90vh', backgroundColor: 'black' }} />
           <Footer />
         </S.BodyContainer>
+
+        <AnimatedCursor />
       </ThemeProvider>
     </Router>
   );

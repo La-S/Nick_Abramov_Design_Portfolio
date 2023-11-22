@@ -155,7 +155,6 @@ const FooterContainer = styled(Box)(({ theme }) => ({
 const LogoContainer = styled(Box)(({ theme }) => ({
   width: '335px',
   height: '46px',
-  cursor: 'pointer',
 
   [theme.breakpoints.down('laptop')]: {
     margin: 'auto',
