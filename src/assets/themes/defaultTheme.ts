@@ -5,12 +5,13 @@ import secondaryFont from '../fonts/Inter.ttf';
 
 const defaultTheme = createTheme({
   componentColors: {
-    backgroundMain: '#000000',
+    backgroundMain: '#131313',
     backgroundSecondary: '#008FD5',
     backgroundTertiary: '#00AF95',
     logoMain: '#008FD5',
     logoSecondary: '#FFFFFF',
     questionUnderline: '#494949',
+    inputBorder: '#626262',
   },
   textColors: {
     main: '#FFFFFF',

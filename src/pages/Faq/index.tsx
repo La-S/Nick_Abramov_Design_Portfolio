@@ -2,14 +2,15 @@ import React from 'react';
 import { Typography } from '@mui/material';
 import S from './styles';
 import QuestionsList from './QuestionsLists';
+import PageTitle from '../../components/PageTitle';
 
-const Faq = (): JSX.Element => {
+const FaqPage = (): JSX.Element => {
   return (
     <S.FaqContainer>
-      <S.PageTitle variant='h2'>
+      <PageTitle>
         Frequently Asked
         <span>Questions</span>
-      </S.PageTitle>
+      </PageTitle>
       <QuestionsList />
       <S.Banner>
         <Typography variant='h3'>
@@ -20,4 +21,4 @@ const Faq = (): JSX.Element => {
   );
 };
 
-export default Faq;
+export default FaqPage;

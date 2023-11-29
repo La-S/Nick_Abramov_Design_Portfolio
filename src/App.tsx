@@ -6,7 +6,8 @@ import Footer from './components/Footer';
 import { defaultTheme } from './assets/themes';
 import S from './styles';
 import AnimatedCursor from './components/AnimatedCursor';
-import Faq from './pages/Faq';
+import FaqPage from './pages/Faq';
+import ContactPage from './pages/Contact';
 
 const App = (): JSX.Element => {
   const [theme] = useState(defaultTheme);
@@ -23,7 +24,8 @@ const App = (): JSX.Element => {
             <Route path="/">
               Home
             </Route>
-            <Route path="/questions" Component={Faq}/>
+            <Route path="/questions" Component={FaqPage} />
+            <Route path="/contact" Component={ContactPage} />
           </Routes>
 
           <Footer />

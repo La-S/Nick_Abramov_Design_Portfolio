@@ -22,6 +22,7 @@ declare module '@mui/material/styles' {
       logoMain: string;
       logoSecondary: string;
       questionUnderline: string;
+      inputBorder: string;
     },
     textColors: {
       main: string;
@@ -43,6 +44,7 @@ declare module '@mui/material/styles' {
       logoMain: string;
       logoSecondary: string;
       questionUnderline: string;
+      inputBorder: string;
     },
     textColors: {
       main: string;
