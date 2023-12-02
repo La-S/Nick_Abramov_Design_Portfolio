@@ -6,8 +6,8 @@ const ContactForm = ():JSX.Element => {
   return (
     <S.ContactForm action="submit">
       <Typography className='Contact-Form-Label'>
-      If you would like to find out more about how I can help
-       your company, please get in touch below, and I’d be happy to help:
+        If you would like to find out more about how I can help
+        your company, please get in touch below, and I’d be happy to help:
       </Typography>
 
       <TextField variant='outlined' placeholder='Name*' required />

@@ -7,7 +7,7 @@ const ContactForm = styled('form')(({ theme }) => ({
   '.Contact-Form-Label': {
     marginBottom: '28px',
     fontFamily: theme.fonts.main,
-    fontWeight: '20px',
+    fontSize: '20px',
   },
 
   '.MuiTextField-root': {
@@ -20,7 +20,7 @@ const ContactForm = styled('form')(({ theme }) => ({
 
     'input, textarea': {
       fontFamily: theme.fonts.main,
-      fontWeight: '20px',
+      fontSize: '20px',
       color: theme.textColors.main,
       padding: '10px',
       border: `1px solid ${theme.componentColors.inputBorder}`,
@@ -32,6 +32,7 @@ const ContactForm = styled('form')(({ theme }) => ({
       },
 
       '&:hover, &:focus-visible': {
+        cursor: 'none',
         transition: 'border-color 0.3s ease-in-out',
         borderColor: `${theme.componentColors.backgroundTertiary} !important`,
       },
@@ -61,6 +62,30 @@ const ContactForm = styled('form')(({ theme }) => ({
     color: theme.textColors.main,
     borderRadius: '5px',
     textTransform: 'uppercase',
+  },
+
+  [theme.breakpoints.down('laptop')]: {
+    padding: '0 15px',
+
+    '.Contact-Form-Label': {
+      marginBottom: '15px',
+    },
+
+    '.Submit-Button': {
+      marginBottom: '40px',
+    },
+  },
+
+  [theme.breakpoints.down('tablet')]: {
+    '.Contact-Form-Label': {
+      fontSize: '16px',
+    },
+
+    '.MuiTextField-root': {
+      'input, textarea': {
+        fontSize: '16px',
+      },
+    },
   },
 }));
 

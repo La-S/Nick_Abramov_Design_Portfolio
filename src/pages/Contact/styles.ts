@@ -1,6 +1,11 @@
 import { Box, styled } from '@mui/material';
 
-const ContactContainer = styled(Box)(() => ({
+const ContactContainer = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.down('laptop')]: {
+    '.Page-Title': {
+      marginBottom: '40px',
+    },
+  },
 }));
 
 const ContactBody = styled(Box)(({ theme }) => ({
@@ -10,17 +15,26 @@ const ContactBody = styled(Box)(({ theme }) => ({
   borderBottom: `1px solid ${theme.componentColors.inputBorder}`,
 
   img: {
-    width: '35vw',
-    maxWidth: '550px',
+    alignSelf: 'center',
+    width: '50%',
+    maxHeight: '585px',
     marginRight: '75px',
+    objectFit: 'cover',
+    '-webkit-user-drag': 'none',
   },
 
-  [theme.breakpoints.down('tablet')]: {
+  [theme.breakpoints.down('laptop')]: {
     margin: '0',
+    flexDirection: 'column',
 
     img: {
+      order: 2,
       width: '100%',
       marginRight: '0',
+    },
+
+    form: {
+      order: 1,
     },
   },
 }));
