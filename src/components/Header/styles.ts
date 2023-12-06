@@ -2,7 +2,10 @@ import { styled, AppBar, Box } from '@mui/material';
 import { List as BurgerIcon } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
-const Header = styled(AppBar)(({ theme }) => ({
+const Header = styled(
+  AppBar,
+  { shouldForwardProp: (propName) => propName !== 'pathName' }
+)<{ pathName: string }>(({ theme, pathName }) => ({
   height: '85px',
   padding: '20px 68px',
   flexDirection: 'row',
@@ -15,14 +18,23 @@ const Header = styled(AppBar)(({ theme }) => ({
     height: '75px',
     padding: '25px',
   },
+
+  [theme.breakpoints.up('tablet')]: {
+    backgroundColor: pathName !== 'about' 
+      ? theme.componentColors.backgroundMain
+      : theme.componentColors.backgroundSecondary,
+  },
 }));
 
-const NewProjectLink = styled(Link)(({ theme }) => ({
+const NewProjectLink = styled(
+  Link,
+  { shouldForwardProp: (propName) => propName !== 'pathName' }
+)<{ pathName: string }>(({ theme, pathName }) => ({
   fontFamily: theme.fonts.secondary,
-  textDecorationColor: theme.textColors.tertiary,
-  textDecorationThickness: '2px',
-  textUnderlineOffset: '2.75px',
 
+  textDecorationThickness: '2px',
+  textUnderlineOffset: '3.5px',
+  textDecorationColor: theme.textColors.tertiary,
   transition: 'color 0.2s ease-in-out',
   '&:hover': {
     color: theme.textColors.tertiary,
@@ -30,6 +42,12 @@ const NewProjectLink = styled(Link)(({ theme }) => ({
 
   [theme.breakpoints.down('tablet')]: {
     display: 'none',
+  },
+
+  [theme.breakpoints.up('tablet')]: {
+    textDecorationColor: pathName !== 'about' 
+      ? theme.textColors.tertiary
+      : theme.textColors.tertiaryAlternate,
   },
 }));
 

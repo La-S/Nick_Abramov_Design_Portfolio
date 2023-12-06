@@ -1,12 +1,14 @@
 import { styled, Box } from '@mui/material';
 
-const FooterContainer = styled(Box)(({ theme }) => ({
+const FooterContainer = styled(
+  Box,
+  { shouldForwardProp: (propName) => propName !== 'pathName' }
+)<{ pathName: string }>(({ theme, pathName }) => ({
   display: 'flex',
   flexWrap: 'wrap',
   width: '100%',
   minHeight: '405px',
   padding: '70px 115px 50px 115px',
-  backgroundColor: theme.componentColors.backgroundMain,
 
   '.Main-Section': {
     flexBasis: '70%',
@@ -81,6 +83,19 @@ const FooterContainer = styled(Box)(({ theme }) => ({
     fontFamily: theme.fonts.main,
     fontSize: '20px',
     color: theme.textColors.copyright,
+  },
+
+  [theme.breakpoints.up('extraLarge')]: {
+    '.Main-Section': {
+      /* Max width of the main section in the footer is set to 1379px
+         for about page, extra large screens specifically.
+         to avoid background from being larger than it should (image issue) */
+      ...(pathName === 'about' && { maxWidth: '1379px' }),
+    },
+
+    '.Links-Section': {
+      ...(pathName === 'about' && { display: 'none' }),
+    },
   },
 
   [theme.breakpoints.down('laptop')]: {

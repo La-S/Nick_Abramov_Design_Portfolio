@@ -28,6 +28,7 @@ declare module '@mui/material/styles' {
       main: string;
       secondary: string;
       tertiary: string;
+      tertiaryAlternate: string;
       copyright: string;
     },
     fonts: {
@@ -50,6 +51,7 @@ declare module '@mui/material/styles' {
       main: string;
       secondary: string;
       tertiary: string;
+      tertiaryAlternate: string;
       copyright: string;
     },
     fonts: {

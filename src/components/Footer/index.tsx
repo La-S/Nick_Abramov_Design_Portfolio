@@ -4,6 +4,7 @@ import { LinkedinLogo, InstagramLogo, YoutubeLogo, BehanceLogo } from '@phosphor
 import S from './styles';
 import Logo from '../Logo';
 import Nav from '../Nav';
+import { useLocation } from 'react-router-dom';
 
 const SOCIAL_MEDIA_LINKS = [
   { icon: <LinkedinLogo />, path: 'https://www.linkedin.com/feed/' },
@@ -13,10 +14,11 @@ const SOCIAL_MEDIA_LINKS = [
 ];
 
 const Footer = ():JSX.Element => {
+  const pathName = useLocation().pathname.substring(1);
   const { componentColors } = useTheme();
 
   return (
-    <S.FooterContainer>
+    <S.FooterContainer id="Footer" pathName={pathName}>
       <Box className="Main-Section">
         <S.LogoContainer>
           <Logo 

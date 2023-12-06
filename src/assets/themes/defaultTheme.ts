@@ -17,6 +17,7 @@ const defaultTheme = createTheme({
     main: '#FFFFFF',
     secondary: '#008FD5',
     tertiary: '#00AF95',
+    tertiaryAlternate: 'black',
     copyright: '#767676',
   },
   fonts: {

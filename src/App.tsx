@@ -8,6 +8,7 @@ import S from './styles';
 import AnimatedCursor from './components/AnimatedCursor';
 import FaqPage from './pages/Faq';
 import ContactPage from './pages/Contact';
+import AboutPage from './pages/About';
 
 const App = (): JSX.Element => {
   const [theme] = useState(defaultTheme);
@@ -17,13 +18,12 @@ const App = (): JSX.Element => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
 
-        <S.BodyContainer>
+        <S.BodyContainer id="Body-Container">
           <Header />
 
           <Routes>
-            <Route path="/">
-              Home
-            </Route>
+            <Route path="/" />
+            <Route path="/about" Component={AboutPage} />
             <Route path="/questions" Component={FaqPage} />
             <Route path="/contact" Component={ContactPage} />
           </Routes>
