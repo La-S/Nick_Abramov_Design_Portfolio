@@ -6,9 +6,10 @@ import Footer from './components/Footer';
 import { defaultTheme } from './assets/themes';
 import S from './styles';
 import AnimatedCursor from './components/AnimatedCursor';
+import Landing from './pages/Landing/Landing';
+import AboutPage from './pages/About';
 import FaqPage from './pages/Faq';
 import ContactPage from './pages/Contact';
-import AboutPage from './pages/About';
 
 const App = (): JSX.Element => {
   const [theme] = useState(defaultTheme);
@@ -22,10 +23,12 @@ const App = (): JSX.Element => {
           <Header />
 
           <Routes>
-            <Route path="/" />
-            <Route path="/about" Component={AboutPage} />
-            <Route path="/questions" Component={FaqPage} />
-            <Route path="/contact" Component={ContactPage} />
+            {['/', '/home', '/projects'].map((path, index) => (
+              <Route key={index} path={path} element={<Landing />} />
+            ))}
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/questions" element={<FaqPage />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
 
           <Footer />
