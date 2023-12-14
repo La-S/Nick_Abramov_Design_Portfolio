@@ -8,6 +8,12 @@ const ProjectBox = styled(Box)(({ theme }) => ({
     height: '100%',
     objectFit: 'cover',
     objectPosition: 'center',
+    filter: 'grayscale(100%)',
+
+    transition: 'all 0.3s linear',
+    '&:hover': {
+      filter: 'grayscale(0%)',
+    },
   },
 
   '.Category-Name': {
@@ -17,6 +23,12 @@ const ProjectBox = styled(Box)(({ theme }) => ({
     fontFamily: theme.fonts.main,
     fontSize: '20px',
     color: theme.textColors.main,
+  },
+
+  [theme.breakpoints.down('tablet')]: {
+    img: {
+      filter: 'grayscale(0%)',
+    },
   },
 }));
 

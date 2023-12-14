@@ -18,7 +18,13 @@ const Landing = (): JSX.Element => {
         <ul>
           {categories.map((category, index) => (
             <li key={index}>
-              <ButtonBase onClick={() => setSortCategory(category)} disableRipple>
+              <ButtonBase 
+                onClick={() => {
+                  if (sortCategory === category) setSortCategory(null);
+                  else setSortCategory(category);
+                }} 
+                disableRipple
+              >
                 <Typography className={sortCategory === category ? 'Active' : ''}>
                   {`#${category}`}
                 </Typography>
