@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import S from './styles';
-import { ButtonBase, Typography } from '@mui/material';
+import { Box, ButtonBase, Typography } from '@mui/material';
+import ProjectsGrid from './ProjectsGrid';
 
 const Landing = (): JSX.Element => {
   const [sortCategory, setSortCategory] = useState<null | string>(null);
@@ -13,7 +14,7 @@ const Landing = (): JSX.Element => {
 
   return (
     <S.LandingContainer>
-      <S.SortBarContainer>
+      <Box className="SortBar-Container">
         <ul>
           {categories.map((category, index) => (
             <li key={index}>
@@ -25,7 +26,11 @@ const Landing = (): JSX.Element => {
             </li>
           ))}
         </ul>
-      </S.SortBarContainer>
+      </Box>
+      
+      <Box className="ProjectGrid-Container">
+        <ProjectsGrid sortCategory={sortCategory} />
+      </Box>
     </S.LandingContainer>
   );
 };
