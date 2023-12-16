@@ -2,6 +2,7 @@ import { styled, Box } from '@mui/material';
 
 const ProjectBox = styled(Box)(({ theme }) => ({
   position: 'relative',
+  overflow: 'hidden',
 
   img: {
     width: '100%',
@@ -10,7 +11,7 @@ const ProjectBox = styled(Box)(({ theme }) => ({
     objectPosition: 'center',
     filter: 'grayscale(100%)',
 
-    transition: 'all 0.3s linear',
+    transition: 'filter 0.3s linear, transform 0.5s ease-out',
     '&:hover': {
       filter: 'grayscale(0%)',
     },
