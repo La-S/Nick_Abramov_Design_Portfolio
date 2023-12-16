@@ -7,6 +7,7 @@ import { defaultTheme } from './assets/themes';
 import S from './styles';
 import AnimatedCursor from './components/AnimatedCursor';
 import Landing from './pages/Landing/Landing';
+import Project from './pages/Project';
 import AboutPage from './pages/About';
 import FaqPage from './pages/Faq';
 import ContactPage from './pages/Contact';
@@ -16,6 +17,7 @@ const App = (): JSX.Element => {
 
   return (
     <Router>
+      
       <ThemeProvider theme={theme}>
         <CssBaseline />
 
@@ -26,6 +28,7 @@ const App = (): JSX.Element => {
             {['/', '/home', '/projects'].map((path, index) => (
               <Route key={index} path={path} element={<Landing />} />
             ))}
+            <Route path="/projects/:project_name" element={<Project />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/questions" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />
