@@ -5,11 +5,12 @@ import QuestionCollapsible from './QuestionCollapsible';
 import S from './styles';
 import { splitArrayIntoChunks } from './utils';
 
-const QUESTIONS_AND_ANSWERS: Array<{ question: string, answer: string }> = [
+const QUESTIONS_AND_ANSWERS: Array<{ question: string; answer: string }> = [
   {
     question: 'What services do you offer?',
-    answer: 'I offer the following services: Consultation, Logo Design,' + 
-    'Logo Animation, Brand Identity, Website Design, Illustrations, Portraits, and more.',
+    answer:
+      'I offer the following services: Consultation, Logo Design,' +
+      'Logo Animation, Brand Identity, Website Design, Illustrations, Portraits, and more.',
   },
   {
     question: 'How many years of experience do you have?',

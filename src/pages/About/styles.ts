@@ -1,9 +1,7 @@
 import { Box, Typography, styled } from '@mui/material';
 
 const AboutPageContainer = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.down('laptop')]: {
-
-  },
+  [theme.breakpoints.down('laptop')]: {},
 }));
 
 const AboutPageTitle = styled(Typography)(({ theme }) => ({

@@ -10,8 +10,8 @@ const LINKS = [
 
 const Nav = (): JSX.Element => {
   return (
-    <ul 
-      className='Nav' 
+    <ul
+      className="Nav"
       style={{
         listStyle: 'none',
         padding: 0,
@@ -20,10 +20,7 @@ const Nav = (): JSX.Element => {
     >
       {LINKS.map(({ name, path }) => (
         <li key={name}>
-          <NavLink 
-            className={(({ isActive }) => isActive ? 'Active' : '')}
-            to={path}
-          >
+          <NavLink className={({ isActive }) => (isActive ? 'Active' : '')} to={path}>
             {name}
           </NavLink>
         </li>

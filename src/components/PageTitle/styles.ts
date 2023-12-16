@@ -13,7 +13,7 @@ const PageTitle = styled(Typography)(({ theme }) => ({
   span: {
     color: theme.textColors.tertiary,
   },
-  
+
   [theme.breakpoints.down('tablet')]: {
     fontSize: '50px',
     marginBottom: '65px',

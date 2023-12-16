@@ -13,7 +13,7 @@ const SOCIAL_MEDIA_LINKS = [
   { icon: <BehanceLogo />, path: 'https://www.behance.net/' },
 ];
 
-const Footer = ():JSX.Element => {
+const Footer = (): JSX.Element => {
   const pathName = useLocation().pathname.substring(1);
   const { componentColors } = useTheme();
 
@@ -21,31 +21,27 @@ const Footer = ():JSX.Element => {
     <S.FooterContainer id="Footer" pathName={pathName}>
       <Box className="Main-Section">
         <S.LogoContainer>
-          <Logo 
-            fillMain={componentColors.logoMain} 
-            fillSecondary={componentColors.logoSecondary} 
-          />
+          <Logo fillMain={componentColors.logoMain} fillSecondary={componentColors.logoSecondary} />
         </S.LogoContainer>
         <Typography className="Main-Body-Text">
-          I help clients connect with their target audience
-          through UX/UI, logo, and brand identity design,
-          paying attention to detail and delivering high-quality designs.
+          I help clients connect with their target audience through UX/UI, logo, and brand identity design, paying
+          attention to detail and delivering high-quality designs.
         </Typography>
         <Nav />
       </Box>
       <Box className="Links-Section">
         <Box className="Social-Media-Links-Container">
           {SOCIAL_MEDIA_LINKS.map(({ icon, path }) => (
-            <a href={path} key={path} target='_blank' rel="noreferrer">{icon}</a>
+            <a href={path} key={path} target="_blank" rel="noreferrer">
+              {icon}
+            </a>
           ))}
         </Box>
         <Box className="Email-Link-Container">
           <a href="">abr.nicki.art@gmail.com</a>
         </Box>
       </Box>
-      <Typography className='Copyright'>
-        Copyright © 2023 Nick Abramov All rights reserved.
-      </Typography>
+      <Typography className="Copyright">Copyright © 2023 Nick Abramov All rights reserved.</Typography>
     </S.FooterContainer>
   );
 };

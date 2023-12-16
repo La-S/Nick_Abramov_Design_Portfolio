@@ -64,7 +64,7 @@ const QuestionContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-const AnswerContainer = styled(Box)(({ theme }) => ({ 
+const AnswerContainer = styled(Box)(({ theme }) => ({
   '.MuiTypography-root': {
     marginTop: '15px',
     fontFamily: theme.fonts.main,

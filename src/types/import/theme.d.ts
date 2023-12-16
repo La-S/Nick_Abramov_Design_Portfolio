@@ -23,19 +23,19 @@ declare module '@mui/material/styles' {
       logoSecondary: string;
       questionUnderline: string;
       inputBorder: string;
-    },
+    };
     textColors: {
       main: string;
       secondary: string;
       tertiary: string;
       tertiaryAlternate: string;
       copyright: string;
-    },
+    };
     fonts: {
       main: string;
       secondary: string;
       tertiary: string;
-    },
+    };
   }
   interface ThemeOptions {
     componentColors: {
@@ -46,19 +46,19 @@ declare module '@mui/material/styles' {
       logoSecondary: string;
       questionUnderline: string;
       inputBorder: string;
-    },
+    };
     textColors: {
       main: string;
       secondary: string;
       tertiary: string;
       tertiaryAlternate: string;
       copyright: string;
-    },
+    };
     fonts: {
       main: string;
       secondary: string;
       tertiary?: string;
-    },
+    };
   }
 }
 

@@ -10,8 +10,7 @@ const Header = (): JSX.Element => {
   const [navMenuOpen, setNavMenuOpen] = useState<boolean>(false);
   const { breakpoints, componentColors, textColors } = useTheme();
   const getFillMainColor = () => {
-    if (pathName === 'about'
-    && window.innerWidth >= breakpoints.values.tablet) {
+    if (pathName === 'about' && window.innerWidth >= breakpoints.values.tablet) {
       return textColors.tertiaryAlternate;
     }
 
@@ -30,14 +29,12 @@ const Header = (): JSX.Element => {
   }, [pathName]);
 
   return (
-    <S.Header pathName={pathName} >
-      <S.NewProjectLink to="/contact" pathName={pathName}>Start a project</S.NewProjectLink>
+    <S.Header pathName={pathName}>
+      <S.NewProjectLink to="/contact" pathName={pathName}>
+        Start a project
+      </S.NewProjectLink>
       <S.LogoContainer>
-        <Logo 
-          fillMain={fillMain}
-          fillSecondary={componentColors.logoSecondary}
-          isLink 
-        />
+        <Logo fillMain={fillMain} fillSecondary={componentColors.logoSecondary} isLink />
       </S.LogoContainer>
       <S.Burger onClick={() => setNavMenuOpen(true)} className="Burger" />
 

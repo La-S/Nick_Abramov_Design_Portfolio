@@ -13,9 +13,7 @@ const FaqPage = (): JSX.Element => {
       </PageTitle>
       <QuestionsList />
       <S.Banner>
-        <Typography variant='h3'>
-          Let me maximize your company’s potential
-        </Typography>
+        <Typography variant="h3">Let me maximize your company’s potential</Typography>
       </S.Banner>
     </S.FaqContainer>
   );

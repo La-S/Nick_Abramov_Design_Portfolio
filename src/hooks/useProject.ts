@@ -6,18 +6,16 @@ type QueryResult = Omit<UseQueryResult<unknown, unknown>, 'data'> & {
   project: Project | null;
 };
 
-const getProject = async (projectId: string):Promise<Project | null> => (
-  PROJECTS.find((project) => project.id === projectId) || null
-);
+const getProject = async (projectId: string): Promise<Project | null> =>
+  PROJECTS.find((project) => project.id === projectId) || null;
 
-const useProjects = (projectId: string): QueryResult => {
+const useProject = (projectId: string): QueryResult => {
   const { data: project = null, ...metaProps } = useQuery({
     queryKey: ['projects', projectId],
     queryFn: () => getProject(projectId),
-  }
-  );
+  });
 
   return { project, ...metaProps };
 };
 
-export default useProjects;
+export default useProject;

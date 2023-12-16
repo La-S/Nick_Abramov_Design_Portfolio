@@ -6,7 +6,7 @@ type QueryResult = Omit<UseQueryResult<unknown, unknown>, 'data'> & {
   projects: Array<Project>;
 };
 
-const getProjects = async ():Promise<Array<Project>> => PROJECTS;
+const getProjects = async (): Promise<Array<Project>> => PROJECTS;
 
 const useProjects = (): QueryResult => {
   const { data: projects = [], ...metaProps } = useQuery({

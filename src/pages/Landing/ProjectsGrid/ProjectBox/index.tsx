@@ -16,10 +16,10 @@ const ProjectBox = (props: Props) => {
   return (
     <S.ProjectBox className="ProjectBox-Container">
       <Link to={`/projects/${id}`} draggable="false">
-        <img 
-          src={imagePath} 
-          className='ProjectBox-Img'
-          draggable={false} 
+        <img
+          src={imagePath}
+          className="ProjectBox-Img"
+          draggable={false}
           onMouseOver={onProjectsTileMouseOver}
           onMouseOut={onProjectsTileMouseOut}
           onMouseMove={onProjectsTileMouseMove}

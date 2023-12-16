@@ -1,9 +1,8 @@
 import { styled, Box } from '@mui/material';
 
-const FooterContainer = styled(
-  Box,
-  { shouldForwardProp: (propName) => propName !== 'pathName' }
-)<{ pathName: string }>(({ theme, pathName }) => ({
+const FooterContainer = styled(Box, {
+  shouldForwardProp: (propName) => propName !== 'pathName',
+})<{ pathName: string }>(({ theme, pathName }) => ({
   display: 'flex',
   flexWrap: 'wrap',
   width: '100%',
@@ -35,7 +34,7 @@ const FooterContainer = styled(
             color: theme.textColors.secondary,
           },
         },
-        
+
         '&:last-of-type': {
           a: {
             marginRight: '0',
@@ -52,7 +51,7 @@ const FooterContainer = styled(
     '.Social-Media-Links-Container': {
       a: {
         marginLeft: '26px',
-  
+
         svg: {
           width: '24px',
           height: '24px',
@@ -64,7 +63,7 @@ const FooterContainer = styled(
       },
     },
 
-    '.Email-Link-Container' : {
+    '.Email-Link-Container': {
       marginTop: '40px',
 
       a: {
@@ -120,7 +119,7 @@ const FooterContainer = styled(
         marginTop: '25px',
       },
 
-      '.Email-Link-Container' : {
+      '.Email-Link-Container': {
         marginTop: '15px',
       },
     },

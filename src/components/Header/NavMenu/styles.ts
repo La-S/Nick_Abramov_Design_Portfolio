@@ -1,10 +1,9 @@
 import { styled, Box } from '@mui/material';
 import { NavMenuProps } from './props';
 
-const NavMainContainer = styled(
-  Box,
-  { shouldForwardProp: (propName) => propName !== 'openState' }
-)<NavMenuProps>(({ theme, openState: [open] }) => ({
+const NavMainContainer = styled(Box, {
+  shouldForwardProp: (propName) => propName !== 'openState',
+})<NavMenuProps>(({ theme, openState: [open] }) => ({
   backgroundColor: theme.componentColors.backgroundMain,
   position: 'fixed',
   zIndex: 1000,
@@ -32,7 +31,7 @@ const NavMainContainer = styled(
       padding: 0,
       display: 'flex',
       alignItems: 'center',
-      justifyContent:'center',
+      justifyContent: 'center',
 
       a: {
         fontFamily: theme.fonts.main,
@@ -43,7 +42,7 @@ const NavMainContainer = styled(
       },
     },
   },
-  
+
   transition: 'height 0.3s ease-in-out, opacity 0.3s ease-in-out',
   ...(open && {
     transition: 'height 0.3s ease-in-out, opacity 0.3s ease-in-out',
@@ -62,7 +61,7 @@ const NavMainContainer = styled(
           fontSize: '50px',
         },
       },
-    }
+    },
   },
 }));
 

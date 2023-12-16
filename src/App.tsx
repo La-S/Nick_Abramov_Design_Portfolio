@@ -17,7 +17,6 @@ const App = (): JSX.Element => {
 
   return (
     <Router>
-      
       <ThemeProvider theme={theme}>
         <CssBaseline />
 
@@ -28,7 +27,7 @@ const App = (): JSX.Element => {
             {['/', '/home', '/projects'].map((path, index) => (
               <Route key={index} path={path} element={<Landing />} />
             ))}
-            <Route path="/projects/:project_name" element={<Project />} />
+            <Route path="/projects/:projectId" element={<Project />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/questions" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />

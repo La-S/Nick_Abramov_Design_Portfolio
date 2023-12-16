@@ -10,7 +10,6 @@ const QuestionsListsContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-
 const QuestionsList = styled('ul')(({ theme }) => ({
   width: '100%',
   margin: '0',
