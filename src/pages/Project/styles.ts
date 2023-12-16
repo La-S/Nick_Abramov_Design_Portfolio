@@ -9,10 +9,100 @@ const ProjectContainer = styled(Box)(({ theme }) => ({
   },
 
   [theme.breakpoints.down('tablet')]: {
-    maxHeight: `min(calc(100vh - ${HEADER_MOBILE_HEIGHT}px), 750px)`,
+    '.Main-Image': {
+      maxHeight: `min(calc(100vh - ${HEADER_MOBILE_HEIGHT}px), 750px)`,
+    },
+  },
+}));
+
+const ProjectOverview = styled(Box)(({ theme }) => ({
+  padding: '85px 75px',
+  display: 'flex',
+  justifyContent: 'center',
+
+  '.Project-Title-Box': {
+    textAlign: 'center',
+    paddingRight: '115px',
+
+    '.MuiTypography-root': {
+      marginTop: '50px',
+      fontFamily: theme.fonts.main,
+      lineHeight: 1.25,
+      fontWeight: 'bold',
+      fontSize: '64px',
+    },
+
+    '.BoxUnderline': {
+      marginTop: '20px',
+      height: '3px',
+    },
+  },
+
+  '.Project-Description-Box': {
+    h3: {
+      fontFamily: theme.fonts.main,
+      fontSize: '48px',
+    },
+
+    ul: {
+      margin: '30px 0 0 0',
+      padding: 0,
+      listStyle: 'none',
+
+      li: {
+        fontFamily: theme.fonts.main,
+        fontSize: '24px',
+        lineHeight: 1.35,
+        marginBottom: '24px',
+      },
+    },
+  },
+
+  [theme.breakpoints.down(900)]: {
+    padding: '50px',
+    flexDirection: 'column',
+
+    '.Project-Title-Box': {
+      paddingRight: 0,
+      marginBottom: '50px',
+
+      '.MuiTypography-root': {
+        marginTop: '25px',
+      },
+    },
+  },
+
+  [theme.breakpoints.down('tablet')]: {
+    '.Project-Title-Box': {
+      marginBottom: '40px',
+
+      '.MuiTypography-root': {
+        fontSize: '50px',
+      },
+
+      '.BoxUnderline': {
+        marginTop: '15px',
+      },
+    },
+
+    '.Project-Description-Box': {
+      h3: {
+        fontSize: '36px',
+      },
+
+      ul: {
+        margin: '25px 0 0 0',
+
+        li: {
+          marginBottom: '18px',
+          fontSize: '18px',
+        },
+      },
+    },
   },
 }));
 
 export default {
   ProjectContainer,
+  ProjectOverview,
 };

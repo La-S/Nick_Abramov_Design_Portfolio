@@ -4,4 +4,5 @@ export interface Project {
   category: string;
   mainImagePath: string;
   dateCreated: number;
+  descriptionBulletPoints: Array<string>;
 }
