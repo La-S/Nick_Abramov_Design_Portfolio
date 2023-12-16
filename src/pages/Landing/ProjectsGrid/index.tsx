@@ -28,8 +28,13 @@ const ProjectsGrid = ({ sortCategory }: Props): JSX.Element => {
 
   return (
     <S.Grid className="Grid">
-      {sortedProjects.map(({ name, category, imagePath }) => (
-        <ProjectBox key={name} category={category} imagePath={imagePath} />
+      {sortedProjects.map(({ id, category, imagePath }) => (
+        <ProjectBox 
+          key={id}
+          id={id} 
+          category={category} 
+          imagePath={imagePath} 
+        />
       ))}
     </S.Grid>
   );

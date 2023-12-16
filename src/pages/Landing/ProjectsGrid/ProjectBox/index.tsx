@@ -4,18 +4,18 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { onProjectsTileMouseMove, onProjectsTileMouseOut, onProjectsTileMouseOver } from './utils';
 
-interface ProjectInfo {
+interface Props {
+  id: string;
   category: string;
   imagePath: string;
 }
 
-const ProjectBox = (projectInfo: ProjectInfo) => {
-  const { category, imagePath } = projectInfo;
-
+const ProjectBox = (props: Props) => {
+  const { category, imagePath, id } = props;
 
   return (
     <S.ProjectBox className="ProjectBox-Container">
-      <Link to="/projects" draggable="false">
+      <Link to={`/projects/${id}`} draggable="false">
         <img 
           src={imagePath} 
           className='ProjectBox-Img'
