@@ -43,10 +43,7 @@ const Header = (): JSX.Element => {
         <Box className="Theme-Switch" onClick={() => setThemeMenuOpen(!themeMenuOpen)}>
           <ThemeIcon className="Theme-Icon" />
           <CaretIcon className="Caret-Icon" />
-          {themeMenuOpen ? (
-            <ThemeMenu />
-          )
-            : null}
+          {themeMenuOpen ? <ThemeMenu /> : null}
         </Box>
         <BurgerIcon onClick={() => setNavMenuOpen(true)} className="Burger-Icon" />
       </S.BurgerContainer>

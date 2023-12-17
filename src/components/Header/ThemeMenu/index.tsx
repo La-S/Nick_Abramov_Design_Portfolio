@@ -18,7 +18,7 @@ const ThemeMenu = (): JSX.Element => {
   const {
     themeState: [currentTheme, setTheme],
   } = useContext(GlobalContext);
-  
+
   const switchTheme = (themeName: string) => {
     const themeObject = THEME_OPTIONS.find((theme) => theme.name === themeName);
     if (themeObject) setTheme(themeObject.value);
@@ -32,8 +32,8 @@ const ThemeMenu = (): JSX.Element => {
           {...(themeValue === currentTheme
             ? { className: 'Selected' }
             : {
-              onClick: () => switchTheme(themeName),
-            })}
+                onClick: () => switchTheme(themeName),
+              })}
         >
           {themeName}
         </li>

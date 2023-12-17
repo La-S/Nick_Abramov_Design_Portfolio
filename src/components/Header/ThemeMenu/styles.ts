@@ -14,7 +14,7 @@ const ThemeMenu = styled('ul')(({ theme }) => ({
 
   li: {
     margin: '2.5px 0',
-    
+
     '&.Selected': {
       backgroundColor: theme.textColors.tertiary,
     },
