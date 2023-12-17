@@ -1,7 +1,7 @@
 export type ProjectGalleryCell = {
   type: 'image' | 'direct video link' | 'embedded video link';
   path: string;
-  lazyPath?: string; /* for type === 'image' */
+  lazyPath?: string /* for type === 'image' */;
 };
 
 export type ProjectGalleryRow = {

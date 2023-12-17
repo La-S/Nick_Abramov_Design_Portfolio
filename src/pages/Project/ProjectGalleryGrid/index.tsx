@@ -4,12 +4,12 @@ import { ProjectGalleryRow } from '../../../types/data/project';
 import { renderGalleryRow } from './utils';
 
 interface Props {
-  gallery: Array<ProjectGalleryRow>,
+  gallery: Array<ProjectGalleryRow>;
 }
 
-const ProjectGalleryGrid = ({ gallery }: Props): JSX.Element => {    
+const ProjectGalleryGrid = ({ gallery }: Props): JSX.Element => {
   return (
-    <S.ProjectGalleryGrid className='ProjectGallery-Grid'>
+    <S.ProjectGalleryGrid className="ProjectGallery-Grid">
       {gallery.map((galleryRow, i) => renderGalleryRow(galleryRow, i))}
     </S.ProjectGalleryGrid>
   );

@@ -6,7 +6,7 @@ import { ProjectGalleryCell, ProjectGalleryRow } from '../../../types/data/proje
 
 const renderCell = (cell: ProjectGalleryCell): JSX.Element => {
   if (cell.type === 'image') {
-    return <img src={cell.path} loading='lazy' />;
+    return <img src={cell.path} loading="lazy" />;
   }
   if (cell.type === 'direct video link') {
     return <video src={cell.path} autoPlay loop muted />;
@@ -15,7 +15,7 @@ const renderCell = (cell: ProjectGalleryCell): JSX.Element => {
     const videoLink = `${cell.path}?mute=1`;
     return (
       <Box className="iframe-container">
-        <iframe width="420" height="315" src={videoLink} className='video' />
+        <iframe width="420" height="315" src={videoLink} className="video" />
       </Box>
     );
   }
@@ -28,11 +28,7 @@ export const renderGalleryRow = (galleryRow: ProjectGalleryRow, i: number): JSX.
   const range = Math.min(cells.length, cellAmount);
 
   return (
-    <S.ProjectGalleryRow
-      key={i}
-      className="ProjectGallery-Grid-Row"
-      cellAmount={cellAmount}
-    >
+    <S.ProjectGalleryRow key={i} className="ProjectGallery-Grid-Row" cellAmount={cellAmount}>
       {cells.slice(0, range).map((cell, j) => (
         <Box key={j} className="ProjectGallery-Grid-Cell">
           {renderCell(cell)}

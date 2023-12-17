@@ -22,7 +22,7 @@ const GALLERY: Array<ProjectGalleryRow> = [
         type: 'image',
         path: ProjectImg1,
         lazyPath: ProjectLazyImg1,
-      }
+      },
     ],
   },
   {
@@ -32,7 +32,7 @@ const GALLERY: Array<ProjectGalleryRow> = [
         type: 'image',
         path: ProjectImg2,
         lazyPath: ProjectLazyImg2,
-      }
+      },
     ],
   },
   {
@@ -42,7 +42,7 @@ const GALLERY: Array<ProjectGalleryRow> = [
         type: 'image',
         path: ProjectGif3,
         lazyPath: ProjectLazyGif3,
-      }
+      },
     ],
   },
   {
@@ -52,7 +52,7 @@ const GALLERY: Array<ProjectGalleryRow> = [
         type: 'image',
         path: ProjectImg4,
         lazyPath: ProjectLazyImg4,
-      }
+      },
     ],
   },
   {
@@ -61,7 +61,7 @@ const GALLERY: Array<ProjectGalleryRow> = [
       {
         type: 'embedded video link',
         path: 'https://www.youtube.com/embed/-cofUNXbk8Q?si=hRpgi3eLXQ7UbAg4',
-      }
+      },
     ],
   },
   {
@@ -71,7 +71,7 @@ const GALLERY: Array<ProjectGalleryRow> = [
         type: 'direct video link',
         path: 'https://media.istockphoto.com/id/1757914655/video/business-man-in-office-space.mp4?s=mp4-640x640-is&k=20&c=0aJtyQPiesfJCxt7Pu4WmF9cSczCvSE6Z84Bvr11kzY=',
       },
-    ]
+    ],
   },
   {
     cellAmount: 3,
@@ -80,7 +80,7 @@ const GALLERY: Array<ProjectGalleryRow> = [
         type: 'image',
         path: ProjectImg6,
         lazyPath: ProjectLazyImg6,
-      }
+      },
     ],
   },
 ];
