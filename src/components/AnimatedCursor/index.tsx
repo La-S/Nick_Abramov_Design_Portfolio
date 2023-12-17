@@ -23,7 +23,7 @@ const AnimatedCursor = (): JSX.Element => {
       outerAlpha={0.9}
       innerScale={0.9}
       outerScale={1.75}
-      clickables={['a', 'button', '.Burger']}
+      clickables={['a', 'button', '.Burger-Icon', '.Theme-Switch']}
     />
   );
 };

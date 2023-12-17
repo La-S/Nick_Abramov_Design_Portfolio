@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '@mui/material';
-import S from './styles';
+import { useLocation } from 'react-router-dom';
+import { Box, useTheme } from '@mui/material';
+import { List as BurgerIcon, PaintBrush as ThemeIcon, CaretDown as CaretIcon } from '@phosphor-icons/react';
 import Logo from '../Logo';
 import NavMenu from './NavMenu';
-import { useLocation } from 'react-router-dom';
+import S from './styles';
 
 const Header = (): JSX.Element => {
   const pathName = useLocation().pathname.substring(1);
@@ -36,7 +37,13 @@ const Header = (): JSX.Element => {
       <S.LogoContainer>
         <Logo fillMain={fillMain} fillSecondary={componentColors.logoSecondary} isLink />
       </S.LogoContainer>
-      <S.Burger onClick={() => setNavMenuOpen(true)} className="Burger" />
+      <S.BurgerContainer>
+        <Box className="Theme-Switch">
+          <ThemeIcon className="Theme-Icon" />
+          <CaretIcon className="Caret-Icon" />
+        </Box>
+        <BurgerIcon onClick={() => setNavMenuOpen(true)} className="Burger-Icon" />
+      </S.BurgerContainer>
 
       <NavMenu openState={[navMenuOpen, setNavMenuOpen]} />
     </S.Header>
