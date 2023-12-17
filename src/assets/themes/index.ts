@@ -1,3 +1,4 @@
 import defaultTheme from './defaultTheme';
+import lightTheme from './lightTheme';
 
-export { defaultTheme };
+export { defaultTheme, lightTheme };

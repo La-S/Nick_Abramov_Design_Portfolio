@@ -62,7 +62,7 @@ const BurgerContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
 
-  svg: {  
+  svg: {
     '*': {
       color: theme.textColors.main,
     },
@@ -78,7 +78,7 @@ const BurgerContainer = styled(Box)(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     position: 'relative',
-    
+
     '.Theme-Icon': {
       width: '40px',
       height: '34px',

@@ -5,10 +5,12 @@ import { List as BurgerIcon, PaintBrush as ThemeIcon, CaretDown as CaretIcon } f
 import Logo from '../Logo';
 import NavMenu from './NavMenu';
 import S from './styles';
+import ThemeMenu from './ThemeMenu';
 
 const Header = (): JSX.Element => {
   const pathName = useLocation().pathname.substring(1);
   const [navMenuOpen, setNavMenuOpen] = useState<boolean>(false);
+  const [themeMenuOpen, setThemeMenuOpen] = useState<boolean>(false);
   const { breakpoints, componentColors, textColors } = useTheme();
   const getFillMainColor = () => {
     if (pathName === 'about' && window.innerWidth >= breakpoints.values.tablet) {
@@ -38,9 +40,13 @@ const Header = (): JSX.Element => {
         <Logo fillMain={fillMain} fillSecondary={componentColors.logoSecondary} isLink />
       </S.LogoContainer>
       <S.BurgerContainer>
-        <Box className="Theme-Switch">
+        <Box className="Theme-Switch" onClick={() => setThemeMenuOpen(!themeMenuOpen)}>
           <ThemeIcon className="Theme-Icon" />
           <CaretIcon className="Caret-Icon" />
+          {themeMenuOpen ? (
+            <ThemeMenu />
+          )
+            : null}
         </Box>
         <BurgerIcon onClick={() => setNavMenuOpen(true)} className="Burger-Icon" />
       </S.BurgerContainer>

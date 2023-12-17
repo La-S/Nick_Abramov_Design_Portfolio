@@ -3,21 +3,21 @@ import { screenSizeBreakpoints } from './constants';
 import mainFont from '../fonts/Futura_book.ttf';
 import secondaryFont from '../fonts/Inter.ttf';
 
-const defaultTheme = createTheme({
+const lightTheme = createTheme({
   componentColors: {
-    backgroundMain: '#131313',
+    backgroundMain: '#FFFFFF',
     backgroundSecondary: '#008FD5',
     backgroundTertiary: '#00AF95',
     logoMain: '#008FD5',
-    logoSecondary: '#FFFFFF',
+    logoSecondary: '#131313',
     questionUnderline: '#494949',
     inputBorder: '#626262',
-    themeSwitchBackground: '#212121',
+    themeSwitchBackground: '#FFFFFF',
   },
   textColors: {
-    main: '#FFFFFF',
+    main: '#131313',
     secondary: '#008FD5',
-    tertiary: '#00AF95',
+    tertiary: '#008FD5',
     tertiaryAlternate: 'black',
     copyright: '#767676',
   },
@@ -44,4 +44,4 @@ const defaultTheme = createTheme({
   },
 });
 
-export default defaultTheme;
+export default lightTheme;

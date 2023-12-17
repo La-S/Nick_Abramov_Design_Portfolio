@@ -11,34 +11,41 @@ import Project from './pages/Project';
 import AboutPage from './pages/About';
 import FaqPage from './pages/Faq';
 import ContactPage from './pages/Contact';
+import { GlobalContext } from './contexts/global';
 
 const App = (): JSX.Element => {
-  const [theme] = useState(defaultTheme);
+  const [theme, setTheme] = useState(defaultTheme);
 
   return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+    <GlobalContext.Provider
+      value={{
+        themeState: [theme, setTheme],
+      }}
+    >
+      <Router>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
 
-        <S.BodyContainer id="Body-Container">
-          <Header />
+          <S.BodyContainer id="Body-Container">
+            <Header />
 
-          <Routes>
-            {['/', '/home', '/projects'].map((path, index) => (
-              <Route key={index} path={path} element={<Landing />} />
-            ))}
-            <Route path="/projects/:projectId" element={<Project />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/questions" element={<FaqPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
+            <Routes>
+              {['/', '/home', '/projects'].map((path, index) => (
+                <Route key={index} path={path} element={<Landing />} />
+              ))}
+              <Route path="/projects/:projectId" element={<Project />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/questions" element={<FaqPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
 
-          <Footer />
-        </S.BodyContainer>
+            <Footer />
+          </S.BodyContainer>
 
-        <AnimatedCursor />
-      </ThemeProvider>
-    </Router>
+          <AnimatedCursor />
+        </ThemeProvider>
+      </Router>
+    </GlobalContext.Provider>
   );
 };
 
