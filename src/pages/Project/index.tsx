@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import useProject from '../../hooks/useProject';
 import S from './styles';
 import BoxUnderline from '../../components/BoxUnderline';
+import ProjectGalleryGrid from './ProjectGalleryGrid';
 
 const Project = () => {
   const { projectId } = useParams();
@@ -15,18 +16,14 @@ const Project = () => {
         <></>
       ) : (
         <>
-          <img src={project?.mainImagePath} className='Main-Image' />
+          <img src={project?.mainImagePath} className="Main-Image" />
           <S.ProjectOverview>
             <Box className="Project-Title-Box">
-              <Typography>
-                {project?.name}
-              </Typography>
+              <Typography>{project?.name}</Typography>
               <BoxUnderline />
             </Box>
             <Box className="Project-Description-Box">
-              <Typography variant='h3'>
-                Project Overview
-              </Typography>
+              <Typography variant="h3">Project Overview</Typography>
               <ul>
                 {project?.descriptionBulletPoints.map((descriptionBullet, i) => (
                   <li key={i}>
@@ -37,6 +34,7 @@ const Project = () => {
               </ul>
             </Box>
           </S.ProjectOverview>
+          <ProjectGalleryGrid gallery={project?.gallery || []} />
         </>
       )}
     </S.ProjectContainer>
