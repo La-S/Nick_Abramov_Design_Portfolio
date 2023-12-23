@@ -8,6 +8,7 @@ const api = axios.create({
   baseURL,
   headers: {
     'Access-Control-Allow-Origin': '*',
+    Authorization: `Bearer ${cookies.get('access_token')}`,
   },
 });
 

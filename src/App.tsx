@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import { GlobalContext } from './contexts/global';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import Header from './components/Header';
@@ -7,16 +7,25 @@ import Footer from './components/Footer';
 import { defaultTheme } from './assets/themes';
 import S from './styles';
 import AnimatedCursor from './components/AnimatedCursor';
-import LandingPage from './pages/Landing/Landing';
-import ProjectPage from './pages/Project';
-import AboutPage from './pages/About';
-import FaqPage from './pages/Faq';
-import ContactPage from './pages/Contact';
-import AdminLoginPage from './pages/AdminLogin';
-import AdminDashboardPage from './pages/AdminDashboard';
+import { adminRoutes, mainRoutes } from './routes';
+import type { RouteFixture } from './routes';
+import { validateAdminAuthentication } from './api/authMethods.api';
 
 const App = (): JSX.Element => {
   const [theme, setTheme] = useState(defaultTheme);
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+
+  const renderProtectedPageElement = (route: RouteFixture, isLoggedIn: boolean) => {
+    console.log(isLoggedIn);
+    if (!isLoggedIn && route.path !== '/admin/login') {
+      return <Navigate to="/admin/login" />;
+    }
+    if (isLoggedIn && route.path === '/admin/login') {
+      return <Navigate to="/admin/dashboard" />;
+    }
+
+    return route.element;
+  };
 
   const MainLayout = (
     <>
@@ -25,17 +34,24 @@ const App = (): JSX.Element => {
       <Footer />
     </>
   );
-
   const AdminLayout = (
     <>
       <Outlet />
     </>
   );
 
+  // TODO: Render a loading screen before this authentication is complete
+  useEffect(() => {
+    validateAdminAuthentication()
+      .then(() => setIsAdminLoggedIn(true))
+      .catch(() => {});
+  }, []);
+
   return (
     <GlobalContext.Provider
       value={{
         themeState: [theme, setTheme],
+        authState: [isAdminLoggedIn, setIsAdminLoggedIn],
       }}
     >
       <Router>
@@ -45,17 +61,14 @@ const App = (): JSX.Element => {
           <S.BodyContainer id="Body-Container">
             <Routes>
               <Route element={MainLayout}>
-                {['/', '/home', '/projects'].map((path, index) => (
-                  <Route key={index} path={path} element={<LandingPage />} />
+                {mainRoutes.map((route, index) => (
+                  <Route key={index} path={route.path} element={route.element} />
                 ))}
-                <Route path="/projects/:projectId" element={<ProjectPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/questions" element={<FaqPage />} />
-                <Route path="/contact" element={<ContactPage />} />
               </Route>
               <Route element={AdminLayout}>
-                <Route path="/admin/login" element={<AdminLoginPage />} />
-                <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+                {adminRoutes.map((route, index) => (
+                  <Route key={index} path={route.path} element={renderProtectedPageElement(route, isAdminLoggedIn)} />
+                ))}
               </Route>
             </Routes>
           </S.BodyContainer>
