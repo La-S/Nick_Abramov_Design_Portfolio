@@ -16,7 +16,6 @@ const App = (): JSX.Element => {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
 
   const renderProtectedPageElement = (route: RouteFixture, isLoggedIn: boolean) => {
-    console.log(isLoggedIn);
     if (!isLoggedIn && route.path !== '/admin/login') {
       return <Navigate to="/admin/login" />;
     }
