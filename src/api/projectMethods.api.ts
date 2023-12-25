@@ -20,3 +20,13 @@ export const createProject = async (projectInputDto: ProjectInputDto): Promise<A
   const route = ROUTE;
   return api.post(route, projectInputDto);
 };
+
+export const updateProject = async (id: string, projectInputDto: ProjectInputDto): Promise<AxiosResponse<Project>> => {
+  const route = `${ROUTE}/${id}`;
+  return api.put(route, projectInputDto);
+};
+
+export const deleteProject = async (id: string): Promise<AxiosResponse<Project>> => {
+  const route = `${ROUTE}/${id}`;
+  return api.delete(route);
+};
