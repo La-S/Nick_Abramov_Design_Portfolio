@@ -11,13 +11,27 @@ const HeaderNavLinks = styled('ul')(({ theme }) => ({
   '.New-Project-Button': {
     margin: '15px',
     padding: '5px 7.5px',
-    fontSize: '16px',
     backgroundColor: theme.componentColors.backgroundSecondary,
-    fontFamily: theme.fonts.secondary,
 
-    transition: 'color 0.2s ease-in-out',
-    '&:hover': {
-      color: theme.componentColors.backgroundMain,
+    p: {
+      display: 'flex',
+      margin: 0,
+      fontSize: '16px',
+      fontFamily: theme.fonts.secondary,
+  
+      p: {
+        margin: 0,
+      },
+  
+      transition: 'color 0.2s ease-in-out',
+      '&:hover': {
+        color: theme.componentColors.backgroundMain,
+  
+        transition: 'color 0.2s ease-in-out',
+        p: {
+          color: theme.componentColors.backgroundMain,
+        },
+      },
     },
   },
 

@@ -29,7 +29,9 @@ const AdminDashboard = (): JSX.Element => {
       </HeaderStyles.LogoContainer>
       <S.HeaderNavLinks>
         <ButtonBase className="New-Project-Button" disableRipple>
-          new project <span>&nbsp;+</span>
+          <p>
+            new project <p>&nbsp;+</p>
+          </p>
         </ButtonBase>
         <ButtonBase disableRipple onClick={logout}>
           <SignOutIcon />
