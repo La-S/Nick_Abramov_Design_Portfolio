@@ -1,4 +1,15 @@
 import defaultTheme from './defaultTheme';
 import lightTheme from './lightTheme';
 
-export { defaultTheme, lightTheme };
+const themeOptions = [
+  {
+    name: 'dark',
+    value: defaultTheme,
+  },
+  {
+    name: 'light',
+    value: lightTheme,
+  },
+];
+
+export default themeOptions;

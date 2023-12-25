@@ -4,15 +4,16 @@ import { GlobalContext } from './contexts/global';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { defaultTheme } from './assets/themes';
 import S from './styles';
 import AnimatedCursor from './components/AnimatedCursor';
 import { adminRoutes, mainRoutes } from './routes';
 import type { RouteFixture } from './routes';
 import { validateAdminAuthentication } from './api/authMethods.api';
+import { getCurrentTheme } from './utils/themeUtils';
 
 const App = (): JSX.Element => {
-  const [theme, setTheme] = useState(defaultTheme);
+  const currentTheme = getCurrentTheme();
+  const [theme, setTheme] = useState(currentTheme);
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
 
   const renderProtectedPageElement = (route: RouteFixture, isLoggedIn: boolean) => {
