@@ -83,10 +83,10 @@ const NewProjectForm = (): JSX.Element => {
         <div key={i}>
           {`Row ${i + 1}:`}
           <p>Cell number</p>
-          <select 
+          <select
             defaultValue={galleryRow.cellAmount}
             onChange={(e) => {
-              const newCellAmount = (e.target.value as unknown) as ProjectGalleryRow['cellAmount'];
+              const newCellAmount = e.target.value as unknown as ProjectGalleryRow['cellAmount'];
               const newGalleryValues = [...galleryValues];
               newGalleryValues[i].cellAmount = newCellAmount;
               if (newGalleryValues[i].cells.length > newCellAmount) {
@@ -120,8 +120,8 @@ const NewProjectForm = (): JSX.Element => {
                 <option value="direct video link">direct video link</option>
                 <option value="embedded video link">youtube video link</option>
               </select>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={cellValue.path}
                 placeholder="path"
                 onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
@@ -142,7 +142,6 @@ const NewProjectForm = (): JSX.Element => {
       >
         Add a new gallery row
       </button>
-
       <button type="submit" onClick={handleSubmit}>
         Submit
       </button>
