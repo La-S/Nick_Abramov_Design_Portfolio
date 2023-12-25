@@ -4,7 +4,7 @@ export const onProjectsTileMouseOver = (e: ProjectBoxMouseEvent) => {
   if (e.target === null) return;
 
   const projectImage = e.target as HTMLImageElement;
-  projectImage.style.transform = 'scale(1.15)';
+  projectImage.style.transform = 'scale(1.05)';
 };
 export const onProjectsTileMouseOut = (e: ProjectBoxMouseEvent) => {
   if (e.target === null) return;

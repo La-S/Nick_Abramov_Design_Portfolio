@@ -1,3 +1,5 @@
+import { ProjectGalleryRow } from './project';
+
 export type ProjectGetRequest =
   | {
       summary?: boolean;
@@ -10,4 +12,6 @@ export type ProjectInputDto = {
   name: string;
   category: string;
   descriptionBullets: Array<string>;
+  mainImagePath: string;
+  gallery: Array<ProjectGalleryRow>;
 };

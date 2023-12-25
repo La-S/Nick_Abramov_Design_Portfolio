@@ -10,7 +10,7 @@ interface Props {
 }
 
 const ProjectsGrid = ({ sortCategory }: Props): JSX.Element => {
-  const { projects } = useProjects();
+  const { projects } = useProjects({ summary: true });
   const sortedProjects = (() => {
     let sorted: Array<Project> = [];
     const unsorted = projects.filter((project) => {

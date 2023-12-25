@@ -11,7 +11,7 @@ const DEFAULT_PARAMS: ProjectGetRequest = {
 };
 
 const useProjects = (params?: ProjectGetRequest): QueryResult => {
-  const queryParams = {...DEFAULT_PARAMS,...params };
+  const queryParams = { ...DEFAULT_PARAMS, ...params };
   const { data: { data: projects } = { data: [] }, ...metaProps } = useQuery({
     queryKey: ['projects'],
     queryFn: () => getProjects(queryParams),

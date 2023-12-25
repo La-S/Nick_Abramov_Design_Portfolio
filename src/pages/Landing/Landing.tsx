@@ -2,10 +2,19 @@ import React, { useState } from 'react';
 import S from './styles';
 import { Box, ButtonBase, Typography } from '@mui/material';
 import ProjectsGrid from './ProjectsGrid';
+import type { Project } from '../../types/data/project';
+import useProjects from '../../hooks/useProjects';
+
+const getProjectCategories = (projects: Array<Project>): Array<string> => {
+  const allCategoryValues = projects.map((project) => project.category);
+  const uniqueCategories = Array.from(new Set(allCategoryValues));
+  return uniqueCategories;
+};
 
 const Landing = (): JSX.Element => {
   const [sortCategory, setSortCategory] = useState<null | string>(null);
-  const categories = ['Web design', 'Branding', 'Illustration'];
+  const { projects } = useProjects({ summary: true });
+  const categories = getProjectCategories(projects);
 
   return (
     <S.LandingContainer>
