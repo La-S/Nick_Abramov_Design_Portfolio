@@ -1,23 +1,20 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
-import type { Project } from '../types/data/project';
-import PROJECTS from './projects';
 import { getProjects } from '../api/projectMethods.api';
+import type { ProjectGetRequest, ProjectGetResponse } from '../types/data/projectAPI';
 
 type QueryResult = Omit<UseQueryResult<unknown, unknown>, 'data'> & {
-  projects: Array<Project>;
+  projects: ProjectGetResponse;
 };
 
-const fetchProjects = async (): Promise<Array<Project>> => {
-  const projects = getProjects({ summary: true });
-  console.log(projects);
-
-  return PROJECTS;
+const DEFAULT_PARAMS: ProjectGetRequest = {
+  summary: false,
 };
 
-const useProjects = (): QueryResult => {
-  const { data: projects = [], ...metaProps } = useQuery({
+const useProjects = (params?: ProjectGetRequest): QueryResult => {
+  const queryParams = {...DEFAULT_PARAMS,...params };
+  const { data: { data: projects } = { data: [] }, ...metaProps } = useQuery({
     queryKey: ['projects'],
-    queryFn: fetchProjects,
+    queryFn: () => getProjects(queryParams),
   });
 
   return { projects, ...metaProps };

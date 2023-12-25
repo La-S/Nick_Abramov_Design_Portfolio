@@ -25,7 +25,7 @@ const Project = () => {
             <Box className="Project-Description-Box">
               <Typography variant="h3">Project Overview</Typography>
               <ul>
-                {project?.descriptionBulletPoints.map((descriptionBullet, i) => (
+                {project?.descriptionBullets.map((descriptionBullet, i) => (
                   <li key={i}>
                     {descriptionBullet}
                     <br />

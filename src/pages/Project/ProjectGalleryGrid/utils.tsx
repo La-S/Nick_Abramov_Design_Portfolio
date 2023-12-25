@@ -5,7 +5,7 @@ import S from './styles';
 import { ProjectGalleryCell, ProjectGalleryRow } from '../../../types/data/project';
 
 const renderCell = (cell: ProjectGalleryCell): JSX.Element => {
-  if (cell.type === 'image') {
+  if (cell.type === 'image link') {
     return <img src={cell.path} loading="lazy" />;
   }
   if (cell.type === 'direct video link') {
@@ -25,6 +25,7 @@ const renderCell = (cell: ProjectGalleryCell): JSX.Element => {
 
 export const renderGalleryRow = (galleryRow: ProjectGalleryRow, i: number): JSX.Element => {
   const { cells, cellAmount } = galleryRow;
+  console.log({ cells, cellAmount });
   const range = Math.min(cells.length, cellAmount);
 
   return (

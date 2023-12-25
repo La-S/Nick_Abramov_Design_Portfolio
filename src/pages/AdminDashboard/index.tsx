@@ -54,6 +54,7 @@ const AdminDashboard = (): JSX.Element => {
           setDescriptionInput((target as HTMLInputElement).value);
         } }
       />
+      <input type="file" />
 
       <button type="submit" onClick={handleSubmit}>Submit</button>
     </form>

@@ -1,5 +1,5 @@
 export type ProjectGalleryCell = {
-  type: 'image' | 'direct video link' | 'embedded video link';
+  type: 'image link' | 'direct video link' | 'embedded video link';
   path: string;
   lazyPath?: string /* for type === 'image' */;
 };
@@ -15,6 +15,6 @@ export interface Project {
   category: string;
   mainImagePath: string;
   dateCreated: number;
-  descriptionBulletPoints: Array<string>;
+  descriptionBullets: Array<string>;
   gallery: Array<ProjectGalleryRow>;
 }
