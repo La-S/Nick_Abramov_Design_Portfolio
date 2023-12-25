@@ -2,7 +2,13 @@ import { styled, Box } from '@mui/material';
 import { HEADER_DESKTOP_HEIGHT, HEADER_MOBILE_HEIGHT } from '../../../components/Header/styles';
 
 const AdminProjectsGrid = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.down('tablet')]: {},
+  display: 'flex',
+  flexWrap: 'wrap',
+  paddingTop: '15px',
+
+  [theme.breakpoints.down('tablet')]: {
+    justifyContent: 'center',
+  },
 }));
 
 const LoadingBox = styled(Box)(({ theme }) => ({
