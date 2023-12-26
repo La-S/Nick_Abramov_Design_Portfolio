@@ -48,22 +48,20 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
       </S.AdminProjectsGridBox>
 
       <S.DeleteModal open={deletionModalOpen} onClose={() => setDeletionModalOpen(false)}>
-        <Box className="Delete-Confirmation-Box-Container">
-          <Box className="Delete-Confirmation-Box">
-            <Typography variant="h5">
-              Are you sure you want to delete <b>{project.name}</b>?
-            </Typography>
-            <Typography variant="subtitle1">This action is irreversible</Typography>
-            <Box className="Confirmation-Buttons">
-              <Button onClick={() => setDeletionModalOpen(false)}>Cancel</Button>
-              <Button 
-                variant="contained"
-                color="error"
-                onClick={handleDelete}
-              >
-                Delete
-              </Button>
-            </Box>
+        <Box className="Delete-Confirmation-Box">
+          <Typography variant="h5">
+            Are you sure you want to delete <b>{project.name}</b>?
+          </Typography>
+          <Typography variant="subtitle1">This action is irreversible</Typography>
+          <Box className="Confirmation-Buttons">
+            <Button onClick={() => setDeletionModalOpen(false)}>Cancel</Button>
+            <Button 
+              variant="contained"
+              color="error"
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
           </Box>
         </Box>
       </S.DeleteModal>

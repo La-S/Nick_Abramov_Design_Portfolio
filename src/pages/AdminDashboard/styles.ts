@@ -1,4 +1,4 @@
-import { styled, Box } from '@mui/material';
+import { styled, Box, Modal } from '@mui/material';
 
 const AdminDashboardContainer = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('tablet')]: {},
@@ -53,7 +53,17 @@ const HeaderNavLinks = styled('ul')(({ theme }) => ({
   },
 }));
 
+const NewProjectModal = styled(Modal)(() => ({
+  'form': {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+}));
+
 export default {
   AdminDashboardContainer,
   HeaderNavLinks,
+  NewProjectModal,
 };

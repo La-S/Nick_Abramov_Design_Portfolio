@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { Box, Button, Select, TextField, OutlinedInput, Typography, ButtonBase } from '@mui/material';
+import { X as CloseIcon } from '@phosphor-icons/react';
 import type { ProjectInputDto } from '../../../types/data/projectAPI';
 import { createProject } from '../../../api/projectMethods.api';
 import { ProjectGalleryRow } from '../../../types/data/project';
+import formUtils from './utils';
+import S from './styles';
 
-const NewProjectForm = (): JSX.Element => {
+const ProjectForm = (): JSX.Element => {
   const [nameValue, setNameValue] = useState('');
   const [categoryValue, setCategoryValue] = useState('');
   const [descriptionBulletValues, setDescriptionBulletValues] = useState<Array<string>>([]);
@@ -37,77 +41,80 @@ const NewProjectForm = (): JSX.Element => {
   };
 
   return (
-    <form style={{ display: 'flex', flexDirection: 'column', width: '500px' }}>
-      Admin Dashboard
-      <input
-        type="text"
+    <S.ProjectForm>
+      <Typography className="Directions-Label">
+        Create a new project:
+      </Typography>
+      <TextField
+        variant='outlined'
         value={nameValue}
-        placeholder="name"
+        placeholder="Project Name*"
+        autoComplete='off'
+        required
         onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
           setNameValue((target as HTMLInputElement).value);
         }}
       />
-      <input
-        type="text"
+      <TextField
+        variant='outlined'
         value={categoryValue}
-        placeholder="category"
+        placeholder="Category Name*"
+        required
         onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
           setCategoryValue((target as HTMLInputElement).value);
         }}
       />
       {descriptionBulletValues.map((descriptionBulletValue, i) => (
-        <input
+        <OutlinedInput
           key={i}
-          type="text"
+          endAdornment={
+            <ButtonBase
+              className='EndAdornment-Button'
+              onClick={() => {
+                setDescriptionBulletValues((prevState) => prevState.filter((_, index) => index !== i));
+              }}
+              disableRipple
+            >
+              <CloseIcon />
+            </ButtonBase>
+          }
           value={descriptionBulletValue}
-          placeholder="description"
-          onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
-            const newDescriptionBulletValues = [...descriptionBulletValues];
-            newDescriptionBulletValues[i] = (target as HTMLInputElement).value;
-            setDescriptionBulletValues(newDescriptionBulletValues);
-          }}
+          placeholder={`Description Bullet ${i + 1}`}
+          required
+          onInput={(e) => formUtils.updateDescriptionBullet(e, i, descriptionBulletValues, setDescriptionBulletValues)}
+          
         />
       ))}
-      <button type="button" onClick={() => setDescriptionBulletValues([...descriptionBulletValues, ''])}>
+      <Button
+        type="button"
+        onClick={() => setDescriptionBulletValues([...descriptionBulletValues, ''])}
+      >
         Add description bullet
-      </button>
-      <input
-        type="text"
+      </Button>
+      <TextField
+        variant='outlined'
         value={mainImagePathValue}
-        placeholder="main image path"
+        placeholder="Cover Image Path*"
+        required
         onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
           setMainImagePathValue((target as HTMLInputElement).value);
         }}
       />
       {galleryValues.map((galleryRow, i) => (
-        <div key={i}>
+        <Box key={i}>
           {`Row ${i + 1}:`}
-          <p>Cell number</p>
-          <select
+          <Typography>Cell number</Typography>
+          <Select
             defaultValue={galleryRow.cellAmount}
-            onChange={(e) => {
-              const newCellAmount = e.target.value as unknown as ProjectGalleryRow['cellAmount'];
-              const newGalleryValues = [...galleryValues];
-              newGalleryValues[i].cellAmount = newCellAmount;
-              if (newGalleryValues[i].cells.length > newCellAmount) {
-                newGalleryValues[i].cells = newGalleryValues[i].cells.slice(0, newCellAmount);
-              } else if (newGalleryValues[i].cells.length < newCellAmount) {
-                const newCells = [...newGalleryValues[i].cells];
-                while (newCells.length < newCellAmount) {
-                  newCells.push({ type: 'image link', path: '' });
-                }
-                newGalleryValues[i].cells = newCells;
-              }
-              setGalleryValues(newGalleryValues);
-            }}
+            onChange={(e) => formUtils.updateGalleryRows(e, i, galleryValues, setGalleryValues)}
           >
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
-          </select>
+          </Select>
           {galleryRow.cells.map((cellValue, j) => (
-            <div key={j}>
+            <Box key={j}>
               <select
                 defaultValue={cellValue.type}
                 onChange={(e) => {
@@ -130,23 +137,23 @@ const NewProjectForm = (): JSX.Element => {
                   setGalleryValues(newGalleryValues);
                 }}
               />
-            </div>
+            </Box>
           ))}
-        </div>
+        </Box>
       ))}
-      <button
+      <Button
         type="button"
         onClick={() =>
           setGalleryValues([...galleryValues, { cellAmount: 1, cells: [{ type: 'image link', path: '' }] }])
         }
       >
         Add a new gallery row
-      </button>
-      <button type="submit" onClick={handleSubmit}>
+      </Button>
+      <Button type="submit" onClick={handleSubmit}>
         Submit
-      </button>
-    </form>
+      </Button>
+    </S.ProjectForm>
   );
 };
 
-export default NewProjectForm;
+export default ProjectForm;

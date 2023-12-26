@@ -39,53 +39,47 @@ const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
 }));
 
 const DeleteModal = styled(Modal)(({ theme }) => ({
-  '.Delete-Confirmation-Box-Container': {
+  '.Delete-Confirmation-Box': {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
+    minHeight: '200px',
+    width: '80%',
+    maxWidth: '750px',
+    padding: '20px',
+    margin: 'auto',
+    backgroundColor: theme.componentColors.backgroundMain,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 30px 1px black',
+    color: theme.textColors.main,
 
-    '.Delete-Confirmation-Box': {
+    h6: {
+      marginTop: '10px',
+    },
+
+    '.Confirmation-Buttons': {
+      flexGrow: 1,
       display: 'flex',
-      flexDirection: 'column',
-      minHeight: '200px',
-      width: '80%',
-      maxWidth: '750px',
-      padding: '20px',
-      margin: 'auto',
-      backgroundColor: theme.componentColors.backgroundMain,
-      borderRadius: '10px',
-      boxShadow: '5px 5px 30px 1px black',
-      color: theme.textColors.main,
+      justifyContent: 'flex-end',
+      alignItems: 'flex-end',
+      marginTop: '20px',
 
-      h6: {
-        marginTop: '10px',
-      },
+      button: {
+        marginRight: '10px',
+        
+        '&:last-of-type': {
+          marginRight: '0',
+        },
 
-      '.Confirmation-Buttons': {
-        flexGrow: 1,
-        display: 'flex',
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end',
-
-        button: {
-          marginRight: '10px',
-          
-          '&:last-of-type': {
-            marginRight: '0',
-          },
-
-          '&:not(.MuiButton-contained)': {
-            color: theme.textColors.main,
-          },
+        '&:not(.MuiButton-contained)': {
+          color: theme.textColors.main,
         },
       },
     },
   },
-
-  [theme.breakpoints.down('tablet')]: {},
 }));
 
 export default {
