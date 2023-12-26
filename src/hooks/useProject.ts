@@ -18,7 +18,7 @@ type QueryResult = Omit<UseQueryResult<unknown, unknown>, 'data'> & {
 
 const useProject = (projectId: string): QueryResult => {
   const { data: { data: project } = { data: EMPTY_PROJECT }, ...metaProps } = useQuery({
-    queryKey: ['projects', projectId],
+    queryKey: ['project', projectId],
     queryFn: () => getProject(projectId),
   });
 
