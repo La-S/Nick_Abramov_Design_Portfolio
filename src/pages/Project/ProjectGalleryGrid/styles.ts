@@ -9,6 +9,7 @@ const ProjectGalleryGrid = styled(Box)(() => ({
 const ProjectGalleryRow = styled(Box, { shouldForwardProp: (propName) => propName !== 'cellAmount' })<{
   cellAmount: ProjectGalleryRow['cellAmount'];
 }>(({ theme, cellAmount }) => ({
+  display: 'flex',
   width: '100%',
 
   '.ProjectGallery-Grid-Cell': {
@@ -42,7 +43,7 @@ const ProjectGalleryRow = styled(Box, { shouldForwardProp: (propName) => propNam
     },
   },
 
-  [theme.breakpoints.up('extraLarge')]: {
+  [theme.breakpoints.up(1550)]: {
     width: '50%',
   },
 }));

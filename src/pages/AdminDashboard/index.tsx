@@ -51,7 +51,7 @@ const AdminDashboard = (): JSX.Element => {
       open={newProjectModalOpen} 
       onClose={() => setNewProjectModalOpen(false)}
     >
-      <><ProjectForm /></>
+      <><ProjectForm setModalOpen={setNewProjectModalOpen}/></>
     </S.NewProjectModal>
   );
 
