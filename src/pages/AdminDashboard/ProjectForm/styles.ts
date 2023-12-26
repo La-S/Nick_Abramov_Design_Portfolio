@@ -5,6 +5,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
   flexDirection: 'column',
   backgroundColor: theme.componentColors.backgroundMain,
   color: theme.textColors.main,
+  border: `2px double ${alpha(theme.componentColors.backgroundTertiary, 0.5)}`,
   width: '80%',
   maxWidth: '800px',
   maxHeight: '800px',
@@ -39,6 +40,30 @@ const ProjectForm = styled('form')(({ theme }) => ({
     padding: '15px',
     borderRadius: '5px',
     border: `1px solid ${theme.componentColors.backgroundTertiary}`,
+
+    '.Row-Number-Box': {
+      display: 'flex',
+      alignItems: 'center',
+
+      button: {
+        marginTop: '0',
+        marginLeft: 'auto',
+        backgroundColor: 'transparent',
+        
+        svg: {
+          fontSize: '24px',
+          color: theme.textColors.main,
+        },
+  
+        '&:hover': {
+          backgroundColor: 'transparent!important',
+
+          svg: {
+            color: '#ca0909',
+          },
+        },
+      },
+    },
   },
 
   '.MuiDivider-root': {
@@ -76,7 +101,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
 
       '&:-webkit-autofill': {
         boxShadow: `0 0 0px 1000px ${theme.componentColors.backgroundMain} inset`,
-        '-webkit-text-fill-color': theme.textColors.main,
+        WebkitTextFillColor: theme.textColors.main,
       },
 
       fieldset: {

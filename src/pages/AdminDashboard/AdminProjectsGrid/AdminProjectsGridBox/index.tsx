@@ -5,6 +5,7 @@ import { Box, Button, CardActions, CardContent, CardMedia, Typography } from '@m
 import { Trash as DeleteIcon, PencilSimple as EditIcon } from '@phosphor-icons/react';
 import { deleteProject } from '../../../../api/projectMethods.api';
 import { QueryClient } from '@tanstack/react-query';
+import ProjectForm from '../../ProjectForm';
 
 interface Props {
   project: Project;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const [deletionModalOpen, setDeletionModalOpen] = useState(false);
   const handleDelete = () => {
     deleteProject(project.id)
@@ -33,7 +35,11 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant="contained" endIcon={<EditIcon color="white" />}>
+          <Button
+            variant="contained"
+            endIcon={<EditIcon color="white" />}
+            onClick={() => setEditModalOpen(true)}
+          >
             Edit
           </Button>
           <Button
@@ -46,6 +52,10 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
           </Button>
         </CardActions>
       </S.AdminProjectsGridBox>
+
+      <S.EditModal open={editModalOpen} onClose={() => setEditModalOpen(false)}>
+        <><ProjectForm projectId={project.id} setModalOpen={setEditModalOpen} /></>
+      </S.EditModal>
 
       <S.DeleteModal open={deletionModalOpen} onClose={() => setDeletionModalOpen(false)}>
         <Box className="Delete-Confirmation-Box">

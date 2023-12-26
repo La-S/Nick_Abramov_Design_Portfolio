@@ -39,7 +39,7 @@ const ContactForm = styled('form')(({ theme }) => ({
 
       '&:-webkit-autofill': {
         boxShadow: `0 0 0px 1000px ${theme.componentColors.backgroundMain} inset`,
-        '-webkit-text-fill-color': theme.textColors.main,
+        WebkitTextFillColor: theme.textColors.main,
       },
     },
 
