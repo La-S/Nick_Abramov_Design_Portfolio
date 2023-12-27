@@ -10,11 +10,13 @@ import { adminRoutes, mainRoutes } from './routes';
 import type { RouteFixture } from './routes';
 import { validateAdminAuthentication } from './api/authMethods.api';
 import { getCurrentTheme } from './utils/themeUtils';
+import LoadingScreen from './components/LoadingScreen';
 
 const App = (): JSX.Element => {
   const currentTheme = getCurrentTheme();
   const [theme, setTheme] = useState(currentTheme);
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true);
 
   const renderProtectedPageElement = (route: RouteFixture, isLoggedIn: boolean) => {
     if (!isLoggedIn && route.path !== '/admin/login') {
@@ -52,6 +54,7 @@ const App = (): JSX.Element => {
       value={{
         themeState: [theme, setTheme],
         authState: [isAdminLoggedIn, setIsAdminLoggedIn],
+        pageLoadingState: [isPageLoading, setIsPageLoading],
       }}
     >
       <Router>
@@ -71,6 +74,8 @@ const App = (): JSX.Element => {
                 ))}
               </Route>
             </Routes>
+
+            {isPageLoading && <LoadingScreen />}
           </S.BodyContainer>
 
           <AnimatedCursor />
