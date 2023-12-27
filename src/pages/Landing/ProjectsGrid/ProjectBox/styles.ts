@@ -23,7 +23,8 @@ const ProjectBox = styled(Box)(({ theme }) => ({
     right: '30px',
     fontFamily: theme.fonts.main,
     fontSize: '20px',
-    color: theme.textColors.main,
+    // color: theme.textColors.main,
+    color: '#fff',
   },
 
   [theme.breakpoints.down('tablet')]: {

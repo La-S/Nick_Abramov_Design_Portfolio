@@ -8,6 +8,8 @@ const BodyContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.componentColors.backgroundMain,
   paddingTop: '85px',
 
+  transition: 'background-color 0.2s ease-in-out',
+
   '*': {
     color: theme.textColors.main,
   },
