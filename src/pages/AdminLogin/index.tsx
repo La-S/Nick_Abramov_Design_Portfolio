@@ -39,12 +39,10 @@ const AdminLogin = (): JSX.Element => {
   });
 
   return (
-    <S.LoginForm id='Login-Form'>
-      <Typography>
-        Enter admin password to log in.
-      </Typography>
+    <S.LoginForm id="Login-Form">
+      <Typography>Enter admin password to log in.</Typography>
       <TextField type="password" value={passwordInput} onInput={handleChange} />
-      <Button type="submit" onClick={handleSubmit} variant='contained'>
+      <Button type="submit" onClick={handleSubmit} variant="contained">
         Submit
       </Button>
     </S.LoginForm>

@@ -49,12 +49,12 @@ const ProjectForm = styled('form')(({ theme }) => ({
         marginTop: '0',
         marginLeft: 'auto',
         backgroundColor: 'transparent',
-        
+
         svg: {
           fontSize: '24px',
           color: theme.textColors.main,
         },
-  
+
         '&:hover': {
           backgroundColor: 'transparent!important',
 
@@ -88,7 +88,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
       border: `1px solid ${theme.componentColors.inputBorder}`,
       borderRadius: '5px',
       transition: 'border-color 0.3s ease-in-out',
-      
+
       '&::placeholder': {
         opacity: 1,
       },
@@ -152,7 +152,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
       backgroundColor: theme.componentColors.backgroundMain,
       border: `1px solid ${theme.componentColors.inputBorder}`,
     },
-    
+
     '.MuiSvgIcon-root': {
       color: `${theme.textColors.main} !important`,
     },
@@ -162,7 +162,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'flex-start',
+    justifyContent: 'flex-start',
     width: '100%',
     marginBottom: '20px',
 
@@ -184,7 +184,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
       width: '125px',
       marginTop: '0',
       marginLeft: '10px',
-      
+
       input: {
         fontSize: '16px',
         padding: '6.25px 10px',
@@ -226,7 +226,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
       marginTop: '0',
       marginLeft: 'auto',
       backgroundColor: 'transparent',
-      
+
       svg: {
         fontSize: '24px',
         color: '#ca0909',
@@ -244,7 +244,6 @@ const ProjectForm = styled('form')(({ theme }) => ({
     marginTop: '15px',
 
     '.MuiCheckbox-root': {
-
       '.MuiSvgIcon-root': {
         color: theme.componentColors.backgroundTertiary,
       },

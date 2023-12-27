@@ -18,15 +18,15 @@ const HeaderNavLinks = styled('ul')(({ theme }) => ({
       margin: 0,
       fontSize: '16px',
       fontFamily: theme.fonts.secondary,
-  
+
       p: {
         margin: 0,
       },
-  
+
       transition: 'color 0.2s ease-in-out',
       '&:hover': {
         color: theme.componentColors.backgroundMain,
-  
+
         transition: 'color 0.2s ease-in-out',
         p: {
           color: theme.componentColors.backgroundMain,
@@ -54,7 +54,7 @@ const HeaderNavLinks = styled('ul')(({ theme }) => ({
 }));
 
 const NewProjectModal = styled(Modal)(() => ({
-  'form': {
+  form: {
     position: 'absolute',
     top: '50%',
     left: '50%',

@@ -5,9 +5,7 @@ const updateDescriptionBullet = (
   { target }: React.FormEvent<HTMLDivElement>,
   i: number,
   descriptionBulletValues: Array<string>,
-  setDescriptionBulletValues: React.Dispatch<
-    React.SetStateAction<Array<string>>
-  >,
+  setDescriptionBulletValues: React.Dispatch<React.SetStateAction<Array<string>>>,
 ) => {
   const newValue = (target as HTMLInputElement).value;
   const newDescriptionBulletValues = [...descriptionBulletValues];

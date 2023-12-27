@@ -30,11 +30,7 @@ const AdminDashboard = (): JSX.Element => {
         </Link>
       </HeaderStyles.LogoContainer>
       <S.HeaderNavLinks>
-        <ButtonBase
-          className="New-Project-Button"
-          onClick={() => setNewProjectModalOpen(true)}
-          disableRipple
-        >
+        <ButtonBase className="New-Project-Button" onClick={() => setNewProjectModalOpen(true)} disableRipple>
           <p>
             new project <p>&nbsp;+</p>
           </p>
@@ -47,11 +43,10 @@ const AdminDashboard = (): JSX.Element => {
   );
 
   const NewProjectModal = (
-    <S.NewProjectModal 
-      open={newProjectModalOpen} 
-      onClose={() => setNewProjectModalOpen(false)}
-    >
-      <><ProjectForm setModalOpen={setNewProjectModalOpen}/></>
+    <S.NewProjectModal open={newProjectModalOpen} onClose={() => setNewProjectModalOpen(false)}>
+      <>
+        <ProjectForm setModalOpen={setNewProjectModalOpen} />
+      </>
     </S.NewProjectModal>
   );
 

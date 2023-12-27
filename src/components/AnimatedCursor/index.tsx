@@ -14,11 +14,13 @@ const AnimatedCursor = (): JSX.Element => {
         borderRadius: '50%',
         transform: 'translate(-50%, -50%)',
         zIndex: 10000,
+        mixBlendMode: 'exclusion',
       }}
       outerStyle={{
         backgroundColor: 'transparent',
         border: `3px solid ${alpha(theme.textColors.main, 0.8)}`,
         zIndex: 10000,
+        mixBlendMode: 'exclusion',
       }}
       outerAlpha={0.9}
       innerScale={0.9}

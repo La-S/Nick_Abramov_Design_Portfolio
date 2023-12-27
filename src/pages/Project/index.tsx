@@ -2,9 +2,9 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import useProject from '../../hooks/useProject';
-import S from './styles';
 import BoxUnderline from '../../components/BoxUnderline';
 import ProjectGalleryGrid from './ProjectGalleryGrid';
+import S from './styles';
 
 const Project = () => {
   const { projectId } = useParams();
@@ -34,10 +34,7 @@ const Project = () => {
               </ul>
             </Box>
           </S.ProjectOverview>
-          <ProjectGalleryGrid
-            gallery={project?.gallery || []}
-            isGallerySpaced={project.isGallerySpaced}
-          />
+          <ProjectGalleryGrid gallery={project?.gallery || []} isGallerySpaced={project.isGallerySpaced} />
         </>
       )}
     </S.ProjectContainer>

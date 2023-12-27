@@ -1,5 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Select, TextField, OutlinedInput, Typography, ButtonBase, FormLabel, Divider, MenuItem, CircularProgress, Checkbox } from '@mui/material';
+import {
+  Box,
+  Button,
+  Select,
+  TextField,
+  OutlinedInput,
+  Typography,
+  ButtonBase,
+  FormLabel,
+  Divider,
+  MenuItem,
+  CircularProgress,
+  Checkbox,
+} from '@mui/material';
 import { X as CloseIcon, Trash as TrashIcon } from '@phosphor-icons/react';
 import { createProject, getProject, updateProject } from '../../../api/projectMethods.api';
 import type { ProjectGalleryRow } from '../../../types/data/project';
@@ -75,7 +88,7 @@ const ProjectForm = (props: Props): JSX.Element => {
   const renderProjectFormState = (): JSX.Element => {
     if (projectId && !isFetched) {
       return (
-        <Box 
+        <Box
           sx={{
             position: 'absolute',
             top: '50%',
@@ -91,38 +104,33 @@ const ProjectForm = (props: Props): JSX.Element => {
     }
 
     return (
-      <S.ProjectForm id='Project-Form'>
-        <Box className='Title-Label-Box'>
+      <S.ProjectForm id="Project-Form">
+        <Box className="Title-Label-Box">
           <Typography className="Title-Label">
-            <b>
-              {projectId ? `Edit '${project.name}' project` : 'Create new project'}
-            </b>
+            <b>{projectId ? `Edit '${project.name}' project` : 'Create new project'}</b>
           </Typography>
           {setModalOpen ? (
-            <ButtonBase
-              onClick={() => setModalOpen(false)}
-              disableRipple
-            >
+            <ButtonBase onClick={() => setModalOpen(false)} disableRipple>
               <CloseIcon />
             </ButtonBase>
-          ): <></>}
+          ) : (
+            <></>
+          )}
         </Box>
 
-        <FormLabel className='Section-Title-Label'>
-        General Information:
-        </FormLabel>
+        <FormLabel className="Section-Title-Label">General Information:</FormLabel>
         <TextField
-          variant='outlined'
+          variant="outlined"
           value={nameValue}
           placeholder="Project Name"
-          autoComplete='off'
+          autoComplete="off"
           required
           onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
             setNameValue((target as HTMLInputElement).value);
           }}
         />
         <TextField
-          variant='outlined'
+          variant="outlined"
           value={categoryValue}
           placeholder="Category Name"
           required
@@ -131,7 +139,7 @@ const ProjectForm = (props: Props): JSX.Element => {
           }}
         />
         <TextField
-          variant='outlined'
+          variant="outlined"
           value={mainImagePathValue}
           placeholder="Cover Image Path"
           required
@@ -141,16 +149,14 @@ const ProjectForm = (props: Props): JSX.Element => {
         />
         <Divider />
 
-        <FormLabel className='Section-Title-Label'>
-        Description:
-        </FormLabel>
+        <FormLabel className="Section-Title-Label">Description:</FormLabel>
         {descriptionBulletValues.map((descriptionBulletValue, i) => (
           <OutlinedInput
-            className='Input-With-Icon'
+            className="Input-With-Icon"
             key={i}
             endAdornment={
               <ButtonBase
-                className='EndAdornment-Button'
+                className="EndAdornment-Button"
                 onClick={() => {
                   setDescriptionBulletValues((prevState) => prevState.filter((_, index) => index !== i));
                 }}
@@ -162,27 +168,21 @@ const ProjectForm = (props: Props): JSX.Element => {
             value={descriptionBulletValue}
             placeholder={`Description Bullet ${i + 1}`}
             required
-            onInput={(e) => formUtils.updateDescriptionBullet(e, i, descriptionBulletValues, setDescriptionBulletValues)}
-          
+            onInput={(e) =>
+              formUtils.updateDescriptionBullet(e, i, descriptionBulletValues, setDescriptionBulletValues)
+            }
           />
         ))}
-        <Button
-          type="button"
-          onClick={() => setDescriptionBulletValues([...descriptionBulletValues, ''])}
-        >
-        Add description bullet +
+        <Button type="button" onClick={() => setDescriptionBulletValues([...descriptionBulletValues, ''])}>
+          Add description bullet +
         </Button>
         <Divider />
 
-        <FormLabel className='Section-Title-Label'>
-        Project Gallery Rows:
-        </FormLabel>
+        <FormLabel className="Section-Title-Label">Project Gallery Rows:</FormLabel>
         {galleryValues.map((galleryRow, i) => (
           <Box key={i} className="Row-Box">
             <Box className="Row-Number-Box">
-              <FormLabel className='Sub-Label'>
-              Row {i + 1}
-              </FormLabel>
+              <FormLabel className="Sub-Label">Row {i + 1}</FormLabel>
               <ButtonBase
                 onClick={() => {
                   const newGalleryValues = galleryValues.filter((_, index) => index !== i);
@@ -196,7 +196,7 @@ const ProjectForm = (props: Props): JSX.Element => {
             <Box className="Cell-Amount-Box">
               <Typography>Specify amount of cells</Typography>
               <Select
-                variant='outlined'
+                variant="outlined"
                 value={galleryRow.cellAmount || 1}
                 onChange={(e) => formUtils.updateGalleryRows(e, i, galleryValues, setGalleryValues)}
               >
@@ -221,7 +221,7 @@ const ProjectForm = (props: Props): JSX.Element => {
                   <MenuItem value="embedded video link">youtube video link</MenuItem>
                 </Select>
                 <TextField
-                  variant='outlined'
+                  variant="outlined"
                   type="text"
                   value={cellValue.path}
                   placeholder="Path"
@@ -241,21 +241,19 @@ const ProjectForm = (props: Props): JSX.Element => {
             setGalleryValues([...galleryValues, { cellAmount: 1, cells: [{ type: 'image link', path: '' }] }])
           }
         >
-        Add a new gallery row +
+          Add a new gallery row +
         </Button>
         <Box className="Gallery-Space-Box">
-          <Checkbox 
-            size='medium' 
+          <Checkbox
+            size="medium"
             checked={isGallerySpacedValue}
             onChange={(e) => setIsGallerySpacedValue(e.target.checked)}
           />
-          <FormLabel className='Sub-Label'>
-            Add space between gallery items
-          </FormLabel>
+          <FormLabel className="Sub-Label">Add space between gallery items</FormLabel>
         </Box>
 
         <Button type="submit" onClick={handleSubmit}>
-        Submit
+          Submit
         </Button>
       </S.ProjectForm>
     );

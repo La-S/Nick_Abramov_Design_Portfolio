@@ -35,11 +35,7 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button
-            variant="contained"
-            endIcon={<EditIcon color="white" />}
-            onClick={() => setEditModalOpen(true)}
-          >
+          <Button variant="contained" endIcon={<EditIcon color="white" />} onClick={() => setEditModalOpen(true)}>
             Edit
           </Button>
           <Button
@@ -54,7 +50,9 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
       </S.AdminProjectsGridBox>
 
       <S.EditModal open={editModalOpen} onClose={() => setEditModalOpen(false)}>
-        <><ProjectForm projectId={project.id} setModalOpen={setEditModalOpen} /></>
+        <>
+          <ProjectForm projectId={project.id} setModalOpen={setEditModalOpen} />
+        </>
       </S.EditModal>
 
       <S.DeleteModal open={deletionModalOpen} onClose={() => setDeletionModalOpen(false)}>
@@ -65,11 +63,7 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
           <Typography variant="subtitle1">This action is irreversible</Typography>
           <Box className="Confirmation-Buttons">
             <Button onClick={() => setDeletionModalOpen(false)}>Cancel</Button>
-            <Button 
-              variant="contained"
-              color="error"
-              onClick={handleDelete}
-            >
+            <Button variant="contained" color="error" onClick={handleDelete}>
               Delete
             </Button>
           </Box>

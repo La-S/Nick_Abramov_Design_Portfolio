@@ -18,14 +18,16 @@ const ProjectContainer = styled(Box)(({ theme }) => ({
 const ProjectOverview = styled(Box)(({ theme }) => ({
   padding: '85px 75px',
   display: 'flex',
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
 
   '.Project-Title-Box': {
+    minWidth: '35vw',
+    maxWidth: '50vw',
     textAlign: 'center',
     paddingRight: '115px',
 
     '.MuiTypography-root': {
-      marginTop: '50px',
+      marginTop: '35px',
       fontFamily: theme.fonts.main,
       lineHeight: 1.25,
       fontWeight: 'bold',
@@ -39,6 +41,8 @@ const ProjectOverview = styled(Box)(({ theme }) => ({
   },
 
   '.Project-Description-Box': {
+    flexGrow: 1,
+
     h3: {
       fontFamily: theme.fonts.main,
       fontSize: '48px',
@@ -61,8 +65,11 @@ const ProjectOverview = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down(900)]: {
     padding: '50px',
     flexDirection: 'column',
+    alignItems: 'center',
 
     '.Project-Title-Box': {
+      minWidth: 'none',
+      maxWidth: 'none',
       paddingRight: 0,
       marginBottom: '50px',
 

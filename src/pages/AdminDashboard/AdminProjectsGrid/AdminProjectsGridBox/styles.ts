@@ -69,7 +69,7 @@ const DeleteModal = styled(Modal)(({ theme }) => ({
 
       button: {
         marginRight: '10px',
-        
+
         '&:last-of-type': {
           marginRight: '0',
         },
@@ -83,7 +83,7 @@ const DeleteModal = styled(Modal)(({ theme }) => ({
 }));
 
 const EditModal = styled(Modal)(() => ({
-  'form': {
+  form: {
     position: 'absolute',
     top: '50%',
     left: '50%',

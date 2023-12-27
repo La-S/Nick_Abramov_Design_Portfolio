@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Box } from '@mui/material';
+import type { ProjectGalleryCell, ProjectGalleryRow } from '../../../types/data/project';
+import type { Slide } from 'yet-another-react-lightbox/*';
 import S from './styles';
-
-import { ProjectGalleryCell, ProjectGalleryRow } from '../../../types/data/project';
 
 const renderCell = (cell: ProjectGalleryCell): JSX.Element => {
   if (cell.type === 'image link') {
@@ -23,22 +23,63 @@ const renderCell = (cell: ProjectGalleryCell): JSX.Element => {
   return <></>;
 };
 
-export const renderGalleryRow = (galleryRow: ProjectGalleryRow, isGallerySpaced: boolean, i: number): JSX.Element => {
+export const renderGalleryRow = (
+  galleryRow: ProjectGalleryRow,
+  isGallerySpaced: boolean,
+  i: number,
+  setIsLightboxOpen: Dispatch<SetStateAction<boolean>>,
+): JSX.Element => {
   const { cells, cellAmount } = galleryRow;
   const range = Math.min(cells.length, cellAmount);
 
   return (
-    <S.ProjectGalleryRow 
+    <S.ProjectGalleryRow
       key={i}
       className="ProjectGallery-Grid-Row"
       cellAmount={cellAmount}
       isGallerySpaced={isGallerySpaced}
     >
       {cells.slice(0, range).map((cell, j) => (
-        <Box key={j} className="ProjectGallery-Grid-Cell">
+        <Box 
+          key={j}
+          className="ProjectGallery-Grid-Cell"
+          onClick={() => setIsLightboxOpen(true)}
+        >
           {renderCell(cell)}
         </Box>
       ))}
     </S.ProjectGalleryRow>
   );
+};
+
+export const getLightboxSlides = (gallery: Array<ProjectGalleryRow>): Slide[] => {
+  const slides: Slide[] = [];
+
+  for (let i = 0; i < gallery.length; i += 1) {
+    const galleryRow = gallery[i];
+
+    for (let j = 0; j < galleryRow.cellAmount; j += 1) {
+      const galleryCell = galleryRow.cells[j];
+      if (!galleryCell) continue;
+
+      if (galleryCell.type === 'image link') {
+        slides.push({
+          src: galleryCell.path,
+        });
+      } else if (galleryCell.type === 'direct video link') {
+        slides.push({
+          type: 'video',
+          width: 1280,
+          height: 720,
+          sources: [{
+            src: galleryCell.path,
+            type: 'video/mp4',
+          },
+          ],
+        });
+      }
+    }
+  }
+
+  return slides;
 };
