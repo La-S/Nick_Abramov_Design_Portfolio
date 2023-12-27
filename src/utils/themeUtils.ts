@@ -5,8 +5,14 @@ export const setCurrentThemeNameInStorage = (theme: string) => {
   localStorage.setItem('theme', theme);
 };
 
-export const getCurrentTheme = () => {
+export const getCurrentThemeName = () => {
   const currentThemeName = localStorage.getItem('theme') || 'dark';
+
+  return currentThemeName;
+};
+
+export const getCurrentTheme = () => {
+  const currentThemeName = getCurrentThemeName();
   const currentTheme = themeOptions.find((theme) => theme.name === currentThemeName);
   return currentTheme?.value || defaultTheme;
 };

@@ -71,27 +71,18 @@ const BurgerContainer = styled(Box)(({ theme }) => ({
   '.Burger-Icon': {
     width: '48px',
     height: '42px',
-    marginLeft: '17.5px',
+    marginLeft: '32px',
   },
 
-  '.Theme-Switch': {
-    display: 'flex',
-    alignItems: 'center',
-    position: 'relative',
+  '.Theme-Toggle': {
+    width: '30px',
+    height: '30px',
 
-    '.Theme-Icon': {
-      width: '40px',
-      height: '34px',
-    },
 
-    '.Caret-Icon': {
-      width: '16px',
-      height: '16px',
-      position: 'absolute',
-      bottom: '0',
-      right: '-3px',
-      strokeWidth: '15px',
-      stroke: theme.textColors.main,
+    '&.Light-Theme-Active': {
+      circle: {
+        fill: 'transparent',
+      },
     },
   },
 
@@ -102,21 +93,9 @@ const BurgerContainer = styled(Box)(({ theme }) => ({
       marginLeft: '10px',
     },
 
-    '.Theme-Switch': {
-      '.Theme-Icon': {
-        width: '33px',
-        height: '27px',
-      },
-
-      '.Caret-Icon': {
-        width: '12px',
-        height: '12px',
-        position: 'absolute',
-        bottom: '0',
-        right: '-2px',
-        strokeWidth: '10px',
-        stroke: theme.textColors.main,
-      },
+    '.Theme-Toggle': {
+      width: '24px',
+      height: '24px',
     },
   },
 }));

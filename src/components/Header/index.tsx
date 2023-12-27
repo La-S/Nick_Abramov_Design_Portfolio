@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Box, useTheme } from '@mui/material';
-import { List as BurgerIcon, PaintBrush as ThemeIcon, CaretDown as CaretIcon } from '@phosphor-icons/react';
+import { useTheme } from '@mui/material';
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
+import { List as BurgerIcon } from '@phosphor-icons/react';
 import Logo from '../Logo';
 import NavMenu from './NavMenu';
 import S from './styles';
-import ThemeMenu from './ThemeMenu';
+import { getCurrentThemeName, setCurrentThemeNameInStorage } from '../../utils/themeUtils';
+import { GlobalContext } from '../../contexts/global';
+import lightTheme from '../../assets/themes/lightTheme';
+import defaultTheme from '../../assets/themes/defaultTheme';
 
 const Header = (): JSX.Element => {
   const pathName = useLocation().pathname.substring(1);
+  const { themeState: [, setTheme] } = useContext(GlobalContext);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(getCurrentThemeName() === 'dark');
   const [navMenuOpen, setNavMenuOpen] = useState<boolean>(false);
-  const [themeMenuOpen, setThemeMenuOpen] = useState<boolean>(false);
   const { breakpoints, componentColors, textColors } = useTheme();
   const getFillMainColor = () => {
     if (pathName === 'about' && window.innerWidth >= breakpoints.values.tablet) {
@@ -20,6 +25,18 @@ const Header = (): JSX.Element => {
     return componentColors.logoMain;
   };
   const [fillMain, setFillMain] = useState(getFillMainColor());
+
+  const toggleTheme = () => {
+    if (isDarkMode) {
+      setTheme(lightTheme);
+      setCurrentThemeNameInStorage('light');
+      setIsDarkMode(false);
+    } else {
+      setTheme(defaultTheme);
+      setCurrentThemeNameInStorage('dark');
+      setIsDarkMode(true);
+    }
+  };
 
   useEffect(() => {
     const resizeListener = () => setFillMain(getFillMainColor());
@@ -40,11 +57,11 @@ const Header = (): JSX.Element => {
         <Logo fillMain={fillMain} fillSecondary={componentColors.logoSecondary} isLink />
       </S.LogoContainer>
       <S.BurgerContainer>
-        <Box className="Theme-Switch" onClick={() => setThemeMenuOpen(!themeMenuOpen)}>
-          <ThemeIcon className="Theme-Icon" />
-          <CaretIcon className="Caret-Icon" />
-          {themeMenuOpen ? <ThemeMenu /> : null}
-        </Box>
+        <DarkModeSwitch 
+          className={`Theme-Toggle ${isDarkMode ? '' : 'Light-Theme-Active'}`}
+          checked={isDarkMode}
+          onChange={toggleTheme}
+        />
         <BurgerIcon onClick={() => setNavMenuOpen(true)} className="Burger-Icon" />
       </S.BurgerContainer>
 
