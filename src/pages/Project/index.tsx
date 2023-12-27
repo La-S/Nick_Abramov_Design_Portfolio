@@ -34,7 +34,10 @@ const Project = () => {
               </ul>
             </Box>
           </S.ProjectOverview>
-          <ProjectGalleryGrid gallery={project?.gallery || []} />
+          <ProjectGalleryGrid
+            gallery={project?.gallery || []}
+            isGallerySpaced={project.isGallerySpaced}
+          />
         </>
       )}
     </S.ProjectContainer>

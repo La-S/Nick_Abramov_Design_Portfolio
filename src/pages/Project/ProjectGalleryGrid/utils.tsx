@@ -23,13 +23,17 @@ const renderCell = (cell: ProjectGalleryCell): JSX.Element => {
   return <></>;
 };
 
-export const renderGalleryRow = (galleryRow: ProjectGalleryRow, i: number): JSX.Element => {
+export const renderGalleryRow = (galleryRow: ProjectGalleryRow, isGallerySpaced: boolean, i: number): JSX.Element => {
   const { cells, cellAmount } = galleryRow;
-  console.log({ cells, cellAmount });
   const range = Math.min(cells.length, cellAmount);
 
   return (
-    <S.ProjectGalleryRow key={i} className="ProjectGallery-Grid-Row" cellAmount={cellAmount}>
+    <S.ProjectGalleryRow 
+      key={i}
+      className="ProjectGallery-Grid-Row"
+      cellAmount={cellAmount}
+      isGallerySpaced={isGallerySpaced}
+    >
       {cells.slice(0, range).map((cell, j) => (
         <Box key={j} className="ProjectGallery-Grid-Cell">
           {renderCell(cell)}

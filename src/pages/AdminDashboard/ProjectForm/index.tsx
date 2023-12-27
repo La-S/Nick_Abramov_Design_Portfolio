@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Select, TextField, OutlinedInput, Typography, ButtonBase, FormLabel, Divider, MenuItem, CircularProgress } from '@mui/material';
+import { Box, Button, Select, TextField, OutlinedInput, Typography, ButtonBase, FormLabel, Divider, MenuItem, CircularProgress, Checkbox } from '@mui/material';
 import { X as CloseIcon, Trash as TrashIcon } from '@phosphor-icons/react';
 import { createProject, getProject, updateProject } from '../../../api/projectMethods.api';
 import type { ProjectGalleryRow } from '../../../types/data/project';
@@ -24,6 +24,7 @@ const ProjectForm = (props: Props): JSX.Element => {
   const [categoryValue, setCategoryValue] = useState(project.category);
   const [descriptionBulletValues, setDescriptionBulletValues] = useState(project.descriptionBullets);
   const [mainImagePathValue, setMainImagePathValue] = useState(project.mainImagePath);
+  const [isGallerySpacedValue, setIsGallerySpacedValue] = useState(project.isGallerySpaced);
   const [galleryValues, setGalleryValues] = useState(project.gallery);
 
   const resetFields = () => {
@@ -46,6 +47,7 @@ const ProjectForm = (props: Props): JSX.Element => {
       category,
       descriptionBullets,
       mainImagePath,
+      isGallerySpaced: isGallerySpacedValue,
       gallery,
     };
 
@@ -241,6 +243,17 @@ const ProjectForm = (props: Props): JSX.Element => {
         >
         Add a new gallery row +
         </Button>
+        <Box className="Gallery-Space-Box">
+          <Checkbox 
+            size='medium' 
+            checked={isGallerySpacedValue}
+            onChange={(e) => setIsGallerySpacedValue(e.target.checked)}
+          />
+          <FormLabel className='Sub-Label'>
+            Add space between gallery items
+          </FormLabel>
+        </Box>
+
         <Button type="submit" onClick={handleSubmit}>
         Submit
         </Button>
@@ -256,6 +269,7 @@ const ProjectForm = (props: Props): JSX.Element => {
     setDescriptionBulletValues(project.descriptionBullets);
     setMainImagePathValue(project.mainImagePath);
     setGalleryValues(project.gallery);
+    setIsGallerySpacedValue(project.isGallerySpaced);
   }, [project]);
 
   useEffect(() => {

@@ -238,6 +238,19 @@ const ProjectForm = styled('form')(({ theme }) => ({
     },
   },
 
+  '.Gallery-Space-Box': {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: '15px',
+
+    '.MuiCheckbox-root': {
+
+      '.MuiSvgIcon-root': {
+        color: theme.componentColors.backgroundTertiary,
+      },
+    },
+  },
+
   [theme.breakpoints.down('tablet')]: {
     width: '90%',
   },

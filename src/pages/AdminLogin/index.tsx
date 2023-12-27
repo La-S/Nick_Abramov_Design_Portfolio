@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button, TextField, Typography } from '@mui/material';
 import { authenticateAdmin } from '../../api/authMethods.api';
 import { cookies } from '../../api/api';
 import { GlobalContext } from '../../contexts/global';
+import S from './styles';
 
 const AdminLogin = (): JSX.Element => {
   const {
@@ -37,13 +39,15 @@ const AdminLogin = (): JSX.Element => {
   });
 
   return (
-    <form>
-      Enter admin password here:
-      <input type="text" value={passwordInput} onInput={handleChange} />
-      <button type="submit" onClick={handleSubmit}>
+    <S.LoginForm id='Login-Form'>
+      <Typography>
+        Enter admin password to log in.
+      </Typography>
+      <TextField type="password" value={passwordInput} onInput={handleChange} />
+      <Button type="submit" onClick={handleSubmit} variant='contained'>
         Submit
-      </button>
-    </form>
+      </Button>
+    </S.LoginForm>
   );
 };
 

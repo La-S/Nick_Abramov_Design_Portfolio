@@ -6,9 +6,13 @@ const ProjectGalleryGrid = styled(Box)(() => ({
   flexWrap: 'wrap',
 }));
 
-const ProjectGalleryRow = styled(Box, { shouldForwardProp: (propName) => propName !== 'cellAmount' })<{
+const ProjectGalleryRow = styled(
+  Box,
+  { shouldForwardProp: (propName) => propName !== 'cellAmount' && propName !== 'isGallerySpaced' },
+)<{
   cellAmount: ProjectGalleryRow['cellAmount'];
-}>(({ theme, cellAmount }) => ({
+  isGallerySpaced: boolean;
+}>(({ theme, cellAmount, isGallerySpaced }) => ({
   display: 'flex',
   width: '100%',
 
@@ -35,7 +39,19 @@ const ProjectGalleryRow = styled(Box, { shouldForwardProp: (propName) => propNam
       width: '100%',
       height: '100%',
     },
+
+    ...(isGallerySpaced && {
+      marginRight: '7.5px',
+  
+      '&:last-of-type': {
+        marginRight: 0,
+      },
+    }),
   },
+
+  ...(isGallerySpaced && {
+    marginBottom: '7.5px',
+  }),
 
   [theme.breakpoints.down('tablet')]: {
     '.ProjectGallery-Grid-Cell': {
@@ -44,7 +60,12 @@ const ProjectGalleryRow = styled(Box, { shouldForwardProp: (propName) => propNam
   },
 
   [theme.breakpoints.up(1550)]: {
-    width: '50%',
+    width: 'calc(50% - 7.5px / 2)',
+    marginRight: '7.5px',
+
+    '&:nth-of-type(2n)': {
+      marginRight: 0,
+    },
   },
 }));
 

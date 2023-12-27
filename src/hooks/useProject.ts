@@ -9,6 +9,7 @@ export const EMPTY_PROJECT: Project = {
   mainImagePath: '',
   dateCreated: 0,
   descriptionBullets: [],
+  isGallerySpaced: false,
   gallery: [],
 };
 

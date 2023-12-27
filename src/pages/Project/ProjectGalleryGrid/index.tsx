@@ -5,12 +5,13 @@ import { renderGalleryRow } from './utils';
 
 interface Props {
   gallery: Array<ProjectGalleryRow>;
+  isGallerySpaced: boolean;
 }
 
-const ProjectGalleryGrid = ({ gallery }: Props): JSX.Element => {
+const ProjectGalleryGrid = ({ gallery , isGallerySpaced }: Props): JSX.Element => {
   return (
     <S.ProjectGalleryGrid className="ProjectGallery-Grid">
-      {gallery.map((galleryRow, i) => renderGalleryRow(galleryRow, i))}
+      {gallery.map((galleryRow, i) => renderGalleryRow(galleryRow, isGallerySpaced, i))}
     </S.ProjectGalleryGrid>
   );
 };

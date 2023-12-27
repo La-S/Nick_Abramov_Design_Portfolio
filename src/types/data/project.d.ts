@@ -16,5 +16,6 @@ export interface Project {
   mainImagePath: string;
   dateCreated: number;
   descriptionBullets: Array<string>;
+  isGallerySpaced: boolean;
   gallery: Array<ProjectGalleryRow>;
 }

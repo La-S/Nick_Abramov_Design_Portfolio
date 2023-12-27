@@ -13,5 +13,6 @@ export type ProjectInputDto = {
   category: string;
   descriptionBullets: Array<string>;
   mainImagePath: string;
+  isGallerySpaced: boolean;
   gallery: Array<ProjectGalleryRow>;
 };
