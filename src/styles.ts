@@ -12,6 +12,10 @@ const BodyContainer = styled(Box)(({ theme }) => ({
     color: theme.textColors.main,
   },
 
+  img: {
+    '-webkit-user-drag': 'none',
+  },
+
   [theme.breakpoints.down('tablet')]: {
     paddingTop: '75px',
   },

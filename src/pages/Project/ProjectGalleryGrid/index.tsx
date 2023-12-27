@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import { Video, Zoom } from 'yet-another-react-lightbox/plugins';
 import { ProjectGalleryRow } from '../../../types/data/project';
@@ -13,18 +13,24 @@ interface Props {
 
 const ProjectGalleryGrid = ({ gallery, isGallerySpaced }: Props): JSX.Element => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0);
+  const slideNumberRef = useRef(0);
 
   return (
     <>
       <S.ProjectGalleryGrid className="ProjectGallery-Grid">
-        {gallery.map((galleryRow, i) => renderGalleryRow(galleryRow, isGallerySpaced, i, setIsLightboxOpen))}
+        {gallery.map((galleryRow, i) => renderGalleryRow(galleryRow, isGallerySpaced, i, setIsLightboxOpen, slideNumberRef, setSlideIndex))}
       </S.ProjectGalleryGrid>
 
       <Lightbox 
         open={isLightboxOpen}
-        close={() => setIsLightboxOpen(false)}
+        close={() => {
+          setIsLightboxOpen(false);
+          slideNumberRef.current = 0;
+        }}
         slides={getLightboxSlides(gallery)} 
         plugins={[Zoom, Video]}
+        index={slideIndex}
         zoom={{
           maxZoomPixelRatio: 3,
           scrollToZoom: true,

@@ -1,5 +1,6 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
+import type { Dispatch, SetStateAction, MutableRefObject } from 'react';
 import type { ProjectGalleryCell, ProjectGalleryRow } from '../../../types/data/project';
 import type { Slide } from 'yet-another-react-lightbox/*';
 import S from './styles';
@@ -28,9 +29,13 @@ export const renderGalleryRow = (
   isGallerySpaced: boolean,
   i: number,
   setIsLightboxOpen: Dispatch<SetStateAction<boolean>>,
+  slideNumberRef: MutableRefObject<number>,
+  setSlideIndex: Dispatch<SetStateAction<number>>,
 ): JSX.Element => {
   const { cells, cellAmount } = galleryRow;
   const range = Math.min(cells.length, cellAmount);
+  const slideNumber = slideNumberRef.current;
+  slideNumberRef.current += 1;
 
   return (
     <S.ProjectGalleryRow
@@ -43,7 +48,11 @@ export const renderGalleryRow = (
         <Box 
           key={j}
           className="ProjectGallery-Grid-Cell"
-          onClick={() => setIsLightboxOpen(true)}
+          onClick={(e) => {
+            e.preventDefault();
+            setSlideIndex(slideNumber);
+            setIsLightboxOpen(true);
+          }}
         >
           {renderCell(cell)}
         </Box>
@@ -52,7 +61,9 @@ export const renderGalleryRow = (
   );
 };
 
-export const getLightboxSlides = (gallery: Array<ProjectGalleryRow>): Slide[] => {
+export const getLightboxSlides = (
+  gallery: Array<ProjectGalleryRow>,
+): Slide[] => {
   const slides: Slide[] = [];
 
   for (let i = 0; i < gallery.length; i += 1) {
