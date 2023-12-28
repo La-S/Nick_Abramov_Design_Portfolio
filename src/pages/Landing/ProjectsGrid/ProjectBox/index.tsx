@@ -15,12 +15,14 @@ interface Props {
 
 const ProjectBox = (props: Props) => {
   const queryClient = useQueryClient();
-  const { pageLoadingState: [, setIsPageLoading] } = useContext(GlobalContext);
+  const {
+    pageLoadingState: [, setIsPageLoading],
+  } = useContext(GlobalContext);
   const { category, imagePath, id } = props;
 
   return (
     <S.ProjectBox className="ProjectBox-Container">
-      <Link 
+      <Link
         to={`/projects/${id}`}
         onClick={() => {
           const cachedProjectExists = checkIfCachedQueryDataExists(queryClient, ['project', id]);

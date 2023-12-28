@@ -3,8 +3,8 @@ import { Outlet } from 'react-router-dom';
 import { GlobalContext } from '../../contexts/global';
 import { validateAdminAuthentication } from '../../api/authMethods.api';
 
-const AdminLayout = ():JSX.Element => {
-  const { 
+const AdminLayout = (): JSX.Element => {
+  const {
     authState: [, setIsAdminLoggedIn],
     pageLoadingState: [, setIsPageLoading],
   } = useContext(GlobalContext);

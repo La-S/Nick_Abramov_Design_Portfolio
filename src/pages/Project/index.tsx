@@ -11,17 +11,16 @@ import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
 const LOADING_DELAY = 1500;
 
 const Project = () => {
-  const { pageLoadingState: [isPageLoading, setIsPageLoading] } = useContext(GlobalContext);
+  const {
+    pageLoadingState: [isPageLoading, setIsPageLoading],
+  } = useContext(GlobalContext);
   const { projectId } = useParams();
   const { project, ...projectResponse } = useProject(projectId || '');
   const [isLoadingDelayActive, setIsLoadingDelayActive] = useState(true);
   const [areImagesLoaded, setAreImagesLoaded] = useState(false);
 
   useEffect(() => {
-    if (
-      !isPageLoading || projectResponse.isLoading
-       || isLoadingDelayActive || !areImagesLoaded
-    ) return;
+    if (!isPageLoading || projectResponse.isLoading || isLoadingDelayActive || !areImagesLoaded) return;
 
     setIsPageLoading(false);
   }, [projectResponse.isLoading, isLoadingDelayActive, areImagesLoaded]);
@@ -32,8 +31,10 @@ const Project = () => {
 
   useEffect(() => {
     if (projectResponse.isLoading) return;
-    
-    const mediaToLoad: Array<HTMLImageElement | HTMLVideoElement> = Array.from(document.querySelectorAll('.Loadable-Image, .Loadable-Direct-Video'));
+
+    const mediaToLoad: Array<HTMLImageElement | HTMLVideoElement> = Array.from(
+      document.querySelectorAll('.Loadable-Image'),
+    );
     executeCallbackOnMediaCollectionLoad(mediaToLoad, () => {
       setAreImagesLoaded(true);
     });

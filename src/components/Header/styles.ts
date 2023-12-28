@@ -15,6 +15,8 @@ const Header = styled(AppBar, {
   backgroundColor: theme.componentColors.backgroundMain,
   boxShadow: 'none',
 
+  transition: 'background-color 0.2s ease-in-out',
+
   [theme.breakpoints.down('tablet')]: {
     height: `${HEADER_MOBILE_HEIGHT}px`,
     padding: '25px',
@@ -77,7 +79,6 @@ const BurgerContainer = styled(Box)(({ theme }) => ({
   '.Theme-Toggle': {
     width: '30px',
     height: '30px',
-
 
     '&.Light-Theme-Active': {
       circle: {

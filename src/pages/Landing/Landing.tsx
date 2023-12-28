@@ -26,10 +26,7 @@ const Landing = (): JSX.Element => {
   const [areImagesLoaded, setAreImagesLoaded] = useState(false);
 
   useEffect(() => {
-    if (
-      !isPageLoading || projectResponse.isLoading
-      || isLoadingDelayActive || !areImagesLoaded
-    ) return;
+    if (!isPageLoading || projectResponse.isLoading || isLoadingDelayActive || !areImagesLoaded) return;
 
     setIsPageLoading(false);
   }, [projectResponse.isLoading, isLoadingDelayActive]);
@@ -40,8 +37,10 @@ const Landing = (): JSX.Element => {
 
   useEffect(() => {
     if (projectResponse.isLoading) return;
-    
-    const mediaToLoad: Array<HTMLImageElement | HTMLVideoElement> = Array.from(document.querySelectorAll('.Loadable-Image'));
+
+    const mediaToLoad: Array<HTMLImageElement | HTMLVideoElement> = Array.from(
+      document.querySelectorAll('.Loadable-Image'),
+    );
     executeCallbackOnMediaCollectionLoad(mediaToLoad, () => {
       setAreImagesLoaded(true);
     });

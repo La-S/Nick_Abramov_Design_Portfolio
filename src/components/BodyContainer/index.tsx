@@ -10,36 +10,47 @@ import { useQueryClient } from '@tanstack/react-query';
 import { GlobalContext } from '../../contexts/global';
 import { checkIfCachedQueryDataExists } from '../../utils/loadingUtils';
 
-const LANDING_PAGE_PAGE_PATHS = ['/', '/home', '/projects'];
+const LANDING_PAGE_PATHS = ['/', '/home', '/projects'];
+const PROJECT_PAGE_PREFIX = '/projects';
 
 const BodyContainer = (): JSX.Element => {
   const {
     authState: [isAdminLoggedIn],
-    pageLoadingState: [isPageLoading, setIsPageLoading],
+    pageLoadingState: [, setIsPageLoading],
   } = useContext(GlobalContext);
 
   const queryClient = useQueryClient();
   const location = useLocation();
 
-  useEffect(() => {
-    if (!LANDING_PAGE_PAGE_PATHS.includes(location.pathname)) return;
-
-    const cachedProjectsExist = checkIfCachedQueryDataExists(queryClient, ['projects', { summary: true }]);
-    if (!cachedProjectsExist) {
-      setIsPageLoading(true);
-    }
-  }, [location.pathname]);
-
   const renderProtectedPageElement = (route: RouteFixture, isLoggedIn: boolean) => {
     if (!isLoggedIn && route.path !== '/admin/login') {
       return <Navigate to="/admin/login" />;
     }
-    if (isLoggedIn && (route.path === '/admin/login')) {
+    if (isLoggedIn && route.path === '/admin/login') {
       return <Navigate to="/admin/dashboard" />;
     }
 
     return route.element;
   };
+
+  useEffect(() => {
+    if (LANDING_PAGE_PATHS.includes(location.pathname)) {
+      const cachedProjectsExist = checkIfCachedQueryDataExists(queryClient, ['projects', { summary: true }]);
+      if (!cachedProjectsExist) {
+        setIsPageLoading(true);
+      }
+      return;
+    }
+    if (location.pathname.includes(PROJECT_PAGE_PREFIX)) {
+      const projectId = location.pathname.replace(`${PROJECT_PAGE_PREFIX}/`, '');
+      if (!projectId) return;
+
+      const cachedProjectExists = checkIfCachedQueryDataExists(queryClient, ['project', projectId]);
+      if (!cachedProjectExists) {
+        setIsPageLoading(true);
+      }
+    }
+  }, [location.pathname]);
 
   return (
     <S.BodyContainer id="Body-Container">
@@ -56,7 +67,7 @@ const BodyContainer = (): JSX.Element => {
         </Route>
       </Routes>
 
-      {isPageLoading && <LoadingScreen />}
+      <LoadingScreen />
     </S.BodyContainer>
   );
 };

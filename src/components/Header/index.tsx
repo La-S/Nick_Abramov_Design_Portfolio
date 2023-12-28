@@ -13,7 +13,9 @@ import defaultTheme from '../../assets/themes/defaultTheme';
 
 const Header = (): JSX.Element => {
   const pathName = useLocation().pathname.substring(1);
-  const { themeState: [, setTheme] } = useContext(GlobalContext);
+  const {
+    themeState: [, setTheme],
+  } = useContext(GlobalContext);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(getCurrentThemeName() === 'dark');
   const [navMenuOpen, setNavMenuOpen] = useState<boolean>(false);
   const { breakpoints, componentColors, textColors } = useTheme();
@@ -57,7 +59,7 @@ const Header = (): JSX.Element => {
         <Logo fillMain={fillMain} fillSecondary={componentColors.logoSecondary} isLink />
       </S.LogoContainer>
       <S.BurgerContainer>
-        <DarkModeSwitch 
+        <DarkModeSwitch
           className={`Theme-Toggle ${isDarkMode ? '' : 'Light-Theme-Active'}`}
           checked={isDarkMode}
           onChange={toggleTheme}
