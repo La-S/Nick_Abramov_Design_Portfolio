@@ -7,15 +7,15 @@ import S from './styles';
 
 const renderCell = (cell: ProjectGalleryCell): JSX.Element => {
   if (cell.type === 'image link') {
-    return <img src={cell.path} loading="lazy" />;
+    return <img className='Project-Image' src={cell.path} loading="lazy" />;
   }
   if (cell.type === 'direct video link') {
-    return <video src={cell.path} autoPlay loop muted />;
+    return <video className='Project-Direct-Video' src={cell.path} autoPlay loop muted />;
   }
   if (cell.type === 'embedded video link') {
     const videoLink = `${cell.path}?mute=1`;
     return (
-      <Box className="iframe-container">
+      <Box className="iframe-container Project-Embedded-Video-Container">
         <iframe width="420" height="315" src={videoLink} className="video" />
       </Box>
     );

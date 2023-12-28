@@ -6,6 +6,7 @@ import BoxUnderline from '../../components/BoxUnderline';
 import ProjectGalleryGrid from './ProjectGalleryGrid';
 import S from './styles';
 import { GlobalContext } from '../../contexts/global';
+import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
 
 const LOADING_DELAY = 1500;
 
@@ -14,16 +15,29 @@ const Project = () => {
   const { projectId } = useParams();
   const { project, ...projectResponse } = useProject(projectId || '');
   const [isLoadingDelayActive, setIsLoadingDelayActive] = useState(true);
+  const [areImagesLoaded, setAreImagesLoaded] = useState(false);
 
   useEffect(() => {
-    if (!isPageLoading || projectResponse.isLoading || isLoadingDelayActive) return;
+    if (
+      !isPageLoading || projectResponse.isLoading
+       || isLoadingDelayActive || !areImagesLoaded
+    ) return;
 
     setIsPageLoading(false);
-  }, [projectResponse.isLoading, isLoadingDelayActive]);
+  }, [projectResponse.isLoading, isLoadingDelayActive, areImagesLoaded]);
 
   useEffect(() => {
     setTimeout(() => setIsLoadingDelayActive(false), LOADING_DELAY);
   }, []);
+
+  useEffect(() => {
+    if (projectResponse.isLoading) return;
+    
+    const mediaToLoad: Array<HTMLImageElement | HTMLVideoElement> = Array.from(document.querySelectorAll('.Project-Image, .Project-Direct-Video'));
+    executeCallbackOnMediaCollectionLoad(mediaToLoad, () => {
+      setAreImagesLoaded(true);
+    });
+  }, [project]);
 
   return (
     <S.ProjectContainer>
