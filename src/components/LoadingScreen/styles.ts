@@ -24,8 +24,36 @@ const LoadingScreenContainer = styled(Box)(({ theme }) => ({
       translate: '-50% -50%',
 
       circle: {
-        strokeWidth: '1px',
+        strokeWidth: '1.75px',
       },
+
+      '&.Main-Moving-Spinner': {
+        svg: {
+          circle: {
+            color: theme.componentColors.backgroundSecondary,
+          },
+        },
+      },
+
+      '&.Secondary-Moving-Spinner': {
+        animationDelay: '0s',
+        animationDuration: '3s',
+
+        svg: {
+          circle: {
+            color: theme.componentColors.backgroundTertiary,
+            animationDuration: '3s',
+          },
+        },
+      },
+    },
+
+    '.Loading-Logo': {
+      width: '85px',
+      height: '85px',
+      position: 'relative',
+      left: '4px',
+      top: '1px',
     },
   },
 }));

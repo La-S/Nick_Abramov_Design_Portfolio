@@ -9,7 +9,19 @@ const LoadingScreen = (): JSX.Element => {
       <Box className="Loading-Box">
         <CircularProgress 
           variant='determinate'
-          size={120}
+          value={100}
+          className='Background-Spinner'
+          size={140}
+        />
+        <CircularProgress 
+          className='Secondary-Moving-Spinner'
+          size={140}
+          disableShrink
+        />
+        <CircularProgress 
+          className='Main-Moving-Spinner'
+          size={140}
+          disableShrink
         />
         <LoadingScreenLogo />
       </Box>

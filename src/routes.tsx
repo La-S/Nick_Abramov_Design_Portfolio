@@ -53,4 +53,8 @@ export const adminRoutes: Array<RouteFixture> = [
     path: '/admin/dashboard',
     element: <AdminDashboardPage />,
   },
+  {
+    path: '/admin',
+    element: <Navigate to="/admin/dashboard" />,
+  },
 ];
