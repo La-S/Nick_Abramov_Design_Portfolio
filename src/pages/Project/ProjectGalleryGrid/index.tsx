@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import { Video, Zoom } from 'yet-another-react-lightbox/plugins';
 import { ProjectGalleryRow } from '../../../types/data/project';
@@ -14,31 +14,28 @@ interface Props {
 const ProjectGalleryGrid = ({ gallery, isGallerySpaced }: Props): JSX.Element => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
-  const slideNumberRef = useRef(0);
   const slides = getLightboxSlides(gallery);
 
-  useEffect(() => {
-    if (slideIndex > slides.length - 1) setSlideIndex(0);
-  }, [slideIndex]);
+  const renderGallery = () => {
+    let slideIndexUpperBoundary = 0;
 
-  useEffect(() => {
-    slideNumberRef.current = 0;
-    setSlideIndex(0);
-  }, [slides]);
+    return gallery.map((galleryRow, i) => {
+      const actualCellAmount = Math.min(galleryRow.cells.length, galleryRow.cellAmount);
+      slideIndexUpperBoundary += actualCellAmount;
+      return renderGalleryRow(galleryRow, isGallerySpaced, i, setIsLightboxOpen, slideIndexUpperBoundary, setSlideIndex);
+    });
+  };
 
   return (
     <>
       <S.ProjectGalleryGrid className="ProjectGallery-Grid">
-        {gallery.map((galleryRow, i) =>
-          renderGalleryRow(galleryRow, isGallerySpaced, i, setIsLightboxOpen, slideNumberRef, setSlideIndex),
-        )}
+        {renderGallery()}
       </S.ProjectGalleryGrid>
 
       <Lightbox
         open={isLightboxOpen}
         close={() => {
           setIsLightboxOpen(false);
-          slideNumberRef.current = 0;
         }}
         slides={slides}
         plugins={[Zoom, Video]}
