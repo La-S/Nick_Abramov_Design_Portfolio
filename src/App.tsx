@@ -21,7 +21,7 @@ const App = (): JSX.Element => {
     if (!isLoggedIn && route.path !== '/admin/login') {
       return <Navigate to="/admin/login" />;
     }
-    if (isLoggedIn && (route.path === '/admin/login' || route.path === '/admin')) {
+    if (isLoggedIn && (route.path === '/admin/login')) {
       return <Navigate to="/admin/dashboard" />;
     }
 

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import S from './styles';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { onProjectsTileMouseMove, onProjectsTileMouseOut, onProjectsTileMouseOver } from './utils';
+import { useQueryClient } from '@tanstack/react-query';
+import { GlobalContext } from '../../../../contexts/global';
 
 interface Props {
   id: string;
@@ -11,11 +13,22 @@ interface Props {
 }
 
 const ProjectBox = (props: Props) => {
+  const queryClient = useQueryClient();
+  const { pageLoadingState: [, setIsPageLoading] } = useContext(GlobalContext);
   const { category, imagePath, id } = props;
 
   return (
     <S.ProjectBox className="ProjectBox-Container">
-      <Link to={`/projects/${id}`} draggable="false">
+      <Link 
+        to={`/projects/${id}`}
+        onClick={() => {
+          const cachedProjectQuery = queryClient.getQueryState(['project', id]);
+          if (!cachedProjectQuery) {
+            setIsPageLoading(true);
+          }
+        }}
+        draggable="false"
+      >
         <img
           src={imagePath}
           className="ProjectBox-Img"
