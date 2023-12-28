@@ -20,7 +20,7 @@ const ContactBody = styled(Box)(({ theme }) => ({
     maxHeight: '585px',
     marginRight: '75px',
     objectFit: 'cover',
-    '-webkit-user-drag': 'none',
+    WebkitUserDrag: 'none',
   },
 
   [theme.breakpoints.down('laptop')]: {

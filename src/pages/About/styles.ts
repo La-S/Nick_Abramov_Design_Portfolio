@@ -37,7 +37,7 @@ const AboutBody = styled(Box)(({ theme }) => ({
     maxWidth: '700px',
     marginRight: '75px',
     objectFit: 'cover',
-    '-webkit-user-drag': 'none',
+    WebkitUserDrag: 'none',
     filter: 'contrast(1.05)',
   },
 

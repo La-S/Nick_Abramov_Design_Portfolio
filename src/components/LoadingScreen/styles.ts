@@ -13,6 +13,21 @@ const LoadingScreenContainer = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: theme.componentColors.backgroundMain,
+
+  '.Loading-Box': {
+    position: 'relative',
+
+    '.MuiCircularProgress-root': {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      translate: '-50% -50%',
+
+      circle: {
+        strokeWidth: '1px',
+      },
+    },
+  },
 }));
 
 export default {

@@ -15,7 +15,7 @@ const BodyContainer = styled(Box)(({ theme }) => ({
   },
 
   img: {
-    '-webkit-user-drag': 'none',
+    WebkitUserDrag: 'none',
   },
 
   [theme.breakpoints.down('tablet')]: {
