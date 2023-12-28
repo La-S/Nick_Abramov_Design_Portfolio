@@ -33,7 +33,7 @@ const Project = () => {
   useEffect(() => {
     if (projectResponse.isLoading) return;
     
-    const mediaToLoad: Array<HTMLImageElement | HTMLVideoElement> = Array.from(document.querySelectorAll('.Project-Image, .Project-Direct-Video'));
+    const mediaToLoad: Array<HTMLImageElement | HTMLVideoElement> = Array.from(document.querySelectorAll('.Loadable-Image, .Loadable-Direct-Video'));
     executeCallbackOnMediaCollectionLoad(mediaToLoad, () => {
       setAreImagesLoaded(true);
     });

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { onProjectsTileMouseMove, onProjectsTileMouseOut, onProjectsTileMouseOver } from './utils';
 import { useQueryClient } from '@tanstack/react-query';
 import { GlobalContext } from '../../../../contexts/global';
+import { checkIfCachedQueryDataExists } from '../../../../utils/loadingUtils';
 
 interface Props {
   id: string;
@@ -22,8 +23,8 @@ const ProjectBox = (props: Props) => {
       <Link 
         to={`/projects/${id}`}
         onClick={() => {
-          const cachedProjectQuery = queryClient.getQueryState(['project', id]);
-          if (!cachedProjectQuery) {
+          const cachedProjectExists = checkIfCachedQueryDataExists(queryClient, ['project', id]);
+          if (!cachedProjectExists) {
             setIsPageLoading(true);
           }
         }}

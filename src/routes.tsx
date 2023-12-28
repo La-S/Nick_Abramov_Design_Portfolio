@@ -13,7 +13,7 @@ export type RouteFixture = {
   element: JSX.Element;
 };
 
-export const mainRoutes: Array<RouteFixture> = [
+export const MAIN_ROUTES: Array<RouteFixture> = [
   {
     path: '/',
     element: <LandingPage />,
@@ -44,7 +44,7 @@ export const mainRoutes: Array<RouteFixture> = [
   },
 ];
 
-export const adminRoutes: Array<RouteFixture> = [
+export const ADMIN_ROUTES: Array<RouteFixture> = [
   {
     path: '/admin/login',
     element: <AdminLoginPage />,
