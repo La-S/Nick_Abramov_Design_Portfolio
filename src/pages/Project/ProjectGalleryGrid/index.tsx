@@ -47,7 +47,7 @@ const ProjectGalleryGrid = ({ gallery, isGallerySpaced }: Props): JSX.Element =>
         }}
         carousel={{
           padding: 0,
-          imageFit: 'cover',
+          imageFit: 'contain',
         }}
       />
     </>
