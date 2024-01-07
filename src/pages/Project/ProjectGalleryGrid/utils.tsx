@@ -6,6 +6,8 @@ import type { Slide } from 'yet-another-react-lightbox/*';
 import S from './styles';
 
 const renderCell = (cell: ProjectGalleryCell): JSX.Element => {
+  if (!cell.path) return <></>;
+
   if (cell.type === 'image link') {
     return <img className="Loadable-Image" src={cell.path} loading="lazy" />;
   }
@@ -47,17 +49,19 @@ export const renderGalleryRow = (
         const slideIndex = startIndex + j;
 
         return (
-          <Box
-            key={j}
-            className="ProjectGallery-Grid-Cell"
-            onClick={(e) => {
-              e.preventDefault();
-              setSlideIndex(slideIndex);
-              setIsLightboxOpen(true);
-            }}
-          >
-            {renderCell(cell)}
-          </Box>
+          cell.path ? (
+            <Box
+              key={j}
+              className="ProjectGallery-Grid-Cell"
+              onClick={(e) => {
+                e.preventDefault();
+                setSlideIndex(slideIndex);
+                setIsLightboxOpen(true);
+              }}
+            >
+              {renderCell(cell)}
+            </Box>
+          ) : <></>
         );
       })}
     </S.ProjectGalleryRow>
@@ -72,7 +76,7 @@ export const getLightboxSlides = (gallery: Array<ProjectGalleryRow>): Slide[] =>
 
     for (let j = 0; j < galleryRow.cellAmount; j += 1) {
       const galleryCell = galleryRow.cells[j];
-      if (!galleryCell || !galleryCell.type) continue;
+      if (!galleryCell || !galleryCell.type || !galleryCell.path) continue;
 
       if (galleryCell.type === 'image link') {
         slides.push({
