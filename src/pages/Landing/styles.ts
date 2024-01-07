@@ -1,4 +1,5 @@
 import { styled, Box } from '@mui/material';
+import { HEADER_DESKTOP_HEIGHT, HEADER_MOBILE_HEIGHT } from '../../components/Header/styles';
 
 const LandingContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -44,6 +45,19 @@ const LandingContainer = styled(Box)(({ theme }) => ({
     width: '100%',
   },
 
+  '.No-Projects-Box': {
+    display: 'flex',
+    alignItems: 'center',
+    height: `calc(100vh - ${HEADER_DESKTOP_HEIGHT}px)`,
+
+    '.MuiTypography-root': {
+      position: 'relative',
+      bottom: `${HEADER_DESKTOP_HEIGHT}px`,
+      fontFamily: theme.fonts.main,
+      fontSize: '24px',
+    },
+  },
+
   [theme.breakpoints.down('tablet')]: {
     '.SortBar-Container': {
       ul: {
@@ -58,6 +72,15 @@ const LandingContainer = styled(Box)(({ theme }) => ({
             },
           },
         },
+      },
+    },
+
+    '.No-Projects-Box': {
+      height: `calc(100vh - ${HEADER_MOBILE_HEIGHT}px)`,
+
+      '.MuiTypography-root': {
+        bottom: `${HEADER_MOBILE_HEIGHT}px`,
+        fontSize: '24px',
       },
     },
   },

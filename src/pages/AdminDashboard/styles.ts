@@ -1,6 +1,15 @@
 import { styled, Box, Modal } from '@mui/material';
 
 const AdminDashboardContainer = styled(Box)(({ theme }) => ({
+  '.No-Projects-Box': {
+    padding: '15px 35px',
+
+    '.MuiTypography-root': {
+      fontFamily: theme.fonts.main,
+      fontSize: '20px',
+    },
+  },
+  
   [theme.breakpoints.down('tablet')]: {},
 }));
 

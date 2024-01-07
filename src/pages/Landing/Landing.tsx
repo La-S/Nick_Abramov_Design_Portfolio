@@ -69,6 +69,12 @@ const Landing = (): JSX.Element => {
       <Box className="ProjectGrid-Container">
         <ProjectsGrid sortCategory={sortCategory} />
       </Box>
+
+      {!projectResponse.isLoading && projects.length === 0 ? (
+        <Box className="No-Projects-Box">
+          <Typography variant="h5">No projects added yet</Typography>
+        </Box>
+      ) : <></>}
     </S.LandingContainer>
   );
 };

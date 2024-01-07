@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ButtonBase, useTheme } from '@mui/material';
+import { Box, ButtonBase, Typography, useTheme } from '@mui/material';
 import { SignOut as SignOutIcon } from '@phosphor-icons/react';
 import HeaderStyles from '../../components/Header/styles';
 import Logo from '../../components/Logo';
@@ -9,6 +9,7 @@ import { cookies } from '../../api/api';
 import { GlobalContext } from '../../contexts/global';
 import AdminProjectsGrid from './AdminProjectsGrid';
 import ProjectForm from './ProjectForm';
+import useProjects from '../../hooks/useProjects';
 
 const AdminDashboard = (): JSX.Element => {
   const {
@@ -16,6 +17,7 @@ const AdminDashboard = (): JSX.Element => {
   } = useContext(GlobalContext);
   const theme = useTheme();
   const [newProjectModalOpen, setNewProjectModalOpen] = useState(false);
+  const { projects, isFetched } = useProjects({ summary: true });
 
   const logout = () => {
     cookies.remove('access_token', { path: '/' });
@@ -54,6 +56,14 @@ const AdminDashboard = (): JSX.Element => {
     <S.AdminDashboardContainer>
       {Header}
       <AdminProjectsGrid />
+      
+      {isFetched && projects.length === 0 ? (
+        <Box className='No-Projects-Box'>
+          <Typography>
+            {'Click new project button to get started...'}
+          </Typography>
+        </Box>
+      ): <></>}
 
       {NewProjectModal}
     </S.AdminDashboardContainer>
