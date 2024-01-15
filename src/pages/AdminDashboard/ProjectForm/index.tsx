@@ -12,8 +12,10 @@ import {
   MenuItem,
   CircularProgress,
   Checkbox,
+  AlertColor,
 } from '@mui/material';
-import { X as CloseIcon, Trash as TrashIcon } from '@phosphor-icons/react';
+import Alert from '../../../components/Alert';
+import { X as CloseIcon, Trash as TrashIcon, UploadSimple as UploadIcon } from '@phosphor-icons/react';
 import { createProject, getProject, updateProject } from '../../../api/projectMethods.api';
 import type { ProjectGalleryRow } from '../../../types/data/project';
 import type { ProjectInputDto } from '../../../types/data/projectAPI';
@@ -21,6 +23,7 @@ import formUtils from './utils';
 import S from './styles';
 import { useQueryClient } from '@tanstack/react-query';
 import { EMPTY_PROJECT } from '../../../hooks/useProject';
+import type { AlertDisplayProps } from '../../../components/Alert/props';
 
 interface Props {
   setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,6 +35,11 @@ const ProjectForm = (props: Props): JSX.Element => {
   const { setModalOpen, projectId } = props;
   const [project, setProject] = useState(EMPTY_PROJECT);
   const [isFetched, setIsFetched] = useState(false);
+  const [alertState, setAlertState] = useState<AlertDisplayProps>({
+    open: false,
+    message: '',
+    severity: 'info',
+  });
 
   const [nameValue, setNameValue] = useState(project.name);
   const [categoryValue, setCategoryValue] = useState(project.category);
@@ -86,11 +94,19 @@ const ProjectForm = (props: Props): JSX.Element => {
   };
 
   const UploadImageButton = (
-    <Button component="label" variant="contained">
-    Upload file
+    <Button 
+      component="label" 
+      variant="contained"
+      startIcon={<UploadIcon />}
+      sx={{ marginLeft: '10px' }}
+    >
+    Upload image
       <S.VisuallyHiddenInput 
         type="file"
-        onChange={formUtils.handleImageUpload}
+        accept="image/png, image/gif, image/jpeg, image/jpg"
+        onChange={(e) => {
+          formUtils.handleImageUpload(e, setAlertState);
+        }}
       />
     </Button>
   );
@@ -114,159 +130,166 @@ const ProjectForm = (props: Props): JSX.Element => {
     }
 
     return (
-      <S.ProjectForm id="Project-Form">
-        <Box className="Title-Label-Box">
-          <Typography className="Title-Label">
-            <b>{projectId ? `Edit '${project.name}' project` : 'Create new project'}</b>
-          </Typography>
-          {setModalOpen ? (
-            <ButtonBase onClick={() => setModalOpen(false)} disableRipple>
-              <CloseIcon />
-            </ButtonBase>
-          ) : (
-            <></>
-          )}
-        </Box>
-
-        <FormLabel className="Section-Title-Label">General Information:</FormLabel>
-        <TextField
-          variant="outlined"
-          value={nameValue}
-          placeholder="Project Name"
-          autoComplete="off"
-          required
-          onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
-            setNameValue((target as HTMLInputElement).value);
-          }}
-        />
-        <TextField
-          variant="outlined"
-          value={categoryValue}
-          placeholder="Category Name"
-          required
-          onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
-            setCategoryValue((target as HTMLInputElement).value);
-          }}
-        />
-        <TextField
-          variant="outlined"
-          value={mainImagePathValue}
-          placeholder="Cover Image Path"
-          required
-          onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
-            setMainImagePathValue((target as HTMLInputElement).value);
-          }}
-        />
-        <Divider />
-
-        <FormLabel className="Section-Title-Label">Description:</FormLabel>
-        {descriptionBulletValues.map((descriptionBulletValue, i) => (
-          <OutlinedInput
-            className="Input-With-Icon"
-            key={i}
-            endAdornment={
-              <ButtonBase
-                className="EndAdornment-Button"
-                onClick={() => {
-                  setDescriptionBulletValues((prevState) => prevState.filter((_, index) => index !== i));
-                }}
-                disableRipple
-              >
-                <TrashIcon />
+      <>
+        <S.ProjectForm id="Project-Form">
+          <Box className="Title-Label-Box">
+            <Typography className="Title-Label">
+              <b>{projectId ? `Edit '${project.name}' project` : 'Create new project'}</b>
+            </Typography>
+            {setModalOpen ? (
+              <ButtonBase onClick={() => setModalOpen(false)} disableRipple>
+                <CloseIcon />
               </ButtonBase>
-            }
-            value={descriptionBulletValue}
-            placeholder={`Description Bullet ${i + 1}`}
-            required
-            onInput={(e) =>
-              formUtils.updateDescriptionBullet(e, i, descriptionBulletValues, setDescriptionBulletValues)
-            }
-          />
-        ))}
-        <Button type="button" onClick={() => setDescriptionBulletValues([...descriptionBulletValues, ''])}>
-          Add description bullet +
-        </Button>
-        <Divider />
-
-        <FormLabel className="Section-Title-Label">Project Gallery Rows:</FormLabel>
-        {galleryValues.map((galleryRow, i) => (
-          <Box key={i} className="Row-Box">
-            <Box className="Row-Number-Box">
-              <FormLabel className="Sub-Label">Row {i + 1}</FormLabel>
-              <ButtonBase
-                onClick={() => {
-                  const newGalleryValues = galleryValues.filter((_, index) => index !== i);
-                  setGalleryValues(newGalleryValues);
-                }}
-                disableRipple
-              >
-                <TrashIcon />
-              </ButtonBase>
-            </Box>
-            <Box className="Cell-Amount-Box">
-              <Typography>Specify amount of cells</Typography>
-              <Select
-                variant="outlined"
-                value={galleryRow.cellAmount || 1}
-                onChange={(e) => formUtils.updateGalleryRows(e, i, galleryValues, setGalleryValues)}
-              >
-                <MenuItem value="1">1</MenuItem>
-                <MenuItem value="2">2</MenuItem>
-                <MenuItem value="3">3</MenuItem>
-                <MenuItem value="4">4</MenuItem>
-              </Select>
-            </Box>
-            {galleryRow.cells.map((cellValue, j) => (
-              <Box key={j} className="Cell-Links-Box">
-                <Select
-                  value={cellValue.type || 'image link'}
-                  onChange={(e) => {
-                    const newGalleryValues = [...galleryValues];
-                    newGalleryValues[i].cells[j].type = e.target.value as ProjectGalleryRow['cells'][number]['type'];
-                    setGalleryValues(newGalleryValues);
-                  }}
-                >
-                  <MenuItem value="image link">image link</MenuItem>
-                  <MenuItem value="direct video link">direct video link</MenuItem>
-                  <MenuItem value="embedded video link">youtube video link</MenuItem>
-                </Select>
-                <TextField
-                  variant="outlined"
-                  type="text"
-                  value={cellValue.path}
-                  placeholder="Path"
-                  onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
-                    const newGalleryValues = [...galleryValues];
-                    newGalleryValues[i].cells[j].path = (target as HTMLInputElement).value;
-                    setGalleryValues(newGalleryValues);
-                  }}
-                />
-                {cellValue.type === 'image link' || !cellValue.type ? UploadImageButton : <></>}
-              </Box>
-            ))}
+            ) : (
+              <></>
+            )}
           </Box>
-        ))}
-        <Button
-          type="button"
-          onClick={() =>
-            setGalleryValues([...galleryValues, { cellAmount: 1, cells: [{ type: 'image link', path: '' }] }])
-          }
-        >
-          Add a new gallery row +
-        </Button>
-        <Box className="Gallery-Space-Box">
-          <Checkbox
-            size="medium"
-            checked={isGallerySpacedValue}
-            onChange={(e) => setIsGallerySpacedValue(e.target.checked)}
-          />
-          <FormLabel className="Sub-Label">Add space between gallery items</FormLabel>
-        </Box>
 
-        <Button type="submit" onClick={handleSubmit}>
-          Submit
-        </Button>
-      </S.ProjectForm>
+          <FormLabel className="Section-Title-Label">General Information:</FormLabel>
+          <TextField
+            variant="outlined"
+            value={nameValue}
+            placeholder="Project Name"
+            autoComplete="off"
+            required
+            onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+              setNameValue((target as HTMLInputElement).value);
+            }}
+          />
+          <TextField
+            variant="outlined"
+            value={categoryValue}
+            placeholder="Category Name"
+            required
+            onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+              setCategoryValue((target as HTMLInputElement).value);
+            }}
+          />
+          <TextField
+            variant="outlined"
+            value={mainImagePathValue}
+            placeholder="Cover Image Path"
+            required
+            onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+              setMainImagePathValue((target as HTMLInputElement).value);
+            }}
+          />
+          <Divider />
+
+          <FormLabel className="Section-Title-Label">Description:</FormLabel>
+          {descriptionBulletValues.map((descriptionBulletValue, i) => (
+            <OutlinedInput
+              className="Input-With-Icon"
+              key={i}
+              endAdornment={
+                <ButtonBase
+                  className="EndAdornment-Button"
+                  onClick={() => {
+                    setDescriptionBulletValues((prevState) => prevState.filter((_, index) => index !== i));
+                  }}
+                  disableRipple
+                >
+                  <TrashIcon />
+                </ButtonBase>
+              }
+              value={descriptionBulletValue}
+              placeholder={`Description Bullet ${i + 1}`}
+              required
+              onInput={(e) =>
+                formUtils.updateDescriptionBullet(e, i, descriptionBulletValues, setDescriptionBulletValues)
+              }
+            />
+          ))}
+          <Button type="button" onClick={() => setDescriptionBulletValues([...descriptionBulletValues, ''])}>
+            Add description bullet +
+          </Button>
+          <Divider />
+
+          <FormLabel className="Section-Title-Label">Project Gallery Rows:</FormLabel>
+          {galleryValues.map((galleryRow, i) => (
+            <Box key={i} className="Row-Box">
+              <Box className="Row-Number-Box">
+                <FormLabel className="Sub-Label">Row {i + 1}</FormLabel>
+                <ButtonBase
+                  onClick={() => {
+                    const newGalleryValues = galleryValues.filter((_, index) => index !== i);
+                    setGalleryValues(newGalleryValues);
+                  }}
+                  disableRipple
+                >
+                  <TrashIcon />
+                </ButtonBase>
+              </Box>
+              <Box className="Cell-Amount-Box">
+                <Typography>Specify amount of cells</Typography>
+                <Select
+                  variant="outlined"
+                  value={galleryRow.cellAmount || 1}
+                  onChange={(e) => formUtils.updateGalleryRows(e, i, galleryValues, setGalleryValues)}
+                >
+                  <MenuItem value="1">1</MenuItem>
+                  <MenuItem value="2">2</MenuItem>
+                  <MenuItem value="3">3</MenuItem>
+                  <MenuItem value="4">4</MenuItem>
+                </Select>
+              </Box>
+              {galleryRow.cells.map((cellValue, j) => (
+                <Box key={j} className="Cell-Links-Box">
+                  <Select
+                    value={cellValue.type || 'image link'}
+                    onChange={(e) => {
+                      const newGalleryValues = [...galleryValues];
+                      newGalleryValues[i].cells[j].type = e.target.value as ProjectGalleryRow['cells'][number]['type'];
+                      setGalleryValues(newGalleryValues);
+                    }}
+                  >
+                    <MenuItem value="image link">image link</MenuItem>
+                    <MenuItem value="direct video link">direct video link</MenuItem>
+                    <MenuItem value="embedded video link">youtube video link</MenuItem>
+                  </Select>
+                  <TextField
+                    variant="outlined"
+                    type="text"
+                    value={cellValue.path}
+                    placeholder="Path"
+                    onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                      const newGalleryValues = [...galleryValues];
+                      newGalleryValues[i].cells[j].path = (target as HTMLInputElement).value;
+                      setGalleryValues(newGalleryValues);
+                    }}
+                  />
+                  {cellValue.type === 'image link' || !cellValue.type ? UploadImageButton : <></>}
+                </Box>
+              ))}
+            </Box>
+          ))}
+          <Button
+            type="button"
+            onClick={() =>
+              setGalleryValues([...galleryValues, { cellAmount: 1, cells: [{ type: 'image link', path: '' }] }])
+            }
+          >
+            Add a new gallery row +
+          </Button>
+          <Box className="Gallery-Space-Box">
+            <Checkbox
+              size="medium"
+              checked={isGallerySpacedValue}
+              onChange={(e) => setIsGallerySpacedValue(e.target.checked)}
+            />
+            <FormLabel className="Sub-Label">Add space between gallery items</FormLabel>
+          </Box>
+
+          <Button type="submit" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </S.ProjectForm>
+        {alertState.open ? (
+          <Alert severity={alertState.severity as AlertColor}>
+            {alertState.message}
+          </Alert>
+        ) : <></>}
+      </>
     );
   };
 
