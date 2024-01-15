@@ -85,6 +85,16 @@ const ProjectForm = (props: Props): JSX.Element => {
     }
   };
 
+  const UploadImageButton = (
+    <Button component="label" variant="contained">
+    Upload file
+      <S.VisuallyHiddenInput 
+        type="file"
+        onChange={formUtils.handleImageUpload}
+      />
+    </Button>
+  );
+
   const renderProjectFormState = (): JSX.Element => {
     if (projectId && !isFetched) {
       return (
@@ -231,6 +241,7 @@ const ProjectForm = (props: Props): JSX.Element => {
                     setGalleryValues(newGalleryValues);
                   }}
                 />
+                {cellValue.type === 'image link' || !cellValue.type ? UploadImageButton : <></>}
               </Box>
             ))}
           </Box>

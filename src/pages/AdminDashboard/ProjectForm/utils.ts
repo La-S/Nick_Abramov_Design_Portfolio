@@ -1,4 +1,6 @@
+import copy from 'copy-text-to-clipboard';
 import { SelectChangeEvent } from '@mui/material';
+import { uploadImage } from '../../../api/uploadMethods.api';
 import type { ProjectGalleryRow } from '../../../types/data/project';
 
 const updateDescriptionBullet = (
@@ -34,7 +36,28 @@ const updateGalleryRows = (
   setGalleryRows(newGalleryValues);
 };
 
+const handleImageUpload = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+  if (!target.files?.length || target.files.length < 1) return;
+  
+  const imageFile = target.files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(imageFile);
+  reader.onload = () => {
+    const imageHash = (reader.result as string || '').replace(
+      /^data:image\/(png|jpg);base64,/,
+      '',
+    );
+
+    uploadImage(imageHash)
+      .then((res) => {
+        const imageUrl = res.data;
+        copy(imageUrl);
+      });
+  };
+};
+
 export default {
   updateDescriptionBullet,
   updateGalleryRows,
+  handleImageUpload,
 };
