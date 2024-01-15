@@ -253,7 +253,7 @@ const ProjectForm = (props: Props): JSX.Element => {
                       setGalleryValues(newGalleryValues);
                     }}
                   />
-                  {cellValue.type === 'image link' || !cellValue.type ? UploadImageButton : <></>}
+                  {(cellValue.type === 'image link' || !cellValue.type) && !cellValue.path ? UploadImageButton : <></>}
                 </Box>
               ))}
             </Box>
