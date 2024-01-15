@@ -5,6 +5,7 @@ export const executeCallbackOnMediaCollectionLoad = (
   callback: () => void,
 ) => {
   const MAX_WAIT_TIME = 5000;
+  setTimeout(() => callback(), MAX_WAIT_TIME);
   const filteredLoadableElements = loadableElements.filter((loadable) => {
     if ('complete' in loadable && loadable.complete) {
       return false;
@@ -31,8 +32,6 @@ export const executeCallbackOnMediaCollectionLoad = (
       }),
   );
   Promise.all(imageLoadPromises).then(() => callback());
-
-  setTimeout(() => callback(), MAX_WAIT_TIME);
 };
 
 export const checkIfCachedQueryDataExists = (queryClient: QueryClient, queryKey: QueryKey) => {
