@@ -48,20 +48,20 @@ export const renderGalleryRow = (
         const startIndex = slideIndexUpperBoundary - actualCellAmount;
         const slideIndex = startIndex + j;
 
-        return (
-          cell.path ? (
-            <Box
-              key={j}
-              className="ProjectGallery-Grid-Cell"
-              onClick={(e) => {
-                e.preventDefault();
-                setSlideIndex(slideIndex);
-                setIsLightboxOpen(true);
-              }}
-            >
-              {renderCell(cell)}
-            </Box>
-          ) : <></>
+        return cell.path ? (
+          <Box
+            key={j}
+            className="ProjectGallery-Grid-Cell"
+            onClick={(e) => {
+              e.preventDefault();
+              setSlideIndex(slideIndex);
+              setIsLightboxOpen(true);
+            }}
+          >
+            {renderCell(cell)}
+          </Box>
+        ) : (
+          <></>
         );
       })}
     </S.ProjectGalleryRow>

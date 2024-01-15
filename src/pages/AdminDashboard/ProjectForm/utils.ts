@@ -37,20 +37,14 @@ const updateGalleryRows = (
   setGalleryRows(newGalleryValues);
 };
 
-const handleImageUpload = (
-  { target }: React.ChangeEvent<HTMLInputElement>,
-  setAlertProps: SetAlertDisplayProps,
-) => {
+const handleImageUpload = ({ target }: React.ChangeEvent<HTMLInputElement>, setAlertProps: SetAlertDisplayProps) => {
   if (!target.files?.length || target.files.length < 1) return;
-  
+
   const imageFile = target.files[0];
   const reader = new FileReader();
   reader.readAsDataURL(imageFile);
   reader.onload = () => {
-    const imageHash = (reader.result as string || '').replace(
-      /^data:image\/(png|jpg|jpeg|gif);base64,/,
-      '',
-    );
+    const imageHash = ((reader.result as string) || '').replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, '');
 
     uploadImage(imageHash)
       .then((res) => {
@@ -74,7 +68,7 @@ const handleImageUpload = (
         };
         setAlertProps(errorAlertProps);
         setTimeout(() => {
-          setAlertProps({...errorAlertProps, open: false });
+          setAlertProps({ ...errorAlertProps, open: false });
         }, 3000);
       });
   };

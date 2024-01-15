@@ -6,7 +6,7 @@ import AnimatedCursor from './components/AnimatedCursor';
 import { getCurrentTheme } from './utils/themeUtils';
 import BodyContainer from './components/BodyContainer';
 
-const checkIfTouchDevice = () => (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
+const checkIfTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 const App = (): JSX.Element => {
   const currentTheme = getCurrentTheme();

@@ -74,7 +74,9 @@ const Landing = (): JSX.Element => {
         <Box className="No-Projects-Box">
           <Typography variant="h5">No projects added yet</Typography>
         </Box>
-      ) : <></>}
+      ) : (
+        <></>
+      )}
     </S.LandingContainer>
   );
 };

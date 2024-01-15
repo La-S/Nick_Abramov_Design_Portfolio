@@ -22,15 +22,20 @@ const ProjectGalleryGrid = ({ gallery, isGallerySpaced }: Props): JSX.Element =>
     return gallery.map((galleryRow, i) => {
       const actualCellAmount = Math.min(galleryRow.cells.length, galleryRow.cellAmount);
       slideIndexUpperBoundary += actualCellAmount;
-      return renderGalleryRow(galleryRow, isGallerySpaced, i, setIsLightboxOpen, slideIndexUpperBoundary, setSlideIndex);
+      return renderGalleryRow(
+        galleryRow,
+        isGallerySpaced,
+        i,
+        setIsLightboxOpen,
+        slideIndexUpperBoundary,
+        setSlideIndex,
+      );
     });
   };
 
   return (
     <>
-      <S.ProjectGalleryGrid className="ProjectGallery-Grid">
-        {renderGallery()}
-      </S.ProjectGalleryGrid>
+      <S.ProjectGalleryGrid className="ProjectGallery-Grid">{renderGallery()}</S.ProjectGalleryGrid>
 
       <Lightbox
         open={isLightboxOpen}

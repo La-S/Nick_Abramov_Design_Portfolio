@@ -94,14 +94,9 @@ const ProjectForm = (props: Props): JSX.Element => {
   };
 
   const UploadImageButton = (
-    <Button 
-      component="label" 
-      variant="contained"
-      startIcon={<UploadIcon />}
-      sx={{ marginLeft: '10px' }}
-    >
-    Upload image
-      <S.VisuallyHiddenInput 
+    <Button component="label" variant="contained" startIcon={<UploadIcon />} sx={{ marginLeft: '10px' }}>
+      Upload image
+      <S.VisuallyHiddenInput
         type="file"
         accept="image/png, image/gif, image/jpeg, image/jpg"
         onChange={(e) => {
@@ -284,11 +279,7 @@ const ProjectForm = (props: Props): JSX.Element => {
             Submit
           </Button>
         </S.ProjectForm>
-        {alertState.open ? (
-          <Alert severity={alertState.severity as AlertColor}>
-            {alertState.message}
-          </Alert>
-        ) : <></>}
+        {alertState.open ? <Alert severity={alertState.severity as AlertColor}>{alertState.message}</Alert> : <></>}
       </>
     );
   };

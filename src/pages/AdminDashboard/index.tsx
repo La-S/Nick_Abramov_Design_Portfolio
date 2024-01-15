@@ -57,14 +57,14 @@ const AdminDashboard = (): JSX.Element => {
     <S.AdminDashboardContainer>
       {Header}
       <AdminProjectsGrid />
-      
+
       {isFetched && projects.length === 0 ? (
-        <Box className='No-Projects-Box'>
-          <Typography>
-            {'Click new project button to get started...'}
-          </Typography>
+        <Box className="No-Projects-Box">
+          <Typography>{'Click new project button to get started...'}</Typography>
         </Box>
-      ): <></>}
+      ) : (
+        <></>
+      )}
 
       {NewProjectModal}
     </S.AdminDashboardContainer>
