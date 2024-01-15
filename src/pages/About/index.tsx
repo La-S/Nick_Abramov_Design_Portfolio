@@ -6,9 +6,9 @@ import AboutImg from '../../assets/images/about.png';
 const BODY_TEXT_TEMP1 =
   'As an experienced Graphic and Web Designer with a strong focus on UI/UX design, logo design, and brand identity, I always pay close attention to details. Over the last five years, I have created high-quality content for numerous clients, and my commitment to delivering exceptional results is unwavering.';
 const BODY_TEXT_TEMP2 =
-  "My goal is to establish a connection between my clients and their target audience, whether it's through a logo, web design, greeting card, or a complete company rebrand. I strive to produce visually appealing work that evokes emotions and stands the test of time while also presenting information in a clear and concise manner.";
+  'My goal is to establish a connection between my clients and their target audience, whether it\'s through a logo, web design, greeting card, or a complete company rebrand. I strive to produce visually appealing work that evokes emotions and stands the test of time while also presenting information in a clear and concise manner.';
 
-const AboutPage = () => {
+const AboutPage = (): JSX.Element => {
   const theme = useTheme();
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const AboutPage = () => {
     <S.AboutPageContainer>
       <S.AboutPageTitle variant="h1">
         <span>{'Hey, '}</span>
-        <span>{"I'm "}</span>
+        <span>{'I\'m '}</span>
         <span>{'Nick '}</span>
         <span>{'Abramov '}</span>
       </S.AboutPageTitle>
