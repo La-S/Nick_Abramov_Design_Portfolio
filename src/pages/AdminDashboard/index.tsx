@@ -31,6 +31,7 @@ const AdminDashboard = (): JSX.Element => {
           <Logo fillMain={theme.componentColors.logoMain} fillSecondary={theme.componentColors.logoSecondary} />
         </Link>
       </HeaderStyles.LogoContainer>
+
       <S.HeaderNavLinks>
         <ButtonBase className="New-Project-Button" onClick={() => setNewProjectModalOpen(true)} disableRipple>
           <p>
