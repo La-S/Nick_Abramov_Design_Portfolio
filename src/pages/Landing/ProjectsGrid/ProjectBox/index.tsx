@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import S from './styles';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { onProjectsTileMouseMove, onProjectsTileMouseOut, onProjectsTileMouseOver } from './utils';
 import { useQueryClient } from '@tanstack/react-query';
@@ -41,6 +41,7 @@ const ProjectBox = (props: Props) => {
           onMouseMove={onProjectsTileMouseMove}
         />
         <Typography className="Category-Name">{`#${category}`}</Typography>
+        <Box className="ProjectBox-Shadow" />
       </Link>
     </S.ProjectBox>
   );

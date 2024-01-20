@@ -19,7 +19,7 @@ const LandingContainer = styled(Box)(({ theme }) => ({
       listStyle: 'none',
 
       li: {
-        marginRight: '90px',
+        margin: '2.5px 45px',
 
         button: {
           '.MuiTypography-root': {
@@ -32,10 +32,6 @@ const LandingContainer = styled(Box)(({ theme }) => ({
               color: theme.textColors.secondary,
             },
           },
-        },
-
-        '&:last-of-type': {
-          marginRight: 0,
         },
       },
     },
@@ -64,7 +60,7 @@ const LandingContainer = styled(Box)(({ theme }) => ({
         padding: '35px 15px',
 
         li: {
-          marginRight: '50px',
+          margin: '2.5px 25px',
 
           button: {
             '.MuiTypography-root': {
