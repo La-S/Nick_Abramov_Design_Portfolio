@@ -40,6 +40,15 @@ const NavMainContainer = styled(Box, {
         textDecoration: 'none',
         color: theme.textColors.main,
       },
+
+      transition: 'background-color 0.3s ease-in-out',
+      '&:hover': {
+        backgroundColor: theme.componentColors.backgroundSecondary,
+
+        a: {
+          filter: 'invert(100%)',
+        },
+      },
     },
   },
 
