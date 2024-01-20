@@ -58,8 +58,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
       </Box>
     </Box>
   );
-
-  const FixedStaticNavProjectsBar = (
+  const FixedNavProjectsBar = (
     <Box className='Fixed-NavProject-Buttons' ref={fixedNavbarRef}>
       {navProjects.prev ? (
         <Link 
@@ -87,7 +86,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
   );
 
   useEffect(() => {
-    const manageStaticNavbarVisibility = () => {
+    const manageFixedNavbarVisibility = () => {
       if (isTouchDevice) {
         setIsStaticNavbarInView(true);
         return;
@@ -96,14 +95,29 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
       const isInView = trackElementVisibility(staticNavbarRef.current);
       setIsStaticNavbarInView(isInView);
     };
+    const manageFixedNavbarButtonVisibility = (e: MouseEvent) => {
+      const prevButtonEl = fixedPrevArrowRef.current;
+      const nextButtonEl = fixedNextArrowRef.current;
+      if (!prevButtonEl || !nextButtonEl) return;
 
-    manageStaticNavbarVisibility();
-    window.addEventListener('scroll', manageStaticNavbarVisibility);
-    window.addEventListener('resize', manageStaticNavbarVisibility);
+      const WIDTH_FACTOR = 4;
+      const { clientWidth } = document.body;
+      const nextButtonTransformX = (clientWidth - e.clientX) / WIDTH_FACTOR - 25;
+      nextButtonEl.style.transform = `translateX(${Math.max(nextButtonTransformX, 0)}px)`;
+      const prevButtonTransformX = e.clientX / WIDTH_FACTOR - 25;
+      console.log(prevButtonTransformX);
+      prevButtonEl.style.transform = `translateX(-${Math.max(prevButtonTransformX)}px)`;
+    };
+
+    manageFixedNavbarVisibility();
+    window.addEventListener('scroll', manageFixedNavbarVisibility);
+    window.addEventListener('resize', manageFixedNavbarVisibility);
+    window.addEventListener('mousemove', manageFixedNavbarButtonVisibility);
 
     return () => {
-      window.removeEventListener('scroll', manageStaticNavbarVisibility);
-      window.removeEventListener('resize', manageStaticNavbarVisibility);
+      window.removeEventListener('scroll', manageFixedNavbarVisibility);
+      window.removeEventListener('resize', manageFixedNavbarVisibility);
+      window.removeEventListener('mousemove', manageFixedNavbarButtonVisibility);
     };
   }, []);
 
@@ -111,7 +125,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
     <S.ProjectNavBar>
       {StaticNavProjectsBar}
 
-      {FixedStaticNavProjectsBar}
+      {FixedNavProjectsBar}
     </S.ProjectNavBar>
   );
 };
