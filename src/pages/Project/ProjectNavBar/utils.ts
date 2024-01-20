@@ -1,3 +1,5 @@
+import { trackElementVisibility } from '../../../utils/domUtils';
+import type { Dispatch, SetStateAction } from 'react';
 import type { Project } from '../../../types/data/project';
 
 interface NavProjects {
@@ -41,13 +43,47 @@ export const manageFixedNavbarButtonVisibility = (
   }
 };
 
-export const addTransitionClassToNavButton = (element: HTMLAnchorElement | null) => {
+export const addTransitionClassToNavButton = (element: HTMLAnchorElement | null, transformXValue: number) => {
   if (!element) return;
 
-  element.style.transform = 'translateX(50px)';
+  element.style.transform = `translateX(${transformXValue}px)`;
   setTimeout(() => {
     if (!element) return;
 
     element.classList.add('Loaded');
   }, 0);
+};
+
+export const manageProjectNavbarEventListeners = (
+  isTouchDevice: boolean,
+  setIsStaticNavbarInView: Dispatch<SetStateAction<boolean>>,
+  staticNavbarRef: React.MutableRefObject<HTMLDivElement | null>,
+  fixedPrevArrowRef: React.MutableRefObject<HTMLAnchorElement | null>,
+  fixedNextArrowRef: React.MutableRefObject<HTMLAnchorElement | null>,
+) => {
+
+  const toggleFixedNavbarVisibility = () => {
+    if (isTouchDevice) {
+      setIsStaticNavbarInView(true);
+      return;
+    }
+
+    const isInView = trackElementVisibility(staticNavbarRef.current);
+    setIsStaticNavbarInView(isInView);
+  };
+
+  const toggleFixedNavbarButtonVisibility = (e: MouseEvent) => {
+    manageFixedNavbarButtonVisibility(e, fixedPrevArrowRef.current, fixedNextArrowRef.current);
+  };
+
+  toggleFixedNavbarVisibility();
+  window.addEventListener('scroll', toggleFixedNavbarVisibility);
+  window.addEventListener('resize', toggleFixedNavbarVisibility);
+  window.addEventListener('mousemove', toggleFixedNavbarButtonVisibility);
+
+  return () => {
+    window.removeEventListener('scroll', toggleFixedNavbarVisibility);
+    window.removeEventListener('resize', toggleFixedNavbarVisibility);
+    window.removeEventListener('mousemove', toggleFixedNavbarButtonVisibility);
+  };
 };

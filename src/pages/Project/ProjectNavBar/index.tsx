@@ -6,7 +6,7 @@ import useProjects from '../../../hooks/useProjects';
 import * as utils from './utils';
 import S from './styles';
 import { Link } from 'react-router-dom';
-import { scrollToTop, trackElementVisibility } from '../../../utils/domUtils';
+import { scrollToTop } from '../../../utils/domUtils';
 import { GlobalContext } from '../../../contexts/global';
 
 interface Props {
@@ -86,33 +86,16 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
   );
 
   useEffect(() => {
-    const manageFixedNavbarVisibility = () => {
-      if (isTouchDevice) {
-        setIsStaticNavbarInView(true);
-        return;
-      }
-
-      const isInView = trackElementVisibility(staticNavbarRef.current);
-      setIsStaticNavbarInView(isInView);
-    };
-
-    const manageFixedNavbarButtonVisibility = (e: MouseEvent) => {
-      utils.manageFixedNavbarButtonVisibility(e, fixedPrevArrowRef.current, fixedNextArrowRef.current);
-    };
-
-    manageFixedNavbarVisibility();
-    window.addEventListener('scroll', manageFixedNavbarVisibility);
-    window.addEventListener('resize', manageFixedNavbarVisibility);
-    window.addEventListener('mousemove', manageFixedNavbarButtonVisibility);
-
-    return () => {
-      window.removeEventListener('scroll', manageFixedNavbarVisibility);
-      window.removeEventListener('resize', manageFixedNavbarVisibility);
-      window.removeEventListener('mousemove', manageFixedNavbarButtonVisibility);
-    };
+    utils.manageProjectNavbarEventListeners(
+      isTouchDevice,
+      setIsStaticNavbarInView,
+      staticNavbarRef,
+      fixedPrevArrowRef,
+      fixedNextArrowRef,
+    );
   }, []);
-  useEffect(() => utils.addTransitionClassToNavButton(fixedPrevArrowRef.current), [fixedPrevArrowRef.current]);
-  useEffect(() => utils.addTransitionClassToNavButton(fixedNextArrowRef.current), [fixedNextArrowRef.current]);
+  useEffect(() => utils.addTransitionClassToNavButton(fixedPrevArrowRef.current, -50), [fixedPrevArrowRef.current]);
+  useEffect(() => utils.addTransitionClassToNavButton(fixedNextArrowRef.current, 50), [fixedNextArrowRef.current]);
 
   return (
     <S.ProjectNavBar>
