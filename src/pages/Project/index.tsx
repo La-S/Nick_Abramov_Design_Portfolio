@@ -7,6 +7,7 @@ import ProjectGalleryGrid from './ProjectGalleryGrid';
 import S from './styles';
 import { GlobalContext } from '../../contexts/global';
 import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
+import ProjectNavBar from './ProjectNavBar';
 
 const LOADING_DELAY = 1500;
 
@@ -61,6 +62,7 @@ const Project = () => {
         </Box>
       </S.ProjectOverview>
       <ProjectGalleryGrid gallery={project?.gallery || []} isGallerySpaced={project.isGallerySpaced} />
+      <ProjectNavBar project={project} />
     </S.ProjectContainer>
   );
 };
