@@ -7,10 +7,10 @@ import Nav from '../Nav';
 import { useLocation } from 'react-router-dom';
 
 const SOCIAL_MEDIA_LINKS = [
-  { icon: <LinkedinLogo />, path: 'https://www.linkedin.com/feed/' },
-  { icon: <InstagramLogo />, path: 'https://www.instagram.com/' },
-  { icon: <YoutubeLogo />, path: 'https://www.youtube.com/' },
-  { icon: <BehanceLogo />, path: 'https://www.behance.net/' },
+  { icon: <LinkedinLogo />, path: 'https://www.linkedin.com/in/nickola40/', className: 'LI-Logo' },
+  { icon: <InstagramLogo />, path: 'https://www.instagram.com/abr.nick.art/', className: 'IG-Logo' },
+  { icon: <YoutubeLogo />, path: 'https://www.youtube.com/@NickAbramov', className: 'YT-Logo' },
+  { icon: <BehanceLogo />, path: 'https://www.behance.net/Nick_abramov', className: 'BE-Logo' },
 ];
 
 const Footer = (): JSX.Element => {
@@ -31,9 +31,9 @@ const Footer = (): JSX.Element => {
       </Box>
       <Box className="Links-Section">
         <Box className="Social-Media-Links-Container">
-          {SOCIAL_MEDIA_LINKS.map(({ icon, path }) => (
-            <a href={path} key={path} target="_blank" rel="noreferrer">
-              {icon}
+          {SOCIAL_MEDIA_LINKS.map((link) => (
+            <a href={link.path} key={link.path} target="_blank" rel="noreferrer" className={link.className}>
+              {link.icon}
             </a>
           ))}
         </Box>

@@ -60,6 +60,30 @@ const FooterContainer = styled(Box, {
         '&:first-of-type': {
           marginLeft: '0',
         },
+
+        transition: 'all 0.2s ease-in-out',
+        '&:hover': {
+          '&.LI-Logo': {
+            svg: {
+              fill: '#0966C2',
+            },
+          },
+          '&.IG-Logo': {
+            svg: {
+              fill: '#D501C2',
+            },
+          },
+          '&.YT-Logo': {
+            svg: {
+              fill:'red',
+            },
+          },
+          '&.BE-Logo': {
+            svg: {
+              fill: '#1765F8',
+            },
+          },
+        },
       },
     },
 
