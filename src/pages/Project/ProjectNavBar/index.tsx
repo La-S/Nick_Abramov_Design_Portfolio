@@ -3,7 +3,7 @@ import { Box, Button, ButtonBase } from '@mui/material';
 import { ArrowLeft as PrevIcon, ArrowRight as NextIcon } from '@phosphor-icons/react';
 import type { Project } from '../../../types/data/project';
 import useProjects from '../../../hooks/useProjects';
-import { getNavProjects } from './utils';
+import * as utils from './utils';
 import S from './styles';
 import { Link } from 'react-router-dom';
 import { scrollToTop, trackElementVisibility } from '../../../utils/domUtils';
@@ -16,7 +16,7 @@ interface Props {
 const ProjectNavBar = ({ project }: Props): JSX.Element => {
   const { touchDeviceState: [isTouchDevice] } = useContext(GlobalContext);
   const { projects } = useProjects({ summary: true });
-  const navProjects = getNavProjects(project, projects);
+  const navProjects = utils.getNavProjects(project, projects);
   const [isStaticNavbarInView, setIsStaticNavbarInView] = useState(false);
 
   const staticNavbarRef = useRef<HTMLDivElement | null>(null);
@@ -95,28 +95,9 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
       const isInView = trackElementVisibility(staticNavbarRef.current);
       setIsStaticNavbarInView(isInView);
     };
-    const manageFixedNavbarButtonVisibility = (e: MouseEvent) => {
-      const prevButtonEl = fixedPrevArrowRef.current;
-      const nextButtonEl = fixedNextArrowRef.current;
 
-      const PROXIMITY_FACTOR = 2.5;
-      const { clientWidth } = document.body;
-      if (nextButtonEl) {
-        const shouldDisplayNextButton = (clientWidth - e.clientX) / PROXIMITY_FACTOR - 25 <= nextButtonEl.offsetWidth;
-        if (shouldDisplayNextButton) {
-          nextButtonEl.style.transform = '';
-        } else {
-          nextButtonEl.style.transform = `translateX(${Math.max(nextButtonEl.offsetWidth)}px)`;
-        }
-      }
-      if (prevButtonEl) {
-        const shouldDisplayPrevButton = e.clientX / PROXIMITY_FACTOR - 25 <= prevButtonEl.offsetWidth;
-        if (shouldDisplayPrevButton) {
-          prevButtonEl.style.transform = '';
-        } else {
-          prevButtonEl.style.transform = `translateX(-${Math.max(prevButtonEl.offsetWidth)}px)`;
-        }
-      }
+    const manageFixedNavbarButtonVisibility = (e: MouseEvent) => {
+      utils.manageFixedNavbarButtonVisibility(e, fixedPrevArrowRef.current, fixedNextArrowRef.current);
     };
 
     manageFixedNavbarVisibility();
@@ -130,11 +111,12 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
       window.removeEventListener('mousemove', manageFixedNavbarButtonVisibility);
     };
   }, []);
+  useEffect(() => utils.addTransitionClassToNavButton(fixedPrevArrowRef.current), [fixedPrevArrowRef.current]);
+  useEffect(() => utils.addTransitionClassToNavButton(fixedNextArrowRef.current), [fixedNextArrowRef.current]);
 
   return (
     <S.ProjectNavBar>
       {StaticNavProjectsBar}
-
       {FixedNavProjectsBar}
     </S.ProjectNavBar>
   );

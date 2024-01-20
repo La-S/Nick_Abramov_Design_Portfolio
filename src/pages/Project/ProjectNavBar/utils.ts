@@ -15,3 +15,39 @@ export const getNavProjects = (project: Project, projects: Array<Project>): NavP
   return navProjects;
 };
 
+
+export const manageFixedNavbarButtonVisibility = (
+  e: MouseEvent,
+  prevButtonEl: HTMLAnchorElement | null,
+  nextButtonEl: HTMLAnchorElement | null,
+) => {
+  const PROXIMITY_FACTOR = 2.5;
+  const { clientWidth } = document.body;
+  if (nextButtonEl) {
+    const shouldDisplayNextButton = (clientWidth - e.clientX) / PROXIMITY_FACTOR - 25 <= nextButtonEl.offsetWidth;
+    if (shouldDisplayNextButton) {
+      nextButtonEl.style.transform = '';
+    } else {
+      nextButtonEl.style.transform = `translateX(${Math.max(nextButtonEl.offsetWidth)}px)`;
+    }
+  }
+  if (prevButtonEl) {
+    const shouldDisplayPrevButton = e.clientX / PROXIMITY_FACTOR - 25 <= prevButtonEl.offsetWidth;
+    if (shouldDisplayPrevButton) {
+      prevButtonEl.style.transform = '';
+    } else {
+      prevButtonEl.style.transform = `translateX(-${Math.max(prevButtonEl.offsetWidth)}px)`;
+    }
+  }
+};
+
+export const addTransitionClassToNavButton = (element: HTMLAnchorElement | null) => {
+  if (!element) return;
+
+  element.style.transform = 'translateX(50px)';
+  setTimeout(() => {
+    if (!element) return;
+
+    element.classList.add('Loaded');
+  }, 0);
+};
