@@ -32,17 +32,21 @@ const ProjectBox = styled(Box)(({ theme }) => ({
   '.ProjectBox-Shadow': {
     zIndex: 1,
     height: '100%',
-    width: '150%',
+    width: '300%',
     position: 'absolute',
     top: 0,
     left: 0,
     pointerEvents: 'none',
-    boxShadow: 'inset -50px -80px 60px -7px rgba(0,0,0,0.35)',
+    boxShadow: 'inset -250px -80px 60px -7px rgba(0,0,0,0.35)',
   },
 
   [theme.breakpoints.down('tablet')]: {
     img: {
       filter: 'grayscale(0%)',
+    },
+
+    '.ProjectBox-Shadow': {
+      boxShadow: 'inset -250px -40px 60px -7px rgba(0,0,0,0.35)',
     },
   },
 }));
