@@ -28,6 +28,7 @@ const App = (): JSX.Element => {
         themeState: [theme, setTheme],
         authState: [isAdminLoggedIn, setIsAdminLoggedIn],
         pageLoadingState: [isPageLoading, setIsPageLoading],
+        touchDeviceState: [isTouchDevice, setIsTouchDevice],
       }}
     >
       <Router>

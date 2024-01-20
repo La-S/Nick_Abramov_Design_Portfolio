@@ -14,3 +14,4 @@ export const getNavProjects = (project: Project, projects: Array<Project>): NavP
 
   return navProjects;
 };
+

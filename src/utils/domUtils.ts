@@ -4,3 +4,16 @@ export const scrollToTop = () => {
     behavior:'smooth',
   });
 };
+
+export const trackElementVisibility = (element: HTMLElement | null) => {
+  if (!element) return false;
+
+  const { top, left, bottom, right } = element.getBoundingClientRect();
+  const { innerHeight, innerWidth } = window;
+
+  const isInView = ((top > 0 && top < innerHeight) ||
+    (bottom > 0 && bottom < innerHeight)) &&
+    ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth));
+
+  return isInView;
+};
