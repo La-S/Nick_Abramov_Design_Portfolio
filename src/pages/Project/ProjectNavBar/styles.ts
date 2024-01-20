@@ -65,8 +65,8 @@ const ProjectNavBar = styled(Box)(({ theme }) => ({
         },
       },
 
+      transition: 'transform 0.2s ease-in-out, opacity 0.2s ease-in-out',
       '&.Hidden': {
-        transition: 'transform 0.2s ease-in-out, opacity 0.2s ease-in-out',
         opacity: 0,
         pointerEvents: 'none',
 

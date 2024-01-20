@@ -70,7 +70,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
             <PrevIcon />
           </ButtonBase>
         </Link>
-      ) : null}
+      ) : <div></div>}
       {navProjects.next ? (
         <Link 
           to={`/projects/${navProjects.next.id}`} 
@@ -81,7 +81,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
             <NextIcon />
           </ButtonBase>
         </Link>
-      ) : null}
+      ) : <div></div>}
     </Box>
   );
 
@@ -98,15 +98,25 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
     const manageFixedNavbarButtonVisibility = (e: MouseEvent) => {
       const prevButtonEl = fixedPrevArrowRef.current;
       const nextButtonEl = fixedNextArrowRef.current;
-      if (!prevButtonEl || !nextButtonEl) return;
 
-      const WIDTH_FACTOR = 4;
+      const PROXIMITY_FACTOR = 2.5;
       const { clientWidth } = document.body;
-      const nextButtonTransformX = (clientWidth - e.clientX) / WIDTH_FACTOR - 25;
-      nextButtonEl.style.transform = `translateX(${Math.max(nextButtonTransformX, 0)}px)`;
-      const prevButtonTransformX = e.clientX / WIDTH_FACTOR - 25;
-      console.log(prevButtonTransformX);
-      prevButtonEl.style.transform = `translateX(-${Math.max(prevButtonTransformX)}px)`;
+      if (nextButtonEl) {
+        const shouldDisplayNextButton = (clientWidth - e.clientX) / PROXIMITY_FACTOR - 25 <= nextButtonEl.offsetWidth;
+        if (shouldDisplayNextButton) {
+          nextButtonEl.style.transform = '';
+        } else {
+          nextButtonEl.style.transform = `translateX(${Math.max(nextButtonEl.offsetWidth)}px)`;
+        }
+      }
+      if (prevButtonEl) {
+        const shouldDisplayPrevButton = e.clientX / PROXIMITY_FACTOR - 25 <= prevButtonEl.offsetWidth;
+        if (shouldDisplayPrevButton) {
+          prevButtonEl.style.transform = '';
+        } else {
+          prevButtonEl.style.transform = `translateX(-${Math.max(prevButtonEl.offsetWidth)}px)`;
+        }
+      }
     };
 
     manageFixedNavbarVisibility();
