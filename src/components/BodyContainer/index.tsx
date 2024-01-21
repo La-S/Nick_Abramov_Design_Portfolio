@@ -49,7 +49,10 @@ const BodyContainer = (): JSX.Element => {
       if (!cachedProjectExists) {
         setIsPageLoading(true);
       }
+      return;
     }
+
+    setTimeout(() => setIsPageLoading(false), 1500);
   }, [location.pathname]);
 
   return (

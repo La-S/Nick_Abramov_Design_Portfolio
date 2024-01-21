@@ -15,8 +15,14 @@ const Header = styled(AppBar, {
   backdropFilter: 'blur(6px)',
   boxShadow: 'none',
 
+  '.Theme-Toggle': {
+    ...(pathName === 'about' ? { 
+      opacity: 0,
+      pointerEvents: 'none',
+    } : {}),
+  },
+  
   transition: 'background-color 0.2s ease-in-out',
-
   [theme.breakpoints.down('tablet')]: {
     backgroundColor: alpha(theme.componentColors.backgroundMain, 0.95),
     height: `${HEADER_MOBILE_HEIGHT}px`,
@@ -94,7 +100,7 @@ const BurgerContainer = styled(Box)(({ theme }) => ({
     '.Burger-Icon': {
       width: '41px',
       height: '35px',
-      marginLeft: '10px',
+      marginLeft: '20px',
     },
 
     '.Theme-Toggle': {

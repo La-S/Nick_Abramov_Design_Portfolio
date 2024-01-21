@@ -16,3 +16,8 @@ export const getCurrentTheme = () => {
   const currentTheme = themeOptions.find((theme) => theme.name === currentThemeName);
   return currentTheme?.value || defaultTheme;
 };
+
+export const getThemeByName = (themeName: string) => {
+  const theme = themeOptions.find((theme) => theme.name === themeName);
+  return theme?.value || defaultTheme;
+};

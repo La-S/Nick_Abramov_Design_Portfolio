@@ -23,7 +23,7 @@ const ProjectOverview = styled(Box)(({ theme }) => ({
   '.Project-Title-Box': {
     minWidth: '35vw',
     maxWidth: '50vw',
-    textAlign: 'center',
+    textAlign: 'left',
     paddingRight: '115px',
 
     '.MuiTypography-root': {
@@ -63,7 +63,7 @@ const ProjectOverview = styled(Box)(({ theme }) => ({
   },
 
   [theme.breakpoints.down(900)]: {
-    padding: '50px',
+    padding: '50px 25px',
     flexDirection: 'column',
     alignItems: 'center',
 
@@ -81,6 +81,7 @@ const ProjectOverview = styled(Box)(({ theme }) => ({
 
   [theme.breakpoints.down('tablet')]: {
     '.Project-Title-Box': {
+      textAlign: 'center',
       marginBottom: '40px',
 
       '.MuiTypography-root': {

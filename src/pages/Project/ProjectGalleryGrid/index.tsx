@@ -46,9 +46,9 @@ const ProjectGalleryGrid = ({ gallery, isGallerySpaced }: Props): JSX.Element =>
         plugins={[Zoom, Video]}
         index={slideIndex}
         zoom={{
-          maxZoomPixelRatio: 3,
+          maxZoomPixelRatio: 1.35,
           scrollToZoom: true,
-          doubleClickMaxStops: 2,
+          doubleClickMaxStops: 1,
         }}
         carousel={{
           padding: 0,

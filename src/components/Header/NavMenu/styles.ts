@@ -34,6 +34,7 @@ const NavMainContainer = styled(Box, {
       justifyContent: 'center',
 
       a: {
+        width: '100%',
         fontFamily: theme.fonts.main,
         fontSize: '64px',
         textTransform: 'uppercase',

@@ -17,6 +17,8 @@ const LandingContainer = styled(Box)(({ theme }) => ({
       maxWidth: '800px',
       padding: '35px',
       listStyle: 'none',
+      position: 'relative',
+      bottom: '10px',
 
       li: {
         margin: '2.5px 45px',
@@ -24,7 +26,7 @@ const LandingContainer = styled(Box)(({ theme }) => ({
         button: {
           '.MuiTypography-root': {
             fontFamily: theme.fonts.main,
-            fontSize: '20px',
+            fontSize: '22px',
             color: theme.textColors.main,
 
             transition: 'color 0.3s ease-in-out',
@@ -58,13 +60,14 @@ const LandingContainer = styled(Box)(({ theme }) => ({
     '.SortBar-Container': {
       ul: {
         padding: '35px 15px',
+        rowGap: '10px',
 
         li: {
-          margin: '2.5px 25px',
+          margin: '2.5px 10px',
 
           button: {
             '.MuiTypography-root': {
-              fontSize: '16px',
+              fontSize: '20px',
             },
           },
         },
