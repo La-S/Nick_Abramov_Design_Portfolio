@@ -37,7 +37,11 @@ const updateGalleryRows = (
   setGalleryRows(newGalleryValues);
 };
 
-const handleImageUpload = ({ target }: React.ChangeEvent<HTMLInputElement>, setAlertProps: SetAlertDisplayProps) => {
+const handleImageUpload = (
+  { target }: React.ChangeEvent<HTMLInputElement>,
+  setAlertProps: SetAlertDisplayProps,
+  callback: (imagePath: string) => void,
+) => {
   if (!target.files?.length || target.files.length < 1) return;
 
   const imageFile = target.files[0];
@@ -59,6 +63,7 @@ const handleImageUpload = ({ target }: React.ChangeEvent<HTMLInputElement>, setA
         setTimeout(() => {
           setAlertProps({ ...successAlertProps, open: false });
         }, 3000);
+        callback(imageUrl);
       })
       .catch(() => {
         const errorAlertProps: AlertDisplayProps = {

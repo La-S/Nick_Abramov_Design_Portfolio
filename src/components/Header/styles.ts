@@ -1,4 +1,4 @@
-import { styled, AppBar, Box } from '@mui/material';
+import { styled, AppBar, Box, alpha } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export const HEADER_DESKTOP_HEIGHT = 85;
@@ -12,19 +12,22 @@ const Header = styled(AppBar, {
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center',
-  backgroundColor: theme.componentColors.backgroundMain,
+  backdropFilter: 'blur(6px)',
   boxShadow: 'none',
 
   transition: 'background-color 0.2s ease-in-out',
 
   [theme.breakpoints.down('tablet')]: {
+    backgroundColor: alpha(theme.componentColors.backgroundMain, 0.95),
     height: `${HEADER_MOBILE_HEIGHT}px`,
     padding: '25px',
   },
 
   [theme.breakpoints.up('tablet')]: {
     backgroundColor:
-      pathName !== 'about' ? theme.componentColors.backgroundMain : theme.componentColors.backgroundSecondary,
+      pathName !== 'about' 
+        ? alpha(theme.componentColors.backgroundMain, 0.95)
+        : theme.componentColors.backgroundSecondary,
   },
 }));
 

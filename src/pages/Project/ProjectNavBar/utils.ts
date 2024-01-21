@@ -55,7 +55,10 @@ export const addTransitionClassToNavButton = (element: HTMLAnchorElement | null,
   }, 0);
 };
 
-export const addHiddenClassToNavButton = (element: HTMLAnchorElement | null, isStaticNavbarInView: boolean) => {
+export const addHiddenClassToNavButton = (
+  element: HTMLAnchorElement | null,
+  isStaticNavbarInView: boolean,
+) => {
   if (!element) return;
 
   if (isStaticNavbarInView) {

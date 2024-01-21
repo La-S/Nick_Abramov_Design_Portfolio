@@ -18,7 +18,7 @@ const renderCell = (cell: ProjectGalleryCell): JSX.Element => {
     const videoLink = `${cell.path}?mute=1`;
     return (
       <Box className="iframe-container Loadable-Embedded-Video-Container">
-        <iframe width="420" height="315" src={videoLink} className="video" />
+        <iframe width="420" height="315" src={videoLink} className="video" allowFullScreen />
       </Box>
     );
   }

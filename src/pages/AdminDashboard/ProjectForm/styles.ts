@@ -115,6 +115,17 @@ const ProjectForm = styled('form')(({ theme }) => ({
     },
   },
 
+  '.CoverImagePath-Box': {
+    marginTop: '10px',
+    display: 'flex',
+    alignItems: 'center',
+
+    '.MuiTextField-root': {
+      marginTop: '0',
+      flexGrow: 1,
+    },
+  },
+
   '.Input-With-Icon': {
     position: 'relative',
     paddingRight: '0',
@@ -252,6 +263,12 @@ const ProjectForm = styled('form')(({ theme }) => ({
 
   [theme.breakpoints.down('tablet')]: {
     width: '90%',
+
+    '.Hide-On-Smaller-Screens': {
+      display: 'none',
+    },
+
+    
   },
 }));
 

@@ -93,14 +93,21 @@ const ProjectForm = (props: Props): JSX.Element => {
     }
   };
 
-  const UploadImageButton = (
-    <Button component="label" variant="contained" startIcon={<UploadIcon />} sx={{ marginLeft: '10px' }}>
-      Upload image
+  const UploadImageButton = (callback: (imagePath: string) => void) => (
+    <Button 
+      component="label"
+      variant="contained"
+      startIcon={<UploadIcon className='Hide-On-Smaller-Screens' />}
+      sx={{ marginLeft: '10px' }}
+    >
+      <span>Upload&nbsp;</span>
+      <span className='Hide-On-Smaller-Screens'>Image</span>
       <S.VisuallyHiddenInput
         type="file"
         accept="image/png, image/gif, image/jpeg, image/jpg"
         onChange={(e) => {
-          formUtils.handleImageUpload(e, setAlertState);
+          formUtils.handleImageUpload(e, setAlertState, callback);
+          callback;
         }}
       />
     </Button>
@@ -160,15 +167,18 @@ const ProjectForm = (props: Props): JSX.Element => {
               setCategoryValue((target as HTMLInputElement).value);
             }}
           />
-          <TextField
-            variant="outlined"
-            value={mainImagePathValue}
-            placeholder="Cover Image Path"
-            required
-            onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
-              setMainImagePathValue((target as HTMLInputElement).value);
-            }}
-          />
+          <Box className="CoverImagePath-Box">
+            <TextField
+              variant="outlined"
+              value={mainImagePathValue}
+              placeholder="Cover Image Path"
+              required
+              onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                setMainImagePathValue((target as HTMLInputElement).value);
+              }}
+            />
+            {UploadImageButton((imagePath) => setMainImagePathValue(imagePath))}
+          </Box>
           <Divider />
 
           <FormLabel className="Section-Title-Label">Description:</FormLabel>
@@ -253,7 +263,13 @@ const ProjectForm = (props: Props): JSX.Element => {
                       setGalleryValues(newGalleryValues);
                     }}
                   />
-                  {(cellValue.type === 'image link' || !cellValue.type) && !cellValue.path ? UploadImageButton : <></>}
+                  {(cellValue.type === 'image link' || !cellValue.type) && !cellValue.path 
+                    ? UploadImageButton((imagePath) => {
+                      const newGalleryValues = [...galleryValues];
+                      newGalleryValues[i].cells[j].path = imagePath;
+                      setGalleryValues(newGalleryValues);
+                    })
+                    : <></>}
                 </Box>
               ))}
             </Box>

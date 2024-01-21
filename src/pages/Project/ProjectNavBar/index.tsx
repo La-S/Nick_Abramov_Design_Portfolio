@@ -115,7 +115,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
   useEffect(() => {
     utils.addHiddenClassToNavButton(fixedPrevArrowRef.current, isStaticNavbarInView);
     utils.addHiddenClassToNavButton(fixedNextArrowRef.current, isStaticNavbarInView);
-  }, [isStaticNavbarInView]);
+  }, [isStaticNavbarInView, isTouchDevice]);
 
   return (
     <S.ProjectNavBar>
