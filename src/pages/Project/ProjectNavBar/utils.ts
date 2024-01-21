@@ -54,6 +54,16 @@ export const addTransitionClassToNavButton = (element: HTMLAnchorElement | null,
   }, 0);
 };
 
+export const addHiddenClassToNavButton = (element: HTMLAnchorElement | null, isStaticNavbarInView: boolean) => {
+  if (!element) return;
+
+  if (isStaticNavbarInView) {
+    element.classList.add('Hidden');
+  } else {
+    element.classList.remove('Hidden');
+  }
+};
+
 export const manageProjectNavbarEventListeners = (
   isTouchDevice: boolean,
   setIsStaticNavbarInView: Dispatch<SetStateAction<boolean>>,

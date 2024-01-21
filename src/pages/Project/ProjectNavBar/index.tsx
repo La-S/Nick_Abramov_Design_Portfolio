@@ -64,7 +64,8 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
         <Link 
           to={`/projects/${navProjects.prev.id}`}
           ref={fixedPrevArrowRef}
-          className={`Prev-Project-Button ${isStaticNavbarInView ? 'Hidden' : ''}`}
+          className='Prev-Project-Button'
+          key={navProjects.prev.id}
         >
           <ButtonBase disableRipple onClick={scrollToTop} title={navProjects.prev.name}>
             <PrevIcon />
@@ -75,7 +76,8 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
         <Link 
           to={`/projects/${navProjects.next.id}`} 
           ref={fixedNextArrowRef}
-          className={`Next-Project-Button ${isStaticNavbarInView ? 'Hidden' : ''}`}
+          className='Next-Project-Button'
+          key={navProjects.next.id}
         >
           <ButtonBase disableRipple onClick={scrollToTop} title={navProjects.next.name}>
             <NextIcon />
@@ -94,8 +96,12 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
       fixedNextArrowRef,
     );
   }, []);
-  useEffect(() => utils.addTransitionClassToNavButton(fixedPrevArrowRef.current, -50), [fixedPrevArrowRef.current]);
-  useEffect(() => utils.addTransitionClassToNavButton(fixedNextArrowRef.current, 50), [fixedNextArrowRef.current]);
+  useEffect(() => utils.addTransitionClassToNavButton(fixedPrevArrowRef.current, -50), [fixedPrevArrowRef.current, project]);
+  useEffect(() => utils.addTransitionClassToNavButton(fixedNextArrowRef.current, 50), [fixedNextArrowRef.current, project]);
+  useEffect(() => {
+    utils.addHiddenClassToNavButton(fixedPrevArrowRef.current, isStaticNavbarInView);
+    utils.addHiddenClassToNavButton(fixedNextArrowRef.current, isStaticNavbarInView);
+  }, [isStaticNavbarInView]);
 
   return (
     <S.ProjectNavBar>
