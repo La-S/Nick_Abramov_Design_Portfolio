@@ -42,9 +42,9 @@ const NavMainContainer = styled(Box, {
         color: theme.textColors.main,
       },
 
-      transition: 'background-color 0.3s ease-in-out',
+      transition: 'box-shadow 0.5s ease-in-out, color 0.3s ease-in-out',
       '&:hover': {
-        backgroundColor: theme.componentColors.backgroundSecondary,
+        boxShadow: `inset 100vw 0 100vw 100vw ${theme.componentColors.backgroundSecondary}`,
 
         a: {
           filter: 'invert(100%)',
