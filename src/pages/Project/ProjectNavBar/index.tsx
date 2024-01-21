@@ -8,13 +8,19 @@ import S from './styles';
 import { Link } from 'react-router-dom';
 import { scrollToTop } from '../../../utils/domUtils';
 import { GlobalContext } from '../../../contexts/global';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface Props {
   project: Project
 }
 
 const ProjectNavBar = ({ project }: Props): JSX.Element => {
-  const { touchDeviceState: [isTouchDevice] } = useContext(GlobalContext);
+  const queryClient = useQueryClient();
+
+  const { 
+    touchDeviceState: [isTouchDevice], 
+    pageLoadingState: [, setIsPageLoading],
+  } = useContext(GlobalContext);
   const { projects } = useProjects({ summary: true });
   const navProjects = utils.getNavProjects(project, projects);
   const [isStaticNavbarInView, setIsStaticNavbarInView] = useState(false);
@@ -28,7 +34,10 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
     <Box className="Static-NavProject-Buttons" ref={staticNavbarRef}>
       <Box>
         {navProjects.prev ? (
-          <Link to={`/projects/${navProjects.prev.id}`}>
+          <Link
+            onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.prev!.id, setIsPageLoading)}
+            to={`/projects/${navProjects.prev.id}`}
+          >
             <Button
               variant="text"
               color="primary"
@@ -43,7 +52,10 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
       </Box>
       <Box>
         {navProjects.next ? (
-          <Link to={`/projects/${navProjects.next.id}`}>
+          <Link 
+            onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.next!.id, setIsPageLoading)}
+            to={`/projects/${navProjects.next.id}`}
+          >
             <Button 
               variant="text"
               color="primary"
@@ -62,6 +74,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
     <Box className='Fixed-NavProject-Buttons' ref={fixedNavbarRef}>
       {navProjects.prev ? (
         <Link 
+          onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.prev!.id, setIsPageLoading)}
           to={`/projects/${navProjects.prev.id}`}
           ref={fixedPrevArrowRef}
           className='Prev-Project-Button'
@@ -74,6 +87,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
       ) : <div></div>}
       {navProjects.next ? (
         <Link 
+          onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.next!.id, setIsPageLoading)}
           to={`/projects/${navProjects.next.id}`} 
           ref={fixedNextArrowRef}
           className='Next-Project-Button'

@@ -27,8 +27,12 @@ const Project = () => {
   }, [projectResponse.isLoading, isLoadingDelayActive, areImagesLoaded]);
 
   useEffect(() => {
-    setTimeout(() => setIsLoadingDelayActive(false), LOADING_DELAY);
-  }, []);
+    setIsLoadingDelayActive(true);
+
+    setTimeout(() => {
+      setIsLoadingDelayActive(false);
+    }, LOADING_DELAY);
+  }, [projectId]);
 
   useEffect(() => {
     if (projectResponse.isLoading) return;

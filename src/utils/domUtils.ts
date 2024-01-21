@@ -17,3 +17,15 @@ export const trackElementVisibility = (element: HTMLElement | null) => {
 
   return isInView;
 };
+
+export const hideScrollbarOnLoading = (isPageLoading: boolean) => {
+  const htmlEl = document.getElementsByTagName('html')[0];
+
+  if (!htmlEl) return;
+
+  if (isPageLoading) {
+    htmlEl.style.overflow = 'hidden';
+  } else {
+    htmlEl.style.overflow = '';
+  }
+};

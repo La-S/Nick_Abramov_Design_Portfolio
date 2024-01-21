@@ -1,6 +1,7 @@
 import { trackElementVisibility } from '../../../utils/domUtils';
 import type { Dispatch, SetStateAction } from 'react';
 import type { Project } from '../../../types/data/project';
+import { QueryClient } from '@tanstack/react-query';
 
 interface NavProjects {
   prev: null | Project;
@@ -62,6 +63,17 @@ export const addHiddenClassToNavButton = (element: HTMLAnchorElement | null, isS
   } else {
     element.classList.remove('Hidden');
   }
+};
+
+export const toggleLoadingOnUnloadedProject = (
+  queryClient: QueryClient,
+  projectId: string | null,
+  setIsPageLoading: Dispatch<SetStateAction<boolean>>,
+) => {
+  if (!projectId) return;
+  const cachedProject = queryClient.getQueryData<Project>(['project', projectId]);
+  if (cachedProject) return;
+  setIsPageLoading(true);
 };
 
 export const manageProjectNavbarEventListeners = (
