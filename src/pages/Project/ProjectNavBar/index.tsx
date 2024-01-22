@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Box, Button, ButtonBase } from '@mui/material';
+import { Box, Button, ButtonBase, Typography } from '@mui/material';
 import { ArrowLeft as PrevIcon, ArrowRight as NextIcon } from '@phosphor-icons/react';
 import type { Project } from '../../../types/data/project';
 import useProjects from '../../../hooks/useProjects';
@@ -37,6 +37,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
           <Link
             onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.prev!.id, setIsPageLoading)}
             to={`/projects/${navProjects.prev.id}`}
+            className='Prev-Project-Button'
           >
             <Button
               variant="text"
@@ -45,7 +46,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
               startIcon={<PrevIcon />}
               onClick={scrollToTop}
             >
-              {navProjects.prev.name}
+              <Typography>{navProjects.prev.name}</Typography>
             </Button>
           </Link>
         ) : null}
@@ -55,6 +56,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
           <Link 
             onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.next!.id, setIsPageLoading)}
             to={`/projects/${navProjects.next.id}`}
+            className='Next-Project-Button'
           >
             <Button 
               variant="text"
@@ -63,7 +65,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
               endIcon={<NextIcon />}
               onClick={scrollToTop}
             >
-              {navProjects.next.name}
+              <Typography>{navProjects.next.name}</Typography>
             </Button>
           </Link>
         ) : null}
