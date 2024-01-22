@@ -1,14 +1,15 @@
-import { styled, Box } from '@mui/material';
+import { styled } from '@mui/material';
+import FlipMove from 'react-flip-move';
 
-const Grid = styled(Box)(({ theme }) => ({
+const Grid = styled(FlipMove)(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
+  position: 'relative',
+  padding: '0',
 
   div: {
     width: '50%',
     height: '33vw',
-
-    transition: 'all 0.3s linear',
   },
 
   [theme.breakpoints.down('tablet')]: {

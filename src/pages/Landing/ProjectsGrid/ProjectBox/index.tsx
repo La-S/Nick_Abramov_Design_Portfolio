@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import S from './styles';
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ interface Props {
   imagePath: string;
 }
 
-const ProjectBox = (props: Props) => {
+const ProjectBox = forwardRef((props: Props, ref) => {
   const queryClient = useQueryClient();
   const {
     pageLoadingState: [, setIsPageLoading],
@@ -21,7 +21,7 @@ const ProjectBox = (props: Props) => {
   const { category, imagePath, id } = props;
 
   return (
-    <S.ProjectBox className="ProjectBox-Container">
+    <S.ProjectBox className="ProjectBox-Container" ref={ref}>
       <Link
         to={`/projects/${id}`}
         onClick={() => {
@@ -45,6 +45,8 @@ const ProjectBox = (props: Props) => {
       </Link>
     </S.ProjectBox>
   );
-};
+});
+
+ProjectBox.displayName = 'ProjectBox';
 
 export default ProjectBox;
