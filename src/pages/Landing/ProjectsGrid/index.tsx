@@ -33,7 +33,7 @@ const ProjectsGrid = ({ sortCategory }: Props): JSX.Element => {
       easing="ease-in-out"
       duration={250}
       staggerDelayBy={50}
-      appearAnimation={undefined}
+      appearAnimation="fade"
     >
       {sortedProjects.map(({ id, category, mainImagePath }) => (
         <ProjectBox key={id} id={id} category={category} imagePath={mainImagePath} />

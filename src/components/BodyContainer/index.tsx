@@ -9,6 +9,7 @@ import LoadingScreen from '../LoadingScreen';
 import { useQueryClient } from '@tanstack/react-query';
 import { GlobalContext } from '../../contexts/global';
 import { checkIfCachedQueryDataExists } from '../../utils/loadingUtils';
+import { scrollToTop } from '../../utils/domUtils';
 
 const LANDING_PAGE_PATHS = ['/', '/home', '/projects'];
 const PROJECT_PAGE_PREFIX = '/projects';
@@ -34,6 +35,8 @@ const BodyContainer = (): JSX.Element => {
   };
 
   useEffect(() => {
+    scrollToTop();
+    
     if (LANDING_PAGE_PATHS.includes(location.pathname)) {
       const cachedProjectsExist = checkIfCachedQueryDataExists(queryClient, ['projects', { summary: true }]);
       if (!cachedProjectsExist) {

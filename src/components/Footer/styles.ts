@@ -65,12 +65,12 @@ const FooterContainer = styled(Box, {
         '&:hover': {
           '&.LI-Logo': {
             svg: {
-              fill: '#0966C2',
+              fill: '#6db6ff',
             },
           },
           '&.IG-Logo': {
             svg: {
-              fill: '#D501C2',
+              fill: '#ffa0ec',
             },
           },
           '&.YT-Logo': {

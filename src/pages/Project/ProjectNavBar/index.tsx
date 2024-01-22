@@ -6,7 +6,6 @@ import useProjects from '../../../hooks/useProjects';
 import * as utils from './utils';
 import S from './styles';
 import { Link } from 'react-router-dom';
-import { scrollToTop } from '../../../utils/domUtils';
 import { GlobalContext } from '../../../contexts/global';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -44,7 +43,6 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
               color="primary"
               disableRipple 
               startIcon={<PrevIcon />}
-              onClick={scrollToTop}
             >
               <Typography>{navProjects.prev.name}</Typography>
             </Button>
@@ -63,7 +61,6 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
               color="primary"
               disableRipple
               endIcon={<NextIcon />}
-              onClick={scrollToTop}
             >
               <Typography>{navProjects.next.name}</Typography>
             </Button>
@@ -82,7 +79,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
           className='Prev-Project-Button'
           key={navProjects.prev.id}
         >
-          <ButtonBase disableRipple onClick={scrollToTop} title={navProjects.prev.name}>
+          <ButtonBase disableRipple title={navProjects.prev.name}>
             <PrevIcon />
           </ButtonBase>
         </Link>
@@ -95,7 +92,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
           className='Next-Project-Button'
           key={navProjects.next.id}
         >
-          <ButtonBase disableRipple onClick={scrollToTop} title={navProjects.next.name}>
+          <ButtonBase disableRipple title={navProjects.next.name}>
             <NextIcon />
           </ButtonBase>
         </Link>
