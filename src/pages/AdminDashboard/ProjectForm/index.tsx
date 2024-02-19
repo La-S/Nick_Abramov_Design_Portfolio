@@ -133,7 +133,12 @@ const ProjectForm = (props: Props): JSX.Element => {
 
     return (
       <>
-        <S.ProjectForm id="Project-Form">
+        <S.ProjectForm
+          id="Project-Form"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && e.shiftKey) e.preventDefault();
+          }}
+        >
           <Box className="Title-Label-Box">
             <Typography className="Title-Label">
               <b>{projectId ? `Edit '${project.name}' project` : 'Create new project'}</b>

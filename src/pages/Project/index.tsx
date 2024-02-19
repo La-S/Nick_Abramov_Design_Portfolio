@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
+import Markdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import { useParams } from 'react-router-dom';
 import useProject from '../../hooks/useProject';
 import BoxUnderline from '../../components/BoxUnderline';
@@ -10,6 +12,11 @@ import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
 import ProjectNavBar from './ProjectNavBar';
 
 const MAX_LOADING_DELAY = 2500;
+const markdownTest = `
+  - Description bullet 1
+  - Description bullet 2
+  - Description bullet 3
+`;
 
 const Project = () => {
   const {
@@ -63,6 +70,12 @@ const Project = () => {
               </li>
             ))}
           </ul>
+          <Markdown
+            className='Project-Description-Box'
+            rehypePlugins={[rehypeRaw]}
+          >
+            {markdownTest}
+          </Markdown>
         </Box>
       </S.ProjectOverview>
       <ProjectGalleryGrid gallery={project?.gallery || []} isGallerySpaced={project.isGallerySpaced} />
