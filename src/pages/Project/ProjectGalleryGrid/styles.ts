@@ -58,20 +58,21 @@ const ProjectGalleryRow = styled(Box, {
     },
   },
 
-  [theme.breakpoints.up(1550)]: {
-    ...(isGallerySpaced && {
-      width: 'calc(50% - 7.5px / 2)',
-      marginRight: '7.5px',
-    }),
-    ...(!isGallerySpaced && {
-      width: 'calc(50%)',
-      marginRight: '0',
-    }),
+  // Note: Keep for now, remove if not necessary in the future.
+  // [theme.breakpoints.up(1550)]: {
+  // ...(isGallerySpaced && {
+  //   width: 'calc(50% - 7.5px / 2)',
+  //   marginRight: '7.5px',
+  // }),
+  // ...(!isGallerySpaced && {
+  //   width: 'calc(50%)',
+  //   marginRight: '0',
+  // }),
 
-    '&:nth-of-type(2n)': {
-      marginRight: 0,
-    },
-  },
+  // '&:nth-of-type(2n)': {
+  //   marginRight: 0,
+  // },
+  // },
 }));
 
 export default {

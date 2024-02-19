@@ -27,6 +27,7 @@ const ProjectBox = styled(Box)(({ theme }) => ({
     fontSize: '20px',
     color: '#fff',
     pointerEvents: 'none',
+    transition: 'opacity 0.25s ease-in-out',
   },
 
   '.ProjectBox-Shadow': {
@@ -38,6 +39,17 @@ const ProjectBox = styled(Box)(({ theme }) => ({
     left: 0,
     pointerEvents: 'none',
     boxShadow: 'inset -250px -80px 60px -7px rgba(0,0,0,0.35)',
+    transition: 'opacity 0.25s ease-in-out',
+  },
+
+  '&:hover': {
+    '.Category-Name': {
+      opacity: 0,
+    },
+
+    '.ProjectBox-Shadow': {
+      opacity: 0,
+    },
   },
 
   [theme.breakpoints.down('tablet')]: {

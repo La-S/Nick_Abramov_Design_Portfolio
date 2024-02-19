@@ -11,6 +11,7 @@ import { GlobalContext } from '../../contexts/global';
 import { checkIfCachedQueryDataExists } from '../../utils/loadingUtils';
 import { scrollToTop } from '../../utils/domUtils';
 
+const MAX_LOADING_DELAY = 2500;
 const LANDING_PAGE_PATHS = ['/', '/home', '/projects'];
 const PROJECT_PAGE_PREFIX = '/projects';
 
@@ -42,20 +43,18 @@ const BodyContainer = (): JSX.Element => {
       if (!cachedProjectsExist) {
         setIsPageLoading(true);
       }
-      return;
     }
     if (location.pathname.includes(PROJECT_PAGE_PREFIX)) {
       const projectId = location.pathname.replace(`${PROJECT_PAGE_PREFIX}/`, '');
-      if (!projectId) return;
-
-      const cachedProjectExists = checkIfCachedQueryDataExists(queryClient, ['project', projectId]);
-      if (!cachedProjectExists) {
-        setIsPageLoading(true);
+      if (projectId) {
+        const cachedProjectExists = checkIfCachedQueryDataExists(queryClient, ['project', projectId]);
+        if (!cachedProjectExists) {
+          setIsPageLoading(true);
+        }
       }
-      return;
     }
 
-    setTimeout(() => setIsPageLoading(false), 1500);
+    setTimeout(() => setIsPageLoading(false), MAX_LOADING_DELAY);
   }, [location.pathname]);
 
   return (

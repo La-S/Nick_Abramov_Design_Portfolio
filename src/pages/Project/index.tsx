@@ -9,7 +9,7 @@ import { GlobalContext } from '../../contexts/global';
 import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
 import ProjectNavBar from './ProjectNavBar';
 
-const LOADING_DELAY = 1500;
+const MAX_LOADING_DELAY = 2500;
 
 const Project = () => {
   const {
@@ -31,7 +31,7 @@ const Project = () => {
 
     setTimeout(() => {
       setIsLoadingDelayActive(false);
-    }, LOADING_DELAY);
+    }, MAX_LOADING_DELAY);
   }, [projectId]);
 
   useEffect(() => {

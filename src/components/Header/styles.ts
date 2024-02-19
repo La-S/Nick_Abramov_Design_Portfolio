@@ -41,9 +41,10 @@ const NewProjectLink = styled(Link, {
   shouldForwardProp: (propName) => propName !== 'pathName',
 })<{ pathName: string }>(({ theme, pathName }) => ({
   fontFamily: theme.fonts.secondary,
+  fontSize: '18px',
 
   textDecorationThickness: '2px',
-  textUnderlineOffset: '3.5px',
+  textUnderlineOffset: '4px',
   textDecorationColor: theme.textColors.tertiary,
   transition: 'color 0.2s ease-in-out',
   '&:hover': {
