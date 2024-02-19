@@ -21,7 +21,7 @@ const ProjectsGrid = ({ sortCategory }: Props): JSX.Element => {
 
       return true;
     });
-    sorted = sorted.sort((a, b) => a.order - b.order);
+    sorted = sorted.sort((a, b) => a.dateCreated - b.dateCreated);
 
     return sorted.concat(unsorted);
   })();
