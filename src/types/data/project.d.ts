@@ -11,6 +11,7 @@ export type ProjectGalleryRow = {
 
 export interface Project {
   id: string;
+  order: number;
   name: string;
   category: string;
   mainImagePath: string;

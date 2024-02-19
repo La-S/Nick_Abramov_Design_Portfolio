@@ -33,6 +33,10 @@ const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
     paddingTop: '0',
   },
 
+  '&:hover': {
+    cursor: 'grab',
+  },
+
   [theme.breakpoints.down('tablet')]: {
     maxWidth: '550px',
   },

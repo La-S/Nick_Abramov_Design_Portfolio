@@ -4,6 +4,7 @@ import { getProject } from '../api/projectMethods.api';
 
 export const EMPTY_PROJECT: Project = {
   id: '',
+  order: 0,
   name: '',
   category: '',
   mainImagePath: '',

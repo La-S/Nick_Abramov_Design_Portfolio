@@ -1,4 +1,5 @@
 import { ProjectGalleryRow } from './project';
+import type { Project } from './project';
 
 export type ProjectGetRequest =
   | {
