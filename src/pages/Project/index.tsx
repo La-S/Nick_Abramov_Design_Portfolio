@@ -12,11 +12,6 @@ import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
 import ProjectNavBar from './ProjectNavBar';
 
 const MAX_LOADING_DELAY = 2500;
-const markdownTest = `
-  - Description bullet 1
-  - Description bullet 2
-  - Description bullet 3
-`;
 
 const Project = () => {
   const {
@@ -61,20 +56,15 @@ const Project = () => {
           <BoxUnderline />
         </Box>
         <Box className="Project-Description-Box">
-          <Typography variant="h3">Project Overview</Typography>
+          <Typography variant="h3" className='Project-Overview-Title'>Project Overview</Typography>
           <ul>
-            {project?.descriptionBullets.map((descriptionBullet, i) => (
-              <li key={i}>
-                {descriptionBullet}
-                <br />
-              </li>
-            ))}
+
           </ul>
           <Markdown
             className='Project-Description-Box'
             rehypePlugins={[rehypeRaw]}
           >
-            {markdownTest}
+            {project.description}
           </Markdown>
         </Box>
       </S.ProjectOverview>

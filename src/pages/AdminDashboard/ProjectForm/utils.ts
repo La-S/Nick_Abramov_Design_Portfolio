@@ -4,18 +4,6 @@ import { uploadImage } from '../../../api/uploadMethods.api';
 import type { ProjectGalleryRow } from '../../../types/data/project';
 import type { AlertDisplayProps, SetAlertDisplayProps } from '../../../components/Alert/props';
 
-const updateDescriptionBullet = (
-  { target }: React.FormEvent<HTMLDivElement>,
-  i: number,
-  descriptionBulletValues: Array<string>,
-  setDescriptionBulletValues: React.Dispatch<React.SetStateAction<Array<string>>>,
-) => {
-  const newValue = (target as HTMLInputElement).value;
-  const newDescriptionBulletValues = [...descriptionBulletValues];
-  newDescriptionBulletValues[i] = newValue;
-  setDescriptionBulletValues(newDescriptionBulletValues);
-};
-
 const updateGalleryRows = (
   e: SelectChangeEvent<1 | 2 | 3 | 4>,
   i: number,
@@ -80,7 +68,6 @@ const handleImageUpload = (
 };
 
 export default {
-  updateDescriptionBullet,
   updateGalleryRows,
   handleImageUpload,
 };

@@ -71,7 +71,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
     backgroundColor: theme.textColors.main,
   },
 
-  '.MuiTextField-root, .Input-With-Icon': {
+  '.MuiTextField-root': {
     marginTop: '10px',
     borderRadius: '5px',
 
@@ -123,34 +123,6 @@ const ProjectForm = styled('form')(({ theme }) => ({
     '.MuiTextField-root': {
       marginTop: '0',
       flexGrow: 1,
-    },
-  },
-
-  '.Input-With-Icon': {
-    position: 'relative',
-    paddingRight: '0',
-
-    input: {
-      paddingRight: '40px',
-    },
-
-    '.MuiButtonBase-root': {
-      position: 'absolute',
-      right: 0,
-      top: 0,
-      bottom: 0,
-      width: '60px',
-
-      svg: {
-        color: theme.textColors.main,
-        fontSize: '20px',
-      },
-
-      '&:hover': {
-        svg: {
-          color: '#ca0909',
-        },
-      },
     },
   },
 

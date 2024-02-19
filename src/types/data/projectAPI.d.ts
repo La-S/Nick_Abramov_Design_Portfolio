@@ -12,7 +12,7 @@ export type ProjectGetResponse = Array<Project>;
 export type ProjectInputDto = {
   name: string;
   category: string;
-  descriptionBullets: Array<string>;
+  description: string;
   mainImagePath: string;
   isGallerySpaced: boolean;
   gallery: Array<ProjectGalleryRow>;

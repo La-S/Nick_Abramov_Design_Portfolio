@@ -9,7 +9,7 @@ export const EMPTY_PROJECT: Project = {
   category: '',
   mainImagePath: '',
   dateCreated: 0,
-  descriptionBullets: [],
+  description: '',
   isGallerySpaced: false,
   gallery: [],
 };

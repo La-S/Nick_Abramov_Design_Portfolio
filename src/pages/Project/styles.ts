@@ -41,15 +41,18 @@ const ProjectOverview = styled(Box)(({ theme }) => ({
   },
 
   '.Project-Description-Box': {
+    fontFamily: theme.fonts.main,
+    fontSize: '24px',
     flexGrow: 1,
 
-    h3: {
+    '.Project-Overview-Title': {
       fontFamily: theme.fonts.main,
       fontSize: '48px',
+      marginBottom: '30px',
     },
 
     ul: {
-      margin: '30px 0 0 0',
+      margin: 0,
       padding: 0,
       listStyle: 'none',
 

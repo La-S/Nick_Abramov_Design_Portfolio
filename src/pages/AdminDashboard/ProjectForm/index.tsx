@@ -4,7 +4,6 @@ import {
   Button,
   Select,
   TextField,
-  OutlinedInput,
   Typography,
   ButtonBase,
   FormLabel,
@@ -43,7 +42,7 @@ const ProjectForm = (props: Props): JSX.Element => {
 
   const [nameValue, setNameValue] = useState(project.name);
   const [categoryValue, setCategoryValue] = useState(project.category);
-  const [descriptionBulletValues, setDescriptionBulletValues] = useState(project.descriptionBullets);
+  const [descriptionValue, setDescriptionValue] = useState(project.description);
   const [mainImagePathValue, setMainImagePathValue] = useState(project.mainImagePath);
   const [isGallerySpacedValue, setIsGallerySpacedValue] = useState(project.isGallerySpaced);
   const [galleryValues, setGalleryValues] = useState(project.gallery);
@@ -51,7 +50,7 @@ const ProjectForm = (props: Props): JSX.Element => {
   const resetFields = () => {
     setNameValue('');
     setCategoryValue('');
-    setDescriptionBulletValues([]);
+    setDescriptionValue('');
     setMainImagePathValue('');
     setGalleryValues([]);
   };
@@ -60,13 +59,13 @@ const ProjectForm = (props: Props): JSX.Element => {
     e.preventDefault();
     const name = nameValue.trim();
     const category = categoryValue.trim();
-    const descriptionBullets = descriptionBulletValues.map((inputValue) => inputValue.trim());
+    const description = descriptionValue.trim();
     const mainImagePath = mainImagePathValue.trim();
     const gallery = [...galleryValues];
     const projectInputDto: ProjectInputDto = {
       name,
       category,
-      descriptionBullets,
+      description,
       mainImagePath,
       isGallerySpaced: isGallerySpacedValue,
       gallery,
@@ -187,32 +186,20 @@ const ProjectForm = (props: Props): JSX.Element => {
           <Divider />
 
           <FormLabel className="Section-Title-Label">Description:</FormLabel>
-          {descriptionBulletValues.map((descriptionBulletValue, i) => (
-            <OutlinedInput
-              className="Input-With-Icon"
-              key={i}
-              endAdornment={
-                <ButtonBase
-                  className="EndAdornment-Button"
-                  onClick={() => {
-                    setDescriptionBulletValues((prevState) => prevState.filter((_, index) => index !== i));
-                  }}
-                  disableRipple
-                >
-                  <TrashIcon />
-                </ButtonBase>
+          <TextField
+            multiline
+            value={descriptionValue}
+            placeholder='Description (markdown format)'
+            required
+            onInput={(e) => {
+              setDescriptionValue((e.target as HTMLInputElement).value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && e.shiftKey) {
+                setDescriptionValue(`${descriptionValue}<br />\n`);
               }
-              value={descriptionBulletValue}
-              placeholder={`Description Bullet ${i + 1}`}
-              required
-              onInput={(e) =>
-                formUtils.updateDescriptionBullet(e, i, descriptionBulletValues, setDescriptionBulletValues)
-              }
-            />
-          ))}
-          <Button type="button" onClick={() => setDescriptionBulletValues([...descriptionBulletValues, ''])}>
-            Add description bullet +
-          </Button>
+            }}
+          />
           <Divider />
 
           <FormLabel className="Section-Title-Label">Project Gallery Rows:</FormLabel>
@@ -310,7 +297,7 @@ const ProjectForm = (props: Props): JSX.Element => {
 
     setNameValue(project.name);
     setCategoryValue(project.category);
-    setDescriptionBulletValues(project.descriptionBullets);
+    setDescriptionValue(project.description);
     setMainImagePathValue(project.mainImagePath);
     setGalleryValues(project.gallery);
     setIsGallerySpacedValue(project.isGallerySpaced);
