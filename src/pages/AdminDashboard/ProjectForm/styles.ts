@@ -126,6 +126,25 @@ const ProjectForm = styled('form')(({ theme }) => ({
     },
   },
 
+  '.Description-Label-Wrapper': {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '15px',
+
+    a: {
+      color: theme.textColors.tertiary,
+
+      '&:visited': {
+        color: theme.textColors.tertiary,
+      },
+    },
+  },
+
+  '.Description-Note': {
+    marginTop: '10px',
+  },
+  
   '.MuiOutlinedInput-root': {
     '.MuiSelect-select': {
       paddingTop: '7.5px',

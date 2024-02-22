@@ -101,14 +101,19 @@ const ProjectOverview = styled(Box)(({ theme }) => ({
         fontSize: '36px',
       },
 
-      ul: {
-        margin: '25px 0 0 0',
+      '.Project-Description-Body': {
+        fontSize: '18px',
 
-        li: {
-          marginBottom: '18px',
-          fontSize: '18px',
+        ul: {
+          margin: '25px 0 0 0',
+  
+          li: {
+            marginBottom: '18px',
+            fontSize: '18px',
+          },
         },
       },
+
     },
   },
 }));

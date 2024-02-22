@@ -75,11 +75,11 @@ const onKeyDown = (
     const inputEl = e.target as HTMLInputElement;
     const cursorPositionIdx = inputEl.selectionStart || descriptionValue.length - 1;
     const updatedDescriptionValue = (
-      `${descriptionValue.slice(0, cursorPositionIdx)}<br />\n${descriptionValue.slice(cursorPositionIdx)}`
+      `${descriptionValue.slice(0, cursorPositionIdx)}\n${descriptionValue.slice(cursorPositionIdx)}`
     );
     setDescriptionValue(updatedDescriptionValue);
     setTimeout(() => {
-      inputEl.setSelectionRange(cursorPositionIdx + 7, cursorPositionIdx + 7);
+      inputEl.setSelectionRange(cursorPositionIdx + 1, cursorPositionIdx + 1);
     }, 0);
   }
 };

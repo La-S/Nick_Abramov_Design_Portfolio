@@ -57,11 +57,8 @@ const Project = () => {
         </Box>
         <Box className="Project-Description-Box">
           <Typography variant="h3" className='Project-Overview-Title'>Project Overview</Typography>
-          <ul>
-
-          </ul>
           <Markdown
-            className='Project-Description-Box'
+            className='Project-Description-Body'
             rehypePlugins={[rehypeRaw]}
           >
             {project.description}

@@ -185,7 +185,16 @@ const ProjectForm = (props: Props): JSX.Element => {
           </Box>
           <Divider />
 
-          <FormLabel className="Section-Title-Label">Description:</FormLabel>
+          <Box className="Description-Label-Wrapper">
+            <FormLabel className="Section-Title-Label">Description:</FormLabel>
+            <a 
+              href='https://www.markdownguide.org/cheat-sheet/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              Markdown cheat sheet
+            </a>
+          </Box>
           <TextField
             multiline
             value={descriptionValue}
@@ -196,6 +205,10 @@ const ProjectForm = (props: Props): JSX.Element => {
             }}
             onKeyDown={(e) => formUtils.onKeyDown(e, [descriptionValue, setDescriptionValue])}
           />
+          <Typography className='Description-Note'>
+            <strong>Note</strong>
+            {': For a new line break, use \'\\\' symbol'}
+          </Typography>
           <Divider />
 
           <FormLabel className="Section-Title-Label">Project Gallery Rows:</FormLabel>
