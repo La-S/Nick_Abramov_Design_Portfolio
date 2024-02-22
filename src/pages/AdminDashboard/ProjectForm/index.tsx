@@ -194,11 +194,7 @@ const ProjectForm = (props: Props): JSX.Element => {
             onInput={(e) => {
               setDescriptionValue((e.target as HTMLInputElement).value);
             }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && e.shiftKey) {
-                setDescriptionValue(`${descriptionValue}<br />\n`);
-              }
-            }}
+            onKeyDown={(e) => formUtils.onKeyDown(e, [descriptionValue, setDescriptionValue])}
           />
           <Divider />
 

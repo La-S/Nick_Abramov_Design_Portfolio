@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { GlobalContext } from './contexts/global';
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import AnimatedCursor from './components/AnimatedCursor';
 import { getCurrentTheme } from './utils/themeUtils';
 import BodyContainer from './components/BodyContainer';
@@ -15,6 +15,7 @@ const App = (): JSX.Element => {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [isTouchDevice, setIsTouchDevice] = useState(checkIfTouchDevice);
+  const cursorWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const latestIsTouchDevice = checkIfTouchDevice();
@@ -32,6 +33,7 @@ const App = (): JSX.Element => {
         authState: [isAdminLoggedIn, setIsAdminLoggedIn],
         pageLoadingState: [isPageLoading, setIsPageLoading],
         touchDeviceState: [isTouchDevice, setIsTouchDevice],
+        cursorWrapperRef, 
       }}
     >
       <Router>
@@ -40,7 +42,11 @@ const App = (): JSX.Element => {
 
           <BodyContainer />
 
-          {isTouchDevice ? null : <AnimatedCursor />}
+          {isTouchDevice ? null : (
+            <Box ref={cursorWrapperRef}>
+              <AnimatedCursor />
+            </Box>
+          )}
         </ThemeProvider>
       </Router>
     </GlobalContext.Provider>

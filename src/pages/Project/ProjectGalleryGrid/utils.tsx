@@ -33,6 +33,7 @@ export const renderGalleryRow = (
   setIsLightboxOpen: Dispatch<SetStateAction<boolean>>,
   slideIndexUpperBoundary: number,
   setSlideIndex: Dispatch<SetStateAction<number>>,
+  cursorWrapperRef: React.RefObject<HTMLDivElement | null>,
 ): JSX.Element => {
   const { cells, cellAmount } = galleryRow;
   const actualCellAmount = Math.min(cells.length, cellAmount);
@@ -54,8 +55,20 @@ export const renderGalleryRow = (
             className="ProjectGallery-Grid-Cell"
             onClick={(e) => {
               e.preventDefault();
-              setSlideIndex(slideIndex);
-              setIsLightboxOpen(true);
+              if (cell.type === 'image link' || cell.type === 'direct video link') {
+                setSlideIndex(slideIndex);
+                setIsLightboxOpen(true);
+              }
+            }}
+            onMouseEnter={() => {
+              if (cell.type === 'embedded video link' && cursorWrapperRef.current) {
+                cursorWrapperRef.current.style.display = 'none';
+              }
+            }}
+            onMouseLeave={() => {
+              if (cell.type === 'embedded video link' && cursorWrapperRef.current) {
+                cursorWrapperRef.current.style.display = 'block';
+              }
             }}
           >
             {renderCell(cell)}

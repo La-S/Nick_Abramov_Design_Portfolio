@@ -67,7 +67,25 @@ const handleImageUpload = (
   };
 };
 
+const onKeyDown = (
+  e: React.KeyboardEvent<HTMLDivElement>,
+  [descriptionValue, setDescriptionValue]: [string, React.Dispatch<React.SetStateAction<string>>],
+) => {
+  if (e.key === 'Enter' && e.shiftKey) {
+    const inputEl = e.target as HTMLInputElement;
+    const cursorPositionIdx = inputEl.selectionStart || descriptionValue.length - 1;
+    const updatedDescriptionValue = (
+      `${descriptionValue.slice(0, cursorPositionIdx)}<br />\n${descriptionValue.slice(cursorPositionIdx)}`
+    );
+    setDescriptionValue(updatedDescriptionValue);
+    setTimeout(() => {
+      inputEl.setSelectionRange(cursorPositionIdx + 7, cursorPositionIdx + 7);
+    }, 0);
+  }
+};
+
 export default {
   updateGalleryRows,
   handleImageUpload,
+  onKeyDown,
 };

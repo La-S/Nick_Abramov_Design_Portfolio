@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import { Video, Zoom } from 'yet-another-react-lightbox/plugins';
 import { ProjectGalleryRow } from '../../../types/data/project';
 import { getLightboxSlides, renderGalleryRow } from './utils';
 import S from './styles';
 import 'yet-another-react-lightbox/styles.css';
+import { GlobalContext } from '../../../contexts/global';
 
 interface Props {
   gallery: Array<ProjectGalleryRow>;
@@ -12,6 +13,9 @@ interface Props {
 }
 
 const ProjectGalleryGrid = ({ gallery, isGallerySpaced }: Props): JSX.Element => {
+  const { cursorWrapperRef } = useContext(GlobalContext);
+  console.log(cursorWrapperRef);
+
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
   const slides = getLightboxSlides(gallery);
@@ -29,6 +33,7 @@ const ProjectGalleryGrid = ({ gallery, isGallerySpaced }: Props): JSX.Element =>
         setIsLightboxOpen,
         slideIndexUpperBoundary,
         setSlideIndex,
+        cursorWrapperRef,
       );
     });
   };

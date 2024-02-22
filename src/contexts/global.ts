@@ -12,6 +12,7 @@ interface GlobalContextProps {
   authState: AuthStateProps;
   pageLoadingState: PageLoadingState;
   touchDeviceState: TouchDeviceState;
+  cursorWrapperRef: React.MutableRefObject<HTMLDivElement | null>;
 }
 
 export const GlobalContext = createContext<GlobalContextProps>({
@@ -19,4 +20,5 @@ export const GlobalContext = createContext<GlobalContextProps>({
   authState: undefined,
   pageLoadingState: undefined,
   touchDeviceState: undefined,
+  cursorWrapperRef: undefined,
 } as unknown as GlobalContextProps);
