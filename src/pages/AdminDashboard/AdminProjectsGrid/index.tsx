@@ -8,6 +8,7 @@ import { useQueryClient } from '@tanstack/react-query';
 const AdminProjectsGrid = (): JSX.Element => {
   const queryClient = useQueryClient();
   const { projects, isLoading } = useProjects({ summary: true });
+  
 
   return (
     <S.AdminProjectsGrid>
