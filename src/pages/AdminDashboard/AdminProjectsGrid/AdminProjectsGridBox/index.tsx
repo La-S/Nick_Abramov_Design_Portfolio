@@ -21,6 +21,8 @@ interface Props {
 const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
   const {
     reorderingState: [isReordering, setIsReordering],
+    draggingElIdState: [draggingElId, setDraggingElId],
+    draggingOverElIdState: [draggingOverElId, setDraggingOverElId],
   } = useContext(AdminProjectsGridContext);
 
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -32,20 +34,42 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
       .finally(() => setDeletionModalOpen(false));
   };
 
+  const classList = [];
+  if (isReordering) {
+    classList.push('AdminProjectsGridBox--reordering');
+  }
+  if (draggingElId === project.id) {
+    classList.push('AdminProjectsGridBox--dragging');
+  }
+  if (draggingOverElId === project.id) {
+    classList.push('AdminProjectsGridBox--dragging-over');
+  }
+
   return (
     <>
       <S.AdminProjectsGridBox
-        data-order={project.order}
+        id={project.id}
         draggable={!isReordering}
-        onDragStart={(e) => handleDragStart(e, project.id)}
-        onDragOver={(e) => handleDragOver(e)}
+        onDragStart={(e) => handleDragStart(
+          e, 
+          project.id,
+          setDraggingElId,
+        )}
+        onDragOver={(e) => handleDragOver(
+          e, 
+          project.id,
+          setDraggingOverElId,
+        )}
         onDrop={(e) => handleDrop(
           e,
+          project.id,
           project.order,
           setIsReordering,
           queryClient,
+          setDraggingElId,
+          setDraggingOverElId,
         )}
-        className={`${isReordering ? 'AdminProjectsGridBox--reordering' : ''}`}
+        className={classList.join(' ')}
       >
         <CardMedia sx={{ height: 250 }} image={project.mainImagePath} />
         <CardContent>

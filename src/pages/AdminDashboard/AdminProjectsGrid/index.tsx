@@ -10,11 +10,15 @@ const AdminProjectsGrid = (): JSX.Element => {
   const queryClient = useQueryClient();
   const { projects, isLoading } = useProjects({ summary: true });
   const [isReordering, setIsReordering] = useState(false);
+  const [draggingElId, setDraggingElId] = useState<string | null>(null);
+  const [draggingOverElId, setDraggingOverElId] = useState<string | null>(null);
 
   return (
     <AdminProjectsGridContext.Provider
       value={{
         reorderingState: [isReordering, setIsReordering],
+        draggingElIdState: [draggingElId, setDraggingElId],
+        draggingOverElIdState: [draggingOverElId, setDraggingOverElId],
       }}
     >
       <S.AdminProjectsGrid>

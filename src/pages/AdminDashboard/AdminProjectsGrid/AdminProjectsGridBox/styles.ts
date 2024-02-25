@@ -42,6 +42,14 @@ const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
     },
   },
 
+  '&.AdminProjectsGridBox--dragging': {
+    opacity: 0.5,
+  },
+
+  '&.AdminProjectsGridBox--dragging-over': {
+    border: `2px dashed ${theme.componentColors.backgroundTertiary}`,
+  },
+
   '&.AdminProjectsGridBox--reordering': {
     '&::after': {
       content: '""',
