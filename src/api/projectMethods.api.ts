@@ -21,6 +21,12 @@ export const createProject = async (projectInputDto: ProjectInputDto): Promise<A
   return api.post(route, projectInputDto);
 };
 
+export const reorderProjects = async (id: string, newOrder: number): Promise<AxiosResponse<Project>> => {
+  const route = `${ROUTE}/reorder`;
+  const body = { id, newOrder };
+  return api.put(route, body);
+};
+
 export const updateProject = async (id: string, projectInputDto: ProjectInputDto): Promise<AxiosResponse<Project>> => {
   const route = `${ROUTE}/${id}`;
   return api.put(route, projectInputDto);

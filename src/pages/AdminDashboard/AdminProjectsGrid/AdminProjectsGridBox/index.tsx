@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import S from './styles';
 import type { Project } from '../../../../types/data/project';
 import { Box, Button, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
@@ -10,6 +10,8 @@ import {
 import { deleteProject } from '../../../../api/projectMethods.api';
 import { QueryClient } from '@tanstack/react-query';
 import ProjectForm from '../../ProjectForm';
+import { AdminProjectsGridContext } from '../contexts';
+import { handleDragOver, handleDragStart, handleDrop } from './utils';
 
 interface Props {
   project: Project;
@@ -17,6 +19,10 @@ interface Props {
 }
 
 const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
+  const {
+    reorderingState: [isReordering, setIsReordering],
+  } = useContext(AdminProjectsGridContext);
+
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deletionModalOpen, setDeletionModalOpen] = useState(false);
   const handleDelete = () => {
@@ -29,9 +35,17 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
   return (
     <>
       <S.AdminProjectsGridBox
-        data-id={project.id}
         data-order={project.order}
-        draggable
+        draggable={!isReordering}
+        onDragStart={(e) => handleDragStart(e, project.id)}
+        onDragOver={(e) => handleDragOver(e)}
+        onDrop={(e) => handleDrop(
+          e,
+          project.order,
+          setIsReordering,
+          queryClient,
+        )}
+        className={`${isReordering ? 'AdminProjectsGridBox--reordering' : ''}`}
       >
         <CardMedia sx={{ height: 250 }} image={project.mainImagePath} />
         <CardContent>

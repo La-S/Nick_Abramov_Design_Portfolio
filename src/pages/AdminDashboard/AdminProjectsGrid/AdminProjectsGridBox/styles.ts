@@ -8,6 +8,7 @@ const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
   margin: '15px',
   backgroundColor: theme.componentColors.backgroundMain,
   border: `2px double ${theme.componentColors.backgroundTertiary}`,
+  position: 'relative',
 
   '.MuiCardMedia-root': {
     height: '250px',
@@ -41,8 +42,24 @@ const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
     },
   },
 
-  '&:hover': {
-    cursor: 'grab',
+  '&.AdminProjectsGridBox--reordering': {
+    '&::after': {
+      content: '""',
+      display: 'block',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      background: alpha(theme.componentColors.backgroundMain, 0.5),
+      cursor: 'disabled',
+    },
+  },
+
+  '&:not(.AdminProjectsGridBox--reordering)': {
+    '&:hover': {
+      cursor: 'grab',
+    },
   },
 
   [theme.breakpoints.down('tablet')]: {
