@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import S from './styles';
 import type { Project } from '../../../../types/data/project';
-import { Box, Button, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
-import { Trash as DeleteIcon, PencilSimple as EditIcon } from '@phosphor-icons/react';
+import { Box, Button, ButtonBase, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { 
+  Trash as DeleteIcon,
+  PencilSimple as EditIcon,
+  DotsSix as DnDIcon,
+} from '@phosphor-icons/react';
 import { deleteProject } from '../../../../api/projectMethods.api';
 import { QueryClient } from '@tanstack/react-query';
 import ProjectForm from '../../ProjectForm';
@@ -24,7 +28,10 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
 
   return (
     <>
-      <S.AdminProjectsGridBox>
+      <S.AdminProjectsGridBox
+        data-id={project.id}
+        data-order={project.order}
+      >
         <CardMedia sx={{ height: 250 }} image={project.mainImagePath} />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
@@ -35,17 +42,27 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant="contained" endIcon={<EditIcon color="white" />} onClick={() => setEditModalOpen(true)}>
-            Edit
-          </Button>
-          <Button
-            variant="contained"
-            color="error"
-            endIcon={<DeleteIcon color="white" />}
-            onClick={() => setDeletionModalOpen(true)}
+          <ButtonBase
+            disableRipple
+            className='DnDButton'
           >
-            Delete
-          </Button>
+            <DnDIcon
+              size={32}
+            />
+          </ButtonBase>
+          <Box className="CardButtons-Wrapper">
+            <Button variant="contained" endIcon={<EditIcon color="white" />} onClick={() => setEditModalOpen(true)}>
+              Edit
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              endIcon={<DeleteIcon color="white" />}
+              onClick={() => setDeletionModalOpen(true)}
+            >
+              Delete
+            </Button>
+          </Box>
         </CardActions>
       </S.AdminProjectsGridBox>
 

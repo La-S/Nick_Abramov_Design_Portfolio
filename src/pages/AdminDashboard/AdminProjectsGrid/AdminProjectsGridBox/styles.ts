@@ -27,14 +27,22 @@ const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
 
   '.MuiCardActions-root': {
     display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     flexGrow: 1,
     paddingTop: '0',
-  },
 
-  '&:hover': {
-    cursor: 'grab',
+    '.DnDButton': {
+      cursor: 'grab',
+    },
+    
+    '.CardButtons-Wrapper': {
+      display: 'flex',
+
+      button: {
+        marginLeft: 8,
+      },
+    },
   },
 
   [theme.breakpoints.down('tablet')]: {
