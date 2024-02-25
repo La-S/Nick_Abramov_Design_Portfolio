@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import S from './styles';
 import type { Project } from '../../../../types/data/project';
-import { Box, Button, ButtonBase, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Box, Button, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import { 
   Trash as DeleteIcon,
   PencilSimple as EditIcon,
@@ -31,6 +31,7 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
       <S.AdminProjectsGridBox
         data-id={project.id}
         data-order={project.order}
+        draggable
       >
         <CardMedia sx={{ height: 250 }} image={project.mainImagePath} />
         <CardContent>
@@ -42,14 +43,9 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
           </Typography>
         </CardContent>
         <CardActions>
-          <ButtonBase
-            disableRipple
-            className='DnDButton'
-          >
-            <DnDIcon
-              size={32}
-            />
-          </ButtonBase>
+          <DnDIcon
+            size={32}
+          />
           <Box className="CardButtons-Wrapper">
             <Button variant="contained" endIcon={<EditIcon color="white" />} onClick={() => setEditModalOpen(true)}>
               Edit

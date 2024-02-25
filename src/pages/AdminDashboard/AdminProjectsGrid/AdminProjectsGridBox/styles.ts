@@ -31,10 +31,6 @@ const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
     alignItems: 'center',
     flexGrow: 1,
     paddingTop: '0',
-
-    '.DnDButton': {
-      cursor: 'grab',
-    },
     
     '.CardButtons-Wrapper': {
       display: 'flex',
@@ -43,6 +39,10 @@ const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
         marginLeft: 8,
       },
     },
+  },
+
+  '&:hover': {
+    cursor: 'grab',
   },
 
   [theme.breakpoints.down('tablet')]: {
