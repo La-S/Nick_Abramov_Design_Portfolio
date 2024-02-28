@@ -24,6 +24,7 @@ const AnimatedCursor = (): JSX.Element => {
       innerScale={0.9}
       outerScale={1.75}
       clickables={['a', 'button', '.Burger-Icon', '.Theme-Switch']}
+      trailingSpeed={4}
     />
   );
 };

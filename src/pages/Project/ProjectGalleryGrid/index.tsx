@@ -14,7 +14,6 @@ interface Props {
 
 const ProjectGalleryGrid = ({ gallery, isGallerySpaced }: Props): JSX.Element => {
   const { cursorWrapperRef } = useContext(GlobalContext);
-  console.log(cursorWrapperRef);
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);

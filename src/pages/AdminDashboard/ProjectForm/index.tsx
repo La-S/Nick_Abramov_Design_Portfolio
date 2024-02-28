@@ -71,8 +71,6 @@ const ProjectForm = (props: Props): JSX.Element => {
       gallery,
     };
 
-    console.log(descriptionValue.trim().replace(/\n/g, '\\'));
-
     if (projectId) {
       updateProject(projectId, projectInputDto)
         .then(() => {
