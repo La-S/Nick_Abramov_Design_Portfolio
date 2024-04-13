@@ -41,7 +41,7 @@ const NewProjectLink = styled(Link, {
   shouldForwardProp: (propName) => propName !== 'pathName',
 })<{ pathName: string }>(({ theme, pathName }) => ({
   fontFamily: theme.fonts.secondary,
-  fontSize: '18px',
+  fontSize: '20px',
 
   textDecorationThickness: '2px',
   textUnderlineOffset: '4px',
