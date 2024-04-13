@@ -1,4 +1,4 @@
-import { styled } from '@mui/material';
+import { alpha, styled } from '@mui/material';
 
 const ContactForm = styled('form')(({ theme }) => ({
   display: 'flex',
@@ -29,6 +29,7 @@ const ContactForm = styled('form')(({ theme }) => ({
 
       '&::placeholder': {
         opacity: 1,
+        color: alpha(theme.textColors.main, 0.5),
       },
 
       '&:hover, &:focus-visible': {
@@ -62,6 +63,10 @@ const ContactForm = styled('form')(({ theme }) => ({
     color: theme.textColors.main,
     borderRadius: '5px',
     textTransform: 'uppercase',
+
+    '&:hover': {
+      backgroundColor: `${theme.componentColors.backgroundSecondary}`,
+    },
   },
 
   [theme.breakpoints.down('laptop')]: {

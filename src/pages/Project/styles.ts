@@ -66,7 +66,7 @@ const ProjectOverview = styled(Box)(({ theme }) => ({
   },
 
   [theme.breakpoints.down(900)]: {
-    padding: '50px 25px',
+    padding: '20px 15px 30px 15px',
     flexDirection: 'column',
     alignItems: 'center',
 
@@ -88,7 +88,7 @@ const ProjectOverview = styled(Box)(({ theme }) => ({
       marginBottom: '40px',
 
       '.MuiTypography-root': {
-        fontSize: '50px',
+        fontSize: '45px',
       },
 
       '.BoxUnderline': {
@@ -99,6 +99,10 @@ const ProjectOverview = styled(Box)(({ theme }) => ({
     '.Project-Description-Box': {
       h3: {
         fontSize: '36px',
+      },
+
+      '.Project-Overview-Title': {
+        fontSize: '35px',
       },
 
       '.Project-Description-Body': {
