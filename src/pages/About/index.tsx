@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Box, Typography, useTheme } from '@mui/material';
 import S from './styles';
 import AboutImg from '../../assets/images/about.png';
@@ -85,7 +86,8 @@ const AboutPage = (): JSX.Element => {
           <Typography>{BODY_TEXT_TEMP2}</Typography>
           <br />
           <Typography>
-            <a href="#">Get in Touch</a>
+
+            <Link to={'/contact'}>Get in Touch</Link>
           </Typography>
           <br />
           <Typography>
