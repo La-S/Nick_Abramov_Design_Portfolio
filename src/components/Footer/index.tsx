@@ -38,7 +38,7 @@ const Footer = (): JSX.Element => {
           ))}
         </Box>
         <Box className="Email-Link-Container">
-          <a href="">abr.nicki.art@gmail.com</a>
+          <a href="mailto:abr.nicki.art@gmail.com">abr.nicki.art@gmail.com</a>
         </Box>
       </Box>
       <Typography className="Copyright">Copyright © 2023 Nick Abramov All rights reserved.</Typography>

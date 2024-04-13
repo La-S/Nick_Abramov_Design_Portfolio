@@ -89,7 +89,7 @@ const AboutPage = (): JSX.Element => {
           </Typography>
           <br />
           <Typography>
-            <a href="">abr.nicki.art@gmail.com</a>
+            <a href="mailto:abr.nicki.art@gmail.com">abr.nicki.art@gmail.com</a>
           </Typography>
         </Box>
       </S.AboutBody>
