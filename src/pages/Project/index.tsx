@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import Markdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useProject from '../../hooks/useProject';
 import BoxUnderline from '../../components/BoxUnderline';
 import ProjectGalleryGrid from './ProjectGalleryGrid';
@@ -17,7 +17,11 @@ const Project = () => {
   const {
     pageLoadingState: [isPageLoading, setIsPageLoading],
   } = useContext(GlobalContext);
-  const { projectId } = useParams();
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const projectId = state?.projectId;
+  if (!projectId) navigate('/'); // Redirect to home page
+
   const { project, ...projectResponse } = useProject(projectId || '');
   const [isLoadingDelayActive, setIsLoadingDelayActive] = useState(true);
   const [areImagesLoaded, setAreImagesLoaded] = useState(false);

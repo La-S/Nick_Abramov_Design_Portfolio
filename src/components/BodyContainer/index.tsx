@@ -37,7 +37,7 @@ const BodyContainer = (): JSX.Element => {
 
   useEffect(() => {
     scrollToTop();
-    
+
     if (LANDING_PAGE_PATHS.includes(location.pathname)) {
       const cachedProjectsExist = checkIfCachedQueryDataExists(queryClient, ['projects', { summary: true }]);
       if (!cachedProjectsExist) {
@@ -45,7 +45,8 @@ const BodyContainer = (): JSX.Element => {
       }
     }
     if (location.pathname.includes(PROJECT_PAGE_PREFIX)) {
-      const projectId = location.pathname.replace(`${PROJECT_PAGE_PREFIX}/`, '');
+      const { state } = location;
+      const projectId = state?.projectId;
       if (projectId) {
         const cachedProjectExists = checkIfCachedQueryDataExists(queryClient, ['project', projectId]);
         if (!cachedProjectExists) {

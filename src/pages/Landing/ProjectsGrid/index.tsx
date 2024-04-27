@@ -27,7 +27,7 @@ const ProjectsGrid = ({ sortCategory }: Props): JSX.Element => {
   })();
 
   return (
-    <S.Grid 
+    <S.Grid
       className='Grid'
       typeName={'div'}
       easing="ease-in-out"
@@ -35,8 +35,8 @@ const ProjectsGrid = ({ sortCategory }: Props): JSX.Element => {
       staggerDelayBy={50}
       appearAnimation="fade"
     >
-      {sortedProjects.map(({ id, category, mainImagePath }) => (
-        <ProjectBox key={id} id={id} category={category} imagePath={mainImagePath} />
+      {sortedProjects.map((project) => (
+        <ProjectBox key={project.id} project={project} />
       ))}
     </S.Grid>
   );

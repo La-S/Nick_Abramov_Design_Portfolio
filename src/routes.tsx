@@ -27,7 +27,7 @@ export const MAIN_ROUTES: Array<RouteFixture> = [
     element: <Navigate to="/" />,
   },
   {
-    path: '/projects/:projectId',
+    path: '/projects/:projectName',
     element: <ProjectPage />,
   },
   {

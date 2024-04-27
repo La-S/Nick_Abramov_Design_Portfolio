@@ -8,6 +8,7 @@ import S from './styles';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../../../contexts/global';
 import { useQueryClient } from '@tanstack/react-query';
+import { formatProjectName } from '../../Landing/ProjectsGrid/ProjectBox/utils';
 
 interface Props {
   project: Project
@@ -16,8 +17,8 @@ interface Props {
 const ProjectNavBar = ({ project }: Props): JSX.Element => {
   const queryClient = useQueryClient();
 
-  const { 
-    touchDeviceState: [isTouchDevice], 
+  const {
+    touchDeviceState: [isTouchDevice],
     pageLoadingState: [, setIsPageLoading],
   } = useContext(GlobalContext);
   const { projects } = useProjects({ summary: true });
@@ -35,13 +36,14 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
         {navProjects.prev ? (
           <Link
             onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.prev!.id, setIsPageLoading)}
-            to={`/projects/${navProjects.prev.id}`}
+            to={`/projects/${formatProjectName(navProjects.prev.name)}`}
+            state={{ projectId: navProjects.prev.id }}
             className='Prev-Project-Button'
           >
             <Button
               variant="text"
               color="primary"
-              disableRipple 
+              disableRipple
               startIcon={<PrevIcon />}
             >
               <Typography>{navProjects.prev.name}</Typography>
@@ -51,12 +53,13 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
       </Box>
       <Box>
         {navProjects.next ? (
-          <Link 
+          <Link
             onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.next!.id, setIsPageLoading)}
-            to={`/projects/${navProjects.next.id}`}
+            to={`/projects/${formatProjectName(navProjects.next.name)}`}
+            state={{ projectId: navProjects.next.id }}
             className='Next-Project-Button'
           >
-            <Button 
+            <Button
               variant="text"
               color="primary"
               disableRipple
@@ -72,9 +75,10 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
   const FixedNavProjectsBar = (
     <Box className='Fixed-NavProject-Buttons' ref={fixedNavbarRef}>
       {navProjects.prev ? (
-        <Link 
+        <Link
           onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.prev!.id, setIsPageLoading)}
-          to={`/projects/${navProjects.prev.id}`}
+          to={`/projects/${formatProjectName(navProjects.prev.name)}`}
+          state={{ projectId: navProjects.prev.id }}
           ref={fixedPrevArrowRef}
           className='Prev-Project-Button'
           key={navProjects.prev.id}
@@ -85,9 +89,10 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
         </Link>
       ) : <div></div>}
       {navProjects.next ? (
-        <Link 
+        <Link
           onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.next!.id, setIsPageLoading)}
-          to={`/projects/${navProjects.next.id}`} 
+          to={`/projects/${formatProjectName(navProjects.next.name)}`}
+          state={{ projectId: navProjects.next.id }}
           ref={fixedNextArrowRef}
           className='Next-Project-Button'
           key={navProjects.next.id}
