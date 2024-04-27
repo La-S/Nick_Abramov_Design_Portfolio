@@ -23,7 +23,6 @@ const ProjectBox = forwardRef(({ project }: Props, ref) => {
     pageLoadingState: [, setIsPageLoading],
   } = useContext(GlobalContext);
   const { category, mainImagePath, id, name } = project;
-  console.log({ name });
   const formattedProjectName = formatProjectName(name);
 
   return (

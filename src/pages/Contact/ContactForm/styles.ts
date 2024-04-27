@@ -14,10 +14,6 @@ const ContactForm = styled('form')(({ theme }) => ({
     marginTop: '20px',
     borderRadius: '5px',
 
-    '.MuiInputBase-root': {
-      padding: 0,
-    },
-
     'input, textarea': {
       fontFamily: theme.fonts.main,
       fontSize: '20px',
@@ -47,6 +43,22 @@ const ContactForm = styled('form')(({ theme }) => ({
     fieldset: {
       border: 'none',
       outline: 'none',
+    },
+
+    '.MuiInputBase-root': {
+      padding: 0,
+
+      '&.Mui-error': {
+        'input, textarea': {
+          borderColor: '#f86262',
+        },
+      },
+    },
+
+    '.MuiFormHelperText-root': {
+      marginTop: '5px',
+      fontFamily: theme.fonts.main,
+      fontSize: '16px',
     },
 
     '&:first-of-type': {
@@ -89,6 +101,10 @@ const ContactForm = styled('form')(({ theme }) => ({
     '.MuiTextField-root': {
       'input, textarea': {
         fontSize: '16px',
+      },
+
+      '.MuiFormHelperText-root': {
+        fontSize: '14px',
       },
     },
   },
