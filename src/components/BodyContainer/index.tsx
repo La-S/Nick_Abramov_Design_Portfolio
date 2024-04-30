@@ -29,7 +29,7 @@ const BodyContainer = (): JSX.Element => {
       return <Navigate to="/admin/login" />;
     }
     if (isLoggedIn && route.path === '/admin/login') {
-      return <Navigate to="/admin/dashboard" />;
+      return <Navigate to="/admin/projects" />;
     }
 
     return route.element;

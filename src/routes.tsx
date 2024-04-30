@@ -6,7 +6,7 @@ import AboutPage from './pages/About';
 import FaqPage from './pages/Faq';
 import ContactPage from './pages/Contact';
 import AdminLoginPage from './pages/AdminLogin';
-import AdminDashboardPage from './pages/AdminDashboard';
+import AdminProjectsPage from './pages/AdminProjects';
 
 export type RouteFixture = {
   path: string;
@@ -44,17 +44,18 @@ export const MAIN_ROUTES: Array<RouteFixture> = [
   },
 ];
 
+export const ADMIN_LOGIN_ROUTE: RouteFixture = {
+  path: '/admin/login',
+  element: <AdminLoginPage />,
+};
 export const ADMIN_ROUTES: Array<RouteFixture> = [
+  ADMIN_LOGIN_ROUTE,
   {
-    path: '/admin/login',
-    element: <AdminLoginPage />,
-  },
-  {
-    path: '/admin/dashboard',
-    element: <AdminDashboardPage />,
+    path: '/admin/projects',
+    element: <AdminProjectsPage />,
   },
   {
     path: '/admin',
-    element: <Navigate to="/admin/dashboard" />,
+    element: <Navigate to="/admin/projects" />,
   },
 ];

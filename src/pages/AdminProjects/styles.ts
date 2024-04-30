@@ -1,6 +1,11 @@
 import { styled, Box, Modal } from '@mui/material';
 
-const AdminDashboardContainer = styled(Box)(({ theme }) => ({
+export const classes = {
+  newProjectButtonWrapper: 'New-Project-Button-Wrapper',
+  newProjectButton: 'New-Project-Button'
+};
+
+const AdminProjectsContainer = styled(Box)(({ theme }) => ({
   '.No-Projects-Box': {
     padding: '15px 35px',
 
@@ -10,7 +15,44 @@ const AdminDashboardContainer = styled(Box)(({ theme }) => ({
     },
   },
 
-  [theme.breakpoints.down('tablet')]: {},
+  [`.${classes.newProjectButtonWrapper}`] : {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-end',
+
+    [`.${classes.newProjectButton}`]: {
+      margin: '15px',
+      padding: '5px 7.5px',
+      backgroundColor: theme.componentColors.backgroundSecondary,
+
+      p: {
+        display: 'flex',
+        margin: 0,
+        fontSize: '16px',
+        fontFamily: theme.fonts.secondary,
+
+        p: {
+          margin: 0,
+        },
+
+        transition: 'color 0.2s ease-in-out',
+        '&:hover': {
+          color: theme.componentColors.backgroundMain,
+
+          transition: 'color 0.2s ease-in-out',
+          p: {
+            color: theme.componentColors.backgroundMain,
+          },
+        },
+      },
+    },
+  },
+
+  [theme.breakpoints.down('tablet')]: {
+    [`.${classes.newProjectButtonWrapper}`] : {
+      justifyContent: 'center'
+    }
+  },
 }));
 
 const HeaderNavLinks = styled('ul')(({ theme }) => ({
@@ -72,7 +114,7 @@ const NewProjectModal = styled(Modal)(() => ({
 }));
 
 export default {
-  AdminDashboardContainer,
+  AdminProjectsContainer,
   HeaderNavLinks,
   NewProjectModal,
 };

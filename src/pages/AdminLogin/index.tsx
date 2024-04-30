@@ -25,7 +25,7 @@ const AdminLogin = (): JSX.Element => {
         cookies.remove('access_token', { path: '/' });
         cookies.set('access_token', access_token, { expires: expirationDate, path: '/' });
         setIsAdminLoggedIn(true);
-        navigate('/admin/dashboard');
+        navigate('/admin/projects');
       })
       .catch((err) => {
         alert(err.message);
@@ -34,7 +34,7 @@ const AdminLogin = (): JSX.Element => {
 
   useEffect(() => {
     if (isAdminLoggedIn) {
-      navigate('/admin/dashboard');
+      navigate('/admin/projects');
     }
   });
 

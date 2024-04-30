@@ -4,7 +4,6 @@ import { HEADER_DESKTOP_HEIGHT, HEADER_MOBILE_HEIGHT } from '../../../components
 const AdminProjectsGrid = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
-  paddingTop: '15px',
 
   [theme.breakpoints.down('tablet')]: {
     justifyContent: 'center',
