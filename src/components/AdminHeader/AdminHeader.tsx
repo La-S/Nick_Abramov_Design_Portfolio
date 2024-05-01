@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { ButtonBase, useTheme } from '@mui/material';
+import { Link, useLocation } from 'react-router-dom';
+import { ButtonBase, Typography, useTheme } from '@mui/material';
 import { SignOut as SignOutIcon } from '@phosphor-icons/react';
 import Logo from '../Logo';
 import { GlobalContext } from '../../contexts/global';
@@ -8,10 +8,16 @@ import { cookies } from '../../api/api';
 import S from './styles';
 import HeaderStyles from '../../components/Header/styles';
 
+const NAV_LINKS = [
+  { name: 'Projects', to: '/admin/projects' },
+  { name: 'FAQ', to: '/admin/faq' },
+];
+
 const AdminHeader = (): JSX.Element => {
   const {
     authState: [, setAuthState],
   } = useContext(GlobalContext);
+  const location = useLocation();
   const theme = useTheme();
 
   const logout = () => {
@@ -28,6 +34,13 @@ const AdminHeader = (): JSX.Element => {
       </HeaderStyles.LogoContainer>
 
       <S.HeaderNavLinks>
+        {NAV_LINKS.map(({ name, to }) => (
+          <Link key={name} to={to}>
+            <Typography {...location.pathname === to ? { className: 'Active' } : {}}>
+              {name}
+            </Typography>
+          </Link>
+        ))}
         <ButtonBase disableRipple onClick={logout}>
           <SignOutIcon />
         </ButtonBase>
