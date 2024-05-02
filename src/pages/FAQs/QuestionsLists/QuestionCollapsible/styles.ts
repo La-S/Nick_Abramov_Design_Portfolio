@@ -8,7 +8,10 @@ const Container = styled('li')(({ theme }) => ({
   },
 }));
 
-const QuestionButton = styled(ButtonBase)<{ expanded: boolean }>(({ theme, expanded }) => ({
+const QuestionButton = styled(
+  ButtonBase,
+  { shouldForwardProp: (prop) => prop !== 'expanded' }
+)<{ expanded: boolean }>(({ theme, expanded }) => ({
   display: 'flex',
   justifyContent: 'flex-start',
   width: '100%',

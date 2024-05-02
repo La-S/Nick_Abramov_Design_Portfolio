@@ -68,7 +68,11 @@ const BodyContainer = (): JSX.Element => {
         </Route>
         <Route element={<AdminLayout />}>
           {ADMIN_ROUTES.map((route, index) => (
-            <Route key={index} path={route.path} element={renderProtectedPageElement(route, isAdminLoggedIn)} />
+            <Route
+              key={index}
+              path={route.path}
+              element={renderProtectedPageElement(route, isAdminLoggedIn)}
+            />
           ))}
         </Route>
       </Routes>

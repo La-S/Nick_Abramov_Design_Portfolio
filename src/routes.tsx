@@ -3,10 +3,11 @@ import { Navigate } from 'react-router-dom';
 import LandingPage from './pages/Landing/Landing';
 import ProjectPage from './pages/Project';
 import AboutPage from './pages/About';
-import FaqPage from './pages/Faq';
+import FAQsPage from './pages/FAQs';
 import ContactPage from './pages/Contact';
 import AdminLoginPage from './pages/AdminLogin';
 import AdminProjectsPage from './pages/AdminProjects';
+import AdminFAQsPage from './pages/AdminFAQs';
 
 export type RouteFixture = {
   path: string;
@@ -36,7 +37,7 @@ export const MAIN_ROUTES: Array<RouteFixture> = [
   },
   {
     path: '/questions',
-    element: <FaqPage />,
+    element: <FAQsPage />,
   },
   {
     path: '/contact',
@@ -58,4 +59,8 @@ export const ADMIN_ROUTES: Array<RouteFixture> = [
     path: '/admin',
     element: <Navigate to="/admin/projects" />,
   },
+  {
+    path: '/admin/faqs',
+    element: <AdminFAQsPage />,
+  }
 ];

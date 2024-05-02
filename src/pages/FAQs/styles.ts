@@ -1,6 +1,6 @@
 import { Box, styled } from '@mui/material';
 
-const FaqContainer = styled(Box)(() => ({}));
+const FAQsContainer = styled(Box)(() => ({}));
 
 const Banner = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -24,6 +24,6 @@ const Banner = styled(Box)(({ theme }) => ({
 }));
 
 export default {
-  FaqContainer,
+  FAQsContainer,
   Banner,
 };
