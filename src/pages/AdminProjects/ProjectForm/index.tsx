@@ -57,18 +57,13 @@ const ProjectForm = (props: Props): JSX.Element => {
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    const name = nameValue.trim();
-    const category = categoryValue.trim();
-    const description = descriptionValue.trim();
-    const mainImagePath = mainImagePathValue.trim();
-    const gallery = [...galleryValues];
     const projectInputDto: ProjectInputDto = {
-      name,
-      category,
-      description,
-      mainImagePath,
+      name: nameValue.trim(),
+      category: categoryValue.trim(),
+      description: descriptionValue.trim(),
+      mainImagePath: mainImagePathValue.trim(),
       isGallerySpaced: isGallerySpacedValue,
-      gallery,
+      gallery: [...galleryValues],
     };
 
     if (projectId) {
@@ -93,7 +88,7 @@ const ProjectForm = (props: Props): JSX.Element => {
   };
 
   const UploadImageButton = (callback: (imagePath: string) => void) => (
-    <Button 
+    <Button
       component="label"
       variant="contained"
       startIcon={<UploadIcon className='Hide-On-Smaller-Screens' />}
@@ -187,7 +182,7 @@ const ProjectForm = (props: Props): JSX.Element => {
 
           <Box className="Description-Label-Wrapper">
             <FormLabel className="Section-Title-Label">Description:</FormLabel>
-            <a 
+            <a
               href='https://www.markdownguide.org/cheat-sheet/'
               target='_blank'
               rel='noreferrer'
@@ -264,7 +259,7 @@ const ProjectForm = (props: Props): JSX.Element => {
                       setGalleryValues(newGalleryValues);
                     }}
                   />
-                  {(cellValue.type === 'image link' || !cellValue.type) && !cellValue.path 
+                  {(cellValue.type === 'image link' || !cellValue.type) && !cellValue.path
                     ? UploadImageButton((imagePath) => {
                       const newGalleryValues = [...galleryValues];
                       newGalleryValues[i].cells[j].path = imagePath;

@@ -1,10 +1,13 @@
 import { styled, Box } from '@mui/material';
 
 export const classes = {
-  list: 'admin-faqs-list',
-  listItem: 'admin-faqs-list-item',
-  question: 'admin-faqs-question',
-  answer: 'admin-faqs-answer',
+  list: 'Admin-FAQs-List',
+  faqWrapper: 'Admin-FAQs-FAQ-Wrapper',
+  question: 'Admin-FAQs-Question',
+  answer: 'Admin-FAQs-Answer',
+  actionBtnsWrapper: 'Admin-FAQs-Action-Btns-Wrapper',
+  btnUpdate: 'Admin-FAQs-Btn-Update',
+  btnDelete: 'Admin-FAQs-Btn-Delete',
 };
 
 const AdminFAQsContainer = styled(Box)(() => ({
@@ -17,7 +20,7 @@ const AdminFAQsContainer = styled(Box)(() => ({
     listStyleType: 'none',
     padding: '0',
 
-    [`.${classes.listItem}`]: {
+    [`.${classes.faqWrapper}`]: {
       display: 'flex',
       flexDirection: 'column',
       margin: '10px',
@@ -26,7 +29,7 @@ const AdminFAQsContainer = styled(Box)(() => ({
   }
 }));
 
-const QuestionEditable = styled('li')(({ theme }) => ({
+const FAQEditable = styled('li')(({ theme }) => ({
   [`.${classes.question}, .${classes.answer}`]: {
     color: theme.textColors.main,
   },
@@ -36,5 +39,5 @@ const QuestionEditable = styled('li')(({ theme }) => ({
 
 export default {
   AdminFAQsContainer,
-  QuestionEditable,
+  FAQEditable,
 };

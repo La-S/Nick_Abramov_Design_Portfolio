@@ -1,6 +1,6 @@
 import React from 'react';
 import useFAQs from '../../hooks/useFAQs';
-import QuestionEditable from './QuestionEditable';
+import FAQEditable from './FAQEditable';
 import S, { classes } from './styles';
 
 const AdminFAQs = (): JSX.Element => {
@@ -9,7 +9,7 @@ const AdminFAQs = (): JSX.Element => {
   return (
     <S.AdminFAQsContainer>
       <ul className={classes.list}>
-        {faqs.map((question) => <QuestionEditable key={question.id} question={question} />)}
+        {faqs.map((faq) => <FAQEditable key={faq.id} faq={faq} />)}
       </ul>
     </S.AdminFAQsContainer>
   );
