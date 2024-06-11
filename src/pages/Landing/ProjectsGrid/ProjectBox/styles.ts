@@ -11,7 +11,8 @@ const ProjectBox = styled(Box)(({ theme }) => ({
     objectFit: 'cover',
     objectPosition: 'center',
     filter: 'grayscale(100%)',
-    
+    willChange: 'transform, transition',
+
     transition: 'filter 0.3s linear, transform 0.5s ease-out',
     '&:hover': {
       filter: 'grayscale(0%)',

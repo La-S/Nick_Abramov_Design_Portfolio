@@ -45,6 +45,7 @@ const ProjectBox = forwardRef(({ project }: Props, ref) => {
           onMouseOver={onProjectsTileMouseOver}
           onMouseOut={onProjectsTileMouseOut}
           onMouseMove={onProjectsTileMouseMove}
+          loading='lazy'
         />
         <Typography className="Category-Name">{`#${category}`}</Typography>
         <Box className="ProjectBox-Shadow" />

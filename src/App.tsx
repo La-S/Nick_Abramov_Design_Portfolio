@@ -33,7 +33,7 @@ const App = (): JSX.Element => {
         authState: [isAdminLoggedIn, setIsAdminLoggedIn],
         pageLoadingState: [isPageLoading, setIsPageLoading],
         touchDeviceState: [isTouchDevice, setIsTouchDevice],
-        cursorWrapperRef, 
+        cursorWrapperRef,
       }}
     >
       <Router>
