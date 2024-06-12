@@ -10,13 +10,13 @@ const AdminProjects = (): JSX.Element => {
   const { projects, isFetched } = useProjects({ summary: true });
 
   const NewProjectButton = (
-    <div className={classes.newProjectButtonWrapper}>
+    <Box className={classes.newProjectButtonWrapper}>
       <ButtonBase className={classes.newProjectButton} onClick={() => setNewProjectModalOpen(true)} disableRipple>
         <p>
           new project <p>&nbsp;+</p>
         </p>
       </ButtonBase>
-    </div>
+    </Box>
   );
 
   const NewProjectModal = (

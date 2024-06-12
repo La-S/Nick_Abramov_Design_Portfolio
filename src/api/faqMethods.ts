@@ -9,6 +9,10 @@ export const getFAQs = async (): Promise<AxiosResponse<FAQGetResponse>> => (
   api.get(ROUTE)
 );
 
+export const createFAQ = async (faqInputDto: FAQInputDto): Promise<AxiosResponse<FAQ>> => (
+  api.post<FAQ>(ROUTE, faqInputDto)
+);
+
 export const updateFAQ = async (id: string, faqInputDto: FAQInputDto): Promise<AxiosResponse<FAQ>> => {
   const route = `${ROUTE}/${id}`;
   return api.put(route, faqInputDto);
