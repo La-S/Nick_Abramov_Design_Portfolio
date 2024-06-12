@@ -12,7 +12,7 @@ export const classes = {
   btnCreate: 'Admin-FAQs-Btn-Create'
 };
 
-const AdminFAQsContainer = styled(Box)(({ theme }) => ({
+const AdminFAQsContainer = styled(Box)(() => ({
   margin: '15px',
 
   // [`.${classes.btnCreateWrapper}`] : {
