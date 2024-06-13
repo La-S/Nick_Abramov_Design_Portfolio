@@ -32,7 +32,6 @@ const FAQEditable = (props: FAQEditableProps): JSX.Element => {
       })
       .catch((err) => alert(err.response.data.message));
   };
-
   const onDeleteClick = (): void => {
     deleteFAQ(faq.id)
       .then(() => {
@@ -43,7 +42,7 @@ const FAQEditable = (props: FAQEditableProps): JSX.Element => {
   };
 
   return (
-    <S.FAQEditable className={classes.faqWrapper}>
+    <S.FAQCard className={classes.faqWrapper}>
       <TextField
         defaultValue={faq.question}
         onChange={(e) => setFaq({...faq, question: e.target.value })}
@@ -76,7 +75,7 @@ const FAQEditable = (props: FAQEditableProps): JSX.Element => {
           Delete
         </Button>
       </Box>
-    </S.FAQEditable>
+    </S.FAQCard>
   );
 };
 

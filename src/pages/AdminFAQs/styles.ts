@@ -12,67 +12,111 @@ export const classes = {
   btnCreate: 'Admin-FAQs-Btn-Create'
 };
 
-const AdminFAQsContainer = styled(Box)(() => ({
+const AdminFAQsContainer = styled(Box)(({ theme }) => ({
   margin: '15px',
-
-  // [`.${classes.btnCreateWrapper}`] : {
-  //   width: '100%',
-  //   display: 'flex',
-  //   justifyContent: 'flex-end',
-
-  //   [`.${classes.btnCreate}`]: {
-  //     margin: '0 15px 15px 15px',
-  //     padding: '5px 7.5px',
-  //     backgroundColor: theme.componentColors.backgroundSecondary,
-
-  //     p: {
-  //       display: 'flex',
-  //       margin: 0,
-  //       fontSize: '16px',
-  //       fontFamily: theme.fonts.secondary,
-
-  //       p: {
-  //         margin: 0,
-  //       },
-
-  //       transition: 'color 0.2s ease-in-out',
-  //       '&:hover': {
-  //         color: theme.componentColors.backgroundMain,
-
-  //         transition: 'color 0.2s ease-in-out',
-  //         p: {
-  //           color: theme.componentColors.backgroundMain,
-  //         },
-  //       },
-  //     },
-  //   },
-  // },
 
   [`.${classes.list}`]: {
     display: 'flex',
-    flexDirection: 'column',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '20px',
 
     listStyleType: 'none',
     padding: '0',
 
     [`.${classes.faqWrapper}`]: {
-      display: 'flex',
-      flexDirection: 'column',
-      margin: '10px',
-      color: 'red',
-    }
+      [`.${classes.btnUpdate}`]: {
+        marginRight: '10px',
+
+        '&.Mui-disabled': {
+          backgroundColor: 'gray',
+          color: '#c7c7c7',
+
+          svg: {
+            fill: '#c7c7c7',
+          }
+        }
+      },
+
+      '&:last-of-type': {
+        marginRight: 'auto',
+      }
+    },
+  },
+
+  [theme.breakpoints.down('laptop')]: {
+    flexDirection: 'column',
   }
 }));
 
-const FAQEditable = styled('li')(({ theme }) => ({
-  [`.${classes.question}, .${classes.answer}`]: {
-    color: theme.textColors.main,
+const FAQCard = styled('li')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  flexBasis: '49%',
+  padding: '20px',
+  border: `2px double ${theme.componentColors.backgroundTertiary}`,
+  borderRadius: '4px',
+
+  '.MuiFormControl-root': {
+    '.MuiInputBase-root': {
+      padding: 0,
+
+      'input, textarea': {
+        marginBottom: '10px',
+        padding: '7.5px 10px',
+        fontFamily: theme.fonts.main,
+        fontSize: '18px',
+        color: theme.textColors.main,
+        backgroundColor: theme.componentColors.backgroundMain,
+        border: `1px solid ${theme.componentColors.inputBorder}`,
+        borderRadius: '5px',
+        transition: 'border-color 0.3s ease-in-out',
+
+        '&::placeholder': {
+          opacity: 1,
+        },
+
+        '&:hover, &:focus-visible': {
+          cursor: 'none',
+          transition: 'border-color 0.3s ease-in-out',
+          borderColor: `${theme.componentColors.backgroundTertiary} !important`,
+        },
+
+        '&:-webkit-autofill': {
+          boxShadow: `0 0 0px 1000px ${theme.componentColors.backgroundMain} inset`,
+          WebkitTextFillColor: theme.textColors.main,
+        },
+      },
+
+      fieldset: {
+        border: 'none',
+      },
+
+      '&:hover' : {
+        'fieldset': {
+          borderColor: 'transparent'
+        }
+      },
+    },
   },
 
-  [theme.breakpoints.down('tablet')]: {}
+  [`.${classes.actionBtnsWrapper}`]: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    height: '43px',
+    marginTop: 'auto',
+
+    button: {
+      marginTop: '7px',
+    },
+  },
+
+  [theme.breakpoints.down('laptop')]: {
+    flexBasis: '100%',
+  }
 }));
 
 export default {
   AdminFAQsContainer,
-  FAQEditable,
+  FAQCard,
 };

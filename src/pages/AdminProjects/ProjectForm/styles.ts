@@ -77,6 +77,12 @@ const ProjectForm = styled('form')(({ theme }) => ({
 
     '.MuiInputBase-root': {
       padding: 0,
+
+      '&:hover' : {
+        'fieldset': {
+          borderColor: 'transparent'
+        }
+      }
     },
 
     'input, textarea': {
@@ -102,11 +108,6 @@ const ProjectForm = styled('form')(({ theme }) => ({
       '&:-webkit-autofill': {
         boxShadow: `0 0 0px 1000px ${theme.componentColors.backgroundMain} inset`,
         WebkitTextFillColor: theme.textColors.main,
-      },
-
-      fieldset: {
-        border: 'none',
-        outline: 'none',
       },
 
       '&:first-of-type': {
@@ -144,7 +145,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
   '.Description-Note': {
     marginTop: '10px',
   },
-  
+
   '.MuiOutlinedInput-root': {
     '.MuiSelect-select': {
       paddingTop: '7.5px',
@@ -259,7 +260,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
       display: 'none',
     },
 
-    
+
   },
 }));
 
