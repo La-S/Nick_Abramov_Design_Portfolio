@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import S from './styles';
 import type { Project } from '../../../../types/data/project';
 import { Box, Button, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
-import { 
+import {
   Trash as DeleteIcon,
   PencilSimple as EditIcon,
   DotsSix as DnDIcon,
@@ -51,12 +51,12 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
         id={project.id}
         draggable={!isReordering}
         onDragStart={(e) => handleDragStart(
-          e, 
+          e,
           project.id,
           setDraggingElId,
         )}
         onDragOver={(e) => handleDragOver(
-          e, 
+          e,
           project.id,
           setDraggingOverElId,
         )}
@@ -81,9 +81,7 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
           </Typography>
         </CardContent>
         <CardActions>
-          <DnDIcon
-            size={32}
-          />
+          <DnDIcon size={32} />
           <Box className="CardButtons-Wrapper">
             <Button variant="contained" endIcon={<EditIcon color="white" />} onClick={() => setEditModalOpen(true)}>
               Edit

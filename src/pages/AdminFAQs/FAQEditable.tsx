@@ -3,6 +3,7 @@ import { TextField, Button, Box } from '@mui/material';
 import {
   Trash as DeleteIcon,
   Check as UpdateIcon,
+  DotsSix as DnDIcon,
 } from '@phosphor-icons/react';
 import { deleteFAQ, updateFAQ } from '../../api/faqMethods';
 import type { FAQ } from '../../types/data/faq';
@@ -18,6 +19,7 @@ const FAQEditable = (props: FAQEditableProps): JSX.Element => {
   const queryClient = useQueryClient();
   const [faq, setFaq] = useState({ ...props.faq });
   const isUnchanged = faq.question === props.faq.question && faq.answer === props.faq.answer;
+  const classNames = [classes.faqWrapper];
 
   const onUpdateClick = (): void => {
     const faqInputDto: FAQInputDto = {
@@ -42,7 +44,7 @@ const FAQEditable = (props: FAQEditableProps): JSX.Element => {
   };
 
   return (
-    <S.FAQCard className={classes.faqWrapper}>
+    <S.FAQCard className={classNames.join(' ')} draggable>
       <TextField
         defaultValue={faq.question}
         onChange={(e) => setFaq({...faq, question: e.target.value })}
@@ -56,6 +58,8 @@ const FAQEditable = (props: FAQEditableProps): JSX.Element => {
         className={classes.answer}
       />
       <Box className={classes.actionBtnsWrapper}>
+        <DnDIcon size={32} className={classes.dndIcon} />
+
         <Button
           onClick={onUpdateClick}
           disabled={isUnchanged}

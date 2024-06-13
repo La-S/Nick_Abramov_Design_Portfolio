@@ -3,13 +3,19 @@ import { styled, Box } from '@mui/material';
 export const classes = {
   list: 'Admin-FAQs-List',
   faqWrapper: 'Admin-FAQs-FAQ-Wrapper',
+  createCard: 'Admin-FAQs-FAQ-Create-Card',
   question: 'Admin-FAQs-Question',
   answer: 'Admin-FAQs-Answer',
   actionBtnsWrapper: 'Admin-FAQs-Action-Btns-Wrapper',
   btnUpdate: 'Admin-FAQs-Btn-Update',
   btnDelete: 'Admin-FAQs-Btn-Delete',
   btnCreateWrapper: 'Admin-FAQs-Btn-Create-Wrapper',
-  btnCreate: 'Admin-FAQs-Btn-Create'
+  btnCreate: 'Admin-FAQs-Btn-Create',
+  dndIcon: 'Admin-FAQs-Dnd-Icon',
+
+  reordering: '--reordering',
+  dragging: '--dragging',
+  draggingOver: '--dragging-over',
 };
 
 const AdminFAQsContainer = styled(Box)(({ theme }) => ({
@@ -36,6 +42,14 @@ const AdminFAQsContainer = styled(Box)(({ theme }) => ({
             fill: '#c7c7c7',
           }
         }
+      },
+
+      [`.${classes.dndIcon}`]: {
+        marginRight: 'auto',
+      },
+
+      [`&.${classes.createCard}`]: {
+        borderColor: '#78a6f7'
       },
 
       '&:last-of-type': {
@@ -103,6 +117,7 @@ const FAQCard = styled('li')(({ theme }) => ({
   [`.${classes.actionBtnsWrapper}`]: {
     display: 'flex',
     justifyContent: 'flex-end',
+    alignItems: 'center',
     height: '43px',
     marginTop: 'auto',
 

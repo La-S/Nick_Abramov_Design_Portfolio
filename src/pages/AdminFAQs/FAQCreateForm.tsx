@@ -12,6 +12,7 @@ const FAQForm = (): JSX.Element => {
     question: '',
     answer: '',
   });
+  const classNames = [classes.faqWrapper, classes.createCard];
 
   const onCreateClick = (): void => {
     createFAQ(newFaq)
@@ -24,7 +25,7 @@ const FAQForm = (): JSX.Element => {
   };
 
   return (
-    <S.FAQCard className={classes.faqWrapper} >
+    <S.FAQCard className={classNames.join(' ')} >
       <TextField
         value={newFaq.question}
         placeholder='Enter question...'
