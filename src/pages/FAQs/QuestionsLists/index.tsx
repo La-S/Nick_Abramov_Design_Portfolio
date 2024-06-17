@@ -8,7 +8,8 @@ import useFAQs from '../../../hooks/useFAQs';
 
 const QuestionsLists = (): JSX.Element => {
   const { faqs } = useFAQs();
-  const questionsChunks = splitArrayIntoChunks(faqs, 4);
+  const questionsChunkSize = Math.ceil(faqs.length / 2);
+  const questionsChunks = splitArrayIntoChunks(faqs, questionsChunkSize);
 
   return (
     <S.QuestionsListsContainer>
