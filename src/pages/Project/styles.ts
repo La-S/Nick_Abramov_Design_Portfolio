@@ -1,5 +1,5 @@
 import { styled, Box } from '@mui/material';
-import { HEADER_DESKTOP_HEIGHT, HEADER_MOBILE_HEIGHT } from '../../components/Header/styles';
+import { HEADER_DESKTOP_HEIGHT, HEADER_MOBILE_HEIGHT } from '../../common/components/Header/styles';
 
 const ProjectContainer = styled(Box)(({ theme }) => ({
   '.Main-Image': {
@@ -110,7 +110,7 @@ const ProjectOverview = styled(Box)(({ theme }) => ({
 
         ul: {
           margin: '25px 0 0 0',
-  
+
           li: {
             marginBottom: '18px',
             fontSize: '18px',

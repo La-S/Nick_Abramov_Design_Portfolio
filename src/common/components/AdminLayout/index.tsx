@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { GlobalContext } from '../../contexts/global';
-import { validateAdminAuthentication } from '../../api/authMethods.api';
+import { GlobalContext } from '../../../contexts/global';
+import { validateAdminAuthentication } from '../../../api/authMethods.api';
 import AdminHeader from '../AdminHeader/AdminHeader';
-import { ADMIN_LOGIN_ROUTE } from '../../routes';
+import { ADMIN_LOGIN_ROUTE } from '../../../routes';
 
 const AdminLayout = (): JSX.Element => {
   const {

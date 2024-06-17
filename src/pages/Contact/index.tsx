@@ -1,5 +1,5 @@
 import React from 'react';
-import PageTitle from '../../components/PageTitle';
+import PageTitle from '../../common/components/PageTitle';
 import S from './styles';
 import ContactImg from '../../assets/images/contact.jpeg';
 import ContactForm from './ContactForm';

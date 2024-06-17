@@ -3,7 +3,7 @@ import { Box, CircularProgress } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import S from './styles';
 import LoadingScreenLogo from './LoadingScreenLogo';
-import { GlobalContext } from '../../contexts/global';
+import { GlobalContext } from '../../../contexts/global';
 
 const LoadingScreen = (): JSX.Element => {
   const {

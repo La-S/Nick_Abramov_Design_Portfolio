@@ -13,6 +13,12 @@ export const createFAQ = async (faqInputDto: FAQInputDto): Promise<AxiosResponse
   api.post<FAQ>(ROUTE, faqInputDto)
 );
 
+export const reorderFAQs = async (id: string, newOrder: number): Promise<AxiosResponse<FAQ>> => {
+  const route = `${ROUTE}/reorder`;
+  const body = { id, newOrder };
+  return api.put(route, body);
+};
+
 export const updateFAQ = async (id: string, faqInputDto: FAQInputDto): Promise<AxiosResponse<FAQ>> => {
   const route = `${ROUTE}/${id}`;
   return api.put(route, faqInputDto);

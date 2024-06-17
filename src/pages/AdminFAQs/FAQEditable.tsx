@@ -1,25 +1,43 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
 import {
   Trash as DeleteIcon,
   Check as UpdateIcon,
   DotsSix as DnDIcon,
 } from '@phosphor-icons/react';
-import { deleteFAQ, updateFAQ } from '../../api/faqMethods';
+import { deleteFAQ, reorderFAQs, updateFAQ } from '../../api/faqMethods';
 import type { FAQ } from '../../types/data/faq';
 import type { FAQInputDto } from '../../types/data/faqAPI';
 import S, { classes } from './styles';
-import { useQueryClient } from '@tanstack/react-query';
+import { AdminFAQsGridContext } from './contexts';
+import { dndClasses, handleDragOver, handleDragStart, handleDrop } from '../../common/dndGridFeature';
+import { QueryClient } from '@tanstack/react-query';
 
 interface FAQEditableProps {
   faq: FAQ;
+  queryClient: QueryClient;
 }
 
 const FAQEditable = (props: FAQEditableProps): JSX.Element => {
-  const queryClient = useQueryClient();
+  const {
+    reorderingState: [isReordering, setIsReordering],
+    draggingElIdState: [draggingElId, setDraggingElId],
+    draggingOverElIdState: [draggingOverElId, setDraggingOverElId],
+  } = useContext(AdminFAQsGridContext);
+  const { queryClient } = props;
   const [faq, setFaq] = useState({ ...props.faq });
   const isUnchanged = faq.question === props.faq.question && faq.answer === props.faq.answer;
-  const classNames = [classes.faqWrapper];
+
+  const classList = [classes.faqWrapper];
+  if (isReordering) {
+    classList.push(dndClasses.reordering);
+  }
+  if (draggingElId === faq.id) {
+    classList.push(dndClasses.dragging);
+  }
+  if (draggingOverElId === faq.id) {
+    classList.push(dndClasses.draggingOver);
+  }
 
   const onUpdateClick = (): void => {
     const faqInputDto: FAQInputDto = {
@@ -44,7 +62,34 @@ const FAQEditable = (props: FAQEditableProps): JSX.Element => {
   };
 
   return (
-    <S.FAQCard className={classNames.join(' ')} draggable>
+    <S.FAQCard
+      className={classList.join(' ')}
+      draggable={!isReordering}
+      onDragStart={(e) => handleDragStart(
+        e,
+        faq.id,
+        setDraggingElId,
+      )}
+      onDragOver={(e) => handleDragOver(
+        e,
+        faq.id,
+        setDraggingOverElId,
+      )}
+      onDrop={(e) => (
+        handleDrop(
+          e,
+          faq.id,
+          faq.order,
+          setIsReordering,
+          queryClient,
+          ['faqs'],
+          setDraggingElId,
+          setDraggingOverElId,
+          reorderFAQs
+        )
+      )
+      }
+    >
       <TextField
         defaultValue={faq.question}
         onChange={(e) => setFaq({...faq, question: e.target.value })}

@@ -4,7 +4,7 @@ import Markdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useProject from '../../hooks/useProject';
-import BoxUnderline from '../../components/BoxUnderline';
+import BoxUnderline from '../../common/components/BoxUnderline';
 import ProjectGalleryGrid from './ProjectGalleryGrid';
 import S from './styles';
 import { GlobalContext } from '../../contexts/global';

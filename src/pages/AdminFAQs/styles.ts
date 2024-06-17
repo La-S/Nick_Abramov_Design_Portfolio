@@ -1,4 +1,5 @@
-import { styled, Box } from '@mui/material';
+import { styled, Box, alpha } from '@mui/material';
+import { dndClasses } from '../../common/dndGridFeature';
 
 export const classes = {
   list: 'Admin-FAQs-List',
@@ -12,10 +13,6 @@ export const classes = {
   btnCreateWrapper: 'Admin-FAQs-Btn-Create-Wrapper',
   btnCreate: 'Admin-FAQs-Btn-Create',
   dndIcon: 'Admin-FAQs-Dnd-Icon',
-
-  reordering: '--reordering',
-  dragging: '--dragging',
-  draggingOver: '--dragging-over',
 };
 
 const AdminFAQsContainer = styled(Box)(({ theme }) => ({
@@ -50,6 +47,34 @@ const AdminFAQsContainer = styled(Box)(({ theme }) => ({
 
       [`&.${classes.createCard}`]: {
         borderColor: '#78a6f7'
+      },
+
+      [`&.${dndClasses.dragging}`]: {
+        opacity: 0.5,
+      },
+
+      [`&.${dndClasses.draggingOver}`]: {
+        border: `2px dashed ${theme.componentColors.backgroundTertiary}`,
+      },
+
+      [`&.${dndClasses.reordering}`]: {
+        '&::after': {
+          content: '""',
+          display: 'block',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: alpha(theme.componentColors.backgroundMain, 0.1),
+          cursor: 'disabled',
+        },
+      },
+
+      [`&:not(.${dndClasses.reordering})`]: {
+        '&:hover': {
+          cursor: 'grab',
+        },
       },
 
       '&:last-of-type': {

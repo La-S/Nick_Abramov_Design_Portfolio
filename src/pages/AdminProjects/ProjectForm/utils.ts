@@ -2,7 +2,7 @@ import copy from 'copy-text-to-clipboard';
 import { SelectChangeEvent } from '@mui/material';
 import { uploadImage } from '../../../api/uploadMethods.api';
 import type { ProjectGalleryRow } from '../../../types/data/project';
-import type { AlertDisplayProps, SetAlertDisplayProps } from '../../../components/Alert/props';
+import type { AlertDisplayProps, SetAlertDisplayProps } from '../../../common/components/Alert/props';
 
 const updateGalleryRows = (
   e: SelectChangeEvent<1 | 2 | 3 | 4>,

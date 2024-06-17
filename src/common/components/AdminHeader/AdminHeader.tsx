@@ -3,8 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { ButtonBase, Typography, useTheme } from '@mui/material';
 import { SignOut as SignOutIcon } from '@phosphor-icons/react';
 import Logo from '../Logo';
-import { GlobalContext } from '../../contexts/global';
-import { cookies } from '../../api/api';
+import { GlobalContext } from '../../../contexts/global';
+import { cookies } from '../../../api/api';
 import S from './styles';
 import HeaderStyles from '../../components/Header/styles';
 

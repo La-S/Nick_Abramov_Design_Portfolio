@@ -1,10 +1,9 @@
 import type { Dispatch, SetStateAction } from 'react';
-import type { Project } from '../../../../types/data/project';
-import { reorderProjects } from '../../../../api/projectMethods.api';
-import { QueryClient } from '@tanstack/react-query';
+import type { QueryClient, QueryKey } from '@tanstack/react-query';
+import { AxiosResponse } from 'axios';
 
 export const handleDragStart = (
-  e: React.DragEvent<HTMLDivElement>,
+  e: React.DragEvent<HTMLElement>,
   id: string,
   setDraggingElId: Dispatch<SetStateAction<null | string>>,
 ) => {
@@ -14,7 +13,7 @@ export const handleDragStart = (
 };
 
 export const handleDragOver = (
-  e: React.DragEvent<HTMLDivElement>,
+  e: React.DragEvent<HTMLElement>,
   id: string,
   setDraggingOverElId: Dispatch<SetStateAction<null | string>>,
 ) => {
@@ -24,25 +23,26 @@ export const handleDragOver = (
 };
 
 export const handleDrop = (
-  e: React.DragEvent<HTMLDivElement>,
+  e: React.DragEvent<HTMLElement>,
   id: string,
-  newOrder: Project['order'],
+  newOrder: number,
   setIsReordering: Dispatch<SetStateAction<boolean>>,
   queryClient: QueryClient,
+  queryKey: QueryKey,
   setDraggingElId: Dispatch<SetStateAction<null | string>>,
   setDraggingOverElId: Dispatch<SetStateAction<null | string>>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  callback: (documentId: string, newOrder: number) => Promise<AxiosResponse<any>>,
 ) => {
-  const projectId = e.dataTransfer.getData('id');
+  const documentId = e.dataTransfer.getData('id');
   setDraggingElId(null);
   setDraggingOverElId(null);
 
-  if (projectId === id) {
-    return;
-  }
+  if (documentId === id) return;
 
   setIsReordering(true);
-  reorderProjects(projectId, newOrder)
-    .then(() => queryClient.invalidateQueries({ queryKey: ['projects'] }))
+  callback(documentId, newOrder)
+    .then(() => queryClient.invalidateQueries({ queryKey }))
     .catch((err) => alert(err))
     .finally(() => setIsReordering(false));
 };

@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useLayoutEffect } from 'react';
 import { Typography } from '@mui/material';
 import S from './styles';
 import QuestionsList from './QuestionsLists';
-import PageTitle from '../../components/PageTitle';
+import PageTitle from '../../common/components/PageTitle';
 import { GlobalContext } from '../../contexts/global';
 import useFAQs from '../../hooks/useFAQs';
 import { checkIfCachedQueryDataExists } from '../../utils/loadingUtils';

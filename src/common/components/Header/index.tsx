@@ -6,10 +6,10 @@ import { List as BurgerIcon } from '@phosphor-icons/react';
 import Logo from '../Logo';
 import NavMenu from './NavMenu';
 import S from './styles';
-import { getCurrentThemeName, setCurrentThemeNameInStorage } from '../../utils/themeUtils';
-import { GlobalContext } from '../../contexts/global';
-import lightTheme from '../../assets/themes/lightTheme';
-import defaultTheme from '../../assets/themes/defaultTheme';
+import { getCurrentThemeName, setCurrentThemeNameInStorage } from '../../../utils/themeUtils';
+import { GlobalContext } from '../../../contexts/global';
+import lightTheme from '../../../assets/themes/lightTheme';
+import defaultTheme from '../../../assets/themes/defaultTheme';
 
 const Header = (): JSX.Element => {
   const pathName = useLocation().pathname.substring(1);

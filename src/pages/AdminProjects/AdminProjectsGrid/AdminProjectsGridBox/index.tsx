@@ -7,11 +7,12 @@ import {
   PencilSimple as EditIcon,
   DotsSix as DnDIcon,
 } from '@phosphor-icons/react';
-import { deleteProject } from '../../../../api/projectMethods.api';
+import { deleteProject, reorderProjects } from '../../../../api/projectMethods.api';
 import { QueryClient } from '@tanstack/react-query';
 import ProjectForm from '../../ProjectForm';
 import { AdminProjectsGridContext } from '../contexts';
-import { handleDragOver, handleDragStart, handleDrop } from './utils';
+import { dndClasses } from '../../../../common/dndGridFeature/styles';
+import { handleDragOver, handleDragStart, handleDrop } from '../../../../common/dndGridFeature/dndUtils';
 
 interface Props {
   project: Project;
@@ -30,19 +31,19 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
   const handleDelete = () => {
     deleteProject(project.id)
       .then(() => queryClient.invalidateQueries({ queryKey: ['projects'] }))
-      .catch((err) => console.log(err))
+      .catch((err) => alert(err.response.data.message))
       .finally(() => setDeletionModalOpen(false));
   };
 
   const classList = [];
   if (isReordering) {
-    classList.push('AdminProjectsGridBox--reordering');
+    classList.push(dndClasses.reordering);
   }
   if (draggingElId === project.id) {
-    classList.push('AdminProjectsGridBox--dragging');
+    classList.push(dndClasses.dragging);
   }
   if (draggingOverElId === project.id) {
-    classList.push('AdminProjectsGridBox--dragging-over');
+    classList.push(dndClasses.draggingOver);
   }
 
   return (
@@ -66,8 +67,10 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
           project.order,
           setIsReordering,
           queryClient,
+          ['projects'],
           setDraggingElId,
           setDraggingOverElId,
+          reorderProjects,
         )}
         className={classList.join(' ')}
       >

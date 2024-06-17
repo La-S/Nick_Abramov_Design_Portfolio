@@ -27,13 +27,16 @@ const AdminProjectsGrid = (): JSX.Element => {
             <CircularProgress />
           </S.LoadingBox>
         ) : (
-          projects.map((project, i) => (
-            <AdminProjectsGridBox 
-              key={i} 
-              project={project} 
-              queryClient={queryClient} 
-            />
-          ))
+          projects.map((project) => {
+            const uniqueOrderId =`${project.id} ${project.order}`;
+            return (
+              <AdminProjectsGridBox
+                key={uniqueOrderId}
+                project={project}
+                queryClient={queryClient}
+              />
+            );
+          })
         )}
       </S.AdminProjectsGrid>
     </AdminProjectsGridContext.Provider>

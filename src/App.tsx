@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { GlobalContext } from './contexts/global';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
-import AnimatedCursor from './components/AnimatedCursor';
+import AnimatedCursor from './common/components/AnimatedCursor';
 import { getCurrentTheme } from './utils/themeUtils';
-import BodyContainer from './components/BodyContainer';
+import BodyContainer from './common/components/BodyContainer';
 import { hideScrollbarOnLoading } from './utils/domUtils';
 
 const checkIfTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;

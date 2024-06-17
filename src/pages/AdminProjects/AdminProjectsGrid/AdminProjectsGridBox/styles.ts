@@ -1,4 +1,5 @@
 import { styled, Modal, Card, alpha } from '@mui/material';
+import { dndClasses } from '../../../../common/dndGridFeature';
 
 const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -32,7 +33,7 @@ const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
     alignItems: 'center',
     flexGrow: 1,
     paddingTop: '0',
-    
+
     '.CardButtons-Wrapper': {
       display: 'flex',
 
@@ -42,15 +43,16 @@ const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
     },
   },
 
-  '&.AdminProjectsGridBox--dragging': {
+
+  [`&.${dndClasses.dragging}`]: {
     opacity: 0.5,
   },
 
-  '&.AdminProjectsGridBox--dragging-over': {
+  [`&.${dndClasses.draggingOver}`]: {
     border: `2px dashed ${theme.componentColors.backgroundTertiary}`,
   },
 
-  '&.AdminProjectsGridBox--reordering': {
+  [`&.${dndClasses.reordering}`]: {
     '&::after': {
       content: '""',
       display: 'block',
@@ -64,7 +66,7 @@ const AdminProjectsGridBox = styled(Card)(({ theme }) => ({
     },
   },
 
-  '&:not(.AdminProjectsGridBox--reordering)': {
+  [`&:not(.${dndClasses.reordering})`]: {
     '&:hover': {
       cursor: 'grab',
     },

@@ -1,5 +1,5 @@
 import { styled, Box } from '@mui/material';
-import { HEADER_DESKTOP_HEIGHT, HEADER_MOBILE_HEIGHT } from '../../components/Header/styles';
+import { HEADER_DESKTOP_HEIGHT, HEADER_MOBILE_HEIGHT } from '../../common/components/Header/styles';
 
 const LandingContainer = styled(Box)(({ theme }) => ({
   display: 'flex',

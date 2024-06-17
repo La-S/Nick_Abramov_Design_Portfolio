@@ -13,7 +13,7 @@ import {
   Checkbox,
   AlertColor,
 } from '@mui/material';
-import Alert from '../../../components/Alert';
+import Alert from '../../../common/components/Alert';
 import { X as CloseIcon, Trash as TrashIcon, UploadSimple as UploadIcon } from '@phosphor-icons/react';
 import { createProject, getProject, updateProject } from '../../../api/projectMethods.api';
 import type { ProjectGalleryRow } from '../../../types/data/project';
@@ -22,7 +22,7 @@ import formUtils from './utils';
 import S from './styles';
 import { useQueryClient } from '@tanstack/react-query';
 import { EMPTY_PROJECT } from '../../../hooks/useProject';
-import type { AlertDisplayProps } from '../../../components/Alert/props';
+import type { AlertDisplayProps } from '../../../common/components/Alert/props';
 
 interface Props {
   setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;

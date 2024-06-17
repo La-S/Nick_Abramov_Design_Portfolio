@@ -1,5 +1,5 @@
 import { styled, Box, alpha } from '@mui/material';
-import { HEADER_DESKTOP_HEIGHT } from '../../../components/Header/styles';
+import { HEADER_DESKTOP_HEIGHT } from '../../../common/components/Header/styles';
 
 const ProjectNavBar = styled(Box)(({ theme }) => ({
   '.Static-NavProject-Buttons': {
@@ -10,31 +10,31 @@ const ProjectNavBar = styled(Box)(({ theme }) => ({
     padding: '0 120px',
     position: 'relative',
     top: '20px',
-  
+
     '.MuiButton-root': {
       color: theme.textColors.main,
       textTransform: 'none',
-      
+
       '.MuiTypography-root': {
         fontFamily: theme.fonts.main,
         fontSize: '30px',
         transition: 'font-size 0.2s ease-in-out',
       },
-  
+
       '.MuiButton-startIcon, .MuiButton-endIcon': {
         svg: {
           fontSize: '32px',
           transition: 'font-size 0.2s ease-in-out',
         },
       },
-  
+
       '&:hover': {
         backgroundColor: 'transparent',
 
         '.MuiTypography-root': {
           fontSize: '32px',
         },
-  
+
         '.MuiButton-startIcon, .MuiButton-endIcon': {
           svg: {
             fontSize: '34px',
@@ -101,7 +101,7 @@ const ProjectNavBar = styled(Box)(({ theme }) => ({
       div: {
         flexBasis: '50%',
       },
-  
+
       '.MuiButton-root': {
         textTransform: 'none',
 
@@ -109,18 +109,18 @@ const ProjectNavBar = styled(Box)(({ theme }) => ({
           fontSize: '20px',
           lineHeight: '1.3',
         },
-  
+
         '.MuiButton-startIcon, .MuiButton-endIcon': {
           svg: {
             fontSize: '22px',
           },
         },
-  
+
         '&:hover': {
           '.MuiTypography-root': {
             fontSize: '20px',
           },
-  
+
           '.MuiButton-startIcon, .MuiButton-endIcon': {
             svg: {
               fontSize: '22px',
