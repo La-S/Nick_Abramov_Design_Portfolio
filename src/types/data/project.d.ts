@@ -1,7 +1,12 @@
+export type ProjectMainImage = {
+  path: string;
+  alt?: string;
+};
+
 export type ProjectGalleryCell = {
   type: 'image link' | 'direct video link' | 'embedded video link';
   path: string;
-  lazyPath?: string /* for type === 'image' */;
+  alt?: string;
 };
 
 export type ProjectGalleryRow = {
@@ -14,7 +19,7 @@ export interface Project {
   order: number;
   name: string;
   category: string;
-  mainImagePath: string;
+  mainImage: ProjectMainImage;
   dateCreated: number;
   description: string;
   isGallerySpaced: boolean;

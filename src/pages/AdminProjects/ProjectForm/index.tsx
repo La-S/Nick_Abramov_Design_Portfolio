@@ -43,7 +43,7 @@ const ProjectForm = (props: Props): JSX.Element => {
   const [nameValue, setNameValue] = useState(project.name);
   const [categoryValue, setCategoryValue] = useState(project.category);
   const [descriptionValue, setDescriptionValue] = useState(project.description);
-  const [mainImagePathValue, setMainImagePathValue] = useState(project.mainImagePath);
+  const [mainImageValue, setMainImageValue] = useState(project.mainImage);
   const [isGallerySpacedValue, setIsGallerySpacedValue] = useState(project.isGallerySpaced);
   const [galleryValues, setGalleryValues] = useState(project.gallery);
 
@@ -51,7 +51,7 @@ const ProjectForm = (props: Props): JSX.Element => {
     setNameValue('');
     setCategoryValue('');
     setDescriptionValue('');
-    setMainImagePathValue('');
+    setMainImageValue({ path: '' });
     setGalleryValues([]);
   };
 
@@ -61,7 +61,7 @@ const ProjectForm = (props: Props): JSX.Element => {
       name: nameValue.trim(),
       category: categoryValue.trim(),
       description: descriptionValue.trim(),
-      mainImagePath: mainImagePathValue.trim(),
+      mainImage: { ...mainImageValue },
       isGallerySpaced: isGallerySpacedValue,
       gallery: [...galleryValues],
     };
@@ -169,14 +169,27 @@ const ProjectForm = (props: Props): JSX.Element => {
           <Box className="CoverImagePath-Box">
             <TextField
               variant="outlined"
-              value={mainImagePathValue}
+              value={mainImageValue.path}
               placeholder="Cover Image Path"
               required
               onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
-                setMainImagePathValue((target as HTMLInputElement).value);
+                const imagePath = (target as HTMLInputElement).value;
+                setMainImageValue({ ...mainImageValue, path: imagePath });
               }}
             />
-            {UploadImageButton((imagePath) => setMainImagePathValue(imagePath))}
+            {UploadImageButton((imagePath) => setMainImageValue({ ...mainImageValue, path: imagePath }))}
+          </Box>
+          <Box className="CoverImageAlt-Box">
+            <TextField
+              variant="outlined"
+              value={mainImageValue.alt}
+              placeholder="Cover Image Alt Text (SEO)"
+              required
+              onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                const altText = (target as HTMLInputElement).value;
+                setMainImageValue({ ...mainImageValue, alt: altText });
+              }}
+            />
           </Box>
           <Divider />
 
@@ -241,6 +254,7 @@ const ProjectForm = (props: Props): JSX.Element => {
                     onChange={(e) => {
                       const newGalleryValues = [...galleryValues];
                       newGalleryValues[i].cells[j].type = e.target.value as ProjectGalleryRow['cells'][number]['type'];
+                      if (cellValue.type && cellValue.type !== 'image link') newGalleryValues[i].cells[j].alt =  '';
                       setGalleryValues(newGalleryValues);
                     }}
                   >
@@ -248,18 +262,33 @@ const ProjectForm = (props: Props): JSX.Element => {
                     <MenuItem value="direct video link">direct video link</MenuItem>
                     <MenuItem value="embedded video link">youtube video link</MenuItem>
                   </Select>
-                  <TextField
-                    variant="outlined"
-                    type="text"
-                    value={cellValue.path}
-                    placeholder="Path"
-                    onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
-                      const newGalleryValues = [...galleryValues];
-                      newGalleryValues[i].cells[j].path = (target as HTMLInputElement).value;
-                      setGalleryValues(newGalleryValues);
-                    }}
-                  />
-                  {(cellValue.type === 'image link' || !cellValue.type) && !cellValue.path
+                  <Box className="Cell-Link-Path-Box">
+                    <TextField
+                      variant="outlined"
+                      type="text"
+                      value={cellValue.path}
+                      placeholder="Path"
+                      onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                        const newGalleryValues = [...galleryValues];
+                        newGalleryValues[i].cells[j].path = (target as HTMLInputElement).value;
+                        setGalleryValues(newGalleryValues);
+                      }}
+                    />
+                    {cellValue.type === 'image link' ? (
+                      <TextField
+                        className='Cell-Link-Alt-Field'
+                        variant="outlined"
+                        value={cellValue.alt}
+                        placeholder="Alt Text (SEO)"
+                        onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                          const newGalleryValues = [...galleryValues];
+                          newGalleryValues[i].cells[j].alt = (target as HTMLInputElement).value;
+                          setGalleryValues(newGalleryValues);
+                        }}
+                      />
+                    ): <></>}
+                  </Box>
+                  {(cellValue.type === 'image link' || !cellValue.type)
                     ? UploadImageButton((imagePath) => {
                       const newGalleryValues = [...galleryValues];
                       newGalleryValues[i].cells[j].path = imagePath;
@@ -302,7 +331,7 @@ const ProjectForm = (props: Props): JSX.Element => {
     setNameValue(project.name);
     setCategoryValue(project.category);
     setDescriptionValue(project.description);
-    setMainImagePathValue(project.mainImagePath);
+    setMainImageValue(project.mainImage);
     setGalleryValues(project.gallery);
     setIsGallerySpacedValue(project.isGallerySpaced);
   }, [project]);

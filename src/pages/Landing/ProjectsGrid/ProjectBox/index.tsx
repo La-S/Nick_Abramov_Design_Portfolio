@@ -22,7 +22,7 @@ const ProjectBox = forwardRef(({ project }: Props, ref) => {
   const {
     pageLoadingState: [, setIsPageLoading],
   } = useContext(GlobalContext);
-  const { category, mainImagePath, id, name } = project;
+  const { category, mainImage, id, name } = project;
   const formattedProjectName = formatProjectName(name);
 
   return (
@@ -39,13 +39,14 @@ const ProjectBox = forwardRef(({ project }: Props, ref) => {
         draggable="false"
       >
         <img
-          src={mainImagePath}
+          src={mainImage.path}
           className="ProjectBox-Img"
           draggable={false}
           onMouseOver={onProjectsTileMouseOver}
           onMouseOut={onProjectsTileMouseOut}
           onMouseMove={onProjectsTileMouseMove}
           loading='lazy'
+          {...mainImage.alt && { alt: mainImage.alt }}
         />
         <Typography className="Category-Name">{`#${category}`}</Typography>
         <Box className="ProjectBox-Shadow" />

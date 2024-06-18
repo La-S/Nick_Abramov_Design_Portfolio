@@ -96,7 +96,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
       transition: 'border-color 0.3s ease-in-out',
 
       '&::placeholder': {
-        opacity: 1,
+        opacity: 0.65,
       },
 
       '&:hover, &:focus-visible': {
@@ -123,6 +123,14 @@ const ProjectForm = styled('form')(({ theme }) => ({
 
     '.MuiTextField-root': {
       marginTop: '0',
+      flexGrow: 1,
+    },
+  },
+
+  '.CoverImageAlt-Box': {
+    display: 'flex',
+
+    '.MuiTextField-root': {
       flexGrow: 1,
     },
   },
@@ -179,7 +187,8 @@ const ProjectForm = styled('form')(({ theme }) => ({
 
   '.Cell-Links-Box': {
     display: 'flex',
-    alignItems: 'center',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
     marginBottom: '10px',
 
     '.MuiTextField-root': {
@@ -193,6 +202,24 @@ const ProjectForm = styled('form')(({ theme }) => ({
         padding: '6.25px 10px',
       },
     },
+
+    '.Cell-Link-Path-Box': {
+      flexGrow: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      rowGap: '10px',
+      marginRight: '10px',
+
+      '.MuiTextField-root': {
+        width: '100%',
+      },
+    },
+
+    '.Cell-Link-Alt-Box': {
+      flexBasis: '100%',
+      marginTop: '10px',
+      width: '125px',
+    }
   },
 
   'button:not(.EndAdornment-Button)': {

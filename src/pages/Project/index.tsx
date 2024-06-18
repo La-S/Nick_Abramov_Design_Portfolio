@@ -53,7 +53,11 @@ const Project = () => {
 
   return (
     <S.ProjectContainer>
-      <img src={project?.mainImagePath} className="Main-Image" />
+      <img
+        src={project?.mainImage.path}
+        className="Main-Image"
+        {...project?.mainImage.alt && { alt: project?.mainImage.alt }}
+      />
       <S.ProjectOverview>
         <Box className="Project-Title-Box">
           <Typography>{project?.name}</Typography>

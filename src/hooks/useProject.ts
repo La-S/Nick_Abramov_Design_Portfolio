@@ -7,7 +7,7 @@ export const EMPTY_PROJECT: Project = {
   order: 0,
   name: '',
   category: '',
-  mainImagePath: '',
+  mainImage: { path: '' },
   dateCreated: 0,
   description: '',
   isGallerySpaced: false,

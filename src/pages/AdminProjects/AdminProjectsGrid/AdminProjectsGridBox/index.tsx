@@ -74,7 +74,7 @@ const AdminProjectsGridBox = ({ project, queryClient }: Props): JSX.Element => {
         )}
         className={classList.join(' ')}
       >
-        <CardMedia sx={{ height: 250 }} image={project.mainImagePath} />
+        <CardMedia sx={{ height: 250 }} image={project.mainImage.path} />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             {project.category}

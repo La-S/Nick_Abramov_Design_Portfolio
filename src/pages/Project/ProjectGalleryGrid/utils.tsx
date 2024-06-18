@@ -9,7 +9,7 @@ const renderCell = (cell: ProjectGalleryCell): JSX.Element => {
   if (!cell.path) return <></>;
 
   if (cell.type === 'image link') {
-    return <img className="Loadable-Image" src={cell.path} loading="lazy" />;
+    return <img className="Loadable-Image" src={cell.path} loading="lazy" {...cell.alt && { alt: cell.alt }} />;
   }
   if (cell.type === 'direct video link') {
     return <video className="Loadable-Direct-Video" src={cell.path} autoPlay loop muted />;

@@ -1,5 +1,4 @@
-import { ProjectGalleryRow } from './project';
-import type { Project } from './project';
+import type { Project, ProjectMainImage, ProjectGalleryRow } from './project';
 
 export type ProjectGetRequest =
   | {
@@ -13,7 +12,7 @@ export type ProjectInputDto = {
   name: string;
   category: string;
   description: string;
-  mainImagePath: string;
+  mainImage: ProjectMainImage;
   isGallerySpaced: boolean;
   gallery: Array<ProjectGalleryRow>;
 };
