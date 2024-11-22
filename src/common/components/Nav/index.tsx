@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const LINKS = [
   { name: 'Home', path: '/' },
+  { name: 'Photo Blog', path: '/photo-blog' },
   { name: 'FAQ', path: '/questions' },
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },

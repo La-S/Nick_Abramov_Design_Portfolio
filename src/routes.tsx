@@ -8,6 +8,7 @@ import ContactPage from './pages/Contact';
 import AdminLoginPage from './pages/AdminLogin';
 import AdminProjectsPage from './pages/AdminProjects';
 import AdminFAQsPage from './pages/AdminFAQs';
+import PhotoBlogProjectsPage from './pages/PhotoBlogProjects';
 
 export type RouteFixture = {
   path: string;
@@ -30,6 +31,10 @@ export const MAIN_ROUTES: Array<RouteFixture> = [
   {
     path: '/projects/:projectName',
     element: <ProjectPage />,
+  },
+  {
+    path: '/photo-blog',
+    element: <PhotoBlogProjectsPage />,
   },
   {
     path: '/about',

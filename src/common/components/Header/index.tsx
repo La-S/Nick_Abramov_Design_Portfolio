@@ -53,7 +53,7 @@ const Header = (): JSX.Element => {
   return (
     <S.Header pathName={pathName}>
       <S.NewProjectLink to="/contact" pathName={pathName}>
-        Start a project
+        Get in Touch
       </S.NewProjectLink>
       <S.LogoContainer>
         <Logo fillMain={fillMain} fillSecondary={componentColors.logoSecondary} isLink />
