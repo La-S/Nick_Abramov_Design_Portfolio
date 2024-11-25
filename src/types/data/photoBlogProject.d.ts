@@ -38,3 +38,5 @@ export interface PhotoBlogProject {
   mainImage: PhotoBlogProjectMainImage;
   gallerySections: Array<PhotoBlogProjectGallerySection>;
 }
+
+export type PhotoBlogProjectSummary = Omit<PhotoBlogProject, 'gallerySections'>;

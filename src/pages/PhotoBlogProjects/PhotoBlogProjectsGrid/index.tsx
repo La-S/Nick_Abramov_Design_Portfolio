@@ -1,14 +1,24 @@
 import React from 'react';
 import S from './styles';
 import PhotoBlogProjectsGridBox from './PhotoBlogProjectsGridBox';
+import usePhotoBlogProjects from '../../../hooks/usePhotoBlogProjects';
 
 const PhotoBlogProjectsGrid = (): JSX.Element => {
+  const {
+    photoBlogProjects,
+    ...photoBlogProjectsResponse
+  } = usePhotoBlogProjects({ summary: true });
+
   return (
     <S.PhotoBlogProjectsGrid>
       {
-        [...new Array(7)].map((_, i) => (
-          <PhotoBlogProjectsGridBox key={i} />
-        ))
+        photoBlogProjectsResponse.isFetched
+          ? photoBlogProjects.map((photoBlogProjectSummary, i) => (
+            <PhotoBlogProjectsGridBox
+              photoBlogProjectSummary={photoBlogProjectSummary}
+              key={i}
+            />
+          )) : <></>
       }
     </S.PhotoBlogProjectsGrid>
   );

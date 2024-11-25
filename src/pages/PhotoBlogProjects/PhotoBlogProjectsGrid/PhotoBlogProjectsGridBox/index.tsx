@@ -5,22 +5,23 @@ import { formatStringToUriPath } from '../../../../utils/apiUtils';
 import { checkIfCachedQueryDataExists } from '../../../../utils/loadingUtils';
 import { GlobalContext } from '../../../../contexts/global';
 import S, { classes } from './styles';
+import type { PhotoBlogProjectSummary } from '../../../../types/data/photoBlogProject';
+import { generatePhotoBlogProjectDateString } from '../../utils';
 
-const PhotoBlogProjectsGridBox = (): JSX.Element => {
+interface PhotoBlogProjectsGridBoxProps {
+  photoBlogProjectSummary: PhotoBlogProjectSummary
+}
+
+const PhotoBlogProjectsGridBox = ({
+  photoBlogProjectSummary,
+}: PhotoBlogProjectsGridBoxProps): JSX.Element => {
   const queryClient = useQueryClient();
   const {
     pageLoadingState: [, setIsPageLoading],
   } = useContext(GlobalContext);
-  const {
-    id, name, dateCreatedString, imagePath, altText,
-  } = {
-    id: 1,
-    name: 'Photo Blog Sample Project 1',
-    dateCreatedString: 'November 2024',
-    imagePath: 'https://images.pexels.com/photos/56866/garden-rose-red-pink-56866.jpeg?cs=srgb&dl=pexels-pixabay-56866.jpg&fm=jpg',
-    altText: 'Sample Photo Blog Project 1',
-  };
-  const formattedName = formatStringToUriPath(name);
+  const { id, dateInfo, nameInfo, mainImage } = photoBlogProjectSummary;
+  const formattedName = formatStringToUriPath(nameInfo.full);
+  const formattedDateString = generatePhotoBlogProjectDateString(dateInfo);
 
   return (
     <S.PhotoBlogProjectsGridBox>
@@ -33,11 +34,11 @@ const PhotoBlogProjectsGridBox = (): JSX.Element => {
         }}
         draggable="false"
       >
-        <img src={imagePath} alt={altText} />
+        <img src={mainImage.path} {...(mainImage.alt ? { alt: mainImage.alt } : {})} />
 
         <p>
-          <span className={classes.name}>{name}</span>
-          <span className={classes.dateCreatedString}>{dateCreatedString}</span>
+          <span className={classes.name}>{nameInfo.short || nameInfo.full}</span>
+          <span className={classes.dateCreatedString}>{formattedDateString}</span>
         </p>
       </Link>
     </S.PhotoBlogProjectsGridBox>
