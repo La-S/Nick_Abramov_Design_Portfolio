@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import LandingPage from './pages/Landing/Landing';
+import LandingPage from './pages/Landing';
 import ProjectPage from './pages/Project';
 import AboutPage from './pages/About';
 import FAQsPage from './pages/FAQs';

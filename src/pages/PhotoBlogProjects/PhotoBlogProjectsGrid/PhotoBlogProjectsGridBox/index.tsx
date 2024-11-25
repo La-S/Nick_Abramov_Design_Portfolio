@@ -34,7 +34,11 @@ const PhotoBlogProjectsGridBox = ({
         }}
         draggable="false"
       >
-        <img src={mainImage.path} {...(mainImage.alt ? { alt: mainImage.alt } : {})} />
+        <img
+          src={mainImage.path}
+          className='Loadable-Image'
+          {...(mainImage.alt ? { alt: mainImage.alt } : {})}
+        />
 
         <p>
           <span className={classes.name}>{nameInfo.short || nameInfo.full}</span>

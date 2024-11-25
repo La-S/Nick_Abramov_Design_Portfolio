@@ -1,11 +1,11 @@
 import { styled } from '@mui/material';
+import { HEADER_DESKTOP_HEIGHT, HEADER_MOBILE_HEIGHT } from '../../common/components/Header/styles';
 
 export const classes = {
   headingTextBox: 'PhotoBlogProjects-HeadingTextBox',
 };
 
 const PhotoBlogProjectsPage = styled('div')(({ theme }) => ({
-  // 32 21
   padding: '0 48px',
 
   [`.${classes.headingTextBox}`]: {
@@ -30,6 +30,20 @@ const PhotoBlogProjectsPage = styled('div')(({ theme }) => ({
     },
   },
 
+  '.No-Photo-Blog-Projects-Box': {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: `calc(100vh - ${HEADER_DESKTOP_HEIGHT}px)`,
+
+    '.MuiTypography-root': {
+      position: 'relative',
+      bottom: `${HEADER_DESKTOP_HEIGHT}px`,
+      fontFamily: theme.fonts.main,
+      fontSize: '24px',
+    },
+  },
+
   [theme.breakpoints.down('tablet')]: {
     padding: '0 19px',
 
@@ -38,6 +52,15 @@ const PhotoBlogProjectsPage = styled('div')(({ theme }) => ({
 
       p: {
         fontSize: 20,
+      },
+    },
+
+    '.No-Photo-Blog-Projects-Box': {
+      height: `calc(100vh - ${HEADER_MOBILE_HEIGHT}px)`,
+
+      '.MuiTypography-root': {
+        bottom: `${HEADER_MOBILE_HEIGHT}px`,
+        fontSize: '24px',
       },
     },
   },
