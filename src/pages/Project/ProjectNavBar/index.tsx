@@ -8,7 +8,7 @@ import S from './styles';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../../../contexts/global';
 import { useQueryClient } from '@tanstack/react-query';
-import { formatProjectName } from '../../Landing/ProjectsGrid/ProjectBox/utils';
+import { formatStringToUriPath } from '../../../utils/apiUtils';
 
 interface Props {
   project: Project
@@ -36,7 +36,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
         {navProjects.prev ? (
           <Link
             onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.prev!.id, setIsPageLoading)}
-            to={`/projects/${formatProjectName(navProjects.prev.name)}`}
+            to={`/projects/${formatStringToUriPath(navProjects.prev.name)}`}
             state={{ projectId: navProjects.prev.id }}
             className='Prev-Project-Button'
           >
@@ -55,7 +55,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
         {navProjects.next ? (
           <Link
             onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.next!.id, setIsPageLoading)}
-            to={`/projects/${formatProjectName(navProjects.next.name)}`}
+            to={`/projects/${formatStringToUriPath(navProjects.next.name)}`}
             state={{ projectId: navProjects.next.id }}
             className='Next-Project-Button'
           >
@@ -77,7 +77,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
       {navProjects.prev ? (
         <Link
           onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.prev!.id, setIsPageLoading)}
-          to={`/projects/${formatProjectName(navProjects.prev.name)}`}
+          to={`/projects/${formatStringToUriPath(navProjects.prev.name)}`}
           state={{ projectId: navProjects.prev.id }}
           ref={fixedPrevArrowRef}
           className='Prev-Project-Button'
@@ -91,7 +91,7 @@ const ProjectNavBar = ({ project }: Props): JSX.Element => {
       {navProjects.next ? (
         <Link
           onClick={() => utils.toggleLoadingOnUnloadedProject(queryClient, navProjects.next!.id, setIsPageLoading)}
-          to={`/projects/${formatProjectName(navProjects.next.name)}`}
+          to={`/projects/${formatStringToUriPath(navProjects.next.name)}`}
           state={{ projectId: navProjects.next.id }}
           ref={fixedNextArrowRef}
           className='Next-Project-Button'

@@ -22,11 +22,3 @@ export const onProjectsTileMouseMove = (e: ProjectBoxMouseEvent) => {
 
   projectImage.style.transformOrigin = `${transformOriginX}% ${transformOriginY}%`;
 };
-
-export const formatProjectName = (name: string) => {
-  const nameLowerCase = name.toLowerCase();
-  const filteredNameParts = nameLowerCase.split(' ').filter((namePart) => namePart !== '-');
-  const formattedName = filteredNameParts.join('-');
-
-  return formattedName;
-};

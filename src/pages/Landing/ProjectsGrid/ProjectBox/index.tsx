@@ -6,8 +6,8 @@ import {
   onProjectsTileMouseMove,
   onProjectsTileMouseOut,
   onProjectsTileMouseOver,
-  formatProjectName,
 } from './utils';
+import { formatStringToUriPath } from '../../../../utils/apiUtils';
 import { useQueryClient } from '@tanstack/react-query';
 import { GlobalContext } from '../../../../contexts/global';
 import { checkIfCachedQueryDataExists } from '../../../../utils/loadingUtils';
@@ -23,7 +23,7 @@ const ProjectBox = forwardRef(({ project }: Props, ref) => {
     pageLoadingState: [, setIsPageLoading],
   } = useContext(GlobalContext);
   const { category, mainImage, id, name } = project;
-  const formattedProjectName = formatProjectName(name);
+  const formattedProjectName = formatStringToUriPath(name);
 
   return (
     <S.ProjectBox className="ProjectBox-Container" ref={ref}>
