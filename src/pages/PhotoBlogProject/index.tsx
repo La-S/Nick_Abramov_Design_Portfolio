@@ -8,6 +8,7 @@ import PhotoBlogProjectGalleryGrid from './PhotoBlogProjectGalleryGrid';
 import Lightbox from 'yet-another-react-lightbox';
 import { Video, Zoom } from 'yet-another-react-lightbox/plugins';
 import { getPhotoBlogProjectLightboxSlides } from './utils';
+import { LightboxContext } from './context';
 
 const PhotoBlogProjectPage = (): JSX.Element => {
   // const {
@@ -32,9 +33,8 @@ const PhotoBlogProjectPage = (): JSX.Element => {
   const formattedDateString = generatePhotoBlogProjectDateString(dateInfo);
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const [slideIndex, /*setSlideIndex*/] = useState(0);
+  const [slideIndex, setSlideIndex] = useState(0);
   const slides = getPhotoBlogProjectLightboxSlides(photoBlogProject);
-  console.log({ slides });
 
   const OverviewSection = (
     <div className={classes.overviewContainer}>
@@ -44,33 +44,46 @@ const PhotoBlogProjectPage = (): JSX.Element => {
       <img
         className={classes.mainImage}
         src={mainImage.path}
+        onClick={() => {
+          setIsLightboxOpen(true);
+          setSlideIndex(0);
+        }}
         {...(mainImage.alt ? { alt: mainImage.alt } : {})}
       />
     </div>
   );
 
   return (
-    <S.PhotoBlogProjectContainer>
-      {OverviewSection}
-      <PhotoBlogProjectGalleryGrid gallerySections={gallerySections} />
+    <LightboxContext.Provider
+      value={{
+        lightboxOpenState: [isLightboxOpen, setIsLightboxOpen],
+        slideIndexState: [slideIndex, setSlideIndex],
+      }}
+    >
+      <S.PhotoBlogProjectContainer>
+        {OverviewSection}
+        <PhotoBlogProjectGalleryGrid
+          gallerySections={gallerySections}
+        />
 
-      <Lightbox
-        open={isLightboxOpen}
-        close={() => { setIsLightboxOpen(false); }}
-        slides={slides}
-        plugins={[Zoom, Video]}
-        index={slideIndex}
-        zoom={{
-          maxZoomPixelRatio: 1.35,
-          scrollToZoom: true,
-          doubleClickMaxStops: 1,
-        }}
-        carousel={{
-          padding: 0,
-          imageFit: 'contain',
-        }}
-      />
-    </S.PhotoBlogProjectContainer>
+        <Lightbox
+          open={isLightboxOpen}
+          close={() => { setIsLightboxOpen(false); }}
+          slides={slides}
+          plugins={[Zoom, Video]}
+          index={slideIndex}
+          zoom={{
+            maxZoomPixelRatio: 1.35,
+            scrollToZoom: true,
+            doubleClickMaxStops: 1,
+          }}
+          carousel={{
+            padding: 0,
+            imageFit: 'contain',
+          }}
+        />
+      </S.PhotoBlogProjectContainer>
+    </LightboxContext.Provider>
   );
 };
 

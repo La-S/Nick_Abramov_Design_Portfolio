@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import S, { classes } from './styles';
 import type { PhotoBlogProject } from '../../../types/data/photoBlogProject';
-import { renderGallerySection } from './utils';
+import { renderGallerySections } from './utils';
+import { LightboxContext } from '../context';
 
 interface PhotoBlogProjectGalleryGridProps {
   gallerySections: PhotoBlogProject['gallerySections'];
@@ -10,9 +11,18 @@ interface PhotoBlogProjectGalleryGridProps {
 const PhotoBlogProjectGalleryGrid = ({
   gallerySections,
 }: PhotoBlogProjectGalleryGridProps): JSX.Element => {
+  const {
+    lightboxOpenState: [, setIsLightboxOpen],
+    slideIndexState: [, setSlideIndex],
+  } = useContext(LightboxContext);
+
   return (
     <S.PhotoBlogProjectGalleryGrid className={classes.container}>
-      {gallerySections.map(renderGallerySection)}
+      {renderGallerySections(
+        gallerySections,
+        setIsLightboxOpen,
+        setSlideIndex
+      )}
     </S.PhotoBlogProjectGalleryGrid>
   );
 };
