@@ -9,6 +9,8 @@ export const classes = {
 };
 
 const PhotoBlogProjectContainer = styled('div')(({ theme }) => ({
+  padding: '0 60px',
+
   [`.${classes.overviewContainer}`]: {
     [`.${classes.dateCreated}`]: {
       textAlign: 'center',
