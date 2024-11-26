@@ -1,10 +1,13 @@
-import React, { /* useContext */ } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import usePhotoBlogProject from '../../hooks/usePhotoBlogProject';
 // import { GlobalContext } from '../../contexts/global';
 import { generatePhotoBlogProjectDateString } from '../PhotoBlogProjects/utils';
 import S, { classes } from './styles';
 import PhotoBlogProjectGalleryGrid from './PhotoBlogProjectGalleryGrid';
+import Lightbox from 'yet-another-react-lightbox';
+import { Video, Zoom } from 'yet-another-react-lightbox/plugins';
+import { getPhotoBlogProjectLightboxSlides } from './utils';
 
 const PhotoBlogProjectPage = (): JSX.Element => {
   // const {
@@ -28,6 +31,11 @@ const PhotoBlogProjectPage = (): JSX.Element => {
   } = photoBlogProject || {};
   const formattedDateString = generatePhotoBlogProjectDateString(dateInfo);
 
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [slideIndex, /*setSlideIndex*/] = useState(0);
+  const slides = getPhotoBlogProjectLightboxSlides(photoBlogProject);
+  console.log({ slides });
+
   const OverviewSection = (
     <div className={classes.overviewContainer}>
       <h5 className={classes.dateCreated}>{formattedDateString}</h5>
@@ -45,6 +53,23 @@ const PhotoBlogProjectPage = (): JSX.Element => {
     <S.PhotoBlogProjectContainer>
       {OverviewSection}
       <PhotoBlogProjectGalleryGrid gallerySections={gallerySections} />
+
+      <Lightbox
+        open={isLightboxOpen}
+        close={() => { setIsLightboxOpen(false); }}
+        slides={slides}
+        plugins={[Zoom, Video]}
+        index={slideIndex}
+        zoom={{
+          maxZoomPixelRatio: 1.35,
+          scrollToZoom: true,
+          doubleClickMaxStops: 1,
+        }}
+        carousel={{
+          padding: 0,
+          imageFit: 'contain',
+        }}
+      />
     </S.PhotoBlogProjectContainer>
   );
 };

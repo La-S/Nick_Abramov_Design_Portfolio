@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import S, { classes } from './styles';
 import type {
   PhotoBlogProjectGalleryCell,
@@ -33,7 +34,7 @@ const renderCell = ({
   })();
 
   return (
-    <div className={classes.cell}>
+    <div key={uuidv4()} className={classes.cell}>
       {CellContent}
     </div>
   );
@@ -48,6 +49,7 @@ const renderGallerySectionRow = ({
 
   return (
     <S.PhotoBlogProjectGalleryRow
+      key={uuidv4()}
       className={classes.row}
       cellAmount={cellAmount}
     >
@@ -62,7 +64,7 @@ export const renderGallerySection = ({
   rows,
 }: PhotoBlogProjectGallerySection): JSX.Element => {
   return (
-    <div className={classes.sectionContainer}>
+    <div className={classes.sectionContainer} key={uuidv4()}>
       {title && <h5 className={classes.title}>{title}</h5>}
       {description && <p className={classes.description}>{description}</p>}
       {rows.length > 0 && (
