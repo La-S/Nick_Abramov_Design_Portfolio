@@ -18,7 +18,8 @@ import { X as CloseIcon, Trash as TrashIcon, UploadSimple as UploadIcon } from '
 import { createProject, getProject, updateProject } from '../../../api/projectMethods.api';
 import type { ProjectGalleryRow } from '../../../types/data/project';
 import type { ProjectInputDto } from '../../../types/data/projectAPI';
-import formUtils from './utils';
+import utils from './utils';
+import formUtils from '../../../utils/formUtils';
 import S from './styles';
 import { useQueryClient } from '@tanstack/react-query';
 import { EMPTY_PROJECT } from '../../../hooks/useProject';
@@ -211,7 +212,7 @@ const ProjectForm = (props: Props): JSX.Element => {
             onInput={(e) => {
               setDescriptionValue((e.target as HTMLInputElement).value);
             }}
-            onKeyDown={(e) => formUtils.onKeyDown(e, [descriptionValue, setDescriptionValue])}
+            onKeyDown={(e) => utils.onKeyDown(e, [descriptionValue, setDescriptionValue])}
           />
           <Typography className='Description-Note'>
             <strong>Note</strong>
@@ -239,7 +240,7 @@ const ProjectForm = (props: Props): JSX.Element => {
                 <Select
                   variant="outlined"
                   value={galleryRow.cellAmount || 1}
-                  onChange={(e) => formUtils.updateGalleryRows(e, i, galleryValues, setGalleryValues)}
+                  onChange={(e) => utils.updateGalleryRows(e, i, galleryValues, setGalleryValues)}
                 >
                   <MenuItem value="1">1</MenuItem>
                   <MenuItem value="2">2</MenuItem>
