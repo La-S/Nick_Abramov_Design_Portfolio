@@ -9,6 +9,7 @@ import Lightbox from 'yet-another-react-lightbox';
 import { Video, Zoom } from 'yet-another-react-lightbox/plugins';
 import { getPhotoBlogProjectLightboxSlides } from './utils';
 import { LightboxContext } from './context';
+import PhotoBlogProjectNav from './PhotoBlogProjectNav';
 
 const PhotoBlogProjectPage = (): JSX.Element => {
   // const {
@@ -65,6 +66,7 @@ const PhotoBlogProjectPage = (): JSX.Element => {
         <PhotoBlogProjectGalleryGrid
           gallerySections={gallerySections}
         />
+        <PhotoBlogProjectNav />
 
         <Lightbox
           open={isLightboxOpen}
