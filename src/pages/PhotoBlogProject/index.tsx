@@ -66,7 +66,7 @@ const PhotoBlogProjectPage = (): JSX.Element => {
         <PhotoBlogProjectGalleryGrid
           gallerySections={gallerySections}
         />
-        <PhotoBlogProjectNav />
+        <PhotoBlogProjectNav photoBlogProject={photoBlogProject} />
 
         <Lightbox
           open={isLightboxOpen}

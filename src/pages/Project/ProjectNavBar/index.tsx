@@ -11,7 +11,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { formatStringToUriPath } from '../../../utils/apiUtils';
 
 interface Props {
-  project: Project
+  project: Project;
 }
 
 const ProjectNavBar = ({ project }: Props): JSX.Element => {

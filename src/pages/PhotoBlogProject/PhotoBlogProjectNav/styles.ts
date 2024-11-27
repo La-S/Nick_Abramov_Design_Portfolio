@@ -5,6 +5,8 @@ export const classes = {
   returnLink: 'PhotoBlog-Project-ReturnLink',
   navButtonsContainer: 'PhotoBlog-Project-NavButtonsContainer',
   navButton: 'PhotoBlog-Project-NavButton',
+  navButtonPrev: 'PhotoBlog-Project-NavButton--prev',
+  navButtonNext: 'PhotoBlog-Project-NavButton--next',
   navButtonDirectionText: 'PhotoBlog-Project-NavButton-DirectionText',
   navButtonProjectName: 'PhotoBlog-Project-NavButton-ProjectName',
 };
@@ -56,13 +58,13 @@ const PhotoBlogProjectNav = styled('div')(({ theme }) => ({
         },
       },
 
-      '&:nth-of-type(1)': {
+      [`&.${classes.navButtonPrev}`]: {
         a: {
           textAlign: 'left',
         },
       },
 
-      '&:nth-of-type(2)': {
+      [`&.${classes.navButtonNext}`]: {
         marginLeft: 'auto',
 
         a: {
