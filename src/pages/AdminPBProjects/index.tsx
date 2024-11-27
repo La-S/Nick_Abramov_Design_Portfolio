@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { /* useState */ } from 'react';
 import { ButtonBase } from '@mui/material';
 import S, { classes } from './styles';
 import usePBProjects from '../../hooks/usePBProjects';
+import AdminPBProjectsGrid from './AdminPBProjectsGrid';
 
 const AdminPBProjects = (): JSX.Element => {
-  const [newPBProjectModalOpen, setNewPBProjectModalOpen] = useState(false);
+  // const [newPBProjectModalOpen, setNewPBProjectModalOpen] = useState(false);
   const { pBProjects, isFetched } = usePBProjects({ summary: true });
 
   const NewPBProjectButton = (
@@ -24,6 +25,7 @@ const AdminPBProjects = (): JSX.Element => {
   return (
     <S.AdminPBProjectsContainer className={classes.root}>
       {NewPBProjectButton}
+      <AdminPBProjectsGrid />
 
       {isFetched && pBProjects.length === 0 ? (
         <div className="No-Projects-Box">
