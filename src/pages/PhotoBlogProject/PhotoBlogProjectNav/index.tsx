@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import S, { classes } from './styles';
 import { Link } from 'react-router-dom';
 import usePhotoBlogProjects from '../../../hooks/usePhotoBlogProjects';
 import type { PhotoBlogProject } from '../../../types/data/photoBlogProject';
-import { getNavPhotoBlogProjects } from './utils';
+import * as utils from './utils';
 import { formatStringToUriPath } from '../../../utils/apiUtils';
+import { useQueryClient } from '@tanstack/react-query';
+import { GlobalContext } from '../../../contexts/global';
 
 interface PhotoBlogProjectNavProps {
   photoBlogProject: PhotoBlogProject;
@@ -13,12 +15,17 @@ interface PhotoBlogProjectNavProps {
 export const PhotoBlogProjectNav = ({
   photoBlogProject
 }: PhotoBlogProjectNavProps): JSX.Element => {
+  const queryClient = useQueryClient();
+  const {
+    pageLoadingState: [, setIsPageLoading],
+  } = useContext(GlobalContext);
+
   const {
     photoBlogProjects,
     ...photoBlogProjectsResponse
   } = usePhotoBlogProjects({ summary: true });
   const navPhotoBlogProjects =
-    getNavPhotoBlogProjects(photoBlogProject, photoBlogProjects);
+    utils.getNavPhotoBlogProjects(photoBlogProject, photoBlogProjects);
 
   return (
     photoBlogProjectsResponse.isFetched ? (
@@ -36,6 +43,11 @@ export const PhotoBlogProjectNav = ({
               <Link
                 to={`/photo-blog/${formatStringToUriPath(navPhotoBlogProjects.prev.nameInfo.full)}`}
                 state={{ photoBlogProjectId: navPhotoBlogProjects.prev.id }}
+                onClick={() => utils.toggleLoadingOnUnloadedPhotoBlogProject(
+                  queryClient,
+                  navPhotoBlogProjects.prev!.id,
+                  setIsPageLoading
+                )}
               >
                 <p className={classes.navButtonDirectionText}>Previous</p>
                 <p className={classes.navButtonProjectName}>
@@ -49,6 +61,11 @@ export const PhotoBlogProjectNav = ({
               <Link
                 to={`/photo-blog/${formatStringToUriPath(navPhotoBlogProjects.next.nameInfo.full)}`}
                 state={{ photoBlogProjectId: navPhotoBlogProjects.next.id }}
+                onClick={() => utils.toggleLoadingOnUnloadedPhotoBlogProject(
+                  queryClient,
+                  navPhotoBlogProjects.next!.id,
+                  setIsPageLoading
+                )}
               >
                 <p className={classes.navButtonDirectionText}>Next</p>
                 <p className={classes.navButtonProjectName}>
