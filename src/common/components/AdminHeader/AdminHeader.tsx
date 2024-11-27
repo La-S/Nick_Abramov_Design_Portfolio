@@ -11,6 +11,7 @@ import HeaderStyles from '../../components/Header/styles';
 const NAV_LINKS = [
   { name: 'Projects', to: '/admin/projects' },
   { name: 'FAQs', to: '/admin/faqs' },
+  { name: 'PB Projects', to: '/admin/photo-blog' }
 ];
 
 const AdminHeader = (): JSX.Element => {

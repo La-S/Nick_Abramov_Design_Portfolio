@@ -1,20 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import S, { classes } from './styles';
 import { Link } from 'react-router-dom';
-import PhotoBlogProjectsGrid from './PhotoBlogProjectsGrid';
+import PBProjectsGrid from './PBProjectsGrid';
 import { GlobalContext } from '../../contexts/global';
-import usePhotoBlogProjects from '../../hooks/usePhotoBlogProjects';
+import usePBProjects from '../../hooks/usePBProjects';
 import { Box, Typography } from '@mui/material';
 import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
 
 const ABOUT_PAGE_PATH = '/about';
 const LOADING_DELAY = 2500;
 
-const PhotoBlogProjectsPage = (): JSX.Element => {
+const PBProjectsPage = (): JSX.Element => {
   const {
-    photoBlogProjects,
-    ...photoBlogProjectsResponse
-  } = usePhotoBlogProjects({ summary: true });
+    pBProjects,
+    ...pBProjectsResponse
+  } = usePBProjects({ summary: true });
   const {
     pageLoadingState: [isPageLoading, setIsPageLoading],
   } = useContext(GlobalContext);
@@ -23,20 +23,20 @@ const PhotoBlogProjectsPage = (): JSX.Element => {
 
   useEffect(() => {
     if (!isPageLoading
-      || photoBlogProjectsResponse.isLoading
+      || pBProjectsResponse.isLoading
       || isLoadingDelayActive
       || !areImagesLoaded
     ) return;
 
     setIsPageLoading(false);
-  }, [photoBlogProjectsResponse.isLoading, isLoadingDelayActive]);
+  }, [pBProjectsResponse.isLoading, isLoadingDelayActive]);
 
   useEffect(() => {
     setTimeout(() => setIsLoadingDelayActive(false), LOADING_DELAY);
   }, []);
 
   useEffect(() => {
-    if (photoBlogProjectsResponse.isLoading) return;
+    if (pBProjectsResponse.isLoading) return;
 
     const mediaToLoad: Array<HTMLImageElement | HTMLVideoElement> = Array.from(
       document.querySelectorAll('.Loadable-Image'),
@@ -44,10 +44,10 @@ const PhotoBlogProjectsPage = (): JSX.Element => {
     executeCallbackOnMediaCollectionLoad(mediaToLoad, () => {
       setAreImagesLoaded(true);
     });
-  }, [photoBlogProjects]);
+  }, [pBProjects]);
 
   return (
-    <S.PhotoBlogProjectsPage>
+    <S.PBProjectsPage>
       <div className={classes.headingTextBox}>
         <p>
           {'Photography by '}
@@ -58,17 +58,17 @@ const PhotoBlogProjectsPage = (): JSX.Element => {
         </p>
         <p>life adventures and beautiful things.</p>
       </div>
-      <PhotoBlogProjectsGrid />
+      <PBProjectsGrid />
 
-      {!photoBlogProjectsResponse.isLoading && photoBlogProjects.length === 0 ? (
+      {!pBProjectsResponse.isLoading && pBProjects.length === 0 ? (
         <Box className="No-Photo-Blog-Projects-Box">
           <Typography variant="h5">No projects added to the blog yet</Typography>
         </Box>
       ) : (
         <></>
       )}
-    </S.PhotoBlogProjectsPage>
+    </S.PBProjectsPage>
   );
 };
 
-export default PhotoBlogProjectsPage;
+export default PBProjectsPage;

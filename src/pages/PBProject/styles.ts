@@ -1,14 +1,14 @@
 import { styled } from '@mui/material';
 
 export const classes = {
-  overviewContainer: 'PhotoBlogProject-OverviewContainer',
-  dateCreated: 'PhotoBlogProject-DateCreated',
-  name: 'PhotoBlogProject-Name',
-  description: 'PhotoBlogProject-Description',
-  mainImage: 'PhotoBlogProject-MainImage',
+  overviewContainer: 'PBProject-OverviewContainer',
+  dateCreated: 'PBProject-DateCreated',
+  name: 'PBProject-Name',
+  description: 'PBProject-Description',
+  mainImage: 'PBProject-MainImage',
 };
 
-const PhotoBlogProjectContainer = styled('div')(({ theme }) => ({
+const PBProjectContainer = styled('div')(({ theme }) => ({
   padding: '0 60px',
 
   [`.${classes.overviewContainer}`]: {
@@ -78,5 +78,5 @@ const PhotoBlogProjectContainer = styled('div')(({ theme }) => ({
 }));
 
 export default {
-  PhotoBlogProjectContainer,
+  PBProjectContainer,
 };

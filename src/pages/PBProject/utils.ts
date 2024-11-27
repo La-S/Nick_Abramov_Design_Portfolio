@@ -1,15 +1,15 @@
 import type {
-  PhotoBlogProject,
-  PhotoBlogProjectGalleryRow,
-  PhotoBlogProjectGallerySection,
-} from '../../types/data/photoBlogProject';
+  PBProject,
+  PBProjectGalleryRow,
+  PBProjectGallerySection,
+} from '../../types/data/pBProject';
 import type { Slide } from 'yet-another-react-lightbox';
 
 const getLightboxSlidesFromGalleryRow = (
   {
     cells,
     cellAmount,
-  }: PhotoBlogProjectGalleryRow
+  }: PBProjectGalleryRow
 ): Array<Slide> => {
   const slides: Array<Slide> = [];
   const actualCellAmount = Math.min(cellAmount, cells.length);
@@ -42,7 +42,7 @@ const getLightboxSlidesFromGalleryRow = (
 };
 
 const getLightboxSlidesFromGallerySection = (
-  gallerySection: PhotoBlogProjectGallerySection,
+  gallerySection: PBProjectGallerySection,
 ): Array<Slide> => {
   const slides: Array<Slide> = [];
 
@@ -55,20 +55,20 @@ const getLightboxSlidesFromGallerySection = (
   return slides;
 };
 
-export const getPhotoBlogProjectLightboxSlides = (
-  photoBlogProject: PhotoBlogProject
+export const getPBProjectLightboxSlides = (
+  pBProject: PBProject
 ): Array<Slide> => {
   const slides: Slide[] = [];
 
-  if (photoBlogProject.mainImage.path) {
+  if (pBProject.mainImage.path) {
     slides.push({
       type: 'image',
-      src: photoBlogProject.mainImage.path,
+      src: pBProject.mainImage.path,
     });
   }
 
-  for (let i = 0; i < photoBlogProject.gallerySections.length; i += 1) {
-    const gallerySection = photoBlogProject.gallerySections[i];
+  for (let i = 0; i < pBProject.gallerySections.length; i += 1) {
+    const gallerySection = pBProject.gallerySections[i];
     const slidesFromGallerySection =
       getLightboxSlidesFromGallerySection(gallerySection);
     slides.push(...slidesFromGallerySection);

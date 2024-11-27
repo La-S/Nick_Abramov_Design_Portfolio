@@ -1,30 +1,28 @@
 import React, { useContext } from 'react';
 import S, { classes } from './styles';
-import type { PhotoBlogProject } from '../../../types/data/photoBlogProject';
+import type { PBProject } from '../../../types/data/pBProject';
 import { renderGallerySections } from './utils';
 import { LightboxContext } from '../context';
 
-interface PhotoBlogProjectGalleryGridProps {
-  gallerySections: PhotoBlogProject['gallerySections'];
+interface PBProjectGalleryGridProps {
+  gallerySections: PBProject['gallerySections'];
 }
 
-const PhotoBlogProjectGalleryGrid = ({
-  gallerySections,
-}: PhotoBlogProjectGalleryGridProps): JSX.Element => {
+const PBProjectGalleryGrid = ({ gallerySections }: PBProjectGalleryGridProps): JSX.Element => {
   const {
     lightboxOpenState: [, setIsLightboxOpen],
     slideIndexState: [, setSlideIndex],
   } = useContext(LightboxContext);
 
   return (
-    <S.PhotoBlogProjectGalleryGrid className={classes.container}>
+    <S.PBProjectGalleryGrid className={classes.container}>
       {renderGallerySections(
         gallerySections,
         setIsLightboxOpen,
         setSlideIndex
       )}
-    </S.PhotoBlogProjectGalleryGrid>
+    </S.PBProjectGalleryGrid>
   );
 };
 
-export default PhotoBlogProjectGalleryGrid;
+export default PBProjectGalleryGrid;

@@ -1,6 +1,6 @@
 import { styled } from '@mui/material';
 
-const PhotoBlogProjectsGrid = styled('div')(({ theme }) => ({
+const PBProjectsGrid = styled('div')(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fill, minmax(420px, 1fr))',
   columnGap: 22,
@@ -15,5 +15,5 @@ const PhotoBlogProjectsGrid = styled('div')(({ theme }) => ({
 }));
 
 export default {
-  PhotoBlogProjectsGrid,
+  PBProjectsGrid,
 };

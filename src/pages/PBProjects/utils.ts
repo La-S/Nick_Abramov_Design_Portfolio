@@ -1,4 +1,4 @@
-import type { PhotoBlogProjectDateInfo } from '../../types/data/photoBlogProject';
+import type { PBProjectDateInfo } from '../../types/data/pBProject';
 
 const ORDERED_MONTHS = [
   'January',
@@ -14,8 +14,8 @@ const ORDERED_MONTHS = [
   'November',
   'December',
 ];
-export const generatePhotoBlogProjectDateString = (
-  { monthIndex, year }: PhotoBlogProjectDateInfo
+export const generatePBProjectDateString = (
+  { monthIndex, year }: PBProjectDateInfo
 ): string => {
   const month = ORDERED_MONTHS[monthIndex];
 

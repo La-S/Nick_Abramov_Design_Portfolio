@@ -5,32 +5,32 @@ import { formatStringToUriPath } from '../../../../utils/apiUtils';
 import { checkIfCachedQueryDataExists } from '../../../../utils/loadingUtils';
 import { GlobalContext } from '../../../../contexts/global';
 import S, { classes } from './styles';
-import type { PhotoBlogProjectSummary } from '../../../../types/data/photoBlogProject';
-import { generatePhotoBlogProjectDateString } from '../../utils';
+import type { PBProjectSummary } from '../../../../types/data/pBProject';
+import { generatePBProjectDateString } from '../../utils';
 
-interface PhotoBlogProjectsGridBoxProps {
-  photoBlogProjectSummary: PhotoBlogProjectSummary
+interface PBProjectsGridBoxProps {
+  pBProjectSummary: PBProjectSummary
 }
 
-const PhotoBlogProjectsGridBox = ({
-  photoBlogProjectSummary,
-}: PhotoBlogProjectsGridBoxProps): JSX.Element => {
+const PBProjectsGridBox = ({
+  pBProjectSummary,
+}: PBProjectsGridBoxProps): JSX.Element => {
   const queryClient = useQueryClient();
   const {
     pageLoadingState: [, setIsPageLoading],
   } = useContext(GlobalContext);
-  const { id, dateInfo, nameInfo, mainImage } = photoBlogProjectSummary;
+  const { id, dateInfo, nameInfo, mainImage } = pBProjectSummary;
   const formattedName = formatStringToUriPath(nameInfo.full);
-  const formattedDateString = generatePhotoBlogProjectDateString(dateInfo);
+  const formattedDateString = generatePBProjectDateString(dateInfo);
 
   return (
-    <S.PhotoBlogProjectsGridBox>
+    <S.PBProjectsGridBox>
       <Link
         to={`/photo-blog/${formattedName}`}
-        state={{ photoBlogProjectId: id }}
+        state={{ pBProjectId: id }}
         onClick={() => {
-          const cachedPhotoBlogProjectExists = checkIfCachedQueryDataExists(queryClient, ['photo-blog-project', id]);
-          if (!cachedPhotoBlogProjectExists) setIsPageLoading(true);
+          const cachedPBProjectExists = checkIfCachedQueryDataExists(queryClient, ['photo-blog-project', id]);
+          if (!cachedPBProjectExists) setIsPageLoading(true);
         }}
         draggable="false"
       >
@@ -45,8 +45,8 @@ const PhotoBlogProjectsGridBox = ({
           <span className={classes.dateCreatedString}>{formattedDateString}</span>
         </p>
       </Link>
-    </S.PhotoBlogProjectsGridBox>
+    </S.PBProjectsGridBox>
   );
 };
 
-export default PhotoBlogProjectsGridBox;
+export default PBProjectsGridBox;

@@ -3,16 +3,16 @@ import type { Dispatch, SetStateAction } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import S, { classes } from './styles';
 import type {
-  PhotoBlogProjectGalleryCell,
-  PhotoBlogProjectGalleryRow,
-  PhotoBlogProjectGallerySection,
-} from '../../../types/data/photoBlogProject';
+  PBProjectGalleryCell,
+  PBProjectGalleryRow,
+  PBProjectGallerySection,
+} from '../../../types/data/pBProject';
 
 const renderCellContent = ({
   path,
   type,
   alt,
-}: PhotoBlogProjectGalleryCell): JSX.Element => {
+}: PBProjectGalleryCell): JSX.Element => {
   if (type === 'image link') {
     return <img className="Loadable-Image" src={path} loading="lazy" {...alt && { alt: alt }} />;
   }
@@ -32,7 +32,7 @@ const renderCellContent = ({
 };
 
 export const renderGallerySections = (
-  gallerySections: Array<PhotoBlogProjectGallerySection>,
+  gallerySections: Array<PBProjectGallerySection>,
   setIsLightboxOpen: Dispatch<SetStateAction<boolean>>,
   setSlideIndex: Dispatch<SetStateAction<number>>,
 ): JSX.Element => {
@@ -49,18 +49,18 @@ export const renderGallerySections = (
             {description && <p className={classes.description}>{description}</p>}
             {rows.length > 0 && (
               <div className={classes.rowsContainer}>
-                {rows.map((row: PhotoBlogProjectGalleryRow) => {
+                {rows.map((row: PBProjectGalleryRow) => {
                   const { cellAmount, cells } = row;
                   const cellAmountToRender = Math.min(cellAmount, cells.length);
                   const cellsToRender = cells.slice(0, cellAmountToRender);
 
                   return (
-                    <S.PhotoBlogProjectGalleryRow
+                    <S.PBProjectGalleryRow
                       key={uuidv4()}
                       className={classes.row}
                       cellAmount={cellAmount}
                     >
-                      {cellsToRender.map((cell: PhotoBlogProjectGalleryCell) => {
+                      {cellsToRender.map((cell: PBProjectGalleryCell) => {
                         const { path, type } = cell;
                         if (!path || (
                           !['image link', 'direct video link', 'embedded video link'].includes(type)
@@ -84,7 +84,7 @@ export const renderGallerySections = (
                           </div>
                         );
                       })}
-                    </S.PhotoBlogProjectGalleryRow>
+                    </S.PBProjectGalleryRow>
                   );
                 })}
               </div>

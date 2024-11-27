@@ -1,11 +1,11 @@
 import { styled } from '@mui/material';
 
 export const classes = {
-  name: 'PhotoBlogProjectsGridBox-ProjectName',
-  dateCreatedString: 'PhotoBlogProjectsGridBox-ProjectDateCreatedString',
+  name: 'PBProjectsGridBox-ProjectName',
+  dateCreatedString: 'PBProjectsGridBox-ProjectDateCreatedString',
 };
 
-const PhotoBlogProjectsGridBox = styled('div')(({ theme }) => ({
+const PBProjectsGridBox = styled('div')(({ theme }) => ({
   '> a': {
     display: 'flex',
     flexDirection: 'column',
@@ -36,5 +36,5 @@ const PhotoBlogProjectsGridBox = styled('div')(({ theme }) => ({
 }));
 
 export default {
-  PhotoBlogProjectsGridBox,
+  PBProjectsGridBox,
 };

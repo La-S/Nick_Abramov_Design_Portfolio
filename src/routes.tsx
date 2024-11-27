@@ -8,8 +8,9 @@ import ContactPage from './pages/Contact';
 import AdminLoginPage from './pages/AdminLogin';
 import AdminProjectsPage from './pages/AdminProjects';
 import AdminFAQsPage from './pages/AdminFAQs';
-import PhotoBlogProjectsPage from './pages/PhotoBlogProjects';
-import PhotoBlogProjectPage from './pages/PhotoBlogProject';
+import PBProjectsPage from './pages/PBProjects';
+import PBProjectPage from './pages/PBProject';
+import AdminPBProjects from './pages/AdminPBProjects';
 
 export type RouteFixture = {
   path: string;
@@ -35,11 +36,11 @@ export const MAIN_ROUTES: Array<RouteFixture> = [
   },
   {
     path: '/photo-blog',
-    element: <PhotoBlogProjectsPage />,
+    element: <PBProjectsPage />,
   },
   {
-    path: '/photo-blog/:photoBlogProjectName',
-    element: <PhotoBlogProjectPage />,
+    path: '/photo-blog/:pBProjectName',
+    element: <PBProjectPage />,
   },
   {
     path: '/about',
@@ -72,5 +73,9 @@ export const ADMIN_ROUTES: Array<RouteFixture> = [
   {
     path: '/admin/faqs',
     element: <AdminFAQsPage />,
-  }
+  },
+  {
+    path: '/admin/photo-blog',
+    element: <AdminPBProjects />
+  },
 ];

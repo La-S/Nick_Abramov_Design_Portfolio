@@ -1,17 +1,17 @@
 import { styled } from '@mui/material';
-import type { PhotoBlogProjectGalleryRow } from '../../../types/data/photoBlogProject';
+import type { PBProjectGalleryRow } from '../../../types/data/pBProject';
 
 export const classes = {
-  container: 'PhotoBlogProject-GallerySectionsContainer',
-  sectionContainer: 'PhotoBlogProject-GallerySectionContainer',
-  title: 'PhotoBlogProject-GallerySectionTitle',
-  description: 'PhotoBlogProject-GallerySectionDescription',
-  rowsContainer: 'PhotoBlogProject-GallerySectionRowsContainer',
-  row: 'PhotoBlogProject-GallerySectionRow',
-  cell: 'PhotoBlogProject-GallerySectionCell',
+  container: 'PBProject-GallerySectionsContainer',
+  sectionContainer: 'PBProject-GallerySectionContainer',
+  title: 'PBProject-GallerySectionTitle',
+  description: 'PBProject-GallerySectionDescription',
+  rowsContainer: 'PBProject-GallerySectionRowsContainer',
+  row: 'PBProject-GallerySectionRow',
+  cell: 'PBProject-GallerySectionCell',
 };
 
-const PhotoBlogProjectGalleryGrid = styled('div')(({ theme }) => ({
+const PBProjectGalleryGrid = styled('div')(({ theme }) => ({
   [`.${classes.sectionContainer}`]: {
     [`.${classes.title}`]: {
       margin: 0,
@@ -56,10 +56,10 @@ const PhotoBlogProjectGalleryGrid = styled('div')(({ theme }) => ({
   },
 }));
 
-const PhotoBlogProjectGalleryRow = styled('div', {
+const PBProjectGalleryRow = styled('div', {
   shouldForwardProp: (propName) => propName !== 'cellAmount',
 })<{
-  cellAmount: PhotoBlogProjectGalleryRow['cellAmount'];
+  cellAmount: PBProjectGalleryRow['cellAmount'];
 }>(({ theme, cellAmount }) => ({
   display: 'flex',
   width: '100%',
@@ -101,6 +101,6 @@ const PhotoBlogProjectGalleryRow = styled('div', {
 }));
 
 export default {
-  PhotoBlogProjectGalleryGrid,
-  PhotoBlogProjectGalleryRow,
+  PBProjectGalleryGrid,
+  PBProjectGalleryRow,
 };

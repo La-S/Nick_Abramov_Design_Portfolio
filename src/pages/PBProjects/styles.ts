@@ -2,10 +2,10 @@ import { styled } from '@mui/material';
 import { HEADER_DESKTOP_HEIGHT, HEADER_MOBILE_HEIGHT } from '../../common/components/Header/styles';
 
 export const classes = {
-  headingTextBox: 'PhotoBlogProjects-HeadingTextBox',
+  headingTextBox: 'PBProjects-HeadingTextBox',
 };
 
-const PhotoBlogProjectsPage = styled('div')(({ theme }) => ({
+const PBProjectsPage = styled('div')(({ theme }) => ({
   padding: '0 48px',
 
   [`.${classes.headingTextBox}`]: {
@@ -67,5 +67,5 @@ const PhotoBlogProjectsPage = styled('div')(({ theme }) => ({
 }));
 
 export default {
-  PhotoBlogProjectsPage,
+  PBProjectsPage,
 };

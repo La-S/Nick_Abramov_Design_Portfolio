@@ -1,17 +1,17 @@
 import { styled } from '@mui/material';
 
 export const classes = {
-  root: 'PhotoBlog-Project-Nav',
-  returnLink: 'PhotoBlog-Project-ReturnLink',
-  navButtonsContainer: 'PhotoBlog-Project-NavButtonsContainer',
-  navButton: 'PhotoBlog-Project-NavButton',
-  navButtonPrev: 'PhotoBlog-Project-NavButton--prev',
-  navButtonNext: 'PhotoBlog-Project-NavButton--next',
-  navButtonDirectionText: 'PhotoBlog-Project-NavButton-DirectionText',
-  navButtonProjectName: 'PhotoBlog-Project-NavButton-ProjectName',
+  root: 'PB-Project-Nav',
+  returnLink: 'PB-Project-ReturnLink',
+  navButtonsContainer: 'PB-Project-NavButtonsContainer',
+  navButton: 'PB-Project-NavButton',
+  navButtonPrev: 'PB-Project-NavButton--prev',
+  navButtonNext: 'PB-Project-NavButton--next',
+  navButtonDirectionText: 'PB-Project-NavButton-DirectionText',
+  navButtonProjectName: 'PB-Project-NavButton-ProjectName',
 };
 
-const PhotoBlogProjectNav = styled('div')(({ theme }) => ({
+const PBProjectNav = styled('div')(({ theme }) => ({
   marginTop: 134,
   marginBottom: 84,
   textAlign: 'center',
@@ -102,5 +102,5 @@ const PhotoBlogProjectNav = styled('div')(({ theme }) => ({
 }));
 
 export default {
-  PhotoBlogProjectNav,
+  PBProjectNav,
 };

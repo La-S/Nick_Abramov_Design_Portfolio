@@ -1,47 +1,47 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import usePhotoBlogProject from '../../hooks/usePhotoBlogProject';
+import usePBProject from '../../hooks/usePBProject';
 import { GlobalContext } from '../../contexts/global';
-import { generatePhotoBlogProjectDateString } from '../PhotoBlogProjects/utils';
+import { generatePBProjectDateString } from '../PBProjects/utils';
 import S, { classes } from './styles';
-import PhotoBlogProjectGalleryGrid from './PhotoBlogProjectGalleryGrid';
+import PBProjectGalleryGrid from './PBProjectGalleryGrid';
 import Lightbox from 'yet-another-react-lightbox';
 import { Video, Zoom } from 'yet-another-react-lightbox/plugins';
-import { getPhotoBlogProjectLightboxSlides } from './utils';
+import { getPBProjectLightboxSlides } from './utils';
 import { LightboxContext } from './context';
-import PhotoBlogProjectNav from './PhotoBlogProjectNav';
+import PBProjectNav from './PBProjectNav';
 import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
 
 const MAX_LOADING_DELAY = 2500;
 
-const PhotoBlogProjectPage = (): JSX.Element => {
+const PBProjectPage = (): JSX.Element => {
   const {
     pageLoadingState: [isPageLoading, setIsPageLoading],
   } = useContext(GlobalContext);
   const navigate = useNavigate();
   const { state } = useLocation();
-  const photoBlogProjectId = state?.photoBlogProjectId;
-  if (!photoBlogProjectId) navigate('/photo-blog'); // Redirect to photo blog page
+  const pBProjectId = state?.pBProjectId;
+  if (!pBProjectId) navigate('/photo-blog'); // Redirect to photo blog page
 
   const {
-    photoBlogProject,
-    ...photoBlogProjectResponse
-  } = usePhotoBlogProject(photoBlogProjectId || '');
+    pBProject,
+    ...pBProjectResponse
+  } = usePBProject(pBProjectId || '');
   const {
     dateInfo,
     nameInfo,
     mainImage,
     description,
     gallerySections,
-  } = photoBlogProject || {};
+  } = pBProject || {};
   const [isLoadingDelayActive, setIsLoadingDelayActive] = useState(true);
   const [areImagesLoaded, setAreImagesLoaded] = useState(false);
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
-  const slides = getPhotoBlogProjectLightboxSlides(photoBlogProject);
+  const slides = getPBProjectLightboxSlides(pBProject);
 
-  const formattedDateString = generatePhotoBlogProjectDateString(dateInfo);
+  const formattedDateString = generatePBProjectDateString(dateInfo);
   const OverviewSection = (
     <div className={classes.overviewContainer}>
       <h5 className={classes.dateCreated}>{formattedDateString}</h5>
@@ -61,12 +61,12 @@ const PhotoBlogProjectPage = (): JSX.Element => {
 
   useEffect(() => {
     if (!isPageLoading
-      || photoBlogProjectResponse.isLoading
+      || pBProjectResponse.isLoading
       || isLoadingDelayActive
       || !areImagesLoaded) return;
 
     setIsPageLoading(false);
-  }, [photoBlogProjectResponse.isLoading, isLoadingDelayActive, areImagesLoaded]);
+  }, [pBProjectResponse.isLoading, isLoadingDelayActive, areImagesLoaded]);
 
   useEffect(() => {
     setIsLoadingDelayActive(true);
@@ -74,10 +74,10 @@ const PhotoBlogProjectPage = (): JSX.Element => {
     setTimeout(() => {
       setIsLoadingDelayActive(false);
     }, MAX_LOADING_DELAY);
-  }, [photoBlogProjectId]);
+  }, [pBProjectId]);
 
   useEffect(() => {
-    if (photoBlogProjectResponse.isLoading) return;
+    if (pBProjectResponse.isLoading) return;
 
     const mediaToLoad: Array<HTMLImageElement | HTMLVideoElement> = Array.from(
       document.querySelectorAll('.Loadable-Image'),
@@ -85,7 +85,7 @@ const PhotoBlogProjectPage = (): JSX.Element => {
     executeCallbackOnMediaCollectionLoad(mediaToLoad, () => {
       setAreImagesLoaded(true);
     });
-  }, [photoBlogProject]);
+  }, [pBProject]);
 
   return (
     <LightboxContext.Provider
@@ -94,12 +94,12 @@ const PhotoBlogProjectPage = (): JSX.Element => {
         slideIndexState: [slideIndex, setSlideIndex],
       }}
     >
-      <S.PhotoBlogProjectContainer>
+      <S.PBProjectContainer>
         {OverviewSection}
-        <PhotoBlogProjectGalleryGrid
+        <PBProjectGalleryGrid
           gallerySections={gallerySections}
         />
-        <PhotoBlogProjectNav photoBlogProject={photoBlogProject} />
+        <PBProjectNav pBProject={pBProject} />
 
         <Lightbox
           open={isLightboxOpen}
@@ -117,9 +117,9 @@ const PhotoBlogProjectPage = (): JSX.Element => {
             imageFit: 'contain',
           }}
         />
-      </S.PhotoBlogProjectContainer>
+      </S.PBProjectContainer>
     </LightboxContext.Provider>
   );
 };
 
-export default PhotoBlogProjectPage;
+export default PBProjectPage;
