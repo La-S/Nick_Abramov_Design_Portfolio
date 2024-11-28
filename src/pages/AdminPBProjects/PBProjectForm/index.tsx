@@ -437,6 +437,7 @@ const PBProjectForm = ({
                 </div>
               ))}
               <Button
+                className="NewRowButton"
                 type="button"
                 onClick={() => {
                   const updatedGallerySectionsValue = [...gallerySectionsValue];
@@ -447,7 +448,7 @@ const PBProjectForm = ({
                   setGallerySectionsValue(updatedGallerySectionsValue);
                 }}
               >
-                Add a new gallery row +
+                Add row +
               </Button>
             </div>
           ))}

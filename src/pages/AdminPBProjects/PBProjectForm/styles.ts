@@ -66,6 +66,45 @@ const PBProjectForm = styled('form')(({ theme }) => ({
         },
       },
     },
+
+    '.Row-Box': {
+      marginTop: '15px',
+      padding: '15px',
+      borderRadius: '5px',
+      border: `1px solid ${theme.componentColors.backgroundSecondary}`,
+
+      '.Row-Number-Box': {
+        display: 'flex',
+        alignItems: 'center',
+
+        button: {
+          marginTop: '0',
+          marginLeft: 'auto',
+          backgroundColor: 'transparent',
+
+          svg: {
+            fontSize: '24px',
+            color: theme.textColors.main,
+          },
+
+          '&:hover': {
+            backgroundColor: 'transparent!important',
+
+            svg: {
+              color: '#ca0909',
+            },
+          },
+        },
+      },
+    },
+
+    '.NewRowButton': {
+      backgroundColor: theme.componentColors.backgroundSecondary,
+
+      '&:hover': {
+        backgroundColor: theme.componentColors.backgroundSecondary,
+      },
+    },
   },
 
   '.MuiDivider-root': {
@@ -234,8 +273,10 @@ const PBProjectForm = styled('form')(({ theme }) => ({
     borderRadius: '0',
     textTransform: 'uppercase',
 
-    '&:hover': {
-      backgroundColor: `${theme.componentColors.backgroundTertiary}!important`,
+    '&:not(.NewRowButton)': {
+      '&:hover': {
+        backgroundColor: `${theme.componentColors.backgroundTertiary}!important`,
+      },
     },
   },
 
