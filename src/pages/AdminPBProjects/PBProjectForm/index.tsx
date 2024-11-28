@@ -21,6 +21,7 @@ import formUtils from '../../../utils/formUtils';
 import S from './styles';
 import type { AlertDisplayProps } from '../../../common/components/Alert/props';
 import type { PBProjectInputDto } from '../../../types/data/pBProjectAPI';
+import { PBProjectGalleryCellType } from '../../../types/data/pBProject';
 
 const ORDERED_MONTHS = [
   'January',
@@ -338,6 +339,116 @@ const PBProjectForm = ({
                   setGallerySectionsValue(newGallerySectionsValue);
                 }}
               />
+
+              <FormLabel className="Section-Title-Label">Rows:</FormLabel>
+              {gallerySection.rows.map((galleryRow, j) => (
+                <div key={i} className="Row-Box">
+                  <div className="Row-Number-Box">
+                    <FormLabel className="Sub-Label">Row {j + 1}</FormLabel>
+                    <ButtonBase
+                      onClick={() => {
+                        const updatedGallerySections = [...gallerySectionsValue];
+                        const updatedGallerySectionRows =
+                          gallerySection.rows.filter((_, index) => index !== j);
+                        updatedGallerySections[i].rows = updatedGallerySectionRows;
+                        setGallerySectionsValue(updatedGallerySections);
+                      }}
+                      disableRipple
+                    >
+                      <TrashIcon />
+                    </ButtonBase>
+                  </div>
+                  <div className="Cell-Amount-Box">
+                    <Typography>Specify amount of cells</Typography>
+                    <Select
+                      variant="outlined"
+                      value={galleryRow.cellAmount || 1}
+                      onChange={(e) => utils.updateGalleryRowCellAmount(
+                        e,
+                        i,
+                        j,
+                        gallerySectionsValue,
+                        setGallerySectionsValue,
+                      )}
+                    >
+                      <MenuItem value="1">1</MenuItem>
+                      <MenuItem value="2">2</MenuItem>
+                      <MenuItem value="3">3</MenuItem>
+                      <MenuItem value="4">4</MenuItem>
+                    </Select>
+                  </div>
+                  {galleryRow.cells.map((cellValue, k) => (
+                    <div key={j} className="Cell-Links-Box">
+                      <Select
+                        value={cellValue.type || 'image link'}
+                        onChange={(e) => {
+                          const updatedGallerySectionsValue = [...gallerySectionsValue];
+                          const updatedRow = updatedGallerySectionsValue[i].rows[j];
+                          updatedRow.cells[k].type = e.target.value as PBProjectGalleryCellType;
+                          if (cellValue.type && cellValue.type !== 'image link') {
+                            updatedRow.cells[k].alt =  '';
+                          }
+
+                          setGallerySectionsValue(updatedGallerySectionsValue);
+                        }}
+                      >
+                        <MenuItem value="image link">image link</MenuItem>
+                        <MenuItem value="direct video link">direct video link</MenuItem>
+                        <MenuItem value="embedded video link">youtube video link</MenuItem>
+                      </Select>
+                      <div className="Cell-Link-Path-Box">
+                        <TextField
+                          variant="outlined"
+                          type="text"
+                          value={cellValue.path}
+                          placeholder="Path"
+                          onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                            const updatedGallerySectionsValue = [...gallerySectionsValue];
+                            const updatedRow = updatedGallerySectionsValue[i].rows[j];
+                            updatedRow.cells[k].path = (target as HTMLInputElement).value;
+                            setGallerySectionsValue(updatedGallerySectionsValue);
+                          }}
+                        />
+                        {cellValue.type === 'image link' ? (
+                          <TextField
+                            className='Cell-Link-Alt-Field'
+                            variant="outlined"
+                            value={cellValue.alt}
+                            placeholder="Alt Text (SEO)"
+                            onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                              const updatedGallerySectionsValue = [...gallerySectionsValue];
+                              const updatedRow = updatedGallerySectionsValue[i].rows[j];
+                              updatedRow.cells[k].alt = (target as HTMLInputElement).value;
+                              setGallerySectionsValue(updatedGallerySectionsValue);
+                            }}
+                          />
+                        ): <></>}
+                      </div>
+                      {(cellValue.type === 'image link' || !cellValue.type)
+                        ? UploadImageButton((imagePath) => {
+                          const updatedGallerySectionsValue = [...gallerySectionsValue];
+                          const updatedRow = updatedGallerySectionsValue[i].rows[j];
+                          updatedRow.cells[k].path = imagePath;
+                          setGallerySectionsValue(updatedGallerySectionsValue);
+                        })
+                        : <></>}
+                    </div>
+                  ))}
+                </div>
+              ))}
+              <Button
+                type="button"
+                onClick={() => {
+                  const updatedGallerySectionsValue = [...gallerySectionsValue];
+                  updatedGallerySectionsValue[i].rows.push({
+                    cellAmount: 1,
+                    cells: [{ type: 'image link', path: '' }],
+                  });
+                  setGallerySectionsValue(updatedGallerySectionsValue);
+                }}
+              >
+                Add a new gallery row +
+              </Button>
             </div>
           ))}
 

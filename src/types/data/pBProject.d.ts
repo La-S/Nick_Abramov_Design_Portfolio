@@ -13,21 +13,23 @@ export type PBProjectMainImage = {
   alt?: string;
 };
 
+export type PBProjectGalleryCellType = 'image link' | 'direct video link' | 'embedded video link';
+
 export type PBProjectGalleryCell = {
-  type: 'image link' | 'direct video link' | 'embedded video link';
+  type: PBProjectGalleryCellType;
   path: string;
   alt?: string;
 };
 
 export type PBProjectGalleryRow = {
   cellAmount: 1 | 2 | 3 | 4;
-  cells: Array<ProjectGalleryCell>;
+  cells: Array<PBProjectGalleryCell>;
 };
 
 export type PBProjectGallerySection = {
   title?: string;
   description?: string;
-  rows: Array<ProjectGalleryRow>;
+  rows: Array<PBProjectGalleryRow>;
 };
 
 export interface PBProject {
