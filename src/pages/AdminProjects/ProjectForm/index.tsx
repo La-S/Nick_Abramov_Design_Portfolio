@@ -321,6 +321,7 @@ const ProjectForm = (props: Props): JSX.Element => {
             Submit
           </Button>
         </S.ProjectForm>
+
         {alertState.open ? <Alert severity={alertState.severity as AlertColor}>{alertState.message}</Alert> : <></>}
       </>
     );

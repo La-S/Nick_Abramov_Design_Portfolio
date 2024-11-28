@@ -286,8 +286,6 @@ const ProjectForm = styled('form')(({ theme }) => ({
     '.Hide-On-Smaller-Screens': {
       display: 'none',
     },
-
-
   },
 }));
 

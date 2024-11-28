@@ -1,4 +1,4 @@
-import { styled } from '@mui/material';
+import { Modal, styled } from '@mui/material';
 
 export const classes = {
   root: 'AdminPBProjects-Container',
@@ -56,6 +56,16 @@ const AdminPBProjectsContainer = styled('div')(({ theme }) => ({
   },
 }));
 
+const NewPBProjectModal = styled(Modal)(() => ({
+  form: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+}));
+
 export default {
   AdminPBProjectsContainer,
+  NewPBProjectModal,
 };

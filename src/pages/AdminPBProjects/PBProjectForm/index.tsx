@@ -1,14 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { Button, CircularProgress } from '@mui/material';
+import {
+  AlertColor,
+  Button,
+  ButtonBase,
+  CircularProgress,
+  Divider,
+  FormLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material';
 import Alert from '../../../common/components/Alert';
 import { X as CloseIcon, Trash as TrashIcon, UploadSimple as UploadIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { EMPTY_PBPROJECT } from '../../../hooks/usePBProject';
 import { createPBProject, getPBProject, updatePBProject } from '../../../api/pBProjectMethods.api';
+import utils from './utils';
 import formUtils from '../../../utils/formUtils';
 import S from './styles';
 import type { AlertDisplayProps } from '../../../common/components/Alert/props';
 import type { PBProjectInputDto } from '../../../types/data/pBProjectAPI';
+
+const ORDERED_MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 interface PBProjectFormProps {
   pBProjectId?: string;
@@ -127,7 +154,213 @@ const PBProjectForm = ({
       );
     }
 
-    return <></>;
+    return (
+      <>
+        <S.PBProjectForm
+          id="Project-Form"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && e.shiftKey) e.preventDefault();
+          }}
+        >
+          <div className="Title-Label-Box">
+            <Typography className="Title-Label">
+              <b>{pBProjectId ? `Edit '${pBProject.nameInfo.full}' project` : 'Create new photo blog project'}</b>
+            </Typography>
+            {setModalOpen ? (
+              <ButtonBase onClick={() => setModalOpen(false)} disableRipple>
+                <CloseIcon />
+              </ButtonBase>
+            ) : (
+              <></>
+            )}
+          </div>
+
+          <FormLabel className="Section-Title-Label">General Information:</FormLabel>
+          <TextField
+            variant="outlined"
+            value={nameInfoValue.full}
+            placeholder="Project Name (Full)"
+            autoComplete="off"
+            required
+            onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+              setNameInfoValue({
+                ...nameInfoValue,
+                full: (target as HTMLInputElement).value,
+              });
+            }}
+          />
+          <TextField
+            variant="outlined"
+            value={nameInfoValue.short}
+            placeholder="Project Name (Short)"
+            autoComplete="off"
+            required
+            onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+              setNameInfoValue({
+                ...nameInfoValue,
+                short: (target as HTMLInputElement).value,
+              });
+            }}
+          />
+          <div className="CoverImagePath-Box">
+            <TextField
+              variant="outlined"
+              value={mainImageValue.path}
+              placeholder="Cover Image Path"
+              required
+              onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                const imagePath = (target as HTMLInputElement).value;
+                setMainImageValue({ ...mainImageValue, path: imagePath });
+              }}
+            />
+            {UploadImageButton((imagePath) => setMainImageValue({ ...mainImageValue, path: imagePath }))}
+          </div>
+          <div className="CoverImageAlt-Box">
+            <TextField
+              variant="outlined"
+              value={mainImageValue.alt}
+              placeholder="Cover Image Alt Text (SEO)"
+              required
+              onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                const altText = (target as HTMLInputElement).value;
+                setMainImageValue({ ...mainImageValue, alt: altText });
+              }}
+            />
+          </div>
+          <Divider />
+
+          <FormLabel className="Section-Title-Label">Date Created:</FormLabel>
+          <div className="DateInfo-Box">
+            <Select
+              className="DateInfo-MonthSelector"
+              value={pBProject.dateInfo.monthIndex || 0}
+              onChange={({ target }) => {
+                const newMonthIndexValue = (
+                  target as unknown as HTMLSelectElement
+                ).value;
+                setDateInfoValue({
+                  ...dateInfoValue,
+                  monthIndex: parseInt(newMonthIndexValue, 10),
+                });
+              }}
+            >
+              {ORDERED_MONTHS.map((month, i) => (
+                <MenuItem key={month} value={i}>{month}</MenuItem>
+              ))}
+            </Select>
+            <TextField
+              variant="outlined"
+              value={dateInfoValue.year}
+              placeholder="Year created"
+              required
+              type='number'
+              onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                const newYearValue = parseInt(
+                  (target as HTMLInputElement).value,
+                  10
+                );
+                setDateInfoValue({...dateInfoValue, year: newYearValue });
+              }}
+            />
+          </div>
+          <Divider />
+
+          <div className="Description-Label-Wrapper">
+            <FormLabel className="Section-Title-Label">Description:</FormLabel>
+            <a
+              href='https://www.markdownguide.org/cheat-sheet/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              Markdown cheat sheet
+            </a>
+          </div>
+          <TextField
+            multiline
+            value={descriptionValue}
+            placeholder='Description (markdown format)'
+            required
+            onInput={(e) => {
+              setDescriptionValue((e.target as HTMLInputElement).value);
+            }}
+            onKeyDown={(e) => utils.onKeyDownDescriptionField(
+              e, [descriptionValue, setDescriptionValue]
+            )}
+          />
+          <Typography className='Description-Note'>
+            <strong>Note</strong>
+            {': For a new line break, use \'\\\' symbol'}
+          </Typography>
+          <Divider />
+
+          <FormLabel className="Section-Title-Label">Project Gallery Sections:</FormLabel>
+          {gallerySectionsValue.map((gallerySection, i) => (
+            <div key={i} className="Section-Box">
+              <div className="Section-Number-Box">
+                <FormLabel className="Sub-Label">Section {i + 1}</FormLabel>
+                <ButtonBase
+                  onClick={() => {
+                    const newGallerySectionsValue = gallerySectionsValue.filter((_, index) => index !== i);
+                    setGallerySectionsValue(newGallerySectionsValue);
+                  }}
+                  disableRipple
+                >
+                  <TrashIcon />
+                </ButtonBase>
+              </div>
+              <TextField
+                variant="outlined"
+                value={gallerySection.title}
+                placeholder="Section Title"
+                autoComplete="off"
+                required
+                onInput={({ target }) => {
+                  const newGallerySectionsValue = [...gallerySectionsValue];
+                  newGallerySectionsValue[i].title = (
+                    target as HTMLInputElement
+                  ).value as string;
+
+                  setGallerySectionsValue(newGallerySectionsValue);
+                }}
+              />
+              <TextField
+                variant="outlined"
+                value={gallerySection.description}
+                placeholder="Section Description"
+                autoComplete="off"
+                required
+                onInput={({ target }) => {
+                  const newGallerySectionsValue = [...gallerySectionsValue];
+                  newGallerySectionsValue[i].description = (
+                    target as HTMLInputElement
+                  ).value as string;
+
+                  setGallerySectionsValue(newGallerySectionsValue);
+                }}
+              />
+            </div>
+          ))}
+
+          <Button
+            type="button"
+            onClick={() =>
+              setGallerySectionsValue([
+                ...gallerySectionsValue,
+                { title: '', description: '', rows: [] },
+              ])
+            }
+          >
+            Add a new gallery section +
+          </Button>
+
+          <Button type="submit" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </S.PBProjectForm>
+
+        {alertState.open ? <Alert severity={alertState.severity as AlertColor}>{alertState.message}</Alert> : <></>}
+      </>
+    );
   };
 
   useEffect(() => {
