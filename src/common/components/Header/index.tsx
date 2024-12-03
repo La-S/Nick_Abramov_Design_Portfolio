@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '@mui/material';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import { List as BurgerIcon } from '@phosphor-icons/react';
 import Logo from '../Logo';
 import NavMenu from './NavMenu';
-import S from './styles';
+import S, { classes } from './styles';
 import { getCurrentThemeName, setCurrentThemeNameInStorage } from '../../../utils/themeUtils';
 import { GlobalContext } from '../../../contexts/global';
 import lightTheme from '../../../assets/themes/lightTheme';
 import defaultTheme from '../../../assets/themes/defaultTheme';
 
 const Header = (): JSX.Element => {
+  const headerRef = useRef<HTMLHeadingElement>(null);
   const pathName = useLocation().pathname.substring(1);
   const {
     themeState: [, setTheme],
@@ -46,12 +47,38 @@ const Header = (): JSX.Element => {
 
     return () => removeEventListener('resize', resizeListener);
   }, []);
+
   useEffect(() => {
     setFillMain(getFillMainColor());
   }, [pathName]);
 
+  useEffect(() => {
+    const visibleHeaderY = 500;
+    let lastScrollY = window.scrollY;
+
+    const scrollListener = () => {
+
+      const currentScrollY = window.scrollY;
+      const isScrollingUp = currentScrollY < lastScrollY;
+
+      if (isScrollingUp || currentScrollY <= visibleHeaderY) {
+        headerRef.current?.classList.remove(classes.hidden);
+      } else {
+        headerRef.current?.classList.add(classes.hidden);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    addEventListener('scroll', scrollListener);
+
+    return () => {
+      removeEventListener('scroll', scrollListener);
+    };
+  }, []);
+
   return (
-    <S.Header pathName={pathName}>
+    <S.Header pathName={pathName} ref={headerRef} className={classes.root}>
       <S.NewProjectLink to="/contact" pathName={pathName}>
         Get in Touch
       </S.NewProjectLink>

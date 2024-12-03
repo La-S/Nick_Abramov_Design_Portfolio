@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 export const HEADER_DESKTOP_HEIGHT = 85;
 export const HEADER_MOBILE_HEIGHT = 75;
 
+export const classes = {
+  root: 'Header',
+  hidden: 'Header--hidden',
+};
+
 const Header = styled(AppBar, {
   shouldForwardProp: (propName) => propName !== 'pathName',
 })<{ pathName: string }>(({ theme, pathName }) => ({
@@ -16,22 +21,30 @@ const Header = styled(AppBar, {
   boxShadow: 'none',
 
   '.Theme-Toggle': {
-    ...(pathName === 'about' ? { 
+    ...(pathName === 'about' ? {
       opacity: 0,
       pointerEvents: 'none',
     } : {}),
   },
-  
-  transition: 'background-color 0.2s ease-in-out',
+
+  [`&.${classes.hidden}`]: {
+    top: `-${HEADER_DESKTOP_HEIGHT}px`,
+  },
+
+  transition: 'background-color 0.2s ease-in-out, top 0.2s ease-in-out',
   [theme.breakpoints.down('tablet')]: {
     backgroundColor: alpha(theme.componentColors.backgroundMain, 0.95),
     height: `${HEADER_MOBILE_HEIGHT}px`,
     padding: '25px',
+
+    [`&.${classes.hidden}`]: {
+      top: `-${HEADER_MOBILE_HEIGHT}px`,
+    },
   },
 
   [theme.breakpoints.up('tablet')]: {
     backgroundColor:
-      pathName !== 'about' 
+      pathName !== 'about'
         ? alpha(theme.componentColors.backgroundMain, 0.95)
         : theme.componentColors.backgroundSecondary,
   },
