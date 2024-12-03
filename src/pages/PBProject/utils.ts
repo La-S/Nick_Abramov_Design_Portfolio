@@ -3,7 +3,10 @@ import type {
   PBProjectGalleryRow,
   PBProjectGallerySection,
 } from '../../types/data/pBProject';
+import gsap from 'gsap';
+import { classes } from './styles';
 import type { Slide } from 'yet-another-react-lightbox';
+import { generateTitleTween } from '../../utils/gsapUtils';
 
 const getLightboxSlidesFromGalleryRow = (
   {
@@ -75,4 +78,27 @@ export const getPBProjectLightboxSlides = (
   }
 
   return slides;
+};
+
+const generateDateCreatedTween = () => gsap.fromTo(
+  `.${classes.dateCreated}`,
+  { opacity: 0 },
+  { duration: 1.5, opacity: 1, easing: 'power2.in' },
+);
+
+const generateNameTween = () => generateTitleTween(`.${classes.name}`);
+
+const generateDescriptionTween = () => generateTitleTween(`.${classes.description}`);
+
+const generateMainImageTween = () => gsap.fromTo(
+  `.${classes.mainImage}`,
+  { opacity: 0, scale: 0.75, translateY: '15%' },
+  { duration: 1, opacity: 1, scale: 1, translateY: '0', ease: 'power4.out' },
+);
+
+export const tweenGenerator = {
+  dateCreated: generateDateCreatedTween,
+  name: generateNameTween,
+  description: generateDescriptionTween,
+  mainImage: generateMainImageTween,
 };

@@ -33,6 +33,7 @@ const PBProjectNav = styled('div')(({ theme }) => ({
     [`.${classes.navButton}`]: {
       background: 'transparent',
       border: 'none',
+      transition: 'transform 0.2s linear',
 
       a: {
         textDecoration: 'none',

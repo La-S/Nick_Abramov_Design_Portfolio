@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import usePBProject from '../../hooks/usePBProject';
 import { GlobalContext } from '../../contexts/global';
@@ -7,14 +7,16 @@ import S, { classes } from './styles';
 import PBProjectGalleryGrid from './PBProjectGalleryGrid';
 import Lightbox from 'yet-another-react-lightbox';
 import { Video, Zoom } from 'yet-another-react-lightbox/plugins';
-import { getPBProjectLightboxSlides } from './utils';
+import { getPBProjectLightboxSlides, tweenGenerator } from './utils';
 import { LightboxContext } from './context';
 import PBProjectNav from './PBProjectNav';
 import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
+import { useGSAP } from '@gsap/react';
 
 const MAX_LOADING_DELAY = 2500;
 
 const PBProjectPage = (): JSX.Element => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const {
     pageLoadingState: [isPageLoading, setIsPageLoading],
   } = useContext(GlobalContext);
@@ -87,6 +89,18 @@ const PBProjectPage = (): JSX.Element => {
     });
   }, [pBProject]);
 
+  useGSAP(() => {
+    if (isPageLoading || !pBProjectResponse.isFetched) return;
+
+    tweenGenerator.dateCreated();
+    tweenGenerator.name();
+    tweenGenerator.description();
+    tweenGenerator.mainImage();
+  }, {
+    scope: containerRef,
+    dependencies: [pBProjectResponse.isFetched, isPageLoading]
+  });
+
   return (
     <LightboxContext.Provider
       value={{
@@ -94,7 +108,7 @@ const PBProjectPage = (): JSX.Element => {
         slideIndexState: [slideIndex, setSlideIndex],
       }}
     >
-      <S.PBProjectContainer>
+      <S.PBProjectContainer ref={containerRef}>
         {OverviewSection}
         <PBProjectGalleryGrid
           gallerySections={gallerySections}
