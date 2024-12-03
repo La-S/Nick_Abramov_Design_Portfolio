@@ -7,6 +7,7 @@ export const classes = {
 
 const PBProjectsGridBox = styled('div')(({ theme }) => ({
   '> a': {
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     textDecoration: 'none',
@@ -31,8 +32,21 @@ const PBProjectsGridBox = styled('div')(({ theme }) => ({
         color: theme.textColors.tertiary,
       },
     },
+
+    img: {
+      objectFit: 'cover',
+      flexGrow: 1,
+    },
   },
 
+  [theme.breakpoints.down('tablet')]: {
+    '> a': {
+      p: {
+        margin: '6px 0 0 0',
+        fontSize: 16,
+      },
+    },
+  },
 }));
 
 export default {
