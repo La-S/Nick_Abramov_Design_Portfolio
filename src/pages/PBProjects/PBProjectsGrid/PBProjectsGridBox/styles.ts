@@ -1,6 +1,7 @@
 import { styled } from '@mui/material';
 
 export const classes = {
+  root: 'PBProjectsGridBox',
   name: 'PBProjectsGridBox-ProjectName',
   dateCreatedString: 'PBProjectsGridBox-ProjectDateCreatedString',
 };

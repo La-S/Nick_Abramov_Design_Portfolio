@@ -24,7 +24,7 @@ const PBProjectsGridBox = ({
   const formattedDateString = generatePBProjectDateString(dateInfo);
 
   return (
-    <S.PBProjectsGridBox>
+    <S.PBProjectsGridBox className={classes.root}>
       <Link
         to={`/photo-blog/${formattedName}`}
         state={{ pBProjectId: id }}

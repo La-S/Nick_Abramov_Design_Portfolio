@@ -21,6 +21,11 @@ const PBProjectNav = styled('div')(({ theme }) => ({
     fontFamily: theme.fonts.main,
     color: theme.textColors.secondary,
     textUnderlineOffset: 3,
+    transition: 'filter 0.2s ease-in-out',
+
+    '&:hover': {
+      filter: 'brightness(1.25)',
+    },
   },
 
   [`.${classes.navButtonsContainer}`]: {

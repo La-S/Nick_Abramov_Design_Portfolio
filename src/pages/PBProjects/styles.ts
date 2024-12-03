@@ -17,7 +17,13 @@ const PBProjectsPage = styled('div')(({ theme }) => ({
       margin: 0,
 
       a: {
-        textUnderlineOffset: 3,
+        textUnderlineOffset: 4,
+        textDecorationColor:theme.textColors.tertiary,
+        transition: 'color 0.2s ease-in-out',
+
+        '&:hover': {
+          color: theme.textColors.tertiary,
+        },
       },
 
       '&:first-of-type': {
