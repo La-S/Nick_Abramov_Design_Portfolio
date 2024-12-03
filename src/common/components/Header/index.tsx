@@ -57,7 +57,6 @@ const Header = (): JSX.Element => {
     let lastScrollY = window.scrollY;
 
     const scrollListener = () => {
-
       const currentScrollY = window.scrollY;
       const isScrollingUp = currentScrollY < lastScrollY;
 
