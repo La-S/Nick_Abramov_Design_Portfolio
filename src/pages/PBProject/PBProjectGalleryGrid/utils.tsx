@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction, RefObject } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import S, { classes } from './styles';
 import type {
@@ -35,6 +35,7 @@ export const renderGallerySections = (
   gallerySections: Array<PBProjectGallerySection>,
   setIsLightboxOpen: Dispatch<SetStateAction<boolean>>,
   setSlideIndex: Dispatch<SetStateAction<number>>,
+  cursorWrapperRef: RefObject<HTMLDivElement | null>,
 ): JSX.Element => {
   let slideIndexCounter = 1;
 
@@ -77,6 +78,16 @@ export const renderGallerySections = (
                               onClick: () => {
                                 setIsLightboxOpen(true);
                                 setSlideIndex(slideIndex);
+                              }
+                            }}
+                            onMouseEnter={() => {
+                              if (cell.type === 'embedded video link' && cursorWrapperRef.current) {
+                                cursorWrapperRef.current.style.display = 'none';
+                              }
+                            }}
+                            onMouseLeave={() => {
+                              if (cell.type === 'embedded video link' && cursorWrapperRef.current) {
+                                cursorWrapperRef.current.style.display = 'block';
                               }
                             }}
                           >

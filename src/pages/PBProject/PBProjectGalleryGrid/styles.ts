@@ -78,7 +78,7 @@ const PBProjectGalleryRow = styled('div', {
     '.iframe-container': {
       position: 'relative',
       width: '100%',
-      height: 0,
+      height: '100%',
       paddingBottom: '56.25%',
     },
 
