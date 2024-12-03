@@ -22,6 +22,11 @@ const PBProjectsPage = (): JSX.Element => {
   const [areImagesLoaded, setAreImagesLoaded] = useState(false);
 
   useEffect(() => {
+    if (!pBProjectsResponse.isFetched && !isPageLoading) {
+      setIsPageLoading(true);
+      return;
+    }
+
     if (!isPageLoading
       || pBProjectsResponse.isLoading
       || isLoadingDelayActive
