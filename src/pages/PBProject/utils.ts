@@ -83,7 +83,15 @@ export const getPBProjectLightboxSlides = (
 const generateDateCreatedTween = () => gsap.fromTo(
   `.${classes.dateCreated}`,
   { opacity: 0 },
-  { duration: 1.5, opacity: 1, easing: 'power2.in' },
+  {
+    duration: 1.5,
+    opacity: 1,
+    scrollTrigger: {
+      trigger: `.${classes.dateCreated}`,
+      start: 'top 80%',
+      end: 'bottom 20%',
+    },
+  },
 );
 
 const generateNameTween = () => generateTitleTween(`.${classes.name}`);

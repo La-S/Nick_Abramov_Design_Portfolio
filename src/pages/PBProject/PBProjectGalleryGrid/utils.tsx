@@ -7,6 +7,7 @@ import type {
   PBProjectGalleryRow,
   PBProjectGallerySection,
 } from '../../../types/data/pBProject';
+import gsap from 'gsap';
 
 const renderCellContent = ({
   path,
@@ -105,4 +106,89 @@ export const renderGallerySections = (
       })}
     </>
   );
+};
+
+const generateRowsTween = () => {
+  const galleryRows: Array<HTMLDivElement> =
+  gsap.utils.toArray<HTMLDivElement>(`.${classes.row}`);
+  galleryRows.forEach((row) => {
+    const cells = row.querySelectorAll(`.${classes.cell}`);
+
+    return gsap.fromTo(
+      cells,
+      {
+        opacity: 0, scale: 0.75, translateY: '15%'
+      },
+      {
+        duration: 0.5,
+        opacity: 1,
+        scale: 1,
+        translateY: '0',
+        ease: 'power2.inOut',
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: row,
+          start: 'top 100%',
+          end: 'bottom 0%',
+        },
+      }
+    );
+  });
+};
+
+const generateTitlesTween = () => {
+  const titles: Array<HTMLElement> =
+  gsap.utils.toArray<HTMLElement>(`.${classes.title}`);
+  titles.forEach((title) => (
+    gsap.fromTo(
+      title,
+      {
+        opacity: 0, scale: 0.75, translateX: '-15%'
+      },
+      {
+        duration: 0.5,
+        opacity: 1,
+        scale: 1,
+        translateX: '0',
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: title,
+          start: 'top 100%',
+          end: 'bottom 0%',
+        },
+      }
+    )
+  ));
+};
+
+const generateDescriptionsTweens = () => {
+  const descriptions: Array<HTMLElement> =
+  gsap.utils.toArray<HTMLElement>(`.${classes.description}`);
+  descriptions.forEach((description) => (
+    gsap.fromTo(
+      description,
+      {
+        opacity: 0, scale: 0.75, translateX: '-15%'
+      },
+      {
+        duration: 0.35,
+        delay: 0.25,
+        opacity: 1,
+        scale: 1,
+        translateX: '0',
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: description,
+          start: 'top 100%',
+          end: 'bottom 0%',
+        },
+      }
+    )
+  ));
+};
+
+export const tweenGenerator = {
+  rows: generateRowsTween,
+  titles: generateTitlesTween,
+  descriptions: generateDescriptionsTweens,
 };

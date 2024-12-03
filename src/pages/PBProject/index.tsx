@@ -43,6 +43,8 @@ const PBProjectPage = (): JSX.Element => {
   const [slideIndex, setSlideIndex] = useState(0);
   const slides = getPBProjectLightboxSlides(pBProject);
 
+  const wereGSAPAnimationsTriggeredRef = useRef(pBProjectResponse.isFetched);
+
   const formattedDateString = generatePBProjectDateString(dateInfo);
   const OverviewSection = (
     <div className={classes.overviewContainer}>
@@ -79,6 +81,13 @@ const PBProjectPage = (): JSX.Element => {
   }, [pBProjectId]);
 
   useEffect(() => {
+    if (pBProjectResponse.isFetched
+      && !wereGSAPAnimationsTriggeredRef.current) {
+      wereGSAPAnimationsTriggeredRef.current = true;
+    }
+  }, [pBProjectId]);
+
+  useEffect(() => {
     if (pBProjectResponse.isLoading) return;
 
     const mediaToLoad: Array<HTMLImageElement | HTMLVideoElement> = Array.from(
@@ -90,7 +99,9 @@ const PBProjectPage = (): JSX.Element => {
   }, [pBProject]);
 
   useGSAP(() => {
-    if (isPageLoading || !pBProjectResponse.isFetched) return;
+    if (isPageLoading
+      || !pBProjectResponse.isFetched
+      || wereGSAPAnimationsTriggeredRef.current) return;
 
     tweenGenerator.dateCreated();
     tweenGenerator.name();
@@ -110,9 +121,7 @@ const PBProjectPage = (): JSX.Element => {
     >
       <S.PBProjectContainer ref={containerRef}>
         {OverviewSection}
-        <PBProjectGalleryGrid
-          gallerySections={gallerySections}
-        />
+        <PBProjectGalleryGrid gallerySections={gallerySections} />
         <PBProjectNav pBProject={pBProject} />
 
         <Lightbox
