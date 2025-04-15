@@ -8,7 +8,7 @@ import ProjectContentGrid from './ProjectContentGrid';
 import S from './styles';
 import { GlobalContext } from '../../contexts/global';
 import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
-import ProjectNavBar from './ProjectNavBar';
+// import ProjectNavBar from './ProjectNavBar';
 
 const MAX_LOADING_DELAY = 2500;
 
@@ -70,7 +70,7 @@ const Project = () => {
         </Box>
       </S.ProjectOverview>
       <ProjectContentGrid content={project?.content || []} isContentSpaced={project.isContentSpaced} />
-      <ProjectNavBar project={project} />
+      {/* <ProjectNavBar project={project} /> */}
     </S.ProjectContainer>
   );
 };

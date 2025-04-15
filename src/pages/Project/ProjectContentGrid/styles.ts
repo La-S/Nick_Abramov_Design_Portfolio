@@ -64,6 +64,12 @@ const ProjectContentRow = styled(Box, {
           tablet: { marginBottom: 20 },
         }),
 
+        ul: {
+          'li::marker': {
+            color: theme.textColors.tertiary,
+          },
+        },
+
         'p, span': {
           ...responsive({
             default: {
