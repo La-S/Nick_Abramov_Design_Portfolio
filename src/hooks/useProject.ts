@@ -10,8 +10,8 @@ export const EMPTY_PROJECT: Project = {
   mainImage: { path: '' },
   dateCreated: 0,
   description: '',
-  isGallerySpaced: false,
-  gallery: [],
+  isContentSpaced: false,
+  content: [],
 };
 
 type QueryResult = Omit<UseQueryResult<unknown, unknown>, 'data'> & {

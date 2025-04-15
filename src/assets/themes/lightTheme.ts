@@ -1,7 +1,25 @@
 import { createTheme } from '@mui/material';
 import { screenSizeBreakpoints } from './constants';
+import { generateTypographyStyleOverrides } from './utils';
 import mainFont from '../fonts/Futura_book.ttf';
 import secondaryFont from '../fonts/Inter.ttf';
+import tertiaryFont from '../fonts/Chivo.ttf';
+
+const fonts = {
+  main: 'Futura',
+  secondary: 'Inter',
+  tertiary: 'Chivo',
+};
+
+const textColors = {
+  main: '#131313',
+  secondary: '#008FD5',
+  tertiary: '#008FD5',
+  tertiaryAlternate: 'black',
+  copyright: '#767676',
+};
+
+const typographyStyleOverrides = generateTypographyStyleOverrides(fonts, textColors);
 
 const lightTheme = createTheme({
   componentColors: {
@@ -14,17 +32,8 @@ const lightTheme = createTheme({
     inputBorder: '#626262',
     themeSwitchBackground: '#FFFFFF',
   },
-  textColors: {
-    main: '#131313',
-    secondary: '#008FD5',
-    tertiary: '#008FD5',
-    tertiaryAlternate: 'black',
-    copyright: '#767676',
-  },
-  fonts: {
-    main: 'Futura',
-    secondary: 'Inter',
-  },
+  textColors,
+  fonts,
   breakpoints: screenSizeBreakpoints,
 
   components: {
@@ -39,7 +48,15 @@ const lightTheme = createTheme({
           font-family: 'Inter';
           src: url(${secondaryFont});
         }
+
+        @font-face {
+          font-family: 'Chivo';
+          src: url(${tertiaryFont});
+        }
       `,
+    },
+    MuiTypography: {
+      styleOverrides: typographyStyleOverrides,
     },
   },
 });

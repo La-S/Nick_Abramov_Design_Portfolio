@@ -268,7 +268,7 @@ const ProjectForm = styled('form')(({ theme }) => ({
     },
   },
 
-  '.Gallery-Space-Box': {
+  '.Content-Space-Box': {
     display: 'flex',
     alignItems: 'center',
     marginTop: '15px',

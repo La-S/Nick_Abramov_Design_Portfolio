@@ -1,33 +1,33 @@
 import React, { useContext, useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import { Video, Zoom } from 'yet-another-react-lightbox/plugins';
-import { ProjectGalleryRow } from '../../../types/data/project';
-import { getLightboxSlides, renderGalleryRow } from './utils';
+import { ProjectContentRow } from '../../../types/data/project';
+import { getLightboxSlides, renderContentRow } from './utils';
 import S from './styles';
 import 'yet-another-react-lightbox/styles.css';
 import { GlobalContext } from '../../../contexts/global';
 
 interface Props {
-  gallery: Array<ProjectGalleryRow>;
-  isGallerySpaced: boolean;
+  content: Array<ProjectContentRow>;
+  isContentSpaced: boolean;
 }
 
-const ProjectGalleryGrid = ({ gallery, isGallerySpaced }: Props): JSX.Element => {
+const ProjectContentGrid = ({ content, isContentSpaced }: Props): JSX.Element => {
   const { cursorWrapperRef } = useContext(GlobalContext);
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
-  const slides = getLightboxSlides(gallery);
+  const slides = getLightboxSlides(content);
 
-  const renderGallery = () => {
+  const renderContent = () => {
     let slideIndexUpperBoundary = 0;
 
-    return gallery.map((galleryRow, i) => {
-      const actualCellAmount = Math.min(galleryRow.cells.length, galleryRow.cellAmount);
+    return content.map((contentRow, i) => {
+      const actualCellAmount = Math.min(contentRow.cells.length, contentRow.cellAmount);
       slideIndexUpperBoundary += actualCellAmount;
-      return renderGalleryRow(
-        galleryRow,
-        isGallerySpaced,
+      return renderContentRow(
+        contentRow,
+        isContentSpaced,
         i,
         setIsLightboxOpen,
         slideIndexUpperBoundary,
@@ -39,7 +39,7 @@ const ProjectGalleryGrid = ({ gallery, isGallerySpaced }: Props): JSX.Element =>
 
   return (
     <>
-      <S.ProjectGalleryGrid className="ProjectGallery-Grid">{renderGallery()}</S.ProjectGalleryGrid>
+      <S.ProjectContentGrid className="ProjectContent-Grid">{renderContent()}</S.ProjectContentGrid>
 
       <Lightbox
         open={isLightboxOpen}
@@ -63,4 +63,4 @@ const ProjectGalleryGrid = ({ gallery, isGallerySpaced }: Props): JSX.Element =>
   );
 };
 
-export default ProjectGalleryGrid;
+export default ProjectContentGrid;

@@ -16,7 +16,7 @@ import {
 import Alert from '../../../common/components/Alert';
 import { X as CloseIcon, Trash as TrashIcon, UploadSimple as UploadIcon } from '@phosphor-icons/react';
 import { createProject, getProject, updateProject } from '../../../api/projectMethods.api';
-import type { ProjectGalleryRow } from '../../../types/data/project';
+import type { ProjectContentRow } from '../../../types/data/project';
 import type { ProjectInputDto } from '../../../types/data/projectAPI';
 import utils from './utils';
 import formUtils from '../../../utils/formUtils';
@@ -45,15 +45,15 @@ const ProjectForm = (props: Props): JSX.Element => {
   const [categoryValue, setCategoryValue] = useState(project.category);
   const [descriptionValue, setDescriptionValue] = useState(project.description);
   const [mainImageValue, setMainImageValue] = useState(project.mainImage);
-  const [isGallerySpacedValue, setIsGallerySpacedValue] = useState(project.isGallerySpaced);
-  const [galleryValues, setGalleryValues] = useState(project.gallery);
+  const [isContentSpacedValue, setIsContentSpacedValue] = useState(project.isContentSpaced);
+  const [contentValues, setContentValues] = useState(project.content);
 
   const resetFields = () => {
     setNameValue('');
     setCategoryValue('');
     setDescriptionValue('');
     setMainImageValue({ path: '' });
-    setGalleryValues([]);
+    setContentValues([]);
   };
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -63,8 +63,8 @@ const ProjectForm = (props: Props): JSX.Element => {
       category: categoryValue.trim(),
       description: descriptionValue.trim(),
       mainImage: { ...mainImageValue },
-      isGallerySpaced: isGallerySpacedValue,
-      gallery: [...galleryValues],
+      isContentSpaced: isContentSpacedValue,
+      content: [...contentValues],
     };
 
     if (projectId) {
@@ -221,14 +221,14 @@ const ProjectForm = (props: Props): JSX.Element => {
           <Divider />
 
           <FormLabel className="Section-Title-Label">Project Gallery Rows:</FormLabel>
-          {galleryValues.map((galleryRow, i) => (
+          {contentValues.map((contentRow, i) => (
             <Box key={i} className="Row-Box">
               <Box className="Row-Number-Box">
                 <FormLabel className="Sub-Label">Row {i + 1}</FormLabel>
                 <ButtonBase
                   onClick={() => {
-                    const newGalleryValues = galleryValues.filter((_, index) => index !== i);
-                    setGalleryValues(newGalleryValues);
+                    const newContentValues = contentValues.filter((_, index) => index !== i);
+                    setContentValues(newContentValues);
                   }}
                   disableRipple
                 >
@@ -239,8 +239,8 @@ const ProjectForm = (props: Props): JSX.Element => {
                 <Typography>Specify amount of cells</Typography>
                 <Select
                   variant="outlined"
-                  value={galleryRow.cellAmount || 1}
-                  onChange={(e) => utils.updateGalleryRows(e, i, galleryValues, setGalleryValues)}
+                  value={contentRow.cellAmount || 1}
+                  onChange={(e) => utils.updateGalleryRows(e, i, contentValues, setContentValues)}
                 >
                   <MenuItem value="1">1</MenuItem>
                   <MenuItem value="2">2</MenuItem>
@@ -248,15 +248,15 @@ const ProjectForm = (props: Props): JSX.Element => {
                   <MenuItem value="4">4</MenuItem>
                 </Select>
               </Box>
-              {galleryRow.cells.map((cellValue, j) => (
+              {contentRow.cells.map((cellValue, j) => (
                 <Box key={j} className="Cell-Links-Box">
                   <Select
                     value={cellValue.type || 'image link'}
                     onChange={(e) => {
-                      const newGalleryValues = [...galleryValues];
-                      newGalleryValues[i].cells[j].type = e.target.value as ProjectGalleryRow['cells'][number]['type'];
-                      if (cellValue.type && cellValue.type !== 'image link') newGalleryValues[i].cells[j].alt =  '';
-                      setGalleryValues(newGalleryValues);
+                      const newContentValues = [...contentValues];
+                      newContentValues[i].cells[j].type = e.target.value as ProjectContentRow['cells'][number]['type'];
+                      if (cellValue.type && cellValue.type !== 'image link') newContentValues[i].cells[j].alt =  '';
+                      setContentValues(newContentValues);
                     }}
                   >
                     <MenuItem value="image link">image link</MenuItem>
@@ -270,9 +270,9 @@ const ProjectForm = (props: Props): JSX.Element => {
                       value={cellValue.path}
                       placeholder="Path"
                       onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
-                        const newGalleryValues = [...galleryValues];
-                        newGalleryValues[i].cells[j].path = (target as HTMLInputElement).value;
-                        setGalleryValues(newGalleryValues);
+                        const newContentValues = [...contentValues];
+                        newContentValues[i].cells[j].path = (target as HTMLInputElement).value;
+                        setContentValues(newContentValues);
                       }}
                     />
                     {cellValue.type === 'image link' ? (
@@ -282,18 +282,18 @@ const ProjectForm = (props: Props): JSX.Element => {
                         value={cellValue.alt}
                         placeholder="Alt Text (SEO)"
                         onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
-                          const newGalleryValues = [...galleryValues];
-                          newGalleryValues[i].cells[j].alt = (target as HTMLInputElement).value;
-                          setGalleryValues(newGalleryValues);
+                          const newContentValues = [...contentValues];
+                          newContentValues[i].cells[j].alt = (target as HTMLInputElement).value;
+                          setContentValues(newContentValues);
                         }}
                       />
                     ): <></>}
                   </Box>
                   {(cellValue.type === 'image link' || !cellValue.type)
                     ? UploadImageButton((imagePath) => {
-                      const newGalleryValues = [...galleryValues];
-                      newGalleryValues[i].cells[j].path = imagePath;
-                      setGalleryValues(newGalleryValues);
+                      const newContentValues = [...contentValues];
+                      newContentValues[i].cells[j].path = imagePath;
+                      setContentValues(newContentValues);
                     })
                     : <></>}
                 </Box>
@@ -303,18 +303,18 @@ const ProjectForm = (props: Props): JSX.Element => {
           <Button
             type="button"
             onClick={() =>
-              setGalleryValues([...galleryValues, { cellAmount: 1, cells: [{ type: 'image link', path: '' }] }])
+              setContentValues([...contentValues, { cellAmount: 1, cells: [{ type: 'image link', path: '' }] }])
             }
           >
-            Add a new gallery row +
+            Add a new content row +
           </Button>
-          <Box className="Gallery-Space-Box">
+          <Box className="Content-Space-Box">
             <Checkbox
               size="medium"
-              checked={isGallerySpacedValue}
-              onChange={(e) => setIsGallerySpacedValue(e.target.checked)}
+              checked={isContentSpacedValue}
+              onChange={(e) => setIsContentSpacedValue(e.target.checked)}
             />
-            <FormLabel className="Sub-Label">Add space between gallery items</FormLabel>
+            <FormLabel className="Sub-Label">Add space between content items</FormLabel>
           </Box>
 
           <Button type="submit" onClick={handleSubmit}>
@@ -334,8 +334,8 @@ const ProjectForm = (props: Props): JSX.Element => {
     setCategoryValue(project.category);
     setDescriptionValue(project.description);
     setMainImageValue(project.mainImage);
-    setGalleryValues(project.gallery);
-    setIsGallerySpacedValue(project.isGallerySpaced);
+    setContentValues(project.content);
+    setIsContentSpacedValue(project.isContentSpaced);
   }, [project]);
 
   useEffect(() => {

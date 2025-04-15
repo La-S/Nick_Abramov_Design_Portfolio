@@ -13,6 +13,20 @@ declare module '@mui/material/styles' {
   }
 }
 
+export type TextColors = {
+  main: string;
+  secondary: string;
+  tertiary: string;
+  tertiaryAlternate: string;
+  copyright: string;
+};
+
+export type Fonts = {
+  main: string;
+  secondary: string;
+  tertiary: string;
+};
+
 declare module '@mui/material/styles' {
   interface Theme {
     componentColors: {
@@ -25,18 +39,8 @@ declare module '@mui/material/styles' {
       inputBorder: string;
       themeSwitchBackground: string;
     };
-    textColors: {
-      main: string;
-      secondary: string;
-      tertiary: string;
-      tertiaryAlternate: string;
-      copyright: string;
-    };
-    fonts: {
-      main: string;
-      secondary: string;
-      tertiary: string;
-    };
+    textColors: TextColors;
+    fonts: Fonts;
   }
   interface ThemeOptions {
     componentColors: {
@@ -49,18 +53,8 @@ declare module '@mui/material/styles' {
       inputBorder: string;
       themeSwitchBackground: string;
     };
-    textColors: {
-      main: string;
-      secondary: string;
-      tertiary: string;
-      tertiaryAlternate: string;
-      copyright: string;
-    };
-    fonts: {
-      main: string;
-      secondary: string;
-      tertiary?: string;
-    };
+    textColors: TextColors;
+    fonts: Fonts;
   }
 }
 

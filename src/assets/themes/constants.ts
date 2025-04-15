@@ -1,3 +1,16 @@
+export type BreakpointKeys =
+  | 'mobileLandscape'
+  | 'tablet'
+  | 'desktop'
+  | 'largeDesktop'
+  | 'extraLargeDesktop';
+
+export type Breakpoints = {
+    values: {
+      [key in BreakpointKeys]: number;
+    };
+  };
+
 export const screenSizeBreakpoints = {
   values: {
     mobile: 480,

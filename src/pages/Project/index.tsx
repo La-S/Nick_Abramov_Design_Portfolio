@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import Markdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
+import Markdown from '../../components/Markdown';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useProject from '../../hooks/useProject';
 import BoxUnderline from '../../common/components/BoxUnderline';
-import ProjectGalleryGrid from './ProjectGalleryGrid';
+import ProjectContentGrid from './ProjectContentGrid';
 import S from './styles';
 import { GlobalContext } from '../../contexts/global';
 import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
@@ -65,15 +64,10 @@ const Project = () => {
         </Box>
         <Box className="Project-Description-Box">
           <Typography variant="h3" className='Project-Overview-Title'>Project Overview</Typography>
-          <Markdown
-            className='Project-Description-Body'
-            rehypePlugins={[rehypeRaw]}
-          >
-            {project.description}
-          </Markdown>
+          <Markdown className='Project-Description-Body'>{project.description}</Markdown>
         </Box>
       </S.ProjectOverview>
-      <ProjectGalleryGrid gallery={project?.gallery || []} isGallerySpaced={project.isGallerySpaced} />
+      <ProjectContentGrid content={project?.content || []} isContentSpaced={project.isContentSpaced} />
       <ProjectNavBar project={project} />
     </S.ProjectContainer>
   );
