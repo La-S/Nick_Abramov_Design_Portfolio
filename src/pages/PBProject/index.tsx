@@ -12,6 +12,10 @@ import { LightboxContext } from './context';
 import PBProjectNav from './PBProjectNav';
 import { executeCallbackOnMediaCollectionLoad } from '../../utils/loadingUtils';
 import { useGSAP } from '@gsap/react';
+import { ThemeProvider, Typography } from '@mui/material';
+import { getCurrentThemeName } from '../../utils/themeUtils';
+import { defaultThemePBProjects } from '../../assets/themes/defaultTheme';
+import { lightThemePBProjects } from '../../assets/themes/lightTheme';
 
 const MAX_LOADING_DELAY = 2500;
 
@@ -43,14 +47,17 @@ const PBProjectPage = (): JSX.Element => {
   const [slideIndex, setSlideIndex] = useState(0);
   const slides = getPBProjectLightboxSlides(pBProject);
 
+  const currentMainThemeName = getCurrentThemeName();
+  const theme = currentMainThemeName === 'dark' ? defaultThemePBProjects : lightThemePBProjects;
+
   const wereGSAPAnimationsTriggeredRef = useRef(pBProjectResponse.isFetched);
 
   const formattedDateString = generatePBProjectDateString(dateInfo);
   const OverviewSection = (
     <div className={classes.overviewContainer}>
-      <h5 className={classes.dateCreated}>{formattedDateString}</h5>
-      <h2 className={classes.name}>{nameInfo.full}</h2>
-      <p className={classes.description}>{description}</p>
+      <Typography variant="h5" className={classes.dateCreated}>{formattedDateString}</Typography>
+      <Typography variant="h2" className={classes.name}>{nameInfo.full}</Typography>
+      <Typography variant="body1" className={classes.description}>{description}</Typography>
       <img
         className={`${classes.mainImage} Loadable-Image`}
         src={mainImage.path}
@@ -113,35 +120,37 @@ const PBProjectPage = (): JSX.Element => {
   });
 
   return (
-    <LightboxContext.Provider
-      value={{
-        lightboxOpenState: [isLightboxOpen, setIsLightboxOpen],
-        slideIndexState: [slideIndex, setSlideIndex],
-      }}
-    >
-      <S.PBProjectContainer ref={containerRef}>
-        {OverviewSection}
-        <PBProjectGalleryGrid gallerySections={gallerySections} />
-        <PBProjectNav pBProject={pBProject} />
+    <ThemeProvider theme={theme}>
+      <LightboxContext.Provider
+        value={{
+          lightboxOpenState: [isLightboxOpen, setIsLightboxOpen],
+          slideIndexState: [slideIndex, setSlideIndex],
+        }}
+      >
+        <S.PBProjectContainer ref={containerRef}>
+          {OverviewSection}
+          <PBProjectGalleryGrid gallerySections={gallerySections} />
+          <PBProjectNav pBProject={pBProject} />
 
-        <Lightbox
-          open={isLightboxOpen}
-          close={() => { setIsLightboxOpen(false); }}
-          slides={slides}
-          plugins={[Zoom, Video]}
-          index={slideIndex}
-          zoom={{
-            maxZoomPixelRatio: 1.35,
-            scrollToZoom: true,
-            doubleClickMaxStops: 1,
-          }}
-          carousel={{
-            padding: 0,
-            imageFit: 'contain',
-          }}
-        />
-      </S.PBProjectContainer>
-    </LightboxContext.Provider>
+          <Lightbox
+            open={isLightboxOpen}
+            close={() => { setIsLightboxOpen(false); }}
+            slides={slides}
+            plugins={[Zoom, Video]}
+            index={slideIndex}
+            zoom={{
+              maxZoomPixelRatio: 1.35,
+              scrollToZoom: true,
+              doubleClickMaxStops: 1,
+            }}
+            carousel={{
+              padding: 0,
+              imageFit: 'contain',
+            }}
+          />
+        </S.PBProjectContainer>
+      </LightboxContext.Provider>
+    </ThemeProvider>
   );
 };
 

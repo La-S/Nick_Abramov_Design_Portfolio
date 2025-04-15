@@ -102,3 +102,41 @@ export const generateTypographyStyleOverrides = (fonts: Fonts, textColors: TextC
     },
   };
 };
+
+export const generatePBProjectsTypographyStyleOverrides = (fonts: Fonts, textColors: TextColors) => {
+  return {
+    h2: {
+      fontFamily: fonts.tertiary,
+      color: textColors.main,
+      textTransform: 'uppercase' as const,
+      fontWeight: 600,
+      ...responsive({
+        default: {
+          fontSize: 32,
+        },
+        tablet: {
+          fontSize: 40,
+        },
+      }),
+    },
+    h5: {
+      fontFamily: fonts.tertiary,
+      color: textColors.main,
+      fontWeight: 600,
+      fontSize: 24,
+    },
+    body1: {
+      fontFamily: fonts.tertiary,
+      color: textColors.main,
+      fontWeight: 350,
+      ...responsive({
+        default: {
+          fontSize: 16,
+        },
+        tablet: {
+          fontSize: 18,
+        },
+      }),
+    },
+  };
+};

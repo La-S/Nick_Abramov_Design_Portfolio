@@ -38,9 +38,6 @@ const PBProjectContainer = styled('div')(({ theme }) => ({
       marginTop: 40,
       padding: '0 15%',
       textAlign: 'center',
-      fontFamily: theme.fonts.main,
-      fontSize: 18,
-      color: theme.textColors.main,
     },
 
     [`.${classes.mainImage}`]: {

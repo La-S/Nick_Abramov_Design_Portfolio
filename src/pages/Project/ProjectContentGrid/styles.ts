@@ -21,16 +21,48 @@ const ProjectContentRow = styled(Box, {
     width: `calc(100% / ${cellAmount})`,
 
     '.Project-Content-Markdown-Container': {
+      ...responsive({
+        default: {
+          padding: 16
+        },
+        tablet: {
+          padding: 30,
+        },
+      }),
+
       '.Project-Content-Markdown': {
         '*': {
           fontFamily: theme.fonts.main,
         },
 
-        'h3': {
+        'h1, h2, h3, h4, h5, h6': {
           marginTop: 0,
-
-          
         },
+
+        h1: responsive({
+          default: { marginBottom: 32 },
+          tablet: { marginBottom: 48 },
+        }),
+        h2: responsive({
+          default: { marginBottom: 28 },
+          tablet: { marginBottom: 40 },
+        }),
+        h3: responsive({
+          default: { marginBottom: 24 },
+          tablet: { marginBottom: 32 },
+        }),
+        h4: responsive({
+          default: { marginBottom: 20 },
+          tablet: { marginBottom: 28 },
+        }),
+        h5: responsive({
+          default: { marginBottom: 16 },
+          tablet: { marginBottom: 24 },
+        }),
+        h6: responsive({
+          default: { marginBottom: 14 },
+          tablet: { marginBottom: 20 },
+        }),
 
         'p, span': {
           ...responsive({
@@ -42,6 +74,17 @@ const ProjectContentRow = styled(Box, {
             },
           }),
         },
+      },
+
+      '&.--has-neighbors': {
+        ...responsive({
+          default: {
+            padding: '0 16px',
+          },
+          tablet: {
+            padding: '0 30px',
+          },
+        }),
       },
     },
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useEffect, useState } from 'react';
 import {
   Box,
@@ -16,7 +17,7 @@ import {
 import Alert from '../../../common/components/Alert';
 import { X as CloseIcon, Trash as TrashIcon, UploadSimple as UploadIcon } from '@phosphor-icons/react';
 import { createProject, getProject, updateProject } from '../../../api/projectMethods.api';
-import type { ProjectContentRow } from '../../../types/data/project';
+import type { ProjectContentRow, ProjectMarkdownCell, ProjectMediaCell } from '../../../types/data/project';
 import type { ProjectInputDto } from '../../../types/data/projectAPI';
 import utils from './utils';
 import formUtils from '../../../utils/formUtils';
@@ -24,6 +25,7 @@ import S from './styles';
 import { useQueryClient } from '@tanstack/react-query';
 import { EMPTY_PROJECT } from '../../../hooks/useProject';
 import type { AlertDisplayProps } from '../../../common/components/Alert/props';
+import MarkdownTextField from '../../../common/components/MarkdownTextField';
 
 interface Props {
   setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -196,28 +198,12 @@ const ProjectForm = (props: Props): JSX.Element => {
 
           <Box className="Description-Label-Wrapper">
             <FormLabel className="Section-Title-Label">Description:</FormLabel>
-            <a
-              href='https://www.markdownguide.org/cheat-sheet/'
-              target='_blank'
-              rel='noreferrer'
-            >
-              Markdown cheat sheet
-            </a>
           </Box>
-          <TextField
-            multiline
-            value={descriptionValue}
-            placeholder='Description (markdown format)'
-            required
-            onInput={(e) => {
-              setDescriptionValue((e.target as HTMLInputElement).value);
-            }}
-            onKeyDown={(e) => utils.onKeyDown(e, [descriptionValue, setDescriptionValue])}
+          <MarkdownTextField 
+            onChange={(markdown) => setDescriptionValue(markdown)}
+            defaultValue={descriptionValue}
+            key={`${projectId} description ${isFetched}`}
           />
-          <Typography className='Description-Note'>
-            <strong>Note</strong>
-            {': For a new line break, use \'\\\' symbol'}
-          </Typography>
           <Divider />
 
           <FormLabel className="Section-Title-Label">Project Gallery Rows:</FormLabel>
@@ -254,48 +240,88 @@ const ProjectForm = (props: Props): JSX.Element => {
                     value={cellValue.type || 'image link'}
                     onChange={(e) => {
                       const newContentValues = [...contentValues];
-                      newContentValues[i].cells[j].type = e.target.value as ProjectContentRow['cells'][number]['type'];
-                      if (cellValue.type && cellValue.type !== 'image link') newContentValues[i].cells[j].alt =  '';
+                      let newCellValue = newContentValues[i].cells[j];
+                      newCellValue.type = e.target.value as ProjectContentRow['cells'][number]['type'];
+                      if (newCellValue.type === 'markdown') {
+                        newCellValue = { type: 'markdown', body: newCellValue.body || '' };
+                      } else if (newCellValue.type === 'image link') {
+                        newCellValue = { type: 'image link', path: newCellValue.path || '', alt: newCellValue.alt || '' };
+                      } else {
+                        newCellValue = { type: newCellValue.type, path: newCellValue.path || '' };
+                      }
+                      newContentValues[i].cells[j] = newCellValue;
                       setContentValues(newContentValues);
                     }}
                   >
                     <MenuItem value="image link">image link</MenuItem>
                     <MenuItem value="direct video link">direct video link</MenuItem>
                     <MenuItem value="embedded video link">youtube video link</MenuItem>
+                    <MenuItem value="markdown">markdown</MenuItem>
                   </Select>
-                  <Box className="Cell-Link-Path-Box">
-                    <TextField
-                      variant="outlined"
-                      type="text"
-                      value={cellValue.path}
-                      placeholder="Path"
-                      onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
-                        const newContentValues = [...contentValues];
-                        newContentValues[i].cells[j].path = (target as HTMLInputElement).value;
-                        setContentValues(newContentValues);
-                      }}
-                    />
-                    {cellValue.type === 'image link' ? (
-                      <TextField
-                        className='Cell-Link-Alt-Field'
-                        variant="outlined"
-                        value={cellValue.alt}
-                        placeholder="Alt Text (SEO)"
-                        onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                  {(() => {
+                    if (cellValue.type !== 'markdown') {
+                      return (
+                        <>
+                          <Box className="Cell-Link-Path-Box">
+                            <TextField
+                              variant="outlined"
+                              type="text"
+                              value={cellValue.path}
+                              placeholder="Path"
+                              onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                                const newContentValues = [...contentValues];
+                                if (newContentValues[i].cells[j].type !== 'markdown') {
+                                  const typedNewContentValue = newContentValues[i].cells[j] as ProjectMediaCell;
+                                  typedNewContentValue.path = (target as HTMLInputElement).value;
+                                  newContentValues[i].cells[j] = typedNewContentValue;
+                                  setContentValues(newContentValues);
+                                }
+                              }}
+                            />
+                            {cellValue.type === 'image link' ? (
+                              <TextField
+                                className='Cell-Link-Alt-Field'
+                                variant="outlined"
+                                value={cellValue.alt}
+                                placeholder="Alt Text (SEO)"
+                                onInput={({ target }: React.FormEvent<HTMLInputElement>) => {
+                                  const newContentValues = [...contentValues];
+                                  if (newContentValues[i].cells[j].type === 'image link') {
+                                    const typedNewContentValue = newContentValues[i].cells[j] as ProjectMediaCell;
+                                    typedNewContentValue.alt = (target as HTMLInputElement).value;
+                                    newContentValues[i].cells[j] = typedNewContentValue;
+                                    setContentValues(newContentValues);
+                                  }
+                                }}
+                              />
+                            ): <></>}
+                          </Box>
+                          {(cellValue.type === 'image link' || !cellValue.type)
+                            ? UploadImageButton((imagePath) => {
+                              const newContentValues = [...contentValues];
+                              // @ts-ignore
+                              newContentValues[i].cells[j].path = imagePath;
+                              setContentValues(newContentValues);
+                            })
+                            : <></>}
+                        </>
+                      );
+                    }
+
+                    return (
+                      <MarkdownTextField 
+                        onChange={(markdown) => {
                           const newContentValues = [...contentValues];
-                          newContentValues[i].cells[j].alt = (target as HTMLInputElement).value;
+                          const typedNewContentValue = newContentValues[i].cells[j] as ProjectMarkdownCell;
+                          typedNewContentValue.body = markdown;
+                          newContentValues[i].cells[j] = typedNewContentValue;
                           setContentValues(newContentValues);
                         }}
+                        defaultValue={cellValue.body}
+                        key={`${projectId} cell ${i} ${j} ${isFetched}`}
                       />
-                    ): <></>}
-                  </Box>
-                  {(cellValue.type === 'image link' || !cellValue.type)
-                    ? UploadImageButton((imagePath) => {
-                      const newContentValues = [...contentValues];
-                      newContentValues[i].cells[j].path = imagePath;
-                      setContentValues(newContentValues);
-                    })
-                    : <></>}
+                    );
+                  })()}
                 </Box>
               ))}
             </Box>
@@ -328,7 +354,7 @@ const ProjectForm = (props: Props): JSX.Element => {
   };
 
   useEffect(() => {
-    if (!projectId) return;
+    if (!projectId || !project.name) return;
 
     setNameValue(project.name);
     setCategoryValue(project.category);
@@ -336,6 +362,7 @@ const ProjectForm = (props: Props): JSX.Element => {
     setMainImageValue(project.mainImage);
     setContentValues(project.content);
     setIsContentSpacedValue(project.isContentSpaced);
+    setIsFetched(true);
   }, [project]);
 
   useEffect(() => {
@@ -344,7 +371,6 @@ const ProjectForm = (props: Props): JSX.Element => {
     getProject(projectId)
       .then(({ data }) => {
         setProject(data);
-        setIsFetched(true);
       })
       .catch((err) => {
         alert(err.response.data.message);

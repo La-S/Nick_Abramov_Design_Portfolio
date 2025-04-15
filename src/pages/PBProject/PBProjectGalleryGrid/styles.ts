@@ -16,17 +16,11 @@ const PBProjectGalleryGrid = styled('div')(({ theme }) => ({
     [`.${classes.title}`]: {
       margin: 0,
       marginTop: 40,
-      fontSize: 24,
-      fontFamily: theme.fonts.secondary,
-      color: theme.textColors.main,
     },
 
     [`.${classes.description}`]: {
       margin: 0,
       marginTop: 40,
-      fontSize: 18,
-      fontFamily: theme.fonts.main,
-      color: theme.textColors.main,
     },
 
     [`.${classes.rowsContainer}`]: {

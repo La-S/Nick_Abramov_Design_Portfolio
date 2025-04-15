@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import Markdown from '../../components/Markdown';
+import Markdown from '../../common/components/Markdown';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useProject from '../../hooks/useProject';
 import BoxUnderline from '../../common/components/BoxUnderline';
@@ -55,7 +55,7 @@ const Project = () => {
       <img
         src={project?.mainImage.path}
         className="Main-Image"
-        {...project?.mainImage.alt && { alt: project?.mainImage.alt }}
+        {...(project?.mainImage.alt && { alt: project?.mainImage.alt })}
       />
       <S.ProjectOverview>
         <Box className="Project-Title-Box">
@@ -63,8 +63,10 @@ const Project = () => {
           <BoxUnderline />
         </Box>
         <Box className="Project-Description-Box">
-          <Typography variant="h3" className='Project-Overview-Title'>Project Overview</Typography>
-          <Markdown className='Project-Description-Body'>{project.description}</Markdown>
+          <Typography variant="h3" className="Project-Overview-Title">
+            Project Overview
+          </Typography>
+          <Markdown className="Project-Description-Body">{project.description}</Markdown>
         </Box>
       </S.ProjectOverview>
       <ProjectContentGrid content={project?.content || []} isContentSpaced={project.isContentSpaced} />

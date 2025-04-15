@@ -18,9 +18,17 @@ const Markdown = ({ children, className = '' }: { children: string | null | unde
         h5: ({ node, ...props }) => <Typography variant='h5' {...props as TypographyProps} />,
         h6: ({ node, ...props }) => <Typography variant='h6' {...props as TypographyProps} />,
         p: ({ node, ...props }) => <Typography variant='body1' {...props as TypographyProps} />,
-        span: ({ node, ...props }) => <Typography variant='body1' {...props as TypographyProps} />,
-        a: ({ node, ...props }) => <Typography variant='body1' {...props as TypographyProps} />,
-        li: ({ node, ...props }) => <Typography variant='body1' {...props as TypographyProps} />,
+        span: ({ node, ...props }) => <Typography variant='body1' component='span' {...props as TypographyProps} />,
+        a: ({ node, ...props }) => (
+          <Typography
+            variant="body1"
+            component="a"
+            target="_blank"
+            rel="noreferrer"
+            {...props as TypographyProps}
+          />
+        ),
+        li: ({ node, ...props }) => <Typography variant='body1' component='li' {...props as TypographyProps} />,
       }}
     >
       {children}

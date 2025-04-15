@@ -8,6 +8,7 @@ import type {
   PBProjectGallerySection,
 } from '../../../types/data/pBProject';
 import gsap from 'gsap';
+import { Typography } from '@mui/material';
 
 const renderCellContent = ({
   path,
@@ -47,8 +48,8 @@ export const renderGallerySections = (
 
         return (
           <div className={classes.sectionContainer} key={uuidv4()}>
-            {title && <h5 className={classes.title}>{title}</h5>}
-            {description && <p className={classes.description}>{description}</p>}
+            {title && <Typography variant='h5' className={classes.title}>{title}</Typography>}
+            {description && <Typography variant="body1" className={classes.description}>{description}</Typography>}
             {rows.length > 0 && (
               <div className={classes.rowsContainer}>
                 {rows.map((row: PBProjectGalleryRow) => {

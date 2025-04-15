@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material';
 import { screenSizeBreakpoints } from './constants';
-import { generateTypographyStyleOverrides } from './utils';
+import { generatePBProjectsTypographyStyleOverrides, generateTypographyStyleOverrides } from './utils';
 import mainFont from '../fonts/Futura_book.ttf';
 import secondaryFont from '../fonts/Inter.ttf';
 import tertiaryFont from '../fonts/Chivo.ttf';
@@ -59,6 +59,15 @@ const defaultTheme = createTheme({
       styleOverrides: typographyStyleOverrides,
     },
   },
+});
+
+export const defaultThemePBProjects = createTheme({
+  ...defaultTheme,
+  components: {
+    MuiTypography: {
+      styleOverrides: generatePBProjectsTypographyStyleOverrides(fonts, textColors),
+    }
+  }
 });
 
 export default defaultTheme;

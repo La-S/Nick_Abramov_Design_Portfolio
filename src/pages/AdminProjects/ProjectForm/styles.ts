@@ -150,10 +150,6 @@ const ProjectForm = styled('form')(({ theme }) => ({
     },
   },
 
-  '.Description-Note': {
-    marginTop: '10px',
-  },
-
   '.MuiOutlinedInput-root': {
     '.MuiSelect-select': {
       paddingTop: '7.5px',

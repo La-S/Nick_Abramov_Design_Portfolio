@@ -22,6 +22,7 @@ import S from './styles';
 import type { AlertDisplayProps } from '../../../common/components/Alert/props';
 import type { PBProjectInputDto } from '../../../types/data/pBProjectAPI';
 import { PBProjectGalleryCellType } from '../../../types/data/pBProject';
+import MarkdownTextField from '../../../common/components/MarkdownTextField';
 
 const ORDERED_MONTHS = [
   'January',
@@ -268,30 +269,12 @@ const PBProjectForm = ({
 
           <div className="Description-Label-Wrapper">
             <FormLabel className="Section-Title-Label">Description:</FormLabel>
-            <a
-              href='https://www.markdownguide.org/cheat-sheet/'
-              target='_blank'
-              rel='noreferrer'
-            >
-              Markdown cheat sheet
-            </a>
           </div>
-          <TextField
-            multiline
-            value={descriptionValue}
-            placeholder='Description (markdown format)'
-            required
-            onInput={(e) => {
-              setDescriptionValue((e.target as HTMLInputElement).value);
-            }}
-            onKeyDown={(e) => utils.onKeyDownDescriptionField(
-              e, [descriptionValue, setDescriptionValue]
-            )}
+          <MarkdownTextField 
+            defaultValue={descriptionValue}
+            onChange={(markdown) => setDescriptionValue(markdown)}
+            key={`${pBProjectId} description ${isFetched}`}
           />
-          <Typography className='Description-Note'>
-            <strong>Note</strong>
-            {': For a new line break, use \'\\\' symbol'}
-          </Typography>
           <Divider />
 
           <FormLabel className="Section-Title-Label">Project Gallery Sections:</FormLabel>
@@ -476,13 +459,14 @@ const PBProjectForm = ({
   };
 
   useEffect(() => {
-    if (!pBProjectId) return;
+    if (!pBProjectId || !pBProject.nameInfo?.full) return;
 
     setNameInfoValue(pBProject.nameInfo);
     setDateInfoValue(pBProject.dateInfo);
     setMainImageValue(pBProject.mainImage);
     setDescriptionValue(pBProject.description);
     setGallerySectionsValue(pBProject.gallerySections);
+    setIsFetched(true);
   }, [pBProject]);
 
   useEffect(() => {
@@ -492,7 +476,6 @@ const PBProjectForm = ({
     getPBProject(pBProjectId)
       .then(({ data }) => {
         setPBProject(data);
-        setIsFetched(true);
       })
       .catch((err) => {
         alert(err.response.data.message);

@@ -1,24 +1,24 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import Markdown from '../../../components/Markdown';
+import Markdown from '../../../common/components/Markdown';
 import S from './styles';
 import type { Dispatch, SetStateAction } from 'react';
 import type { ProjectContentCell, ProjectContentRow } from '../../../types/data/project';
 import type { Slide } from 'yet-another-react-lightbox/*';
 
-const renderCell = (cell: ProjectContentCell): JSX.Element => {
+const renderCell = (cell: ProjectContentCell, rowCellAmount: number): JSX.Element => {
   const isInvalidCell = (cell.type === 'markdown' && !cell.body) || (cell.type !== 'markdown' && !cell.path);
   if (isInvalidCell) return <></>;
 
   if (cell.type === 'markdown') {
     return (
-      <Box className="Project-Content-Markdown-Container">
-        <Markdown className='Project-Content-Markdown'>{cell.body}</Markdown>
+      <Box className={`Project-Content-Markdown-Container ${rowCellAmount > 1 ? '--has-neighbors' : ''}`}>
+        <Markdown className="Project-Content-Markdown">{cell.body}</Markdown>
       </Box>
     );
   }
   if (cell.type === 'image link') {
-    return <img className="Loadable-Image" src={cell.path} loading="lazy" {...cell.alt && { alt: cell.alt }} />;
+    return <img className="Loadable-Image" src={cell.path} loading="lazy" {...(cell.alt && { alt: cell.alt })} />;
   }
   if (cell.type === 'direct video link') {
     return <video className="Loadable-Direct-Video" src={cell.path} autoPlay loop muted />;
@@ -81,7 +81,7 @@ export const renderContentRow = (
               }
             }}
           >
-            {renderCell(cell)}
+            {renderCell(cell, cellAmount)}
           </Box>
         ) : (
           <></>
